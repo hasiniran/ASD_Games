@@ -17,13 +17,18 @@
 		2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC5319F8160900EE77C7 /* Main.storyboard */; };
 		2552AC5819F8160900EE77C7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC5719F8160900EE77C7 /* ViewController.m */; };
 		2552AC5B19F8160900EE77C7 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC5A19F8160900EE77C7 /* MyScene.m */; };
-		2552AC5D19F8160900EE77C7 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC5C19F8160900EE77C7 /* Spaceship.png */; };
 		2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC5E19F8160900EE77C7 /* Images.xcassets */; };
 		2552AC6619F8160900EE77C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC6519F8160900EE77C7 /* XCTest.framework */; };
 		2552AC6719F8160900EE77C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC3F19F8160900EE77C7 /* Foundation.framework */; };
 		2552AC6819F8160900EE77C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC4319F8160900EE77C7 /* UIKit.framework */; };
 		2552AC7019F8160900EE77C7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC6E19F8160900EE77C7 /* InfoPlist.strings */; };
 		2552AC7219F8160A00EE77C7 /* airplaneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC7119F8160A00EE77C7 /* airplaneTests.m */; };
+		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
+		2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */; };
+		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
+		2561A9A11A1A714900685B1A /* CityBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A9A01A1A714900685B1A /* CityBackground.png */; };
+		25B1522B19F996730056147D /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B1522A19F996730056147D /* sky.png */; };
+		25B1522D19F999180056147D /* plane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25B1522C19F999180056147D /* plane.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,13 +58,18 @@
 		2552AC5719F8160900EE77C7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2552AC5919F8160900EE77C7 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		2552AC5A19F8160900EE77C7 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		2552AC5C19F8160900EE77C7 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		2552AC5E19F8160900EE77C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2552AC6419F8160900EE77C7 /* airplaneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = airplaneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552AC6519F8160900EE77C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2552AC6D19F8160900EE77C7 /* airplaneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "airplaneTests-Info.plist"; sourceTree = "<group>"; };
 		2552AC6F19F8160900EE77C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2552AC7119F8160A00EE77C7 /* airplaneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = airplaneTests.m; sourceTree = "<group>"; };
+		2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplaneCartoon.png; sourceTree = "<group>"; };
+		2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airPlanesBackground.png; sourceTree = "<group>"; };
+		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
+		2561A9A01A1A714900685B1A /* CityBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CityBackground.png; sourceTree = "<group>"; };
+		25B1522A19F996730056147D /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
+		25B1522C19F999180056147D /* plane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plane.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +131,12 @@
 		2552AC4719F8160900EE77C7 /* airplane */ = {
 			isa = PBXGroup;
 			children = (
+				2561A9A01A1A714900685B1A /* CityBackground.png */,
+				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
+				2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */,
+				2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */,
+				25B1522C19F999180056147D /* plane.jpg */,
+				25B1522A19F996730056147D /* sky.png */,
 				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
 				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
 				2552AC5319F8160900EE77C7 /* Main.storyboard */,
@@ -128,7 +144,6 @@
 				2552AC5719F8160900EE77C7 /* ViewController.m */,
 				2552AC5919F8160900EE77C7 /* MyScene.h */,
 				2552AC5A19F8160900EE77C7 /* MyScene.m */,
-				2552AC5C19F8160900EE77C7 /* Spaceship.png */,
 				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
 				2552AC4819F8160900EE77C7 /* Supporting Files */,
 			);
@@ -241,8 +256,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
+				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
+				2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */,
+				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
+				2561A9A11A1A714900685B1A /* CityBackground.png in Resources */,
+				25B1522B19F996730056147D /* sky.png in Resources */,
+				25B1522D19F999180056147D /* plane.jpg in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
-				2552AC5D19F8160900EE77C7 /* Spaceship.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,6 +494,7 @@
 				2552AC7719F8160A00EE77C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2552AC7819F8160A00EE77C7 /* Build configuration list for PBXNativeTarget "airplaneTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +503,7 @@
 				2552AC7A19F8160A00EE77C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

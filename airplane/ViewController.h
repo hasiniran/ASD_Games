@@ -10,5 +10,8 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface ViewController : UIViewController
+//@property (nonatomic,strong) SKScene * scene;
+
+@property (weak, nonatomic) IBOutlet UIButton *goButton;
 
 @end

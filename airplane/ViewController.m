@@ -11,22 +11,52 @@
 
 @implementation ViewController
 
+SKScene * scene;
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+   [super viewDidLoad];
+//
+//    // Configure the view.
+//    SKView * skView = (SKView *)self.view;
+//    skView.showsFPS = YES;
+//    skView.showsNodeCount = YES;
+//    
+//    // Create and configure the scene.
+//    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
+//    scene.scaleMode = SKSceneScaleModeAspectFill;
+//    
+//    // Present the scene.
+//    [skView presentScene:scene];
+    [self.goButton setTitle:@"GO !!" forState:UIControlStateNormal];
+    
 
-    // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    
-    // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    // Present the scene.
-    [skView presentScene:scene];
 }
+
+
+
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    
+    SKView * skView = (SKView *)self.view;
+    
+    if (!skView.scene) {
+        skView.showsFPS = YES;
+        skView.showsNodeCount = YES;
+        
+        // Create and configure the scene.
+        scene = [MyScene sceneWithSize:skView.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        // Present the scene.
+        [skView presentScene:scene];
+    }
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
 
 - (BOOL)shouldAutorotate
 {
@@ -46,6 +76,24 @@
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (IBAction)GoButton:(id)sender {
+    
+    SKSpriteNode *ship = ((MyScene *)scene).ship ;
+    [ship runAction:((MyScene *)scene).actionMoveUp];
+    
+    
+}
+- (IBAction)goAction:(id)sender {
+    SKSpriteNode *ship = ((MyScene *)scene).ship ;
+    [ship runAction:((MyScene *)scene).actionMoveUp];
+    
+    SKSpriteNode *bg = ((MyScene *)scene).bg;
+    [bg runAction:((MyScene *)scene).actionMoveUp];
+    
+
+     NSLog(@"clicked !!!!");
 }
 
 @end
