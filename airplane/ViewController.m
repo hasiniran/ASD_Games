@@ -89,8 +89,8 @@ SKScene * scene;
     SKSpriteNode *ship = ((MyScene *)scene).ship ;
     [ship runAction:((MyScene *)scene).actionMoveUp];
     
-    SKSpriteNode *bg = ((MyScene *)scene).bg;
-    [bg runAction:((MyScene *)scene).actionMoveUp];
+   // SKSpriteNode *bg = ((MyScene *)scene).bg;
+    //[bg runAction:((MyScene *)scene).actionMoveUp];
     
 
      NSLog(@"clicked !!!!");
