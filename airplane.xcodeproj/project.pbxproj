@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2525D8A51A355719009816BB /* Runway.png in Resources */ = {isa = PBXBuildFile; fileRef = 2525D8A41A355719009816BB /* Runway.png */; };
+		2525D8A71A3557F1009816BB /* Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 2525D8A61A3557F1009816BB /* Sky.png */; };
 		2552AC4019F8160900EE77C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC3F19F8160900EE77C7 /* Foundation.framework */; };
 		2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC4119F8160900EE77C7 /* CoreGraphics.framework */; };
 		2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC4319F8160900EE77C7 /* UIKit.framework */; };
@@ -26,8 +28,6 @@
 		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
 		2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */; };
 		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
-		2561A9A11A1A714900685B1A /* CityBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A9A01A1A714900685B1A /* CityBackground.png */; };
-		25B1522B19F996730056147D /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B1522A19F996730056147D /* sky.png */; };
 		25B1522D19F999180056147D /* plane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25B1522C19F999180056147D /* plane.jpg */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2525D8A41A355719009816BB /* Runway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Runway.png; sourceTree = "<group>"; };
+		2525D8A61A3557F1009816BB /* Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky.png; sourceTree = "<group>"; };
 		2552AC3C19F8160900EE77C7 /* airplane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = airplane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552AC3F19F8160900EE77C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2552AC4119F8160900EE77C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -67,8 +69,6 @@
 		2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplaneCartoon.png; sourceTree = "<group>"; };
 		2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airPlanesBackground.png; sourceTree = "<group>"; };
 		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
-		2561A9A01A1A714900685B1A /* CityBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CityBackground.png; sourceTree = "<group>"; };
-		25B1522A19F996730056147D /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
 		25B1522C19F999180056147D /* plane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plane.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,12 +131,10 @@
 		2552AC4719F8160900EE77C7 /* airplane */ = {
 			isa = PBXGroup;
 			children = (
-				2561A9A01A1A714900685B1A /* CityBackground.png */,
 				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
 				2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */,
 				2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */,
 				25B1522C19F999180056147D /* plane.jpg */,
-				25B1522A19F996730056147D /* sky.png */,
 				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
 				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
 				2552AC5319F8160900EE77C7 /* Main.storyboard */,
@@ -153,6 +151,8 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2525D8A61A3557F1009816BB /* Sky.png */,
+				2525D8A41A355719009816BB /* Runway.png */,
 				2552AC4919F8160900EE77C7 /* airplane-Info.plist */,
 				2552AC4A19F8160900EE77C7 /* InfoPlist.strings */,
 				2552AC4D19F8160900EE77C7 /* main.m */,
@@ -255,12 +255,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2525D8A71A3557F1009816BB /* Sky.png in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
+				2525D8A51A355719009816BB /* Runway.png in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
 				2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
-				2561A9A11A1A714900685B1A /* CityBackground.png in Resources */,
-				25B1522B19F996730056147D /* sky.png in Resources */,
 				25B1522D19F999180056147D /* plane.jpg in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,

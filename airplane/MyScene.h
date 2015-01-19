@@ -10,7 +10,11 @@
 
 static const uint32_t shipCategory =  0x1 << 0;
 static const uint32_t obstacleCategory =  0x1 << 1;
-static const float BG_VELOCITY = 100.0;
+static CGFloat RUNWAY_VELOCITY = -500.0;
+static CGFloat SKY_VELOCITY = -50.0;
+
+static  uint32_t _dt = 0;
+static  uint32_t _lastUpdateTime = 0;
 
 static inline CGPoint CGPointAdd(const CGPoint a, const CGPoint b)
 {
@@ -31,12 +35,15 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     CGFloat screenHeight;
     CGFloat screenWidth;
     SKAction *actionMoveRight;
+    SKTexture* groundTexture;
+    SKAction* moveGroundSpritesForever;
+    
 }
 
 @property (nonatomic, strong)  SKSpriteNode *ship;
 @property (nonatomic,strong)   SKAction *actionMoveUp;
 @property (nonatomic, strong)    SKSpriteNode *bg ;
-@property (nonatomic, strong)    SKSpriteNode *background ;
-@property (nonatomic, strong)    SKSpriteNode *background2 ;
+@property (nonatomic, strong)    SKSpriteNode *sky ;
+@property (nonatomic, strong)    SKSpriteNode *runway ;
 
 @end

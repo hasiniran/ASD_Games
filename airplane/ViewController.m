@@ -86,8 +86,19 @@ SKScene * scene;
     
 }
 - (IBAction)goAction:(id)sender {
+    
     SKSpriteNode *ship = ((MyScene *)scene).ship ;
-    [ship runAction:((MyScene *)scene).actionMoveUp];
+    
+    if(ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75){
+    
+    [ship.physicsBody applyImpulse:CGVectorMake(0, 100)];
+    }else{
+        
+        [ship setPosition:CGPointMake(ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
+        ship.physicsBody.dynamic = NO;
+        
+    }
+   // [ship runAction:((MyScene *)scene).actionMoveUp];
     
    // SKSpriteNode *bg = ((MyScene *)scene).bg;
     //[bg runAction:((MyScene *)scene).actionMoveUp];
