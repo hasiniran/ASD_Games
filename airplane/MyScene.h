@@ -10,8 +10,8 @@
 
 static const uint32_t shipCategory =  0x1 << 0;
 static const uint32_t obstacleCategory =  0x1 << 1;
-static CGFloat RUNWAY_VELOCITY = -500.0;
-static CGFloat SKY_VELOCITY = -50.0;
+static CGFloat RUNWAY_VELOCITY = -50.0;
+static CGFloat SKY_VELOCITY = -25.0;
 
 static  uint32_t _dt = 0;
 static  uint32_t _lastUpdateTime = 0;

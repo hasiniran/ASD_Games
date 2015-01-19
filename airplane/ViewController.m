@@ -91,7 +91,7 @@ SKScene * scene;
     
     if(ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75){
     
-    [ship.physicsBody applyImpulse:CGVectorMake(0, 100)];
+    [ship.physicsBody applyImpulse:CGVectorMake(0, 40)];
     }else{
         
         [ship setPosition:CGPointMake(ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
