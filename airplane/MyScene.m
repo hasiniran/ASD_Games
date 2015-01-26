@@ -67,6 +67,19 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location]; //1
+    
+    if ([node.name isEqualToString:@"level2"]) { //2
+        
+        //3
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+        
+    }
 
     
 }
@@ -89,7 +102,7 @@
     
     // Create ground
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:groundTexture];
         bg.position = CGPointMake(i * bg.size.width, 0);
         bg.anchorPoint = CGPointZero;
@@ -119,14 +132,12 @@
     
     
     
-    SKAction* moveSkySprite = [SKAction moveByX:-skylineTexture.size.width*2 y:0 duration:0.1 * skylineTexture.size.width*2];
-    SKAction* resetSkySprite = [SKAction moveByX:skylineTexture.size.width*2 y:0 duration:0];
-    SKAction* moveSkySpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveSkySprite, resetSkySprite]]];
+   
     
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
         bg.position = CGPointMake(i * bg.size.width, groundTexture.size.height );
-        bg.zPosition = -200;
+      //  bg.zPosition = -200;
         bg.anchorPoint = CGPointZero;
         bg.name = @"sky";
         [self addChild:bg];
@@ -193,6 +204,79 @@
     dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, groundTexture.size.height/2 -20)];
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
+   // [self moveBg];
+    
+    
+    
+}
+
+-(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval  {
+    SKAction* action = [SKAction moveByX:-width*1 y:0 duration: timeInterval* width*2];
+    return action;
+}
+
+
+-(SKAction*)moveBgContinuously
+{
+
+    __block SKAction* moveRunwayForever;
+    __block SKAction* moveSkyForever;
+    __block SKSpriteNode *sky;
+    __block SKSpriteNode *runway;
+    SKAction* moveBackground;
+    
+    [self enumerateChildNodesWithName:@"runway" usingBlock: ^(SKNode *node, BOOL *stop)
+    {
+        runway = (SKSpriteNode *)node;
+        SKAction* moveRunway = [self moveAction:runway.size.width: 0.005];
+        SKAction* resetRunway = [self moveAction:-runway.size.width: 0.0];
+        moveRunwayForever = [SKAction repeatActionForever:[SKAction sequence:@[moveRunway,resetRunway]]];
+
+        
+        if( !runway.hasActions){
+            [runway runAction: moveRunwayForever];
+        }
+    }];
+    
+
+    
+    [self enumerateChildNodesWithName:@"sky" usingBlock: ^(SKNode *node, BOOL *stop)
+     {
+         sky = (SKSpriteNode *) node;
+         SKAction* moveSky = [self moveAction:sky.size.width*1.0: 0.009];
+         SKAction* resetSky = [self moveAction:-sky.size.width: 0.0];
+         moveSkyForever = [SKAction repeatActionForever:[SKAction sequence:@[moveSky,resetSky]]];
+         
+         if( !sky.hasActions){
+             [sky runAction: moveSkyForever];
+         }
+     }];
+    
+
+    
+    
+
+//     moveBackground = [SKAction group:@[[SKAction runBlock:^{
+//                                                            [runway runAction:moveRunwayForever];
+//                                                           }
+//                                        ],
+//                                       [SKAction runBlock:^{
+//                                                            [sky runAction:moveSkyForever];
+//                                                            }
+//                                        ]]];
+//    
+//    
+//    moveBackground = [SKAction group:@[ [SKAction runActi],
+//                                         [SKAction runAction:moveSkyForever onChildWithName:@"sky"] ]];
+    
+                    
+    
+    if(!sky.hasActions && !runway.hasActions) {
+       [self runAction:moveBackground];
+        
+    }
+    
+    return moveBackground;
     
     
 }
@@ -244,6 +328,44 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
     }
 }
 
+
+-(void)levelCompleted:(BOOL)won{
+    
+    if(won){
+        //make a label that is invisible
+        SKLabelNode *flashLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        flashLabel.position = CGPointMake(screenWidth/2, screenHeight/2);
+        flashLabel.fontSize = 30;
+        flashLabel.fontColor = [SKColor blueColor];
+        flashLabel.text = @"Level ! Completed !!";
+        flashLabel.alpha =0;
+        flashLabel.zPosition = 100;
+        [self addChild:flashLabel];
+        //make an animation sequence to flash in and out the label
+        SKAction *flashAction = [SKAction sequence:@[
+                                                     [SKAction fadeInWithDuration:3],
+                                                     [SKAction waitForDuration:0.05],
+                                                     [SKAction fadeOutWithDuration:3]
+                                                     ]];
+        // run the sequence then delete the label
+        [flashLabel runAction:flashAction completion:^{[flashLabel removeFromParent];}];
+        
+        NSString * retrymessage;
+        retrymessage = @"Go to Level 2";
+        SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        retryButton.text = retrymessage;
+        retryButton.fontColor = [SKColor blueColor];
+        retryButton.color = [SKColor yellowColor];
+        retryButton.position = CGPointMake(self.size.width/2, screenHeight/2-100);
+        retryButton.name = @"level2";
+        [self addChild:retryButton];
+
+//
+
+    }
+    
+}
+
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
 
@@ -268,15 +390,49 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
         self.ship.physicsBody.dynamic = NO;
         }
         
-        [self moveBg];
+       [self moveBgContinuously];
+        
+    }
+    else if(self.ship.physicsBody.velocity.dy==0 && self.ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75)
+    {
+        [self enumerateChildNodesWithName:@"runway" usingBlock: ^(SKNode *node, BOOL *stop)
+         {
+             SKSpriteNode * bg = (SKSpriteNode *) node;
+        
+             
+             if( bg.hasActions){
+               //  [bg removeAllActions];
+    
+             }
+         }];
+        
+        
+        [self enumerateChildNodesWithName:@"sky" usingBlock: ^(SKNode *node, BOOL *stop)
+         {
+             SKSpriteNode * bg = (SKSpriteNode *) node;
+             
+             
+             if( bg.hasActions){
+                // [bg removeAllActions];
+                 
+             }
+         }];
+
+        
     }
     
     if( self.ship.position.y >= [[UIScreen mainScreen] bounds].size.height*0.75 ){
         
         [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
         self.ship.physicsBody.dynamic = NO;
-        [self moveBg];
+        [self levelCompleted:TRUE];
+//        SKTransition *reveal = [SKTransition doorsCloseVerticalWithDuration:5];
+//        SKScene * gameOverScene = [[GameStartScene alloc] initWithSize:self.size];
+//        [self.view presentScene:gameOverScene transition: reveal];
+       // [self moveBg];
     }
+    
+    
     
     
 }

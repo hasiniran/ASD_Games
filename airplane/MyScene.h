@@ -7,11 +7,13 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SecondLevel.h"
+
 
 static const uint32_t shipCategory =  0x1 << 0;
 static const uint32_t obstacleCategory =  0x1 << 1;
-static CGFloat RUNWAY_VELOCITY = -50.0;
-static CGFloat SKY_VELOCITY = -25.0;
+static CGFloat RUNWAY_VELOCITY = -5.0;
+static CGFloat SKY_VELOCITY = -5.0;
 
 static  uint32_t _dt = 0;
 static  uint32_t _lastUpdateTime = 0;
@@ -45,5 +47,11 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 @property (nonatomic, strong)    SKSpriteNode *bg ;
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *runway ;
+
+
+-(SKAction*)moveBgContinuously;
+-(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;
+
+-(void)levelCompleted:(BOOL)won;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GameStartScene.h"
 #import "MyScene.h"
 
 @implementation ViewController
@@ -47,6 +48,10 @@ SKScene * scene;
         // Create and configure the scene.
         scene = [MyScene sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
+//
+//        
+//        SKScene * scene = [GameStartScene sceneWithSize:skView.bounds.size];
+//        scene.scaleMode = SKSceneScaleModeAspectFill;
         
         // Present the scene.
         [skView presentScene:scene];
@@ -91,18 +96,21 @@ SKScene * scene;
     
     if(ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75){
     
-    [ship.physicsBody applyImpulse:CGVectorMake(0, 40)];
+    [ship.physicsBody applyImpulse:CGVectorMake(0, 30)];
     }else{
         
         [ship setPosition:CGPointMake(ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
         ship.physicsBody.dynamic = NO;
         
     }
+    
    // [ship runAction:((MyScene *)scene).actionMoveUp];
     
-   // SKSpriteNode *bg = ((MyScene *)scene).bg;
+    //SKSpriteNode *bg = ((MyScene *)scene).bg;
     //[bg runAction:((MyScene *)scene).actionMoveUp];
     
+     [(MyScene *)scene moveBgContinuously];
+     
 
      NSLog(@"clicked !!!!");
 }

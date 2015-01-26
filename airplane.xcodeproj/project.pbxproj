@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
+		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
+		2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2521EBF51A75BDA600E844F1 /* GameStartScene.m */; };
+		2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2521EBFB1A761C8F00E844F1 /* SecondLevel.m */; };
+		2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */; };
+		2521EC031A76335D00E844F1 /* Sea.png in Resources */ = {isa = PBXBuildFile; fileRef = 2521EC001A76335D00E844F1 /* Sea.png */; };
+		2521EC041A76335D00E844F1 /* Sky-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2521EC011A76335D00E844F1 /* Sky-3.png */; };
+		2521EC051A76335D00E844F1 /* Waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 2521EC021A76335D00E844F1 /* Waves.png */; };
 		2525D8A51A355719009816BB /* Runway.png in Resources */ = {isa = PBXBuildFile; fileRef = 2525D8A41A355719009816BB /* Runway.png */; };
 		2525D8A71A3557F1009816BB /* Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 2525D8A61A3557F1009816BB /* Sky.png */; };
 		2552AC4019F8160900EE77C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC3F19F8160900EE77C7 /* Foundation.framework */; };
@@ -42,6 +50,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
+		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
+		2521EBF71A75BDC300E844F1 /* GameStartScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameStartScene.h; sourceTree = "<group>"; };
+		2521EBFA1A761C8F00E844F1 /* SecondLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondLevel.h; sourceTree = "<group>"; };
+		2521EBFB1A761C8F00E844F1 /* SecondLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondLevel.m; sourceTree = "<group>"; };
+		2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLevelCompleted.h; sourceTree = "<group>"; };
+		2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstLevelCompleted.m; sourceTree = "<group>"; };
+		2521EC001A76335D00E844F1 /* Sea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sea.png; sourceTree = "<group>"; };
+		2521EC011A76335D00E844F1 /* Sky-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sky-3.png"; sourceTree = "<group>"; };
+		2521EC021A76335D00E844F1 /* Waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Waves.png; sourceTree = "<group>"; };
 		2525D8A41A355719009816BB /* Runway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Runway.png; sourceTree = "<group>"; };
 		2525D8A61A3557F1009816BB /* Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky.png; sourceTree = "<group>"; };
 		2552AC3C19F8160900EE77C7 /* airplane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = airplane.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +119,8 @@
 		2552AC3319F8160900EE77C7 = {
 			isa = PBXGroup;
 			children = (
+				2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */,
+				2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */,
 				2552AC4719F8160900EE77C7 /* airplane */,
 				2552AC6B19F8160900EE77C7 /* airplaneTests */,
 				2552AC3E19F8160900EE77C7 /* Frameworks */,
@@ -144,6 +165,12 @@
 				2552AC5A19F8160900EE77C7 /* MyScene.m */,
 				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
 				2552AC4819F8160900EE77C7 /* Supporting Files */,
+				2521EBF11A75BAF500E844F1 /* Launch Screen.xib */,
+				2521EBF31A75BD0200E844F1 /* GameStartScene.sks */,
+				2521EBF51A75BDA600E844F1 /* GameStartScene.m */,
+				2521EBF71A75BDC300E844F1 /* GameStartScene.h */,
+				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
+				2521EBFB1A761C8F00E844F1 /* SecondLevel.m */,
 			);
 			path = airplane;
 			sourceTree = "<group>";
@@ -151,6 +178,9 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2521EC001A76335D00E844F1 /* Sea.png */,
+				2521EC011A76335D00E844F1 /* Sky-3.png */,
+				2521EC021A76335D00E844F1 /* Waves.png */,
 				2525D8A61A3557F1009816BB /* Sky.png */,
 				2525D8A41A355719009816BB /* Runway.png */,
 				2552AC4919F8160900EE77C7 /* airplane-Info.plist */,
@@ -257,13 +287,18 @@
 			files = (
 				2525D8A71A3557F1009816BB /* Sky.png in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
+				2521EC051A76335D00E844F1 /* Waves.png in Resources */,
 				2525D8A51A355719009816BB /* Runway.png in Resources */,
+				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
+				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
 				2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
 				25B1522D19F999180056147D /* plane.jpg in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
+				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
+				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +317,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */,
+				2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */,
+				2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */,
 				2552AC5B19F8160900EE77C7 /* MyScene.m in Sources */,
 				2552AC5819F8160900EE77C7 /* ViewController.m in Sources */,
 				2552AC5219F8160900EE77C7 /* AppDelegate.m in Sources */,
