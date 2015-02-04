@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2552AC3B19F8160900EE77C7"
                BuildableName = "airplane.app"
                BlueprintName = "airplane"
-               ReferencedContainer = "container:airplane.xcodeproj">
+               ReferencedContainer = "container:ASD_Game.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "2552AC6319F8160900EE77C7"
                BuildableName = "airplaneTests.xctest"
                BlueprintName = "airplaneTests"
-               ReferencedContainer = "container:airplane.xcodeproj">
+               ReferencedContainer = "container:ASD_Game.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "2552AC3B19F8160900EE77C7"
             BuildableName = "airplane.app"
             BlueprintName = "airplane"
-            ReferencedContainer = "container:airplane.xcodeproj">
+            ReferencedContainer = "container:ASD_Game.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "2552AC3B19F8160900EE77C7"
             BuildableName = "airplane.app"
             BlueprintName = "airplane"
-            ReferencedContainer = "container:airplane.xcodeproj">
+            ReferencedContainer = "container:ASD_Game.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -82,7 +82,7 @@
             BlueprintIdentifier = "2552AC3B19F8160900EE77C7"
             BuildableName = "airplane.app"
             BlueprintName = "airplane"
-            ReferencedContainer = "container:airplane.xcodeproj">
+            ReferencedContainer = "container:ASD_Game.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

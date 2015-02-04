@@ -17,6 +17,7 @@
 		2521EC051A76335D00E844F1 /* Waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 2521EC021A76335D00E844F1 /* Waves.png */; };
 		2525D8A51A355719009816BB /* Runway.png in Resources */ = {isa = PBXBuildFile; fileRef = 2525D8A41A355719009816BB /* Runway.png */; };
 		2525D8A71A3557F1009816BB /* Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 2525D8A61A3557F1009816BB /* Sky.png */; };
+		253F0B491A829FBB00D691E6 /* Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = 253F0B481A829FBB00D691E6 /* Actions.m */; };
 		2552AC4019F8160900EE77C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC3F19F8160900EE77C7 /* Foundation.framework */; };
 		2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC4119F8160900EE77C7 /* CoreGraphics.framework */; };
 		2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC4319F8160900EE77C7 /* UIKit.framework */; };
@@ -26,7 +27,7 @@
 		2552AC5219F8160900EE77C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC5119F8160900EE77C7 /* AppDelegate.m */; };
 		2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC5319F8160900EE77C7 /* Main.storyboard */; };
 		2552AC5819F8160900EE77C7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC5719F8160900EE77C7 /* ViewController.m */; };
-		2552AC5B19F8160900EE77C7 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC5A19F8160900EE77C7 /* MyScene.m */; };
+		2552AC5B19F8160900EE77C7 /* AirplaneScene1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */; };
 		2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC5E19F8160900EE77C7 /* Images.xcassets */; };
 		2552AC6619F8160900EE77C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC6519F8160900EE77C7 /* XCTest.framework */; };
 		2552AC6719F8160900EE77C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2552AC3F19F8160900EE77C7 /* Foundation.framework */; };
@@ -34,9 +35,8 @@
 		2552AC7019F8160900EE77C7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2552AC6E19F8160900EE77C7 /* InfoPlist.strings */; };
 		2552AC7219F8160A00EE77C7 /* airplaneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552AC7119F8160A00EE77C7 /* airplaneTests.m */; };
 		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
-		2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */; };
 		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
-		25B1522D19F999180056147D /* plane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25B1522C19F999180056147D /* plane.jpg */; };
+		25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
 		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
 		2521EBF71A75BDC300E844F1 /* GameStartScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameStartScene.h; sourceTree = "<group>"; };
@@ -63,6 +63,8 @@
 		2521EC021A76335D00E844F1 /* Waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Waves.png; sourceTree = "<group>"; };
 		2525D8A41A355719009816BB /* Runway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Runway.png; sourceTree = "<group>"; };
 		2525D8A61A3557F1009816BB /* Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky.png; sourceTree = "<group>"; };
+		253F0B471A829FA800D691E6 /* Actions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Actions.h; sourceTree = "<group>"; };
+		253F0B481A829FBB00D691E6 /* Actions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Actions.m; sourceTree = "<group>"; };
 		2552AC3C19F8160900EE77C7 /* airplane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = airplane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552AC3F19F8160900EE77C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2552AC4119F8160900EE77C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -75,10 +77,10 @@
 		2552AC5019F8160900EE77C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2552AC5119F8160900EE77C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2552AC5419F8160900EE77C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2552AC5619F8160900EE77C7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2552AC5719F8160900EE77C7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2552AC5919F8160900EE77C7 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
-		2552AC5A19F8160900EE77C7 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
+		2552AC5619F8160900EE77C7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = airplane/ViewController.h; sourceTree = "<group>"; };
+		2552AC5719F8160900EE77C7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = airplane/ViewController.m; sourceTree = "<group>"; };
+		2552AC5919F8160900EE77C7 /* AirplaneScene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirplaneScene1.h; sourceTree = "<group>"; };
+		2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirplaneScene1.m; sourceTree = "<group>"; };
 		2552AC5E19F8160900EE77C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2552AC6419F8160900EE77C7 /* airplaneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = airplaneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552AC6519F8160900EE77C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -86,9 +88,9 @@
 		2552AC6F19F8160900EE77C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2552AC7119F8160A00EE77C7 /* airplaneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = airplaneTests.m; sourceTree = "<group>"; };
 		2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplaneCartoon.png; sourceTree = "<group>"; };
-		2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airPlanesBackground.png; sourceTree = "<group>"; };
 		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
-		25B1522C19F999180056147D /* plane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plane.jpg; sourceTree = "<group>"; };
+		25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpMenu.m; sourceTree = "<group>"; };
+		25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupMenu.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,15 +118,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		253F0B461A829F7900D691E6 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				253F0B471A829FA800D691E6 /* Actions.h */,
+				253F0B481A829FBB00D691E6 /* Actions.m */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
 		2552AC3319F8160900EE77C7 = {
 			isa = PBXGroup;
 			children = (
-				2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */,
-				2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */,
-				2552AC4719F8160900EE77C7 /* airplane */,
-				2552AC6B19F8160900EE77C7 /* airplaneTests */,
-				2552AC3E19F8160900EE77C7 /* Frameworks */,
-				2552AC3D19F8160900EE77C7 /* Products */,
+				253F0B461A829F7900D691E6 /* util */,
+				25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */,
+				25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */,
+				2521EBF11A75BAF500E844F1 /* Launch Screen.xib */,
+				2552AC5319F8160900EE77C7 /* Main.storyboard */,
+				2552AC5619F8160900EE77C7 /* ViewController.h */,
+				2552AC5719F8160900EE77C7 /* ViewController.m */,
+				255647A41A8280AD0018D2C9 /* trainGame */,
+				255647A31A8280710018D2C9 /* airplaneGame */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,25 +166,17 @@
 		2552AC4719F8160900EE77C7 /* airplane */ = {
 			isa = PBXGroup;
 			children = (
-				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
-				2561A99B1A1A70BE00685B1A /* airPlanesBackground.png */,
-				2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */,
-				25B1522C19F999180056147D /* plane.jpg */,
 				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
-				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
-				2552AC5319F8160900EE77C7 /* Main.storyboard */,
-				2552AC5619F8160900EE77C7 /* ViewController.h */,
-				2552AC5719F8160900EE77C7 /* ViewController.m */,
-				2552AC5919F8160900EE77C7 /* MyScene.h */,
-				2552AC5A19F8160900EE77C7 /* MyScene.m */,
-				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
-				2552AC4819F8160900EE77C7 /* Supporting Files */,
-				2521EBF11A75BAF500E844F1 /* Launch Screen.xib */,
 				2521EBF31A75BD0200E844F1 /* GameStartScene.sks */,
 				2521EBF51A75BDA600E844F1 /* GameStartScene.m */,
 				2521EBF71A75BDC300E844F1 /* GameStartScene.h */,
 				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
 				2521EBFB1A761C8F00E844F1 /* SecondLevel.m */,
+				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
+				2552AC5919F8160900EE77C7 /* AirplaneScene1.h */,
+				2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */,
+				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
+				2552AC4819F8160900EE77C7 /* Supporting Files */,
 			);
 			path = airplane;
 			sourceTree = "<group>";
@@ -178,6 +184,8 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
+				2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */,
 				2521EC001A76335D00E844F1 /* Sea.png */,
 				2521EC011A76335D00E844F1 /* Sky-3.png */,
 				2521EC021A76335D00E844F1 /* Waves.png */,
@@ -207,6 +215,26 @@
 				2552AC6E19F8160900EE77C7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		255647A31A8280710018D2C9 /* airplaneGame */ = {
+			isa = PBXGroup;
+			children = (
+				2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */,
+				2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */,
+				2552AC4719F8160900EE77C7 /* airplane */,
+				2552AC6B19F8160900EE77C7 /* airplaneTests */,
+				2552AC3E19F8160900EE77C7 /* Frameworks */,
+				2552AC3D19F8160900EE77C7 /* Products */,
+			);
+			name = airplaneGame;
+			sourceTree = "<group>";
+		};
+		255647A41A8280AD0018D2C9 /* trainGame */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = trainGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2552AC3719F8160900EE77C7 /* Build configuration list for PBXProject "airplane" */;
+			buildConfigurationList = 2552AC3719F8160900EE77C7 /* Build configuration list for PBXProject "ASD_Game" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -292,9 +320,7 @@
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
 				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
-				2561A99E1A1A70BE00685B1A /* airPlanesBackground.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
-				25B1522D19F999180056147D /* plane.jpg in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
@@ -317,10 +343,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253F0B491A829FBB00D691E6 /* Actions.m in Sources */,
+				25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */,
 				2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */,
 				2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */,
 				2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */,
-				2552AC5B19F8160900EE77C7 /* MyScene.m in Sources */,
+				2552AC5B19F8160900EE77C7 /* AirplaneScene1.m in Sources */,
 				2552AC5819F8160900EE77C7 /* ViewController.m in Sources */,
 				2552AC5219F8160900EE77C7 /* AppDelegate.m in Sources */,
 				2552AC4E19F8160900EE77C7 /* main.m in Sources */,
@@ -360,6 +388,7 @@
 				2552AC5419F8160900EE77C7 /* Base */,
 			);
 			name = Main.storyboard;
+			path = airplane;
 			sourceTree = "<group>";
 		};
 		2552AC6E19F8160900EE77C7 /* InfoPlist.strings */ = {
@@ -516,7 +545,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2552AC3719F8160900EE77C7 /* Build configuration list for PBXProject "airplane" */ = {
+		2552AC3719F8160900EE77C7 /* Build configuration list for PBXProject "ASD_Game" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2552AC7319F8160A00EE77C7 /* Debug */,

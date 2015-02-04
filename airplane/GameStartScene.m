@@ -7,7 +7,7 @@
 //
 
 #import "GameStartScene.h"
-#import "MyScene.h"
+#import "AirplaneScene1.h"
 
 
 @implementation GameStartScene
@@ -53,7 +53,7 @@
         
         //3
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        MyScene * scene = [MyScene sceneWithSize:self.view.bounds.size];
+        AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         

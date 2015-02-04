@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Hasini Yatawatte. All rights reserved.
 //
 
-#import "MyScene.h"
+#import "AirplaneScene1.h"
 
-@implementation MyScene
+@implementation AirplaneScene1
 
 
 -(id)initWithSize:(CGSize)size {
@@ -26,12 +26,22 @@
        [self initalizingScrollingBackground];
        [self addShip];
 
+        
+        // add the Go button
+        //should be removed after embedding voice commands
+        SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        go.text = @"Go"; //Set the button text
+        go.name = @"Go";
+        go.fontSize = 40;
+        go.fontColor = [SKColor yellowColor];
+        go.position = CGPointMake(0,-go.frame.size.height/2);
+        SKSpriteNode *background = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(go.frame.size.width, go.frame.size.height)];
+        background.position = CGPointMake(self.size.width/2, 40);
+        [background addChild:go];
+
+        [self addChild:background];
        
     }
-    
-    
-
-       
     
     return self;
 }
@@ -69,18 +79,32 @@
     
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location]; //1
+    SKNode *node = [self nodeAtPoint:location];
     
-    if ([node.name isEqualToString:@"level2"]) { //2
+    if ([node.name isEqualToString:@"level2"]) {
         
-        //3
+    
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         
+    }else if ([node.name isEqualToString:@"Go"]) {
+       
+        
+            if(self.ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75){
+        
+                [self.ship.physicsBody applyImpulse:CGVectorMake(0, 30)];
+            }else{
+        
+                [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
+                self.ship.physicsBody.dynamic = NO;
+        
+            }
+        
+             [self moveBgContinuously];
+        
     }
-
     
 }
 
@@ -90,7 +114,7 @@
 {
 
     
-    // Create ground
+    // Create ground texture
     
     groundTexture = [SKTexture textureWithImageNamed:@"Runway.png"];
     self.runway = [SKSpriteNode spriteNodeWithTexture:groundTexture];
@@ -101,6 +125,7 @@
     moveGroundSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
     
     // Create ground
+    // multiple images are merged to give the illusion of continuity
 
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:groundTexture];
@@ -110,30 +135,13 @@
         [self addChild:bg];
     }
     
-    
 
-    
-    
-    
-//    for( int i = 0; i< 2 + self.frame.size.width / ( groundTexture.size.width * 2 ) ; ++i ) {
-//       SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
-//        [sprite setScale:2];
-//      //  sprite.position = CGPointMake(i * sprite.size.width, sprite.size.height / 2);
-//     //   [sprite runAction:moveGroundSpritesForever];
-//        sprite.name = @"runway";
-//        [self addChild:sprite];
-//    }
-    
     // Create skyline
 
     
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
-    
-    
-    
-   
-    
+ 
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
         bg.position = CGPointMake(i * bg.size.width, groundTexture.size.height );
@@ -189,13 +197,7 @@
 //    }
 //    
     
-    
-    
-    
-    
-
-    
-    
+  
     
     // Create ground physics container
     
@@ -359,8 +361,6 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
         retryButton.position = CGPointMake(self.size.width/2, screenHeight/2-100);
         retryButton.name = @"level2";
         [self addChild:retryButton];
-
-//
 
     }
     

@@ -29,7 +29,7 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 }
 
 
-@interface MyScene : SKScene{
+@interface AirplaneScene1 : SKScene{
    
 
     SKAction *actionMoveDown;
