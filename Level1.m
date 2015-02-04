@@ -23,6 +23,15 @@
         //[self train];
         self.backgroundColor = [SKColor colorWithRed:.15 green:.15 blue:.3 alpha:1];
         
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        
+        _gameLayer = [SKNode node];
+        [self addChild: _gameLayer];
+        
+        _HUDLayer = [SKNode node];
+        [self addChild: _HUDLayer];
+        
         
     }
     return self;
