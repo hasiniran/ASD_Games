@@ -47,7 +47,9 @@ SKScene * scene;
     if ([node.name isEqualToString:@"Airplane"]) {
         
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
-        AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];
+        Level1 *scene= [Level1 sceneWithSize:self.view.bounds.size];
+        
+        //AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];    //commented out in order to test Train game
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Matthew Perez. All rights reserved.
 //
 
-#import "GameScene.h"
+#import "Level1.h"
 //LEVEL1
-@implementation GameScene{
+@implementation Level1{
     SKNode *_train;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
@@ -31,6 +31,21 @@
         
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
+        
+        SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Sky.png"];
+        SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width*2 y:0 duration: 0.1*backgroundTexture.size.width];    //moves background
+        SKAction *resetBg = [SKAction moveByX:backgroundTexture.size.width*2 y:0 duration:0];   //reset background
+        SKAction *moveBackgroundForever = [SKAction repeatActionForever:[SKAction sequence:@[moveBg, resetBg]]];    //repeat moveBg and resetBg
+        
+        for(int i =0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++){     //create sprite to call moveBgForever
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+            [sprite setScale:1];
+            sprite.zPosition=-20;
+            sprite.anchorPoint=CGPointZero;
+            sprite.position=CGPointMake(i*sprite.size.width, 0);
+            [sprite runAction:moveBackgroundForever];
+            [_bgLayer addChild:sprite];
+        }
         
         
     }
