@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		078A114A1A82D77C00956F41 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A11491A82D77C00956F41 /* GameScene.m */; };
 		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
 		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
 		2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2521EBF51A75BDA600E844F1 /* GameStartScene.m */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		078A11481A82D77C00956F41 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		078A11491A82D77C00956F41 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
 		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 		255647A41A8280AD0018D2C9 /* trainGame */ = {
 			isa = PBXGroup;
 			children = (
+				078A11481A82D77C00956F41 /* GameScene.h */,
+				078A11491A82D77C00956F41 /* GameScene.m */,
 			);
 			name = trainGame;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 			files = (
 				253F0B491A829FBB00D691E6 /* Actions.m in Sources */,
 				25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */,
+				078A114A1A82D77C00956F41 /* GameScene.m in Sources */,
 				2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */,
 				2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */,
 				2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */,
