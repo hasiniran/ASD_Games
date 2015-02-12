@@ -10,19 +10,23 @@
 //LEVEL1
 @implementation Level1{
     SKSpriteNode *_train;
+    SKSpriteNode *station;
+    //SKSpriteNode *background;
+    //SKSpriteNode *foreground;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
     NSTimeInterval *_dt;
     NSTimeInterval *_lastUpdateTime;
     double speed;
-    bool touch;
+    bool first;
 }
 
 -(id)initWithSize:(CGSize)size{
     speed = 1;
+    //first = true;
     if(self = [super initWithSize:size]){
-        self.backgroundColor = [SKColor colorWithRed:.15 green:.15 blue:.3 alpha:1];
+        //self.backgroundColor = [SKColor colorWithRed:.15 green:.15 blue:.3 alpha:1];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
@@ -30,10 +34,24 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
+        //init static background, erase in touch function
+      /*  background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
+        background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
+        [self addChild:background];
+        
+        foreground = [SKSpriteNode spriteNodeWithImageNamed:@"Runway.png"];
+        foreground.position = CGPointMake(CGRectGetMidX(self.frame),9);
+        [self addChild:foreground];
+        */
+        
         [self initScrollingBackground]; //scolling background (buildings, hills, etc.)
         [self initScrollingForeground]; //scolling tracks
         [self train];   //train object with physics body
-
+        [self station];
+        [station.physicsBody applyForce:CGVectorMake(-20, 0)];
+        if(_train.position.x >= 200){
+            [self nextLevel];
+        }
     }
     return self;
 }
@@ -70,15 +88,31 @@
     }
 }
 
+-(void)nextLevel{
+    _train.physicsBody.velocity = CGVectorMake(0, 0);
+    NSLog(@"next level");
+}
+
+-(void)station{
+    station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
+    station.position = CGPointMake(150, 200);
+    station.zPosition = 20;
+    station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    station.physicsBody.affectedByGravity = NO;
+    station.physicsBody.allowsRotation = NO;
+    //station.centerRect = CGRectMake(100, 200, 50, 50);
+    [_gameLayer addChild:station];
+}
 
 -(void)train{   //Moving object
     _train = [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];//change to train png
     _train.position = CGPointMake(60, 50);
     _train.zPosition = 50;
-    _train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(46, 18)];
+    _train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     _train.physicsBody.dynamic = YES;
     _train.physicsBody.affectedByGravity = NO;
     _train.physicsBody.allowsRotation = NO;
+    //_train.centerRect = CGRectMake(60, 50, 1, 5);
     [_gameLayer addChild:_train];
     
     
@@ -95,83 +129,18 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    speed = speed/2;
-    [self initScrollingBackground]; //fix speed increased for scrolling
-    [self initScrollingForeground];
-    
-    
-    /* Called when a touch begins */
-    /*
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.xScale = 0.5;
-        sprite.yScale = 0.5;
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
-    }
-     */
-    
-    
-    
-    
-    
+    /*if(first == true){
+        [background removeFromParent];
+        [foreground removeFromParent];
+        [self initScrollingBackground]; //scolling background (buildings, hills, etc.)
+        [self initScrollingForeground]; //scolling tracks
+        first = false;
+    }*/
+    [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+    //speed = speed/2;
+    //[self initScrollingBackground]; //fix speed increased for scrolling
+    //[self initScrollingForeground];
+
 }
-/*
--(void)initalizingScrollingBackground
-{
-    
-    
-    // Create ground
-    
-    groundTexture = [SKTexture textureWithImageNamed:@"runway2.png"];
-    self.runway = [SKSpriteNode spriteNodeWithTexture:groundTexture];
-    groundTexture.filteringMode = SKTextureFilteringNearest;
-    
-    SKAction* moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration: 0.02 * groundTexture.size.width*2];
-    SKAction* resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
-    moveGroundSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
-}
-
-
--(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval  {
-    SKAction* action = [SKAction moveByX:-width*1 y:0 duration: timeInterval* width*2];
-    return action;
-}
-
-
--(SKAction*)moveBgContinuously
-{
-    
-    __block SKAction* moveRunwayForever;
-    __block SKSpriteNode *runway;
-    SKAction* moveBackground;
-    
-    [self enumerateChildNodesWithName:@"runway" usingBlock: ^(SKNode *node, BOOL *stop)
-     {
-         runway = (SKSpriteNode *)node;
-         SKAction* moveRunway = [self moveAction:runway.size.width: 0.005];
-         SKAction* resetRunway = [self moveAction:-runway.size.width: 0.0];
-         moveRunwayForever = [SKAction repeatActionForever:[SKAction sequence:@[moveRunway,resetRunway]]];
-         
-         
-         if( !runway.hasActions){
-             [runway runAction: moveRunwayForever];
-         }
-     }];
-    
-    
-    return moveBackground;
-    
-    
-}*/
 
 @end

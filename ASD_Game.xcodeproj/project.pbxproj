@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		074D32C41A8BF9F1004C1C11 /* station.png in Resources */ = {isa = PBXBuildFile; fileRef = 074D32C31A8BF9F1004C1C11 /* station.png */; };
 		078A114A1A82D77C00956F41 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A11491A82D77C00956F41 /* Level1.m */; };
 		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
 		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		074D32C31A8BF9F1004C1C11 /* station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station.png; sourceTree = "<group>"; };
 		078A11481A82D77C00956F41 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		078A11491A82D77C00956F41 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
+				074D32C31A8BF9F1004C1C11 /* station.png */,
 				2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */,
 				2521EC001A76335D00E844F1 /* Sea.png */,
 				2521EC011A76335D00E844F1 /* Sky-3.png */,
@@ -289,6 +292,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Hasini Yatawatte";
 				TargetAttributes = {
+					2552AC3B19F8160900EE77C7 = {
+						DevelopmentTeam = 47J734W9F8;
+					};
 					2552AC6319F8160900EE77C7 = {
 						TestTargetID = 2552AC3B19F8160900EE77C7;
 					};
@@ -327,6 +333,7 @@
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
+				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
@@ -490,6 +497,7 @@
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -504,6 +512,7 @@
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
