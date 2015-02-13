@@ -49,9 +49,7 @@
         [self train];   //train object with physics body
         [self station];
         [station.physicsBody applyForce:CGVectorMake(-20, 0)];
-        if(_train.position.x >= 200){
-            [self nextLevel];
-        }
+    
     }
     return self;
 }
@@ -89,8 +87,17 @@
 }
 
 -(void)nextLevel{
-    _train.physicsBody.velocity = CGVectorMake(0, 0);
-    NSLog(@"next level");
+    _train.physicsBody.velocity = CGVectorMake(0, 0);   //stop train
+    
+    NSString * retrymessage;
+    retrymessage = @"Go to Level 2";
+    SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    retryButton.text = retrymessage;
+    retryButton.fontColor = [SKColor blueColor];
+    retryButton.color = [SKColor yellowColor];
+    retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    retryButton.name = @"level2";
+    [self addChild:retryButton];
 }
 
 -(void)station{
@@ -112,35 +119,20 @@
     _train.physicsBody.dynamic = YES;
     _train.physicsBody.affectedByGravity = NO;
     _train.physicsBody.allowsRotation = NO;
-    //_train.centerRect = CGRectMake(60, 50, 1, 5);
     [_gameLayer addChild:_train];
     
     
-    /*SKShapeNode *rect = [SKShapeNode node];
-    rect.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-10, 10, 20, 20)].CGPath;
-    rect.fillColor = [UIColor blueColor];
-    rect.strokeColor = [UIColor blueColor];
-    rect.glowWidth = 5;
-    [_train addChild:rect];
-    _train.position = CGPointMake(screenWidth/2, screenHeight/2);
-    
-    
-    [self addChild:_train];*/
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /*if(first == true){
-        [background removeFromParent];
-        [foreground removeFromParent];
-        [self initScrollingBackground]; //scolling background (buildings, hills, etc.)
-        [self initScrollingForeground]; //scolling tracks
-        first = false;
-    }*/
     [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-    //speed = speed/2;
-    //[self initScrollingBackground]; //fix speed increased for scrolling
-    //[self initScrollingForeground];
+}
 
+-(void)update:(NSTimeInterval)currentTime{
+    if(_train.position.x >= 600){
+        [self nextLevel];
+    
+    }
 }
 
 @end
