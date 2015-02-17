@@ -5,14 +5,13 @@
 //  Created by Matthew Perez on 1/28/15.
 //  Copyright (c) 2015 Matthew Perez. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 #import "Level1.h"
+
 //LEVEL1
 @implementation Level1{
     SKSpriteNode *_train;
     SKSpriteNode *station;
-    //SKSpriteNode *background;
-    //SKSpriteNode *foreground;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -20,11 +19,13 @@
     NSTimeInterval *_lastUpdateTime;
     double speed;
     bool first;
+    bool firstTouch;
 }
 
 -(id)initWithSize:(CGSize)size{
-    speed = 1;
-    //first = true;
+    speed = 0;
+    first = true;
+    firstTouch = true;
     if(self = [super initWithSize:size]){
         //self.backgroundColor = [SKColor colorWithRed:.15 green:.15 blue:.3 alpha:1];
         _bgLayer = [SKNode node];
@@ -34,24 +35,13 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
-        //init static background, erase in touch function
-      /*  background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky.png"];
-        background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
-        [self addChild:background];
         
-        foreground = [SKSpriteNode spriteNodeWithImageNamed:@"Runway.png"];
-        foreground.position = CGPointMake(CGRectGetMidX(self.frame),9);
-        [self addChild:foreground];
-        */
         
-        [self initScrollingBackground]; //scolling background (buildings, hills, etc.)
-        [self initScrollingForeground]; //scolling tracks
+        [self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 1 so no scrolling
+        [self initScrollingForeground]; //scolling tracks speed is 1
         [self train];   //train object with physics body
-        [self station];
-        [station.physicsBody applyForce:CGVectorMake(-20, 0)];
-        if(_train.position.x >= 200){
-            [self nextLevel];
-        }
+        [self station]; //station object
+    
     }
     return self;
 }
@@ -86,11 +76,24 @@
         [sprite runAction:moveBackgroundForever];
         [_bgLayer addChild:sprite];
     }
+     
+    
 }
 
 -(void)nextLevel{
-    _train.physicsBody.velocity = CGVectorMake(0, 0);
-    NSLog(@"next level");
+    _train.physicsBody.velocity = CGVectorMake(0, 0);   //stop train - poop
+    if(first == true){
+        NSString * retrymessage;            //Display Level 2 message
+        retrymessage = @"Go to Level 2";
+        SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        retryButton.text = retrymessage;
+        retryButton.fontColor = [SKColor blueColor];
+        retryButton.color = [SKColor yellowColor];
+        retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+        retryButton.name = @"level2";
+        [self addChild:retryButton];
+        first = false;
+    }
 }
 
 -(void)station{
@@ -100,7 +103,6 @@
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     station.physicsBody.affectedByGravity = NO;
     station.physicsBody.allowsRotation = NO;
-    //station.centerRect = CGRectMake(100, 200, 50, 50);
     [_gameLayer addChild:station];
 }
 
@@ -112,35 +114,45 @@
     _train.physicsBody.dynamic = YES;
     _train.physicsBody.affectedByGravity = NO;
     _train.physicsBody.allowsRotation = NO;
-    //_train.centerRect = CGRectMake(60, 50, 1, 5);
     [_gameLayer addChild:_train];
     
     
-    /*SKShapeNode *rect = [SKShapeNode node];
-    rect.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-10, 10, 20, 20)].CGPath;
-    rect.fillColor = [UIColor blueColor];
-    rect.strokeColor = [UIColor blueColor];
-    rect.glowWidth = 5;
-    [_train addChild:rect];
-    _train.position = CGPointMake(screenWidth/2, screenHeight/2);
-    
-    
-    [self addChild:_train];*/
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /*if(first == true){
-        [background removeFromParent];
-        [foreground removeFromParent];
-        [self initScrollingBackground]; //scolling background (buildings, hills, etc.)
-        [self initScrollingForeground]; //scolling tracks
-        first = false;
-    }*/
     [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-    //speed = speed/2;
-    //[self initScrollingBackground]; //fix speed increased for scrolling
-    //[self initScrollingForeground];
+    speed = 1;  //set speed to 1 which starts background scrolling
+    if (firstTouch==true){  //initial touch
+        [station.physicsBody applyForce:CGVectorMake(-25, 0)];
+        [self initScrollingBackground]; //start background scrolling
+        [self initScrollingForeground];
+        firstTouch = false; //any touches after are not initial touch
+    }
+    //Level 2 connection
+    /*
+    CGPoint location = [[touches anyObject] locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"level2"]) {
+        
+        
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
 
+    }asdfa
+    */
+    
 }
+
+
+-(void)update:(NSTimeInterval)currentTime{
+    if(_train.position.x >= 600){   //call next level function once train reaches right side of screen
+        [self nextLevel];
+    
+    }
+}
+    
 
 @end

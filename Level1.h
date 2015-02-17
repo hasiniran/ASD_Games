@@ -5,24 +5,17 @@
 
 //  Copyright (c) 2015 Matthew Perez. All rights reserved.
 //
-
+//#ifndef ASD_Game_Level1_h
+//#define ASD_Game_Level1_h
 #import <SpriteKit/SpriteKit.h>
+//#import "Level2.h"
+
+
 //LEVEL1
-@interface Level1 : SKScene{
-    
-    
-    /*
-    SKTexture *groundTexture;
-    SKAction *moveGroundSpritesForever;
-    CGRect screenRect;
-    CGFloat screenHeight;
-    CGFloat screenWidth;
-     */
+@interface Level1 : SKScene {
+
 }
 
-//@property (nonatomic, strong) SKSpriteNode *runway;
-
-//-(SKAction*)moveBg;
-//-(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;
 
 @end
+//#endif
