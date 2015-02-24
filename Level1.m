@@ -88,7 +88,8 @@
 }
 
 -(void)nextLevel{
-    _train.physicsBody.velocity = CGVectorMake(0, 0);   //stop train - poop
+    _train.physicsBody.velocity = CGVectorMake(0, 0);   //stop train
+    
     if(first == true){
         NSString * retrymessage;            //Display Level 2 message
         retrymessage = @"Go to Level 2";
@@ -105,7 +106,7 @@
 
 -(void)station{
     station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
-    station.position = CGPointMake(150, 200);
+    station.position = CGPointMake(150, 170);
     station.zPosition = 20;
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     station.physicsBody.affectedByGravity = NO;
@@ -152,7 +153,7 @@
         
         
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
+        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
 
