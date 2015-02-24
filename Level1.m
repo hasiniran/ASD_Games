@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import "Level1.h"
+#import "Level2.h"
 
 //LEVEL1
 @implementation Level1{
@@ -143,7 +144,7 @@
         firstTouch = false; //any touches after are not initial touch
     }
     //Level 2 connection
-    /*
+    
     CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
@@ -155,8 +156,8 @@
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
 
-    }asdfa
-    */
+    }
+    
     
 }
 

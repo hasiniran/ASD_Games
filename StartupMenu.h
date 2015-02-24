@@ -8,7 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "AirplaneScene1.h"
-#import "Level1.h"
+#import "Level2.h" //changed level1 to level2 for testing purposes
 
 #ifndef ASD_Game_StartupMenu_h
 #define ASD_Game_StartupMenu_h
