@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01CBB5201A9C4505001B075E /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CBB51D1A9C4505001B075E /* Background.png */; };
+		01CBB5211A9C4505001B075E /* Cow.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CBB51E1A9C4505001B075E /* Cow.png */; };
+		01CBB5241A9C4568001B075E /* Sky2.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CBB5231A9C4568001B075E /* Sky2.png */; };
 		073371781A95A6250024872B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371771A95A6250024872B /* Train.png */; };
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
+		0733717F1A95B1D30024872B /* Level2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0733717E1A95B1D30024872B /* Level2.m */; };
 		074D32C41A8BF9F1004C1C11 /* station.png in Resources */ = {isa = PBXBuildFile; fileRef = 074D32C31A8BF9F1004C1C11 /* station.png */; };
-		076A87BB1A9C053600317F72 /* Level3.m in Sources */ = {isa = PBXBuildFile; fileRef = 076A87BA1A9C053600317F72 /* Level3.m */; };
 		078A114A1A82D77C00956F41 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A11491A82D77C00956F41 /* Level1.m */; };
 		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
 		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
@@ -55,11 +58,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01CBB51D1A9C4505001B075E /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Background.png; path = ../../../Downloads/Background.png; sourceTree = "<group>"; };
+		01CBB51E1A9C4505001B075E /* Cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cow.png; path = ../../../Downloads/Cow.png; sourceTree = "<group>"; };
+		01CBB5231A9C4568001B075E /* Sky2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sky2.png; path = ../../../Downloads/Sky2.png; sourceTree = "<group>"; };
 		073371771A95A6250024872B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
 		073371791A95A6340024872B /* Rail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rail.png; sourceTree = "<group>"; };
+		0733717D1A95B1D30024872B /* Level2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
+		0733717E1A95B1D30024872B /* Level2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level2.m; sourceTree = "<group>"; };
 		074D32C31A8BF9F1004C1C11 /* station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station.png; sourceTree = "<group>"; };
-		076A87B91A9C053600317F72 /* Level3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level3.h; sourceTree = "<group>"; };
-		076A87BA1A9C053600317F72 /* Level3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level3.m; sourceTree = "<group>"; };
 		078A11481A82D77C00956F41 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		078A11491A82D77C00956F41 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
@@ -196,6 +202,8 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01CBB51D1A9C4505001B075E /* Background.png */,
+				01CBB51E1A9C4505001B075E /* Cow.png */,
 				073371771A95A6250024872B /* Train.png */,
 				073371791A95A6340024872B /* Rail.png */,
 				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
@@ -205,6 +213,7 @@
 				2521EC011A76335D00E844F1 /* Sky-3.png */,
 				2521EC021A76335D00E844F1 /* Waves.png */,
 				2525D8A61A3557F1009816BB /* Sky.png */,
+				01CBB5231A9C4568001B075E /* Sky2.png */,
 				2525D8A41A355719009816BB /* Runway.png */,
 				2552AC4919F8160900EE77C7 /* airplane-Info.plist */,
 				2552AC4A19F8160900EE77C7 /* InfoPlist.strings */,
@@ -250,8 +259,8 @@
 			children = (
 				078A11481A82D77C00956F41 /* Level1.h */,
 				078A11491A82D77C00956F41 /* Level1.m */,
-				076A87B91A9C053600317F72 /* Level3.h */,
-				076A87BA1A9C053600317F72 /* Level3.m */,
+				0733717D1A95B1D30024872B /* Level2.h */,
+				0733717E1A95B1D30024872B /* Level2.m */,
 			);
 			name = trainGame;
 			sourceTree = "<group>";
@@ -336,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				073371781A95A6250024872B /* Train.png in Resources */,
+				01CBB5201A9C4505001B075E /* Background.png in Resources */,
 				2525D8A71A3557F1009816BB /* Sky.png in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
 				2521EC051A76335D00E844F1 /* Waves.png in Resources */,
@@ -343,12 +353,14 @@
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
 				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
+				01CBB5241A9C4568001B075E /* Sky2.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
+				01CBB5211A9C4505001B075E /* Cow.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,9 +385,9 @@
 				078A114A1A82D77C00956F41 /* Level1.m in Sources */,
 				2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */,
 				2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */,
-				076A87BB1A9C053600317F72 /* Level3.m in Sources */,
 				2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */,
 				2552AC5B19F8160900EE77C7 /* AirplaneScene1.m in Sources */,
+				0733717F1A95B1D30024872B /* Level2.m in Sources */,
 				2552AC5819F8160900EE77C7 /* ViewController.m in Sources */,
 				2552AC5219F8160900EE77C7 /* AppDelegate.m in Sources */,
 				2552AC4E19F8160900EE77C7 /* main.m in Sources */,
