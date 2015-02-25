@@ -14,6 +14,7 @@
     SKSpriteNode *_train;
     SKSpriteNode *station;
     SKSpriteNode *rail;
+    SKSpriteNode *mountain;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -37,20 +38,44 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
+        [self addMountain];
+        [self addClouds];
         
-        
-        [self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 0 so no scrolling
+        //[self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 0 so no scrolling
         [self initScrollingForeground]; //scolling tracks speed is 0
         [self train];   //train object with physics body
         rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
-        rail.position = CGPointMake(917, 36
-                                    );
+        rail.position = CGPointMake(917, 36);
         [_gameLayer addChild:rail];
+        
         [self station]; //station object
     
     }
     return self;
     
+}
+-(void)addMountain{
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"background_mount.png"];
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:2];
+        sprite.zPosition=-30;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 100);
+        [_HUDLayer addChild:sprite];
+    }
+}
+
+-(void)addClouds{
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:1];
+        sprite.zPosition=-20;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 500);
+        [_bgLayer addChild:sprite];
+    }
 }
 
 -(void)initScrollingForeground{ //Scrolling tracks function
@@ -70,7 +95,7 @@
     }
 }
 -(void)initScrollingBackground{   //scrolling background function
-    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Sky.png"];        //reuse sky image
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];        //reuse sky image
     SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width*2 y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
     SKAction *resetBg = [SKAction moveByX:backgroundTexture.size.width*2 y:0 duration:0];   //reset background
     SKAction *moveBackgroundForever = [SKAction repeatActionForever:[SKAction sequence:@[moveBg, resetBg]]];    //repeat moveBg and resetBg
@@ -79,7 +104,7 @@
         [sprite setScale:1];
         sprite.zPosition=-20;
         sprite.anchorPoint=CGPointZero;
-        sprite.position=CGPointMake(i*sprite.size.width, 100);
+        sprite.position=CGPointMake(i*sprite.size.width, 500);
         [sprite runAction:moveBackgroundForever];
         [_bgLayer addChild:sprite];
     }
@@ -131,12 +156,18 @@
     [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
     speed = 1;  //set speed to 1 which starts background scrolling
     if (firstTouch==true){  //initial touch
+        [_HUDLayer removeFromParent];
         [_bgLayer removeFromParent];
         [_gameLayer removeFromParent];
+        
+        _HUDLayer = [SKNode node];
+        [self addChild: _HUDLayer];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
         [self addChild: _gameLayer];
+        
+        [self addMountain];
         [self station];
         [self train];
         [self initScrollingBackground]; //start background scrolling

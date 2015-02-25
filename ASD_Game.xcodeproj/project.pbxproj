@@ -17,6 +17,7 @@
 		076CF6021A9D2049001839A2 /* Clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF6011A9D2049001839A2 /* Clouds.png */; };
 		076CF6041A9D2076001839A2 /* Sky2.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF6031A9D2076001839A2 /* Sky2.png */; };
 		078A114A1A82D77C00956F41 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A11491A82D77C00956F41 /* Level1.m */; };
+		07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */ = {isa = PBXBuildFile; fileRef = 07EE529A1A9E2C06004D0DE7 /* background_mount.png */; };
 		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
 		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
 		2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2521EBF51A75BDA600E844F1 /* GameStartScene.m */; };
@@ -73,6 +74,7 @@
 		076CF6031A9D2076001839A2 /* Sky2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky2.png; sourceTree = "<group>"; };
 		078A11481A82D77C00956F41 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		078A11491A82D77C00956F41 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
+		07EE529A1A9E2C06004D0DE7 /* background_mount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_mount.png; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
 		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
@@ -192,7 +194,6 @@
 				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
 				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
 				2521EBF31A75BD0200E844F1 /* GameStartScene.sks */,
-				076CF6011A9D2049001839A2 /* Clouds.png */,
 				2521EBF51A75BDA600E844F1 /* GameStartScene.m */,
 				2521EBF71A75BDC300E844F1 /* GameStartScene.h */,
 				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
@@ -208,7 +209,9 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07EE529A1A9E2C06004D0DE7 /* background_mount.png */,
 				076CF6031A9D2076001839A2 /* Sky2.png */,
+				076CF6011A9D2049001839A2 /* Clouds.png */,
 				076CF5FF1A9D1FF3001839A2 /* Cow.png */,
 				076CF5FD1A9D1FEA001839A2 /* Background.png */,
 				073371771A95A6250024872B /* Train.png */,
@@ -357,6 +360,7 @@
 				2525D8A71A3557F1009816BB /* Sky.png in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
 				2521EC051A76335D00E844F1 /* Waves.png in Resources */,
+				07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */,
 				076CF6021A9D2049001839A2 /* Clouds.png in Resources */,
 				2525D8A51A355719009816BB /* Runway.png in Resources */,
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
