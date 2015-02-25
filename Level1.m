@@ -38,6 +38,16 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
+        SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        go.text = @"Go"; //Set the button text
+        go.name = @"Go";
+        go.fontSize = 40;
+        go.fontColor = [SKColor blueColor];
+        go.position = CGPointMake(300,70);
+        go.zPosition = 50;  
+        [self addChild:go]; //add node to screen
+        
+        
         [self addMountain];
         [self addClouds];
         
@@ -153,7 +163,6 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
     speed = 1;  //set speed to 1 which starts background scrolling
     if (firstTouch==true){  //initial touch
         [_HUDLayer removeFromParent];
@@ -188,6 +197,10 @@
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
 
+    }else if ([node.name isEqualToString:@"Go"]) {
+        
+        [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        
     }
     
     
