@@ -23,6 +23,8 @@
     //check 0 = moving, check 1 = stop, check 3 = moving, check 4 display
 }
 
+
+
 -(id)initWithSize:(CGSize)size{
     count = 0;
     check = 0;
@@ -36,7 +38,8 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
-        
+        [self addMountain];
+        //[self addClouds];
         
         [self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 0 so no scrolling
         [self initScrollingForeground]; //scolling tracks speed is 0
@@ -46,7 +49,30 @@
         
     }
     return self;
-    
+}
+
+-(void)addMountain{
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"background_mount.png"];
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:2];
+        sprite.zPosition=-30;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 100);
+        [_HUDLayer addChild:sprite];
+    }
+}
+
+-(void)addClouds{
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:1];
+        sprite.zPosition=-20;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 500);
+        [_bgLayer addChild:sprite];
+    }
 }
 
 -(void)initScrollingForeground{ //Scrolling tracks function
@@ -55,7 +81,7 @@
     SKAction *resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
     SKAction *moveGroundSpriteForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
     
-    for(int i=0; i<2 +self.frame.size.width/(groundTexture.size.width*2);i++){      //place image
+    for(int i=0; i<2 +self.frame.size.width/(groundTexture.size.width);i++){      //place image
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
         [sprite setScale:1];
         sprite.zPosition = 10;
@@ -66,8 +92,8 @@
     }
 }
 -(void)initScrollingBackground{   //scrolling background function
-    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Sky.png"];        //reuse sky image
-    SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width*2 y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];        //reuse sky image
+    SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
     SKAction *resetBg = [SKAction moveByX:backgroundTexture.size.width*2 y:0 duration:0];   //reset background
     SKAction *moveBackgroundForever = [SKAction repeatActionForever:[SKAction sequence:@[moveBg, resetBg]]];    //repeat moveBg and resetBg
     for(int i =0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++){     //place image
@@ -75,12 +101,11 @@
         [sprite setScale:1];
         sprite.zPosition=-20;
         sprite.anchorPoint=CGPointZero;
-        sprite.position=CGPointMake(i*sprite.size.width, 100);
+        sprite.position=CGPointMake(i*sprite.size.width, 500);
         [sprite runAction:moveBackgroundForever];
         [_bgLayer addChild:sprite];
     }
 }
-
 -(void)nextLevel{
     if(check == 3){
         NSString * retrymessage;            //Display Level 2 message
@@ -116,7 +141,7 @@
         rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
         rail.position = CGPointMake(917, 36);
         [_gameLayer addChild:rail];
-        
+        [self addClouds];
         NSString *question;            //Display question message
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         question = @"Pick up the passenger in purple";
@@ -132,7 +157,7 @@
 
 -(void)station{
     station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
-    station.position = CGPointMake(750, 160);
+    station.position = CGPointMake(810, 160);
     station.zPosition = 20;
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     station.physicsBody.affectedByGravity = NO;
@@ -149,8 +174,6 @@
     _train.physicsBody.affectedByGravity = NO;
     _train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:_train];
-    
-    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -170,7 +193,7 @@
      scene.scaleMode = SKSceneScaleModeAspectFill;
      [self.view presentScene:scene transition: reveal];
      
-     }asdfa
+     }
      */
     
 }

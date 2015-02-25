@@ -118,8 +118,6 @@
         [sprite runAction:moveBackgroundForever];
         [_bgLayer addChild:sprite];
     }
-     
-    
 }
 
 -(void)nextLevel{
