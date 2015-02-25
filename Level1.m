@@ -43,9 +43,9 @@
         go.name = @"Go";
         go.fontSize = 40;
         go.fontColor = [SKColor blueColor];
-        go.position = CGPointMake(300,70);
+        go.position = CGPointMake(500,200);
         go.zPosition = 50;  
-        [self addChild:go]; //add node to screen
+        [_HUDLayer addChild:go]; //add node to screen
         
         
         [self addMountain];
@@ -165,18 +165,18 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     speed = 1;  //set speed to 1 which starts background scrolling
     if (firstTouch==true){  //initial touch
-        [_HUDLayer removeFromParent];
+        //[_HUDLayer removeFromParent];
         [_bgLayer removeFromParent];
         [_gameLayer removeFromParent];
         
-        _HUDLayer = [SKNode node];
-        [self addChild: _HUDLayer];
+       // _HUDLayer = [SKNode node];
+        //[self addChild: _HUDLayer];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
         [self addChild: _gameLayer];
         
-        [self addMountain];
+        //[self addMountain];
         [self station];
         [self train];
         [self initScrollingBackground]; //start background scrolling
