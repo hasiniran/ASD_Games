@@ -17,6 +17,7 @@
     SKNode *_gameLayer;
     NSTimeInterval *_dt;
     NSTimeInterval *_lastUpdateTime;
+    SKSpriteNode *blueBoy;
     double speed;
     int count;
     int check; //keep track of train states
@@ -39,9 +40,9 @@
         [self addChild: _HUDLayer];
         
         [self addMountain];
-        //[self addClouds];
+        [self addClouds];
         
-        [self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 0 so no scrolling
+        //[self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 0 so no scrolling
         [self initScrollingForeground]; //scolling tracks speed is 0
         [self train];   //train object with physics body
         [self station]; //station object
@@ -148,12 +149,19 @@
         display.text=question;
         display.fontColor = [SKColor purpleColor];
         display.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [self blueBoy];
         [self addChild:display];
     }
     check++;
-    
 }
 
+-(void)blueBoy{
+    blueBoy = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBoy.png"];
+    blueBoy.position = CGPointMake(700, 160);
+    blueBoy.zPosition = 30;
+    [blueBoy setScale:.5];
+    [_gameLayer addChild:blueBoy];
+}
 
 -(void)station{
     station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
