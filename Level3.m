@@ -20,9 +20,11 @@
     SKSpriteNode *blueBoy;
     SKSpriteNode *yellowBoy;
     SKSpriteNode *purpleBoy;
+    SKSpriteNode *head;
     double speed;
     int count;
     int check; //keep track of train states
+    int count2;
     //check 0 = moving, check 1 = stop, check 3 = moving, check 4 display
 }
 
@@ -162,6 +164,10 @@
     blueBoy.position = CGPointMake(700, 160);
     blueBoy.zPosition = 30;
     [blueBoy setScale:.5];
+    blueBoy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    blueBoy.physicsBody.affectedByGravity = NO;
+    blueBoy.physicsBody.allowsRotation=NO;
+    blueBoy.physicsBody.collisionBitMask=NO;
     [_gameLayer addChild:blueBoy];
 }
 -(void)purpleBoy{
@@ -176,14 +182,18 @@
     yellowBoy = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoy.png"];
     yellowBoy.name = @"yellowBoy";
     yellowBoy.position = CGPointMake(600, 160);
-    yellowBoy.zPosition = 30;
+    yellowBoy.zPosition = 31;
     [yellowBoy setScale:.5];
+    yellowBoy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    yellowBoy.physicsBody.affectedByGravity = NO;
+    yellowBoy.physicsBody.allowsRotation=NO;
+    yellowBoy.physicsBody.collisionBitMask = NO;
     [_gameLayer addChild:yellowBoy];
 }
 
 -(void)station{
     station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
-    station.position = CGPointMake(810, 160);
+    station.position = CGPointMake(800, 160);
     station.zPosition = 20;
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     station.physicsBody.affectedByGravity = NO;
@@ -201,6 +211,17 @@
     _train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:_train];
 }
+-(void)addHeadToTrain{
+    head = [SKSpriteNode spriteNodeWithImageNamed:@"purpHead.png"];
+    head.position = CGPointMake(330, 120);
+    head.zPosition = 60;
+    [head setScale:.8];
+    head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    head.physicsBody.affectedByGravity = NO;
+    head.physicsBody.allowsRotation=NO;
+    head.physicsBody.collisionBitMask = NO;
+    [_gameLayer addChild:head];
+}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //speed = 1;  //set speed to 1 which starts background scrolling
@@ -212,7 +233,19 @@
      
     if([node.name  isEqual: @"purpleBoy"]){
         [purpleBoy removeFromParent];
-        
+        [self addHeadToTrain];
+        [_bgLayer removeFromParent];
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        [self initScrollingForeground];
+        [self initScrollingBackground];
+        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [_train.physicsBody applyForce:CGVectorMake(25, 0)];
+        [head.physicsBody applyForce:CGVectorMake(25, 0)];
+        count =0;
+        count2 =1;
     }
     /*
     else if ([node.name isEqualToString:@"level2"]) {
@@ -229,9 +262,12 @@
 
 -(void)update:(NSTimeInterval)currentTime{
     count++;
-    if(count >= 40){   //call next level function once train reaches right side of screen
+    if(count2 == 1){
+        if(count >= 50)
+            NSLog(@"next level");
+    }
+    else if(count >= 40){   //call next level function once train reaches right side of screen
         [self stopTrain];
-        
     }
 }
 
