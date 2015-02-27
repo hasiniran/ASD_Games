@@ -188,20 +188,14 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqualToString:@"level2"]) {
-        
-        
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
-
-    }else if ([node.name isEqualToString:@"Go"]) {
-        
-        [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-        
     }
-    
-    
+    else if ([node.name isEqualToString:@"Go"]) {
+        [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+    }
 }
 
 

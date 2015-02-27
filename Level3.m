@@ -158,6 +158,7 @@
 
 -(void)blueBoy{
     blueBoy = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBoy.png"];
+    blueBoy.name = @"blueBoy";
     blueBoy.position = CGPointMake(700, 160);
     blueBoy.zPosition = 30;
     [blueBoy setScale:.5];
@@ -165,6 +166,7 @@
 }
 -(void)purpleBoy{
     purpleBoy = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoy.png"];
+    purpleBoy.name = @"purpleBoy";
     purpleBoy.position = CGPointMake(800, 160);
     purpleBoy.zPosition = 30;
     [purpleBoy setScale:.5];
@@ -172,6 +174,7 @@
 }
 -(void)yellowBoy{
     yellowBoy = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoy.png"];
+    yellowBoy.name = @"yellowBoy";
     yellowBoy.position = CGPointMake(600, 160);
     yellowBoy.zPosition = 30;
     [yellowBoy setScale:.5];
@@ -200,17 +203,19 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //[_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-    speed = 1;  //set speed to 1 which starts background scrolling
+    //speed = 1;  //set speed to 1 which starts background scrolling
     
     //Level 2 connection
-    /*
+    
      CGPoint location = [[touches anyObject] locationInNode:self];
      SKNode *node = [self nodeAtPoint:location];
      
-     if ([node.name isEqualToString:@"level2"]) {
-     
-     
+    if([node.name  isEqual: @"purpleBoy"]){
+        [purpleBoy removeFromParent];
+        
+    }
+    /*
+    else if ([node.name isEqualToString:@"level2"]) {
      SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
      Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
      scene.scaleMode = SKSceneScaleModeAspectFill;
