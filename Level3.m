@@ -18,6 +18,8 @@
     NSTimeInterval *_dt;
     NSTimeInterval *_lastUpdateTime;
     SKSpriteNode *blueBoy;
+    SKSpriteNode *yellowBoy;
+    SKSpriteNode *purpleBoy;
     double speed;
     int count;
     int check; //keep track of train states
@@ -31,7 +33,6 @@
     check = 0;
     speed = 1;
     if(self = [super initWithSize:size]){
-        //self.backgroundColor = [SKColor colorWithRed:.15 green:.15 blue:.3 alpha:1];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
@@ -123,8 +124,6 @@
 }
 
 -(void)stopTrain{
-    //CGPoint stationPos = station.position;
-    //NSLog(@"%@", NSStringFromCGPoint(station.position));
     if(check ==0){
         speed = 0;
         [_bgLayer removeFromParent];
@@ -150,6 +149,8 @@
         display.fontColor = [SKColor purpleColor];
         display.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self blueBoy];
+        [self yellowBoy];
+        [self purpleBoy];
         [self addChild:display];
     }
     check++;
@@ -161,6 +162,20 @@
     blueBoy.zPosition = 30;
     [blueBoy setScale:.5];
     [_gameLayer addChild:blueBoy];
+}
+-(void)purpleBoy{
+    purpleBoy = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoy.png"];
+    purpleBoy.position = CGPointMake(800, 160);
+    purpleBoy.zPosition = 30;
+    [purpleBoy setScale:.5];
+    [_gameLayer addChild:purpleBoy];
+}
+-(void)yellowBoy{
+    yellowBoy = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoy.png"];
+    yellowBoy.position = CGPointMake(600, 160);
+    yellowBoy.zPosition = 30;
+    [yellowBoy setScale:.5];
+    [_gameLayer addChild:yellowBoy];
 }
 
 -(void)station{
