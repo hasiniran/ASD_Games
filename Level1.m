@@ -182,7 +182,7 @@
         [station.physicsBody applyForce:CGVectorMake(-25, 0)];
         firstTouch = false; //any touches after are not initial touch
     }
-    //Level 2 connection
+    //Level 3 connection
     
     CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
@@ -197,7 +197,6 @@
         [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
     }
 }
-
 
 -(void)update:(NSTimeInterval)currentTime{
     if(_train.position.x >= 600){   //call next level function once train reaches right side of screen
