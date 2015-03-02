@@ -170,15 +170,24 @@
 }
 
 
+
+//randomly generate cows
+int Cows = [self getRandomNumberBetween:0 to:1];
+if(Cows == 1){
+    SKSpriteNode *cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
+    cow.position = CGPointMake(screenRect.size.height+cow.size.height/2, screenRect.size.width+cow.size.height/2);
+    cow.zPosition = 1;
+    int randomTime = [self getRandomNumberBetween:9 to:19];
+    
+    SKAction *move =[SKAction moveTo:CGPointMake(0-cow.size.height, 0-cow.size.width) duration:randomTime];
+    SKAction *remove = [SKAction removeFromParent];
+    [cow runAction:[SKAction sequence:@[move,remove]]];
+    [self addChild:cow];
+}
+
+
 -(void)update:(NSTimeInterval)currentTime{
-    if(_train.position.x == 0){
-        count = 1;
-    }
-    if((int)_train.position.x % 200 == 0){
-        count++;
-        pause = true; //attempts to pause screen?
-    }
-    if(count == 7) { //once train reaches the end, next level
+    if((int)_train.position.x >= 600){
         [self nextLevel];
     }
 }
