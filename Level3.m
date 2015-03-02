@@ -1,36 +1,40 @@
 //
-//  GameScene.m
-//  Autism_train
+//  Level3.m
+//  ASD_Game
 //
-//  Created by Matthew Perez on 1/28/15.
-//  Copyright (c) 2015 Matthew Perez. All rights reserved.
+//  Created by Matthew Perez on 2/23/15.
+//  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
 //
-#import <Foundation/Foundation.h>
-#import "Level1.h"
-#import "Level2.h"
 
-//LEVEL1
-@implementation Level1{
+#import "Level3.h"
+
+@implementation Level3{
     SKSpriteNode *_train;
     SKSpriteNode *station;
     SKSpriteNode *rail;
-    SKSpriteNode *mountain;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
     NSTimeInterval *_dt;
     NSTimeInterval *_lastUpdateTime;
+    SKSpriteNode *blueBoy;
+    SKSpriteNode *yellowBoy;
+    SKSpriteNode *purpleBoy;
+    SKSpriteNode *head;
     double speed;
-    bool first;
-    bool firstTouch;
+    int count;
+    int check; //keep track of train states
+    int count2;
+    //check 0 = moving, check 1 = stop, check 3 = moving, check 4 display
 }
 
+
+
 -(id)initWithSize:(CGSize)size{
-    speed = 0;
-    first = true;
-    firstTouch = true;
+    count = 0;
+    check = 0;
+    speed = 1;
     if(self = [super initWithSize:size]){
-        //self.backgroundColor = [SKColor colorWithRed:.15 green:.15 blue:.3 alpha:1];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
@@ -38,32 +42,19 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
-        SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        go.text = @"Go"; //Set the button text
-        go.name = @"Go";
-        go.fontSize = 40;
-        go.fontColor = [SKColor blueColor];
-        go.position = CGPointMake(500,200);
-        go.zPosition = 50;  
-        [_HUDLayer addChild:go]; //add node to screen
-        
-        
         [self addMountain];
         [self addClouds];
         
         //[self initScrollingBackground]; //scolling background (buildings, hills, etc.) but speed is 0 so no scrolling
         [self initScrollingForeground]; //scolling tracks speed is 0
         [self train];   //train object with physics body
-        rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
-        rail.position = CGPointMake(917, 36);
-        [_gameLayer addChild:rail];
-        
         [self station]; //station object
-    
+        [station.physicsBody applyImpulse:CGVectorMake(-5, 0)];
+        
     }
     return self;
-    
 }
+
 -(void)addMountain{
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"background_mount.png"];
     for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
@@ -119,27 +110,90 @@
         [_bgLayer addChild:sprite];
     }
 }
-
 -(void)nextLevel{
-    _train.physicsBody.velocity = CGVectorMake(0, 0);   //stop train
-    
-    if(first == true){
+    if(check == 3){
         NSString * retrymessage;            //Display Level 2 message
-        retrymessage = @"Go to Level 2";
+        retrymessage = @"Go to Level 4";
         SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         retryButton.text = retrymessage;
         retryButton.fontColor = [SKColor blueColor];
         retryButton.color = [SKColor yellowColor];
         retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-        retryButton.name = @"level2";
+        retryButton.name = @"level4";
         [self addChild:retryButton];
-        first = false;
+        check++;
     }
+}
+
+-(void)stopTrain{
+    if(check ==0){
+        speed = 0;
+        [_bgLayer removeFromParent];
+        [_gameLayer removeFromParent];
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        _gameLayer = [SKNode node];
+        [self addChild: _gameLayer];
+        [self train];
+        [self station];
+        station.position = CGPointMake(500, 160);
+        [self initScrollingBackground];
+        [self initScrollingForeground];
+        
+        rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
+        rail.position = CGPointMake(917, 36);
+        [_gameLayer addChild:rail];
+        [self addClouds];
+        NSString *question;            //Display question message
+        SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        question = @"Pick up the passenger in purple";
+        display.text=question;
+        display.fontColor = [SKColor purpleColor];
+        display.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [self blueBoy];
+        [self yellowBoy];
+        [self purpleBoy];
+        [self addChild:display];
+    }
+    check++;
+}
+
+-(void)blueBoy{
+    blueBoy = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBoy.png"];
+    blueBoy.name = @"blueBoy";
+    blueBoy.position = CGPointMake(700, 160);
+    blueBoy.zPosition = 30;
+    [blueBoy setScale:.5];
+    blueBoy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    blueBoy.physicsBody.affectedByGravity = NO;
+    blueBoy.physicsBody.allowsRotation=NO;
+    blueBoy.physicsBody.collisionBitMask=NO;
+    [_gameLayer addChild:blueBoy];
+}
+-(void)purpleBoy{
+    purpleBoy = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoy.png"];
+    purpleBoy.name = @"purpleBoy";
+    purpleBoy.position = CGPointMake(800, 160);
+    purpleBoy.zPosition = 30;
+    [purpleBoy setScale:.5];
+    [_gameLayer addChild:purpleBoy];
+}
+-(void)yellowBoy{
+    yellowBoy = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoy.png"];
+    yellowBoy.name = @"yellowBoy";
+    yellowBoy.position = CGPointMake(600, 160);
+    yellowBoy.zPosition = 31;
+    [yellowBoy setScale:.5];
+    yellowBoy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    yellowBoy.physicsBody.affectedByGravity = NO;
+    yellowBoy.physicsBody.allowsRotation=NO;
+    yellowBoy.physicsBody.collisionBitMask = NO;
+    [_gameLayer addChild:yellowBoy];
 }
 
 -(void)station{
     station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
-    station.position = CGPointMake(150, 170);
+    station.position = CGPointMake(800, 160);
     station.zPosition = 20;
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     station.physicsBody.affectedByGravity = NO;
@@ -149,62 +203,73 @@
 
 -(void)train{   //Moving object
     _train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];//change to train png
-    _train.position = CGPointMake(60, 100);
+    _train.position = CGPointMake(250, 100);
     _train.zPosition = 50;
     _train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     _train.physicsBody.dynamic = YES;
     _train.physicsBody.affectedByGravity = NO;
     _train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:_train];
-    
-    
+}
+-(void)addHeadToTrain{
+    head = [SKSpriteNode spriteNodeWithImageNamed:@"purpHead.png"];
+    head.position = CGPointMake(330, 120);
+    head.zPosition = 60;
+    [head setScale:.8];
+    head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    head.physicsBody.affectedByGravity = NO;
+    head.physicsBody.allowsRotation=NO;
+    head.physicsBody.collisionBitMask = NO;
+    [_gameLayer addChild:head];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    speed = 1;  //set speed to 1 which starts background scrolling
-    if (firstTouch==true){  //initial touch
-        //[_HUDLayer removeFromParent];
-        [_bgLayer removeFromParent];
-        [_gameLayer removeFromParent];
-        
-       // _HUDLayer = [SKNode node];
-        //[self addChild: _HUDLayer];
-        _bgLayer = [SKNode node];
-        [self addChild: _bgLayer];
-        _gameLayer = [SKNode node];
-        [self addChild: _gameLayer];
-        
-        //[self addMountain];
-        [self station];
-        [self train];
-        [self initScrollingBackground]; //start background scrolling
-        [self initScrollingForeground];
-        [station.physicsBody applyForce:CGVectorMake(-25, 0)];
-        firstTouch = false; //any touches after are not initial touch
-    }
+    //speed = 1;  //set speed to 1 which starts background scrolling
+    
     //Level 2 connection
     
-    CGPoint location = [[touches anyObject] locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+     CGPoint location = [[touches anyObject] locationInNode:self];
+     SKNode *node = [self nodeAtPoint:location];
+     
+    if([node.name  isEqual: @"purpleBoy"]){
+        [purpleBoy removeFromParent];
+        [self addHeadToTrain];
+        [_bgLayer removeFromParent];
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        [self initScrollingForeground];
+        [self initScrollingBackground];
+        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [_train.physicsBody applyForce:CGVectorMake(25, 0)];
+        [head.physicsBody applyForce:CGVectorMake(25, 0)];
+        count =0;
+        count2 =1;
+    }
+    /*
+    else if ([node.name isEqualToString:@"level2"]) {
+     SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+     Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
+     scene.scaleMode = SKSceneScaleModeAspectFill;
+     [self.view presentScene:scene transition: reveal];
+     
+     }
+     */
     
-    if ([node.name isEqualToString:@"level2"]) {
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
-        scene.scaleMode = SKSceneScaleModeAspectFill;
-        [self.view presentScene:scene transition: reveal];
-    }
-    else if ([node.name isEqualToString:@"Go"]) {
-        [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-    }
 }
 
 
 -(void)update:(NSTimeInterval)currentTime{
-    if(_train.position.x >= 600){   //call next level function once train reaches right side of screen
-        [self nextLevel];
-    
+    count++;
+    if(count2 == 1){
+        if(count >= 50)
+            NSLog(@"next level");
+    }
+    else if(count >= 40){   //call next level function once train reaches right side of screen
+        [self stopTrain];
     }
 }
-    
+
 
 @end
