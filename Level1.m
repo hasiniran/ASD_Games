@@ -189,7 +189,7 @@
     
     if ([node.name isEqualToString:@"level2"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
+        Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }

@@ -23,7 +23,8 @@
     bool first;
     bool firstTouch;
     double speed;
-    int count;
+//    int count;
+    int numCows;
     bool pause;
 }
 
@@ -136,12 +137,11 @@
     
 }
 
+
 -(void)cow{
     cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
     cow.position = CGPointMake(500,300);
     cow.zPosition = 100;
-    
-    [_gameLayer addChild:cow];
 }
 
 
@@ -160,22 +160,34 @@
         [self initScrollingBackground]; //start background scrolling
         [self initScrollingForeground];
         pause = false;
+        /*
         if (count%2 == 0) { //if game is paused, show cows
             [self cow];
             count++; //after cows, increment count to keep moving
         }
+        */
         firstTouch = false; //any touches after are not initial touch
     }
 
 }
 
+-(void)update:(NSTimeInterval)currentTime{
+    //randomly generate number of cows
+  //  if ((int)_train.position.x == 300) {
+        numCows = arc4random() % 9; //[self getRandomNumberBetween:1 to:10];
+        for (int i=1; i<=numCows+1; i++){
+    
+            [_gameLayer addChild:cow];
+        }
+ //   }
+}
 
-
+/*
 //randomly generate cows
 int Cows = [self getRandomNumberBetween:0 to:1];
-if(Cows == 1){
+if (Cows == 1) {
     SKSpriteNode *cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
-    cow.position = CGPointMake(screenRect.size.height+cow.size.height/2, screenRect.size.width+cow.size.height/2);
+    cow.position = CGPointMake(screenRect.size.height+cow.size.height/2, screenRect.size.width+cow.size.width/2);
     cow.zPosition = 1;
     int randomTime = [self getRandomNumberBetween:9 to:19];
     
@@ -184,13 +196,14 @@ if(Cows == 1){
     [cow runAction:[SKAction sequence:@[move,remove]]];
     [self addChild:cow];
 }
+*/
 
-
+/*
 -(void)update:(NSTimeInterval)currentTime{
-    if((int)_train.position.x >= 600){
+    if((int)_train.position.x >= 800){ //was 600
         [self nextLevel];
     }
-}
+}*/
 
 @end
 
