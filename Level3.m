@@ -120,7 +120,7 @@
         retryButton.color = [SKColor yellowColor];
         retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
         retryButton.name = @"level4";
-        [self addChild:retryButton];
+        [_gameLayer addChild:retryButton];
         check++;
     }
 }
@@ -137,7 +137,7 @@
         [self train];
         [self station];
         station.position = CGPointMake(500, 160);
-        [self initScrollingBackground];
+        //[self initScrollingBackground];
         [self initScrollingForeground];
         
         rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
@@ -262,9 +262,7 @@
         [purpleBoy removeFromParent];
         [self addHeadToTrain];
         [_bgLayer removeFromParent];
-        [_gameLayer removeFromParent];
-        _gameLayer = [SKNode node];
-        [self addChild: _gameLayer];
+        //[_gameLayer removeFromParent];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         [self initScrollingForeground];
