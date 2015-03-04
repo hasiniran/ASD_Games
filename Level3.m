@@ -258,9 +258,13 @@
      SKNode *node = [self nodeAtPoint:location];
      
     if([node.name  isEqual: @"purpleBoy"]){
+        speed = 1;
         [purpleBoy removeFromParent];
         [self addHeadToTrain];
         [_bgLayer removeFromParent];
+        [_gameLayer removeFromParent];
+        _gameLayer = [SKNode node];
+        [self addChild: _gameLayer];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         [self initScrollingForeground];
