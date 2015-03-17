@@ -120,7 +120,7 @@
         retryButton.color = [SKColor yellowColor];
         retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
         retryButton.name = @"level4";
-        [self addChild:retryButton];
+        [_gameLayer addChild:retryButton];
         check++;
     }
 }
@@ -137,7 +137,7 @@
         [self train];
         [self station];
         station.position = CGPointMake(500, 160);
-        [self initScrollingBackground];
+        //[self initScrollingBackground];
         [self initScrollingForeground];
         
         rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
@@ -168,6 +168,14 @@
     blueBoy.physicsBody.affectedByGravity = NO;
     blueBoy.physicsBody.allowsRotation=NO;
     blueBoy.physicsBody.collisionBitMask=NO;
+    SKLabelNode *blue= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    blue.text = @"Blue"; //Set the button text
+    blue.name = @"Blue";
+    blue.fontSize = 20;
+    blue.fontColor = [SKColor blueColor];
+    blue.position = CGPointMake(700,250);
+    //yellow.zPosition = 50;
+    [_gameLayer addChild:blue]; //add node to screen
     [_gameLayer addChild:blueBoy];
 }
 -(void)purpleBoy{
@@ -176,6 +184,14 @@
     purpleBoy.position = CGPointMake(800, 160);
     purpleBoy.zPosition = 30;
     [purpleBoy setScale:.5];
+    SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    purple.text = @"Purple"; //Set the button text
+    purple.name = @"Purple";
+    purple.fontSize = 20;
+    purple.fontColor = [SKColor purpleColor];
+    purple.position = CGPointMake(800,250);
+    //yellow.zPosition = 50;
+    [_gameLayer addChild:purple]; //add node to screen
     [_gameLayer addChild:purpleBoy];
 }
 -(void)yellowBoy{
@@ -188,6 +204,16 @@
     yellowBoy.physicsBody.affectedByGravity = NO;
     yellowBoy.physicsBody.allowsRotation=NO;
     yellowBoy.physicsBody.collisionBitMask = NO;
+    
+    
+    SKLabelNode *yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    yellow.text = @"Yellow"; //Set the button text
+    yellow.name = @"Yellow";
+    yellow.fontSize = 20;
+    yellow.fontColor = [SKColor yellowColor];
+    yellow.position = CGPointMake(600,250);
+    //yellow.zPosition = 50;
+    [_gameLayer addChild:yellow]; //add node to screen
     [_gameLayer addChild:yellowBoy];
 }
 
@@ -232,9 +258,11 @@
      SKNode *node = [self nodeAtPoint:location];
      
     if([node.name  isEqual: @"purpleBoy"]){
+        speed = 1;
         [purpleBoy removeFromParent];
         [self addHeadToTrain];
         [_bgLayer removeFromParent];
+        //[_gameLayer removeFromParent];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         [self initScrollingForeground];
@@ -263,8 +291,11 @@
 -(void)update:(NSTimeInterval)currentTime{
     count++;
     if(count2 == 1){
-        if(count >= 50)
-            NSLog(@"next level");
+        if(count >= 20){
+            _train.physicsBody.velocity = CGVectorMake(0, 0);
+            head.physicsBody.velocity=CGVectorMake(0, 0);
+            [self nextLevel];
+        }
     }
     else if(count >= 40){   //call next level function once train reaches right side of screen
         [self stopTrain];
