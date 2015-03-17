@@ -12,27 +12,24 @@
 
 //LEVEL2
 @implementation Level2{
-    SKSpriteNode *_train;
-    SKSpriteNode *cow;
+    SKSpriteNode *train;
+    SKSpriteNode *cow1;
+    SKSpriteNode *cow2;
+    SKSpriteNode *cow3;
+    SKSpriteNode *cow4;
+    SKSpriteNode *cow5;
     SKSpriteNode *rail;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
-    NSTimeInterval *_dt;
-    NSTimeInterval *_lastUpdateTime;
-    bool first;
-    bool firstTouch;
     double speed;
-//    int count;
     int numCows;
-    bool pause;
 }
 
 
 -(id)initWithSize:(CGSize)size{
-    speed = 0;
-    first = true;
-    firstTouch = true;
+    speed = 1; //start with train moving
+    numCows = (arc4random_uniform(4)+1); //random number of cows, 1-5
     if(self = [super initWithSize:size]){
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -41,29 +38,67 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
+        //text to count the cows
+        SKLabelNode *count = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        count.text = @"How many cows do you see?";
+        count.name = @"Count";
+        count.fontSize = 40;
+        count.fontColor = [SKColor redColor];
+        count.position = CGPointMake(500,500);
+        count.zPosition = 50;
+        [_HUDLayer addChild:count];
         
-        [self initBackground];
         [self initScrollingBackground]; //scolling sky
         [self initScrollingForeground]; //scolling tracks
-        [self train];   //train object
-        //[self cow];
+        [self train];
+        [self addCows];
+        [self addMountain];
         
-        rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];
-        rail.position = CGPointMake(917, 36);
-        [_gameLayer addChild:rail];
-        
+        //move train(LtoR) and cows (RtoL)
+        [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        [cow1.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        [cow2.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        [cow3.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        [cow4.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        [cow5.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+
     }
     return self;
     
 }
 
--(void)initScrollingForeground{ //Scrolling train tracks function
-    SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"];
+-(void)addMountain{
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"background_mount.png"];
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:2];
+        sprite.zPosition=-30;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 100);
+        [_HUDLayer addChild:sprite];
+    }
+}
+
+-(void)addClouds{
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:1];
+        sprite.zPosition=-20;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 500);
+        [_bgLayer addChild:sprite];
+    }
+}
+
+
+-(void)initScrollingForeground{ //Scrolling tracks function
+    SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"]; //change runway to train tracks
     SKAction *moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:.02*speed*groundTexture.size.width*2];
     SKAction *resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
     SKAction *moveGroundSpriteForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
     
-    for(int i=0; i<2 +self.frame.size.width/(groundTexture.size.width*2);i++){      //place image
+    for(int i=0; i<2 +self.frame.size.width/(groundTexture.size.width);i++){      //place image
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
         [sprite setScale:1];
         sprite.zPosition = 10;
@@ -74,136 +109,151 @@
     }
 }
 
--(void)initBackground{ //grass background, doesn't move
-    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Background.png"];
-    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
-        [sprite setScale:1];
-        sprite.zPosition=-20;
-        sprite.anchorPoint=CGPointZero;
-        sprite.position=CGPointMake(i*sprite.size.width, 100);
-        [_bgLayer addChild:sprite];
-    }
-}
 
 -(void)initScrollingBackground{   //scrolling background function
-    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Sky2.png"];
-    if (pause == false){ //try to pause screen?
-        SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width*2 y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
-        SKAction *resetBg = [SKAction moveByX:backgroundTexture.size.width*2 y:0 duration:0];   //reset background
-        SKAction *moveBackgroundForever = [SKAction repeatActionForever:[SKAction sequence:@[moveBg, resetBg]]];    //repeat moveBg and resetBg
-        for(int i =0; i<5+self.frame.size.width/(backgroundTexture.size.width*2); i++){
-            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
-            [sprite runAction:moveBackgroundForever];
-        }
-    }
-    for(int i =0; i<5+self.frame.size.width/(backgroundTexture.size.width*2); i++){     //place image
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];        //reuse sky image
+    SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
+    SKAction *resetBg = [SKAction moveByX:backgroundTexture.size.width*2 y:0 duration:0];   //reset background
+    SKAction *moveBackgroundForever = [SKAction repeatActionForever:[SKAction sequence:@[moveBg, resetBg]]];    //repeat moveBg and resetBg
+    for(int i =0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++){     //place image
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
         [sprite setScale:1];
         sprite.zPosition=-20;
         sprite.anchorPoint=CGPointZero;
         sprite.position=CGPointMake(i*sprite.size.width, 500);
+        [sprite runAction:moveBackgroundForever];
         [_bgLayer addChild:sprite];
     }
-    
+}
+
+
+-(void)nextLevel{ //transition to level 3
+    NSString * retrymessage;
+    retrymessage = @"Go to Level 3";
+    SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    retryButton.text = retrymessage;
+    retryButton.fontColor = [SKColor blueColor];
+    retryButton.color = [SKColor yellowColor];
+    retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    retryButton.name = @"level3";
+    [self addChild:retryButton];
+}
+
+-(void)train{
+    train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];
+    train.position = CGPointMake(60, 100);
+    train.zPosition = 50;
+    train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(25, 20)];
+    train.physicsBody.dynamic = YES;
+    train.physicsBody.affectedByGravity = NO;
+    train.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:train];
     
 }
 
--(void)nextLevel{
-    _train.physicsBody.velocity = CGVectorMake(0, 0);   //stop train - poop
-    if(first == true){
-        NSString * retrymessage;            //Next Level
-        retrymessage = @"Go to Level 3";
-        SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        retryButton.text = retrymessage;
-        retryButton.fontColor = [SKColor blueColor];
-        retryButton.color = [SKColor yellowColor];
-        retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-        retryButton.name = @"level3";
-        [self addChild:retryButton];
-        first = false;
+
+//set each cow as a physics body, give starting position (no overlap)
+-(void)cow1{
+    cow1 = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
+    cow1.name = @"cow1";
+    cow1.position = CGPointMake(1075,300);
+    cow1.zPosition = 100;
+    cow1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    cow1.physicsBody.dynamic = YES;
+    cow1.physicsBody.affectedByGravity = NO;
+    cow1.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:cow1];
+}
+
+-(void)cow2{
+    cow2 = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
+    cow2.position = CGPointMake(1150,400);
+    cow2.zPosition = 100;
+    cow2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    cow2.physicsBody.dynamic = YES;
+    cow2.physicsBody.affectedByGravity = NO;
+    cow2.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:cow2];
+}
+
+-(void)cow3{
+    cow3 = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
+    cow3.position = CGPointMake(1175,200);
+    cow3.zPosition = 100;
+    cow3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    cow3.physicsBody.dynamic = YES;
+    cow3.physicsBody.affectedByGravity = NO;
+    cow3.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:cow3];
+}
+
+-(void)cow4{
+    cow4 = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
+    cow4.position = CGPointMake(1275,250);
+    cow4.zPosition = 100;
+    cow4.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    cow4.physicsBody.dynamic = YES;
+    cow4.physicsBody.affectedByGravity = NO;
+    cow4.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:cow4];
+}
+
+-(void)cow5{
+    cow5 = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
+    cow5.position = CGPointMake(1275,350);
+    cow5.zPosition = 100;
+    cow5.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    cow5.physicsBody.dynamic = YES;
+    cow5.physicsBody.affectedByGravity = NO;
+    cow5.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:cow5];
+}
+
+-(void)addCows { //put random number of cows into scene
+    if(numCows == 1){
+        [self cow1];
+    }
+    else if(numCows == 2){
+        [self cow1];
+        [self cow2];
+    }
+    else if(numCows == 3){
+        [self cow1];
+        [self cow2];
+        [self cow3];
+    }
+    else if(numCows == 4){
+        [self cow1];
+        [self cow2];
+        [self cow3];
+        [self cow4];
+    }
+    else if(numCows == 5){
+        [self cow1];
+        [self cow2];
+        [self cow3];
+        [self cow4];
+        [self cow5];
     }
 }
-
--(void)train{   //Moving train object
-    _train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];
-    _train.position = CGPointMake(60, 100);
-    _train.zPosition = 50;
-    _train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
-    _train.physicsBody.dynamic = YES;
-    _train.physicsBody.affectedByGravity = NO;
-    _train.physicsBody.allowsRotation = NO;
-    [_gameLayer addChild:_train];
-    
-}
-
-
--(void)cow{
-    cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
-    cow.position = CGPointMake(500,300);
-    cow.zPosition = 100;
-}
-
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-    speed = 1;  //set speed to 1 which starts background scrolling
-    if (firstTouch==true){  //initial touch
-        [_bgLayer removeFromParent];
-        [_gameLayer removeFromParent];
-        _bgLayer = [SKNode node];
-        [self addChild: _bgLayer];
-        _gameLayer = [SKNode node];
-        [self addChild: _gameLayer];
-        [self train];
-        [self initBackground];
-        [self initScrollingBackground]; //start background scrolling
-        [self initScrollingForeground];
-        pause = false;
-        /*
-        if (count%2 == 0) { //if game is paused, show cows
-            [self cow];
-            count++; //after cows, increment count to keep moving
-        }
-        */
-        firstTouch = false; //any touches after are not initial touch
-    }
 
-}
+    CGPoint location = [[touches anyObject] locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
 
--(void)update:(NSTimeInterval)currentTime{
-    //randomly generate number of cows
-  //  if ((int)_train.position.x == 300) {
-        numCows = arc4random() % 9; //[self getRandomNumberBetween:1 to:10];
-        for (int i=1; i<=numCows+1; i++){
-    
-            [_gameLayer addChild:cow];
-        }
- //   }
-}
-
-/*
-//randomly generate cows
-int Cows = [self getRandomNumberBetween:0 to:1];
-if (Cows == 1) {
-    SKSpriteNode *cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
-    cow.position = CGPointMake(screenRect.size.height+cow.size.height/2, screenRect.size.width+cow.size.width/2);
-    cow.zPosition = 1;
-    int randomTime = [self getRandomNumberBetween:9 to:19];
-    
-    SKAction *move =[SKAction moveTo:CGPointMake(0-cow.size.height, 0-cow.size.width) duration:randomTime];
-    SKAction *remove = [SKAction removeFromParent];
-    [cow runAction:[SKAction sequence:@[move,remove]]];
-    [self addChild:cow];
-}
-*/
-
-/*
--(void)update:(NSTimeInterval)currentTime{
-    if((int)_train.position.x >= 800){ //was 600
+    if([node.name  isEqual: @"cow1"]){ //display level 3
         [self nextLevel];
     }
-}*/
+    else if ([node.name isEqualToString:@"level3"]) { //transition to level 3
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+    }
+}
+
+
 
 @end
 
