@@ -9,7 +9,7 @@
 #ifndef ASD_Game_Level2_h
 #define ASD_Game_Level2_h
 #import <SpriteKit/SpriteKit.h>
-#import "Level1.h"
+#import "Level3.h"
 
 @interface Level2 : SKScene{
     

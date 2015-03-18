@@ -125,8 +125,7 @@
         retrymessage = @"Go to Level 4";
         SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         retryButton.text = retrymessage;
-        retryButton.fontColor = [SKColor blueColor];
-        retryButton.color = [SKColor yellowColor];
+        retryButton.fontColor = [SKColor redColor];
         retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
         retryButton.name = @"level4";
         [_gameLayer addChild:retryButton];
@@ -299,6 +298,12 @@
         [head.physicsBody applyForce:CGVectorMake(25, 0)];
         count =0;
         count2 =1;
+    }
+    if(check==3 && [node.name isEqual: @"level4"]){
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
     }
 }
 

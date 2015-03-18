@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Level1.h"
 
 @interface Level3 : SKScene
 
