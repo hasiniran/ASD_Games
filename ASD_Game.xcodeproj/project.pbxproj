@@ -21,6 +21,7 @@
 		07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF121AA115400076A177 /* PurpleBoy.png */; };
 		07D7AF151AA115470076A177 /* YellowBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF141AA115470076A177 /* YellowBoy.png */; };
 		07D7AF171AA11B2C0076A177 /* purpHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF161AA11B2C0076A177 /* purpHead.png */; };
+		07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07ED6EAD1AB9FA5C007F0E41 /* Station2.png */; };
 		07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */ = {isa = PBXBuildFile; fileRef = 07EE529A1A9E2C06004D0DE7 /* background_mount.png */; };
 		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
 		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
@@ -82,6 +83,7 @@
 		07D7AF121AA115400076A177 /* PurpleBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleBoy.png; sourceTree = "<group>"; };
 		07D7AF141AA115470076A177 /* YellowBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowBoy.png; sourceTree = "<group>"; };
 		07D7AF161AA11B2C0076A177 /* purpHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpHead.png; sourceTree = "<group>"; };
+		07ED6EAD1AB9FA5C007F0E41 /* Station2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Station2.png; sourceTree = "<group>"; };
 		07EE529A1A9E2C06004D0DE7 /* background_mount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_mount.png; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
 		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07ED6EAD1AB9FA5C007F0E41 /* Station2.png */,
 				07D7AF161AA11B2C0076A177 /* purpHead.png */,
 				07CCCB5D1A9FD39C00C62E25 /* BlueBoy.png */,
 				07D7AF141AA115470076A177 /* YellowBoy.png */,
@@ -385,6 +388,7 @@
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
+				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,

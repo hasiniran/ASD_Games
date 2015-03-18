@@ -136,7 +136,7 @@
         [self addChild: _gameLayer];
         [self train];
         [self station];
-        station.position = CGPointMake(500, 160);
+        station.position = CGPointMake(620, 160);
         //[self initScrollingBackground];
         [self initScrollingForeground];
         
@@ -161,7 +161,7 @@
 -(void)blueBoy{
     blueBoy = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBoy.png"];
     blueBoy.name = @"blueBoy";
-    blueBoy.position = CGPointMake(700, 160);
+    blueBoy.position = CGPointMake(700, 167);
     blueBoy.zPosition = 30;
     [blueBoy setScale:.5];
     blueBoy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -181,7 +181,7 @@
 -(void)purpleBoy{
     purpleBoy = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoy.png"];
     purpleBoy.name = @"purpleBoy";
-    purpleBoy.position = CGPointMake(800, 160);
+    purpleBoy.position = CGPointMake(800, 170);
     purpleBoy.zPosition = 30;
     [purpleBoy setScale:.5];
     SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -197,7 +197,7 @@
 -(void)yellowBoy{
     yellowBoy = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoy.png"];
     yellowBoy.name = @"yellowBoy";
-    yellowBoy.position = CGPointMake(600, 160);
+    yellowBoy.position = CGPointMake(600, 170);
     yellowBoy.zPosition = 31;
     [yellowBoy setScale:.5];
     yellowBoy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -218,9 +218,9 @@
 }
 
 -(void)station{
-    station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
-    station.position = CGPointMake(800, 160);
-    station.zPosition = 20;
+    station = [SKSpriteNode spriteNodeWithImageNamed:@"Station2.png"];//change to train png
+    station.position = CGPointMake(950, 160);
+    station.zPosition = 0;
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     station.physicsBody.affectedByGravity = NO;
     station.physicsBody.allowsRotation = NO;
