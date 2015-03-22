@@ -7,6 +7,7 @@
 //
 
 #import "Level3.h"
+#import "Level5.h"
 
 @implementation Level3{
     SKSpriteNode *_train;
@@ -301,7 +302,7 @@
     }
     if(check==3 && [node.name isEqual: @"level4"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }

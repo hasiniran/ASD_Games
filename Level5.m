@@ -207,13 +207,26 @@
         }
     }
     if(state ==1){  //train is stopped
-        count++;
-        [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
-        [chicken.physicsBody applyImpulse:CGVectorMake(-1, .5)];
-        [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
-        sleep(.2);
-        [chicken.physicsBody applyImpulse:CGVectorMake(-1, -1)];
-        [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
+        if(count >= 10){
+            cow.physicsBody.velocity = CGVectorMake(0, 0);
+            chicken.physicsBody.velocity = CGVectorMake(0, 0);
+            horse.physicsBody.velocity = CGVectorMake(0, 0);
+            state++;
+            count =0;
+        }
+        else{
+            count++;
+            [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
+            [chicken.physicsBody applyImpulse:CGVectorMake(-1, .5)];
+            [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
+            sleep(.2);
+            [chicken.physicsBody applyImpulse:CGVectorMake(-1, -1)];
+            [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
+        }
+    }
+    if(state == 2){   //animals out of barn
+        //display animals sounds
+        //ask question
     }
 }
 
