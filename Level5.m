@@ -21,7 +21,7 @@
     SKNode *_text;      //TextLayer
     double speed;
     int count;
-    int check; //keep track of train states
+    int state; //keep track of train states
     int count2;
     //check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
 }
@@ -29,7 +29,7 @@
 /******MAIN******/
 -(id)initWithSize:(CGSize)size{
     count = 0;
-    check = 0;
+    state = 0;
     speed = 1;
     if(self = [super initWithSize:size]){
         _bgLayer = [SKNode node];
@@ -113,7 +113,7 @@
 
 -(void)addCow{
     cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
-    cow.position = CGPointMake(500, 280);
+    cow.position = CGPointMake(530, 280);
     cow.zPosition = -5;
     cow.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     cow.physicsBody.affectedByGravity = NO;
@@ -122,7 +122,7 @@
 }
 -(void)addChicken{
     chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
-    chicken.position = CGPointMake(500, 280);
+    chicken.position = CGPointMake(470, 280);
     chicken.zPosition = -5;
     chicken.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     chicken.physicsBody.affectedByGravity = NO;
@@ -131,7 +131,7 @@
 }
 -(void)addHorse{
     horse = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
-    horse.position = CGPointMake(500, 310);
+    horse.position = CGPointMake(500, 330);
     horse.zPosition = -5;
     horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     horse.physicsBody.affectedByGravity = NO;
@@ -189,7 +189,7 @@
 }
 
 -(void)stopTrain{
-    count++;    //train is stopped
+    state++;    //train is stopped
     _train.physicsBody.velocity = CGVectorMake(0, 0);
 }
 
@@ -200,11 +200,20 @@
 }
 
 -(void)update:(NSTimeInterval)currentTime{
-    if(count == 0){
+    if(state == 0){ //train is moving
         if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
             [self stopTrain];
             [self spawnAnimals];
         }
+    }
+    if(state ==1){  //train is stopped
+        count++;
+        [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
+        [chicken.physicsBody applyImpulse:CGVectorMake(-1, .5)];
+        [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
+        sleep(.2);
+        [chicken.physicsBody applyImpulse:CGVectorMake(-1, -1)];
+        [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
     }
 }
 
