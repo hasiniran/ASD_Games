@@ -12,6 +12,9 @@
     SKSpriteNode *_train;
     SKSpriteNode *barn;
     SKSpriteNode *rail;
+    SKSpriteNode *cow;
+    SKSpriteNode *chicken;
+    SKSpriteNode *horse;
     SKNode *_bgLayer;   //Permanent Layer (Mountains)
     SKNode *_HUDLayer;  //Static Layer
     SKNode *_gameLayer; //Moving Layer
@@ -89,10 +92,11 @@
 -(void)addBarn{
     barn = [SKSpriteNode spriteNodeWithImageNamed:@"BarnLarge.png"];//change to train png
     barn.position = CGPointMake(550, 300);
-    barn.zPosition = 0;
+    barn.zPosition = 5;
     barn.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     barn.physicsBody.affectedByGravity = NO;
     barn.physicsBody.allowsRotation = NO;
+    barn.physicsBody.dynamic=NO;
     [_gameLayer addChild:barn];
 }
 
@@ -105,6 +109,34 @@
     _train.physicsBody.affectedByGravity = NO;
     _train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:_train];
+}
+
+-(void)addCow{
+    cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    cow.position = CGPointMake(500, 280);
+    cow.zPosition = -5;
+    cow.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    cow.physicsBody.affectedByGravity = NO;
+    cow.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:cow];
+}
+-(void)addChicken{
+    chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    chicken.position = CGPointMake(500, 280);
+    chicken.zPosition = -5;
+    chicken.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    chicken.physicsBody.affectedByGravity = NO;
+    chicken.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:chicken];
+}
+-(void)addHorse{
+    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    horse.position = CGPointMake(500, 310);
+    horse.zPosition = -5;
+    horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    horse.physicsBody.affectedByGravity = NO;
+    horse.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:horse];
 }
 
 /******MOVING OBJECTS**********/
@@ -157,12 +189,22 @@
 }
 
 -(void)stopTrain{
+    count++;    //train is stopped
     _train.physicsBody.velocity = CGVectorMake(0, 0);
 }
 
+-(void)spawnAnimals{
+    [self addHorse];
+    [self addCow];
+    [self addChicken];
+}
+
 -(void)update:(NSTimeInterval)currentTime{
-    if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
-        [self stopTrain];
+    if(count == 0){
+        if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
+            [self stopTrain];
+            [self spawnAnimals];
+        }
     }
 }
 
