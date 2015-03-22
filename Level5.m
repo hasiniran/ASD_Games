@@ -42,6 +42,8 @@
         [self addClouds];
         [self addBarn];
         [self addTracks];
+        [self train];
+        [_train.physicsBody applyForce:CGVectorMake(65, 0)];
         
     }
     return self;
@@ -96,7 +98,7 @@
 
 -(void)train{   //Moving object
     _train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];//change to train png
-    _train.position = CGPointMake(250, 100);
+    _train.position = CGPointMake(50, 100);
     _train.zPosition = 50;
     _train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     _train.physicsBody.dynamic = YES;
@@ -159,8 +161,7 @@
 }
 
 -(void)update:(NSTimeInterval)currentTime{
-    count++;
-    if(count >= 28){   //call next level function once train reaches right side of screen
+    if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
         [self stopTrain];
     }
 }
