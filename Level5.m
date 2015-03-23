@@ -42,7 +42,7 @@
         [self addChild:_text];
         
         [self addMountain];
-        [self addClouds];
+        [self initScrollingClouds];
         [self addBarn];
         [self addTracks];
         [self train];
