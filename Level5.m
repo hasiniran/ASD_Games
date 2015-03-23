@@ -7,6 +7,7 @@
 //
 
 #import "Level5.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation Level5{
     SKSpriteNode *_train;
@@ -15,6 +16,7 @@
     SKSpriteNode *cow;
     SKSpriteNode *chicken;
     SKSpriteNode *horse;
+    AVAudioPlayer *_audio;
     SKNode *_bgLayer;   //Permanent Layer (Mountains)
     SKNode *_HUDLayer;  //Static Layer
     SKNode *_gameLayer; //Moving Layer
@@ -197,6 +199,15 @@
     [self addHorse];
     [self addCow];
     [self addChicken];
+}
+
+-(void)animalSound{
+    // Construct URL to sound file
+    NSString *path = [NSString stringWithFormat:@"%@/animal.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    
+    // Create audio player object and initialize with URL to sound
+    _audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
 }
 
 -(void)update:(NSTimeInterval)currentTime{
