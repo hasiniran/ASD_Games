@@ -227,6 +227,12 @@
     if(state == 2){   //animals out of barn
         //display animals sounds
         //ask question
+        NSString *question= @"Pick animal that makes this noise";
+        SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        display.text=question;
+        display.fontColor = [SKColor blackColor];
+        display.position = CGPointMake(self.size.width/2, 500);
+        [_text addChild:display];
     }
 }
 
