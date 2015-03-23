@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072A47CC1ABFE17B00353FEC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 072A47CB1ABFE17B00353FEC /* AVFoundation.framework */; };
 		073371781A95A6250024872B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371771A95A6250024872B /* Train.png */; };
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
 		0733717F1A95B1D30024872B /* Level2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0733717E1A95B1D30024872B /* Level2.m */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072A47CB1ABFE17B00353FEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		073371771A95A6250024872B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
 		073371791A95A6340024872B /* Rail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rail.png; sourceTree = "<group>"; };
 		0733717D1A95B1D30024872B /* Level2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				072A47CC1ABFE17B00353FEC /* AVFoundation.framework in Frameworks */,
 				2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */,
 				2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */,
 				2552AC4619F8160900EE77C7 /* SpriteKit.framework in Frameworks */,
@@ -170,6 +173,7 @@
 		2552AC3319F8160900EE77C7 = {
 			isa = PBXGroup;
 			children = (
+				072A47CB1ABFE17B00353FEC /* AVFoundation.framework */,
 				253F0B461A829F7900D691E6 /* util */,
 				25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */,
 				25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */,
