@@ -9,6 +9,13 @@
 #import "SecondLevel.h"
 
 @implementation SecondLevel
+/*
+* TODO: Birds created
+* TODO: Birds float in
+* TODO: Scene pauses when birds finished flying
+* TODO: Number of birds correctly identified
+* TODO: Transition to next scene
+*/
 
 
 -(id)initWithSize:(CGSize)size {
