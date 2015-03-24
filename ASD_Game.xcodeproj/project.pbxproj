@@ -22,7 +22,10 @@
 		07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF121AA115400076A177 /* PurpleBoy.png */; };
 		07D7AF151AA115470076A177 /* YellowBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF141AA115470076A177 /* YellowBoy.png */; };
 		07D7AF171AA11B2C0076A177 /* purpHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF161AA11B2C0076A177 /* purpHead.png */; };
+		07E332901ABC880400C2EEFE /* Level5.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E3328F1ABC880400C2EEFE /* Level5.m */; };
+		07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07ED6EAD1AB9FA5C007F0E41 /* Station2.png */; };
 		07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */ = {isa = PBXBuildFile; fileRef = 07EE529A1A9E2C06004D0DE7 /* background_mount.png */; };
+		07F8D6CC1ABE86C300F97244 /* BarnLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F8D6CB1ABE86C300F97244 /* BarnLarge.png */; };
 		2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF11A75BAF500E844F1 /* Launch Screen.xib */; };
 		2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2521EBF31A75BD0200E844F1 /* GameStartScene.sks */; };
 		2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2521EBF51A75BDA600E844F1 /* GameStartScene.m */; };
@@ -85,7 +88,11 @@
 		07D7AF121AA115400076A177 /* PurpleBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleBoy.png; sourceTree = "<group>"; };
 		07D7AF141AA115470076A177 /* YellowBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowBoy.png; sourceTree = "<group>"; };
 		07D7AF161AA11B2C0076A177 /* purpHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpHead.png; sourceTree = "<group>"; };
+		07E3328E1ABC880400C2EEFE /* Level5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level5.h; sourceTree = "<group>"; };
+		07E3328F1ABC880400C2EEFE /* Level5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level5.m; sourceTree = "<group>"; };
+		07ED6EAD1AB9FA5C007F0E41 /* Station2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Station2.png; sourceTree = "<group>"; };
 		07EE529A1A9E2C06004D0DE7 /* background_mount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_mount.png; sourceTree = "<group>"; };
+		07F8D6CB1ABE86C300F97244 /* BarnLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarnLarge.png; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
 		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
@@ -134,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				072A47CC1ABFE17B00353FEC /* AVFoundation.framework in Frameworks */,
 				2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */,
 				2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */,
 				2552AC4619F8160900EE77C7 /* SpriteKit.framework in Frameworks */,
@@ -166,6 +174,7 @@
 		2552AC3319F8160900EE77C7 = {
 			isa = PBXGroup;
 			children = (
+				072A47CB1ABFE17B00353FEC /* AVFoundation.framework */,
 				253F0B461A829F7900D691E6 /* util */,
 				25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */,
 				25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */,
@@ -220,6 +229,8 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07F8D6CB1ABE86C300F97244 /* BarnLarge.png */,
+				07ED6EAD1AB9FA5C007F0E41 /* Station2.png */,
 				07D7AF161AA11B2C0076A177 /* purpHead.png */,
 				07CCCB5D1A9FD39C00C62E25 /* BlueBoy.png */,
 				07D7AF141AA115470076A177 /* YellowBoy.png */,
@@ -378,6 +389,7 @@
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
 				07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */,
 				2521EC051A76335D00E844F1 /* Waves.png in Resources */,
+				07F8D6CC1ABE86C300F97244 /* BarnLarge.png in Resources */,
 				07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */,
 				076CF6021A9D2049001839A2 /* Clouds.png in Resources */,
 				07D7AF171AA11B2C0076A177 /* purpHead.png in Resources */,
@@ -390,6 +402,7 @@
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
+				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
@@ -427,6 +440,7 @@
 				2552AC5819F8160900EE77C7 /* ViewController.m in Sources */,
 				2552AC5219F8160900EE77C7 /* AppDelegate.m in Sources */,
 				2552AC4E19F8160900EE77C7 /* main.m in Sources */,
+				07E332901ABC880400C2EEFE /* Level5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

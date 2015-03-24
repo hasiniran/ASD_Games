@@ -138,7 +138,7 @@
 }
 
 -(void)station{
-    station = [SKSpriteNode spriteNodeWithImageNamed:@"station.png"];//change to train png
+    station = [SKSpriteNode spriteNodeWithImageNamed:@"Station2.png"];//change to train png
     station.position = CGPointMake(150, 170);
     station.zPosition = 20;
     station.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
