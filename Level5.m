@@ -249,9 +249,8 @@
         
         [self animalSound];
         
-        sleep(7);
-        //state++;
-        //check for correct selection
+        state++; //make sure animal sound does not play infinitely
+        
     }
 }
 
