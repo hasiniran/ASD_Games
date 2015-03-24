@@ -133,11 +133,13 @@
 }
 -(void)addHorse{
     horse = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    horse.name = @"horse";
     horse.position = CGPointMake(500, 330);
     horse.zPosition = -5;
     horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     horse.physicsBody.affectedByGravity = NO;
     horse.physicsBody.allowsRotation = NO;
+    horse.physicsBody.collisionBitMask=NO;
     [_gameLayer addChild:horse];
 }
 
@@ -232,7 +234,7 @@
             [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
             [chicken.physicsBody applyImpulse:CGVectorMake(-1, .5)];
             [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
-            sleep(.2);
+            sleep(.5);
             [chicken.physicsBody applyImpulse:CGVectorMake(-1, -1)];
             [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
         }
@@ -250,8 +252,30 @@
         [self animalSound];
         
         state++; //make sure animal sound does not play infinitely
+    }
+    NSLog(@"%d",state);
+    if(state == 4){
         
     }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint location = [[touches anyObject] locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+
+        if(state ==3 && [node.name  isEqual: @"horse"]){
+            NSLog(@"hi");
+            [_text removeFromParent];//clear text
+            state++;
+        }
+    /*
+    if(check==3 && [node.name isEqual: @"level4"]){
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+    }*/
 }
 
 
