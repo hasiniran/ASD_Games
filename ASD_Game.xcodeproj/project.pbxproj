@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0116E4E81AC0B9DD00832B2F /* Level4.m in Sources */ = {isa = PBXBuildFile; fileRef = 0116E4E71AC0B9DD00832B2F /* Level4.m */; };
 		073371781A95A6250024872B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371771A95A6250024872B /* Train.png */; };
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
 		0733717F1A95B1D30024872B /* Level2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0733717E1A95B1D30024872B /* Level2.m */; };
@@ -65,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0116E4E61AC0B96B00832B2F /* Level4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level4.h; sourceTree = "<group>"; };
+		0116E4E71AC0B9DD00832B2F /* Level4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level4.m; sourceTree = "<group>"; };
 		073371771A95A6250024872B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
 		073371791A95A6340024872B /* Rail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rail.png; sourceTree = "<group>"; };
 		0733717D1A95B1D30024872B /* Level2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				0733717E1A95B1D30024872B /* Level2.m */,
 				076CF5FA1A9D1FCC001839A2 /* Level3.h */,
 				076CF5FB1A9D1FCC001839A2 /* Level3.m */,
+				0116E4E61AC0B96B00832B2F /* Level4.h */,
+				0116E4E71AC0B9DD00832B2F /* Level4.m */,
 			);
 			name = trainGame;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0116E4E81AC0B9DD00832B2F /* Level4.m in Sources */,
 				253F0B491A829FBB00D691E6 /* Actions.m in Sources */,
 				25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */,
 				076CF5FC1A9D1FCC001839A2 /* Level3.m in Sources */,
