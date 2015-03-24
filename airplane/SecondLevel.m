@@ -26,11 +26,25 @@
         
         [self initalizingScrollingBackground];
         [self addShip];
+        [self addBirds];
         
         
     }
     
     return self;
+}
+
+-(void)addBirds
+{
+    /*
+     * Birds fly in from side
+    */
+
+    SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
+    blueBird.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
+
+    [self addChild:blueBird];
+
 }
 
 
