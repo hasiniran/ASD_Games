@@ -40,10 +40,35 @@
      * Birds fly in from side
     */
 
-    SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
-    blueBird.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
 
-    [self addChild:blueBird];
+    // Create bird sprites
+    SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
+    SKSpriteNode *lightPinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBird.png"];
+    SKSpriteNode *orangeBird = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBird.png"];
+    SKSpriteNode *pinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"PinkBird.png"];
+    SKSpriteNode *purpleBird = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBird.png"];
+    SKSpriteNode *yellowBird = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBird.png"];
+    self.birds = [NSArray arrayWithObjects:blueBird, lightPinkBird, orangeBird, pinkBird, purpleBird, yellowBird, nil];
+    
+
+    // Set bird positions
+    int numBirds = 6;
+    double maxHeight = screenSize.height*0.85;
+    double dh = maxHeight * 1/6;
+    double currentHeight = maxHeight;
+    double minWidth = screenSize.width * .5;
+    double dw = minWidth / numBirds;
+    double currentWidth = minWidth;
+    
+    for (SKSpriteNode *bird in self.birds)
+    {
+        bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
+        [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5]];
+        currentHeight -= dh;
+        currentWidth += dw;
+        [self addChild:bird];
+    }
 
 }
 
