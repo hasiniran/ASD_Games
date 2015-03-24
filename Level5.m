@@ -202,12 +202,14 @@
 }
 
 -(void)animalSound{
+    
     // Construct URL to sound file
-    NSString *path = [NSString stringWithFormat:@"%@/animal.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSString *path = [NSString stringWithFormat:@"%@/Horse Whinny.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
     
     // Create audio player object and initialize with URL to sound
     _audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    [_audio play];
 }
 
 -(void)update:(NSTimeInterval)currentTime{
@@ -237,7 +239,6 @@
     }
     if(state == 2){   //animals out of barn
         //display animals sounds
-        
         //ask question
         NSString *question= @"Pick animal that makes this noise";
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -246,6 +247,10 @@
         display.position = CGPointMake(self.size.width/2, 500);
         [_text addChild:display];
         
+        [self animalSound];
+        
+        sleep(7);
+        //state++;
         //check for correct selection
     }
 }

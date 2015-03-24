@@ -18,6 +18,7 @@
 		076CF6021A9D2049001839A2 /* Clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF6011A9D2049001839A2 /* Clouds.png */; };
 		076CF6041A9D2076001839A2 /* Sky2.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF6031A9D2076001839A2 /* Sky2.png */; };
 		078A114A1A82D77C00956F41 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A11491A82D77C00956F41 /* Level1.m */; };
+		07AF73F51AC1EC2A0092603C /* Horse Whinny.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 07AF73F41AC1EC2A0092603C /* Horse Whinny.mp3 */; };
 		07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07CCCB5D1A9FD39C00C62E25 /* BlueBoy.png */; };
 		07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF121AA115400076A177 /* PurpleBoy.png */; };
 		07D7AF151AA115470076A177 /* YellowBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF141AA115470076A177 /* YellowBoy.png */; };
@@ -83,6 +84,7 @@
 		076CF6031A9D2076001839A2 /* Sky2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky2.png; sourceTree = "<group>"; };
 		078A11481A82D77C00956F41 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		078A11491A82D77C00956F41 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
+		07AF73F41AC1EC2A0092603C /* Horse Whinny.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Horse Whinny.mp3"; sourceTree = "<group>"; };
 		07CCCB5D1A9FD39C00C62E25 /* BlueBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBoy.png; sourceTree = "<group>"; };
 		07D7AF121AA115400076A177 /* PurpleBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleBoy.png; sourceTree = "<group>"; };
 		07D7AF141AA115470076A177 /* YellowBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowBoy.png; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07AF73F41AC1EC2A0092603C /* Horse Whinny.mp3 */,
 				07F8D6CB1ABE86C300F97244 /* BarnLarge.png */,
 				07ED6EAD1AB9FA5C007F0E41 /* Station2.png */,
 				07D7AF161AA11B2C0076A177 /* purpHead.png */,
@@ -404,6 +407,7 @@
 				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
+				07AF73F51AC1EC2A0092603C /* Horse Whinny.mp3 in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
