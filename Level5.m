@@ -115,6 +115,7 @@
 
 -(void)addCow{
     cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    cow.name = @"cow";
     cow.position = CGPointMake(530, 280);
     cow.zPosition = -5;
     cow.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -124,6 +125,7 @@
 }
 -(void)addChicken{
     chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    chicken.name = @"chicken";
     chicken.position = CGPointMake(470, 280);
     chicken.zPosition = -5;
     chicken.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -253,7 +255,10 @@
         
         state++; //make sure animal sound does not play infinitely
     }
-    NSLog(@"%d",state);
+    if(state == 3){
+        //code in touchesBegan
+    }
+    //NSLog(@"%d",state);
     if(state == 4){
         
     }
@@ -264,7 +269,7 @@
     SKNode *node = [self nodeAtPoint:location];
     
 
-        if(state ==3 && [node.name  isEqual: @"horse"]){
+        if(state == 3 && [node.name isEqual: @"horse"]){
             NSLog(@"hi");
             [_text removeFromParent];//clear text
             state++;
