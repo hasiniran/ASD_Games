@@ -217,6 +217,16 @@
     go.zPosition = 50;
     [_text addChild:go]; //add node to screen
 }
+-(void)nextLevel{
+    NSString * nxtLevel= @"Go to Level 6";
+    SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    Button.text = nxtLevel;
+    Button.fontColor = [SKColor blueColor];
+    Button.color = [SKColor yellowColor];
+    Button.position = CGPointMake(self.size.width/2, self.size.height/2);
+    Button.name = @"level6";
+    [self addChild:Button];
+}
 
 -(void)update:(NSTimeInterval)currentTime{
     if(state == 0){ //train is moving
@@ -272,6 +282,8 @@
     if(state == 5){
         horse.physicsBody.angularVelocity = 0;
         //display next level
+        [self nextLevel];
+        
     }
 }
 
@@ -290,13 +302,13 @@
         state++;
     }
      
-     
-    if(check==3 && [node.name isEqual: @"level4"]){
+    */
+    if(state==5 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
+        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
-    }*/
+    }
 }
 
 
