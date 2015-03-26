@@ -223,7 +223,7 @@
     Button.text = nxtLevel;
     Button.fontColor = [SKColor blueColor];
     Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(self.size.width/2, self.size.height/2);
+    Button.position = CGPointMake(500, 600);
     Button.name = @"level6";
     [self addChild:Button];
 }
@@ -303,6 +303,7 @@
     }
      
     */
+    //touches not working
     if(state==5 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
