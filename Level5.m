@@ -201,12 +201,16 @@
     [_audio play];
 }
 
+-(void)danceHorse{
+    horse.physicsBody.allowsRotation = YES;
+    [horse.physicsBody applyAngularImpulse:10];
+}
+
 -(void)horseButton{
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Horse"; //Set the button text
     go.name = @"Button";
-    //go.hidden = YES;
-    //go.xScale = 2;
+    go.hidden = YES;
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
@@ -255,11 +259,13 @@
         state++; //make sure animal sound does not play infinitely
     }
     if(state == 3){
-        //code in touchesBegan
+        //code in touchesBegan. check for horse touch
+        //clear text
     }
     //NSLog(@"%d",state);
-    if(state == 4){
-        
+    if(state == 4){ //text is cleared. Make cow dance
+        [self danceHorse];
+        [_train.physicsBody applyForce:CGVectorMake(5, 0)];
     }
 }
 
@@ -271,12 +277,14 @@
         [_text removeFromParent];//clear text
         state++;
     }
-        if([node.name isEqualToString: @"horse"]){
-            NSLog(@"hi");
-            [_text removeFromParent];//clear text
-            state++;
-        }
     /*
+    if([node.name isEqualToString: @"horse"]){
+        NSLog(@"hi");
+        [_text removeFromParent];//clear text
+        state++;
+    }
+     
+     
     if(check==3 && [node.name isEqual: @"level4"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
