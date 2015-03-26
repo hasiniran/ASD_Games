@@ -146,7 +146,6 @@
 }
 
 /******MOVING OBJECTS**********/
-
 -(void)initScrollingTracks{ //Scrolling tracks function
     SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"]; //change runway to train tracks
     SKAction *moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:.02*speed*groundTexture.size.width*2];
@@ -164,20 +163,6 @@
     }
 }
 
-/*-(void)initScrollingTracks{ //Scrolling tracks function
-    
-    for(int i=0; i<2 +self.frame.size.width/(rail.size.width);i++){      //place image
-        //SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
-        rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"]; //change runway to train tracks
-        [rail setScale:1];
-        rail.zPosition = 10;
-        rail.anchorPoint = CGPointZero;
-        rail.position = CGPointMake(i*rail.size.width, 0);
-        //[rail runAction:moveGroundSpriteForever];
-        [_gameLayer addChild:rail];
-    }
-}
-*/
 -(void)initScrollingClouds{   //scrolling CLOUDS function
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];        //reuse sky image
     SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
@@ -216,6 +201,20 @@
     [_audio play];
 }
 
+-(void)horseButton{
+    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    go.text = @"Horse"; //Set the button text
+    go.name = @"Button";
+    //go.hidden = YES;
+    //go.xScale = 2;
+    go.yScale=2;
+    go.fontSize = 40;
+    go.fontColor = [SKColor blueColor];
+    go.position = CGPointMake(500,430);
+    go.zPosition = 50;
+    [_text addChild:go]; //add node to screen
+}
+
 -(void)update:(NSTimeInterval)currentTime{
     if(state == 0){ //train is moving
         if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
@@ -252,7 +251,7 @@
         [_text addChild:display];
         
         [self animalSound];
-        
+        [self horseButton];
         state++; //make sure animal sound does not play infinitely
     }
     if(state == 3){
@@ -268,8 +267,11 @@
     CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-
-        if(state == 3 && [node.name isEqual: @"horse"]){
+    if(state==3 && [node.name isEqualToString:@"Button"]){
+        [_text removeFromParent];//clear text
+        state++;
+    }
+        if([node.name isEqualToString: @"horse"]){
             NSLog(@"hi");
             [_text removeFromParent];//clear text
             state++;
