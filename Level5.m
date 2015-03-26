@@ -203,7 +203,7 @@
 
 -(void)danceHorse{
     horse.physicsBody.allowsRotation = YES;
-    [horse.physicsBody applyAngularImpulse:10];
+    [horse.physicsBody applyAngularImpulse:5];
 }
 
 -(void)horseButton{
@@ -265,8 +265,13 @@
     //NSLog(@"%d",state);
     if(state == 4){ //text is cleared. Make cow dance
         [self danceHorse];
-        [_train.physicsBody applyForce:CGVectorMake(5, 0)];
+        //[self initScrollingTracks];
+        [_train.physicsBody applyForce:CGVectorMake(1, 0)];
+        if(_train.position.x >= 700)
+            [self stopTrain];
     }
+    if(state == 5)
+        //horse.physicsBody.allowsRotation = NO;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
