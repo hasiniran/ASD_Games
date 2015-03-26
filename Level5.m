@@ -191,7 +191,6 @@
 }
 
 -(void)animalSound{
-    
     // Construct URL to sound file
     NSString *path = [NSString stringWithFormat:@"%@/Horse Whinny.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
@@ -203,7 +202,7 @@
 
 -(void)danceHorse{
     horse.physicsBody.allowsRotation = YES;
-    [horse.physicsBody applyAngularImpulse:5];
+    [horse.physicsBody applyAngularImpulse:7];
 }
 
 -(void)horseButton{
@@ -267,11 +266,13 @@
         [self danceHorse];
         //[self initScrollingTracks];
         [_train.physicsBody applyForce:CGVectorMake(1, 0)];
-        if(_train.position.x >= 700)
+        if(_train.position.x >= 820)
             [self stopTrain];
     }
-    if(state == 5)
-        //horse.physicsBody.allowsRotation = NO;
+    if(state == 5){
+        horse.physicsBody.angularVelocity = 0;
+        //display next level
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
