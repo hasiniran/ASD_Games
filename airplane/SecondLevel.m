@@ -10,6 +10,8 @@
 
 @implementation SecondLevel {
     int birdsDisplayed;
+    SKLabelNode *correctButton;
+    SKLabelNode *incorrectButton;
     CGSize screenSize;
 }
 /*
@@ -30,9 +32,26 @@
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
 
+        // Create button
+        correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        correctButton.text = @"6 birds";
+        correctButton.name = @"correctButton";
+        correctButton.fontSize = 40;
+        correctButton.fontColor = [SKColor blueColor];
+        correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
+
+        incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        incorrectButton.text = @"Not 6 birds";
+        incorrectButton.name = @"incorrectButton";
+        incorrectButton.fontSize = 40;
+        incorrectButton.fontColor = [SKColor blueColor];
+        incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
+
         [self initalizingScrollingBackground];
         [self addShip];
         [self addBirds];
+        [self addChild:correctButton];
+        [self addChild:incorrectButton];
         // Set birds displayed
         birdsDisplayed = 0;
     }
@@ -60,7 +79,7 @@
     // Set bird positions
     int numBirds = 6;
     double maxHeight = screenSize.height*0.85;
-    double dh = maxHeight * 1/6;
+    double dh = maxHeight * 1/8;
     double currentHeight = maxHeight;
     double minWidth = screenSize.width * .5;
     double dw = minWidth / numBirds;
@@ -116,15 +135,6 @@
     
     
 }
-
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
-    
-    
-}
-
 
 
 -(void)initalizingScrollingBackground
@@ -243,8 +253,28 @@
     
 }
 
-
-
-
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    /* Called when a touch begins */
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"correctButton"]) {
+        
+    
+        // Move to next scene
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+        
+    }else if ([node.name isEqualToString:@"incorrectButton"]) {
+        // TODO: load next question asking
+       
+        
+    }
+    
+}
 
 @end
