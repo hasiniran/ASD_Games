@@ -3,10 +3,12 @@
 //  airplane
 //
 //  Created by Hasini Yatawatte on 1/26/15.
+//  Maintained by Charles Shinaver since 3/30/15
 //  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
 //
 
 #import "SecondLevel.h"
+#import "ThirdLevel.h"
 
 @implementation SecondLevel {
     int birdsDisplayed;
@@ -15,20 +17,11 @@
     SKLabelNode *incorrectButton;
     CGSize screenSize;
 }
-/*
-* TODO: Birds created
-* TODO: Birds float in
-* TODO: Scene pauses when birds finished flying
-* TODO: Number of birds correctly identified
-* TODO: Transition to next scene
-*/
-
 
 -(id)initWithSize:(CGSize)size {
     
     
     if (self = [super initWithSize:size]) {
-        
         
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
@@ -73,7 +66,6 @@
      * Birds fly in from side
     */
 
-
     // Create bird sprites
     SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
     SKSpriteNode *lightPinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBird.png"];
@@ -109,7 +101,6 @@
         currentWidth += dw;
         [self addChild:bird];
     }
-
 }
 
 -(void)askQuestion
@@ -155,7 +146,7 @@
 {
     // Move to next scene
     SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
+    SecondLevel * scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [self.view presentScene:scene transition: reveal];
 }
@@ -177,20 +168,12 @@
     [self addChild:self.ship ];
     
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
-
-    
     
 }
 
 
 -(void)initalizingScrollingBackground
 {
-    
-    
-
-
-    
-    
     // Create ground
     
     seaTexture = [SKTexture textureWithImageNamed:@"Sea.png"];
@@ -205,11 +188,6 @@
         bg.name = @"sea";
         [self addChild:bg];
     }
-    
-    
-
-    
-    
     waveTexture = [SKTexture textureWithImageNamed:@"Waves.png"];
     self.wave = [SKSpriteNode spriteNodeWithTexture:waveTexture];
     waveTexture.filteringMode = SKTextureFilteringNearest;
@@ -222,19 +200,11 @@
         bg.name = @"waves";
         [self addChild:bg];
     }
-    
 
-    
     // Create skyline
-    
     
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky-3.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
-    
-    
-    
-    
-    
     
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
@@ -254,8 +224,6 @@
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
     [self moveBgContinuously];
-    
-    
     
 }
 
@@ -287,16 +255,11 @@
          }
      }];
     
-    
-    
     if(!waves.hasActions) {
         [self runAction:moveBackground];
-        
     }
     
     return moveBackground;
-    
-    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -314,7 +277,6 @@
     {
         [self askQuestion];
     }
-    
 }
 
 @end

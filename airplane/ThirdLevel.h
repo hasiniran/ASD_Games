@@ -1,9 +1,8 @@
 //
-//  ThirdLevel.h
-//  airplane
+//  ThirdLevel.h //  airplane
 //
-//  Created by Hasini Yatawatte on 1/26/15.
-//  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
+//  Created by Charles Shinaver on 3/31/15.
+//  Copyright (c) 2015 Charles Shinaver. All rights reserved.
 //
 
 #import <SpriteKit/SpriteKit.h>
@@ -25,8 +24,6 @@
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *sea ;
 @property (nonatomic, strong)    SKSpriteNode *wave ;
-@property (nonatomic, weak) NSArray *birds;
 
 -(SKAction*)moveBgContinuously;
--(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;
 @end
