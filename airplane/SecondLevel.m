@@ -10,6 +10,7 @@
 
 @implementation SecondLevel {
     int birdsDisplayed;
+    int questionDisplayed;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
     CGSize screenSize;
@@ -50,13 +51,20 @@
         [self initalizingScrollingBackground];
         [self addShip];
         [self addBirds];
-        [self addChild:correctButton];
-        [self addChild:incorrectButton];
+        
         // Set birds displayed
         birdsDisplayed = 0;
+        // Set question displayed
+        questionDisplayed = 0;
     }
     
     return self;
+}
+
+-(void)displayButtons
+{
+    [self addChild:correctButton];
+    [self addChild:incorrectButton];
 }
 
 -(void)addBirds
@@ -94,6 +102,7 @@
             if (birdsDisplayed == numBirds)
             {
                 [self askQuestion];
+                [self displayButtons];
             }
         }];
         currentHeight -= dh;
@@ -105,13 +114,50 @@
 
 -(void)askQuestion
 {
-    // Create text label
-    SKLabelNode *question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    question.text = @"How many birds are in the air?";
-    question.fontSize = 50;
-    question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
+    /*
+     Choose question to be displayed
+    */
     
-    [self addChild:question];
+    SKLabelNode *question;
+    
+    // Set text of question
+    switch (questionDisplayed) {
+        case 0:
+            // Create text label
+            question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            question.name = @"numberOfBirdsQuestion";
+            question.fontSize = 50;
+            question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
+            question.text = @"How many birds are in the air?";
+            [self addChild:question];
+            break;
+        case 1:
+            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
+            question.text = @"Are you sure? How many birds are in the air?";
+            break;
+        case 2:
+            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
+            question.text = @"Can you say six?";
+            break;
+        case 3:
+            [self moveToNextScene];
+            break;
+        default:
+            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
+            question.text = @"How many birds are in the air?";
+    }
+    
+    // Display question and increment
+    questionDisplayed++;
+}
+
+-(void)moveToNextScene
+{
+    // Move to next scene
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.view presentScene:scene transition: reveal];
 }
 
 
@@ -260,19 +306,13 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if ([node.name isEqualToString:@"correctButton"]) {
-        
-    
-        // Move to next scene
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
-        scene.scaleMode = SKSceneScaleModeAspectFill;
-        [self.view presentScene:scene transition: reveal];
-        
-    }else if ([node.name isEqualToString:@"incorrectButton"]) {
-        // TODO: load next question asking
-       
-        
+    if ([node.name isEqualToString:@"correctButton"])
+    {
+        [self moveToNextScene];
+    }
+    else if ([node.name isEqualToString:@"incorrectButton"])
+    {
+        [self askQuestion];
     }
     
 }
