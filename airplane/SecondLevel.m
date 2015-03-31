@@ -8,7 +8,10 @@
 
 #import "SecondLevel.h"
 
-@implementation SecondLevel
+@implementation SecondLevel {
+    int birdsDisplayed;
+    CGSize screenSize;
+}
 /*
 * TODO: Birds created
 * TODO: Birds float in
@@ -24,11 +27,14 @@
     if (self = [super initWithSize:size]) {
         
         
+        // Set screenSize for ease
+        screenSize = [[UIScreen mainScreen] bounds].size;
+
         [self initalizingScrollingBackground];
         [self addShip];
         [self addBirds];
-        
-        
+        // Set birds displayed
+        birdsDisplayed = 0;
     }
     
     return self;
@@ -40,7 +46,6 @@
      * Birds fly in from side
     */
 
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
 
     // Create bird sprites
     SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
@@ -63,8 +68,15 @@
     
     for (SKSpriteNode *bird in self.birds)
     {
+        // Set bird initial position
         bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
-        [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5]];
+        [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
+            birdsDisplayed++;
+            if (birdsDisplayed == numBirds)
+            {
+                [self askQuestion];
+            }
+        }];
         currentHeight -= dh;
         currentWidth += dw;
         [self addChild:bird];
@@ -72,6 +84,16 @@
 
 }
 
+-(void)askQuestion
+{
+    // Create text label
+    SKLabelNode *question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    question.text = @"How many birds are in the air?";
+    question.fontSize = 50;
+    question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
+    
+    [self addChild:question];
+}
 
 
 -(void)addShip
