@@ -17,6 +17,11 @@
     SKLabelNode *incorrectButton;
     CGSize screenSize;
 }
+/*
+ * TODO 3 repetitions of birds coming in, random number each time
+ * TODO Must get 3 in a row correct to move to next scene. Max of 5 tries
+ * TODO Birds fly away after 3 questions asked
+*/
 
 -(id)initWithSize:(CGSize)size {
     
