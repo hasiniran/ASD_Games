@@ -55,6 +55,12 @@
 		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
 		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
 		25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */; };
+		E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E95017691ABFCF6000F7359E /* BlueBird.png */; };
+		E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176A1ABFCF6000F7359E /* LightPinkBird.png */; };
+		E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176B1ABFCF6000F7359E /* OrangeBird.png */; };
+		E95017721ABFCF6000F7359E /* PinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176C1ABFCF6000F7359E /* PinkBird.png */; };
+		E95017731ABFCF6000F7359E /* PurpleBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176D1ABFCF6000F7359E /* PurpleBird.png */; };
+		E95017741ABFCF6000F7359E /* YellowBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176E1ABFCF6000F7359E /* YellowBird.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +137,12 @@
 		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
 		25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpMenu.m; sourceTree = "<group>"; };
 		25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupMenu.h; sourceTree = "<group>"; };
+		E95017691ABFCF6000F7359E /* BlueBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBird.png; sourceTree = "<group>"; };
+		E950176A1ABFCF6000F7359E /* LightPinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPinkBird.png; sourceTree = "<group>"; };
+		E950176B1ABFCF6000F7359E /* OrangeBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBird.png; sourceTree = "<group>"; };
+		E950176C1ABFCF6000F7359E /* PinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkBird.png; sourceTree = "<group>"; };
+		E950176D1ABFCF6000F7359E /* PurpleBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleBird.png; sourceTree = "<group>"; };
+		E950176E1ABFCF6000F7359E /* YellowBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowBird.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +252,12 @@
 				2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */,
 				074D32C31A8BF9F1004C1C11 /* station.png */,
 				2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */,
+				E95017691ABFCF6000F7359E /* BlueBird.png */,
+				E950176A1ABFCF6000F7359E /* LightPinkBird.png */,
+				E950176B1ABFCF6000F7359E /* OrangeBird.png */,
+				E950176C1ABFCF6000F7359E /* PinkBird.png */,
+				E950176D1ABFCF6000F7359E /* PurpleBird.png */,
+				E950176E1ABFCF6000F7359E /* YellowBird.png */,
 				2521EC001A76335D00E844F1 /* Sea.png */,
 				2521EC011A76335D00E844F1 /* Sky-3.png */,
 				2521EC021A76335D00E844F1 /* Waves.png */,
@@ -392,7 +410,11 @@
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
 				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
+				E95017721ABFCF6000F7359E /* PinkBird.png in Resources */,
+				E95017731ABFCF6000F7359E /* PurpleBird.png in Resources */,
+				E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */,
 				076CF6041A9D2076001839A2 /* Sky2.png in Resources */,
+				E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
@@ -401,8 +423,10 @@
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
+				E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
+				E95017741ABFCF6000F7359E /* YellowBird.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
