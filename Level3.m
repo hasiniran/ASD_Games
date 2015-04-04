@@ -276,6 +276,7 @@
     check++;
 }
 -(void)tryAgain{
+    chances--;
     NSString *question;            //Display question message
     SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -290,10 +291,33 @@
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
+    
+    [display removeFromParent];
     [_text addChild:lives];
     [_text addChild:display];
-    chances--;
+    if(chances <= 0){
+        [self help];
+    }
 }
+-(void)help{
+    speed = 1;
+    [purpleBoy removeFromParent];
+    [self addHeadToTrain];
+    [_bgLayer removeFromParent];
+    //[_gameLayer removeFromParent];
+    _bgLayer = [SKNode node];
+    [self addChild: _bgLayer];
+    [self initScrollingForeground];
+    [self initScrollingBackground];
+    [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+    [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+    [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+    [_train.physicsBody applyForce:CGVectorMake(25, 0)];
+    [head.physicsBody applyForce:CGVectorMake(25, 0)];
+    count =0;
+    count2 =1;
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //speed = 1;  //set speed to 1 which starts background scrolling
     
