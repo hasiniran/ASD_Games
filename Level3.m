@@ -27,6 +27,7 @@
     int count;
     int check; //keep track of train states
     int count2;
+    int chances;
     //check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
 }
 
@@ -36,6 +37,7 @@
     count = 0;
     check = 0;
     speed = 1;
+    chances = 3; //lives
     if(self = [super initWithSize:size]){
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -273,7 +275,16 @@
     [_gameLayer addChild:head];
     check++;
 }
-
+-(void)tryAgain{
+    NSString *question;            //Display question message
+    SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    question = @"Try Again. Pick the PURPLE passenger";
+    display.text=question;
+    display.fontColor = [SKColor purpleColor];
+    display.position = CGPointMake(self.size.width/2, self.size.height/2);
+    [_text addChild:display];
+    chances--;
+}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //speed = 1;  //set speed to 1 which starts background scrolling
     
@@ -283,6 +294,47 @@
      SKNode *node = [self nodeAtPoint:location];
      
     if([node.name  isEqual: @"purpleBoy"]){
+        speed = 1;
+        [purpleBoy removeFromParent];
+        [self addHeadToTrain];
+        [_bgLayer removeFromParent];
+        //[_gameLayer removeFromParent];
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        [self initScrollingForeground];
+        [self initScrollingBackground];
+        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [_train.physicsBody applyForce:CGVectorMake(25, 0)];
+        [head.physicsBody applyForce:CGVectorMake(25, 0)];
+        count =0;
+        count2 =1;
+    }
+    if([node.name  isEqual: @"yellowBoy"]){
+        speed = 1;
+        [_text removeFromParent];   //erase and re-add text
+        _text = [SKNode node];
+        [self addChild:_text];
+        [self tryAgain];
+        /*[purpleBoy removeFromParent];
+        [self addHeadToTrain];
+        [_bgLayer removeFromParent];
+        //[_gameLayer removeFromParent];
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        [self initScrollingForeground];
+        [self initScrollingBackground];
+        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        [_train.physicsBody applyForce:CGVectorMake(25, 0)];
+        [head.physicsBody applyForce:CGVectorMake(25, 0)];*/
+        //chances--;
+        count =0;
+        count2 =1;
+    }
+    if([node.name  isEqual: @"blueBoy"]){
         speed = 1;
         [purpleBoy removeFromParent];
         [self addHeadToTrain];

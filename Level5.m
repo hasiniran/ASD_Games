@@ -223,7 +223,7 @@
     Button.text = nxtLevel;
     Button.fontColor = [SKColor blueColor];
     Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(500, 600);
+    Button.position = CGPointMake(500, 600  );
     Button.name = @"level6";
     [self addChild:Button];
 }
