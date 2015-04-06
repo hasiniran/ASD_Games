@@ -124,7 +124,7 @@
     [_gameLayer addChild:cow];
 }
 -(void)addChicken{
-    chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];//change to train png
     chicken.name = @"chicken";
     chicken.position = CGPointMake(470, 280);
     chicken.zPosition = -5;
