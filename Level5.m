@@ -136,6 +136,7 @@
 -(void)addHorse{
     horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];//change to train png
     horse.name = @"horse";
+    [horse setScale:.4];
     horse.position = CGPointMake(500, 330);
     horse.zPosition = -5;
     horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
