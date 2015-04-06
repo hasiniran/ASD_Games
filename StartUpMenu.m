@@ -70,7 +70,7 @@ SKScene * scene;
     if ([trainNode.name isEqualToString:@"Train"]) {
         
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
-        Level3 *scene= [Level3 sceneWithSize:self.view.bounds.size];
+        Level5 *scene= [Level5 sceneWithSize:self.view.bounds.size];
         
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];

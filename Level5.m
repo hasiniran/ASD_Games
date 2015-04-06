@@ -134,7 +134,7 @@
     [_gameLayer addChild:chicken];
 }
 -(void)addHorse{
-    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];//change to train png
     horse.name = @"horse";
     horse.position = CGPointMake(500, 330);
     horse.zPosition = -5;
