@@ -125,6 +125,7 @@
 }
 -(void)addChicken{
     chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];//change to train png
+    [chicken setScale:.3];
     chicken.name = @"chicken";
     chicken.position = CGPointMake(470, 280);
     chicken.zPosition = -5;
