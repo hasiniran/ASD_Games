@@ -27,6 +27,7 @@
     int count;
     int check; //keep track of train states
     int count2;
+    int chances;
     //check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
 }
 
@@ -36,6 +37,7 @@
     count = 0;
     check = 0;
     speed = 1;
+    chances = 3; //lives
     if(self = [super initWithSize:size]){
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -273,6 +275,48 @@
     [_gameLayer addChild:head];
     check++;
 }
+-(void)tryAgain{
+    chances--;
+    NSString *question;            //Display question message
+    SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    question = @"Try Again. Pick the PURPLE passenger";
+    display.text=question;
+    display.fontColor = [SKColor purpleColor];
+    display.position = CGPointMake(self.size.width/2, self.size.height/2);
+    lives.text =[NSString stringWithFormat:@"Chances: %i", chances];
+    lives.fontColor = [SKColor redColor];
+    lives.position =CGPointMake(self.size.width/2, self.size.height/2 + 100);
+    
+    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
+    // run the sequence then delete the label
+    [lives runAction:flashAction completion:^{[lives removeFromParent];}];
+    
+    [display removeFromParent];
+    [_text addChild:lives];
+    [_text addChild:display];
+    if(chances <= 0){
+        [self help];
+    }
+}
+-(void)help{
+    speed = 1;
+    [purpleBoy removeFromParent];
+    [self addHeadToTrain];
+    [_bgLayer removeFromParent];
+    //[_gameLayer removeFromParent];
+    _bgLayer = [SKNode node];
+    [self addChild: _bgLayer];
+    [self initScrollingForeground];
+    [self initScrollingBackground];
+    [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+    [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+    [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+    [_train.physicsBody applyForce:CGVectorMake(25, 0)];
+    [head.physicsBody applyForce:CGVectorMake(25, 0)];
+    count =0;
+    count2 =1;
+}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //speed = 1;  //set speed to 1 which starts background scrolling
@@ -299,6 +343,20 @@
         [head.physicsBody applyForce:CGVectorMake(25, 0)];
         count =0;
         count2 =1;
+    }
+    if([node.name  isEqual: @"yellowBoy"]){
+        speed = 1;
+        [_text removeFromParent];   //erase and re-add text
+        _text = [SKNode node];
+        [self addChild:_text];
+        [self tryAgain];
+    }
+    if([node.name  isEqual: @"blueBoy"]){
+        speed = 1;
+        [_text removeFromParent];   //erase and re-add text
+        _text = [SKNode node];
+        [self addChild:_text];
+        [self tryAgain];
     }
     if(check==3 && [node.name isEqual: @"level4"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];

@@ -115,6 +115,7 @@
 
 -(void)addCow{
     cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    cow.name = @"cow";
     cow.position = CGPointMake(530, 280);
     cow.zPosition = -5;
     cow.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -123,7 +124,9 @@
     [_gameLayer addChild:cow];
 }
 -(void)addChicken{
-    chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];//change to train png
+    [chicken setScale:.3];
+    chicken.name = @"chicken";
     chicken.position = CGPointMake(470, 280);
     chicken.zPosition = -5;
     chicken.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -132,17 +135,19 @@
     [_gameLayer addChild:chicken];
 }
 -(void)addHorse{
-    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];//change to train png
+    horse.name = @"horse";
+    [horse setScale:.4];
     horse.position = CGPointMake(500, 330);
     horse.zPosition = -5;
     horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     horse.physicsBody.affectedByGravity = NO;
     horse.physicsBody.allowsRotation = NO;
+    horse.physicsBody.collisionBitMask=NO;
     [_gameLayer addChild:horse];
 }
 
 /******MOVING OBJECTS**********/
-
 -(void)initScrollingTracks{ //Scrolling tracks function
     SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"]; //change runway to train tracks
     SKAction *moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:.02*speed*groundTexture.size.width*2];
@@ -160,20 +165,6 @@
     }
 }
 
-/*-(void)initScrollingTracks{ //Scrolling tracks function
-    
-    for(int i=0; i<2 +self.frame.size.width/(rail.size.width);i++){      //place image
-        //SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
-        rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"]; //change runway to train tracks
-        [rail setScale:1];
-        rail.zPosition = 10;
-        rail.anchorPoint = CGPointZero;
-        rail.position = CGPointMake(i*rail.size.width, 0);
-        //[rail runAction:moveGroundSpriteForever];
-        [_gameLayer addChild:rail];
-    }
-}
-*/
 -(void)initScrollingClouds{   //scrolling CLOUDS function
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];        //reuse sky image
     SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
@@ -203,11 +194,40 @@
 
 -(void)animalSound{
     // Construct URL to sound file
-    NSString *path = [NSString stringWithFormat:@"%@/animal.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSString *path = [NSString stringWithFormat:@"%@/Horse Whinny.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
     
     // Create audio player object and initialize with URL to sound
     _audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    [_audio play];
+}
+
+-(void)danceHorse{
+    horse.physicsBody.allowsRotation = YES;
+    [horse.physicsBody applyAngularImpulse:7];
+}
+
+-(void)horseButton{
+    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    go.text = @"Horse"; //Set the button text
+    go.name = @"Button";
+    go.hidden = YES;
+    go.yScale=2;
+    go.fontSize = 40;
+    go.fontColor = [SKColor blueColor];
+    go.position = CGPointMake(500,430);
+    go.zPosition = 50;
+    [_text addChild:go]; //add node to screen
+}
+-(void)nextLevel{
+    NSString * nxtLevel= @"Go to Level 6";
+    SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    Button.text = nxtLevel;
+    Button.fontColor = [SKColor blueColor];
+    Button.color = [SKColor yellowColor];
+    Button.position = CGPointMake(500, 600  );
+    Button.name = @"level6";
+    [self addChild:Button];
 }
 
 -(void)update:(NSTimeInterval)currentTime{
@@ -230,14 +250,13 @@
             [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
             [chicken.physicsBody applyImpulse:CGVectorMake(-1, .5)];
             [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
-            sleep(.2);
+            sleep(.5);
             [chicken.physicsBody applyImpulse:CGVectorMake(-1, -1)];
             [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
         }
     }
     if(state == 2){   //animals out of barn
         //display animals sounds
-        
         //ask question
         NSString *question= @"Pick animal that makes this noise";
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -246,7 +265,52 @@
         display.position = CGPointMake(self.size.width/2, 500);
         [_text addChild:display];
         
-        //check for correct selection
+        [self animalSound];
+        [self horseButton];
+        state++; //make sure animal sound does not play infinitely
+    }
+    if(state == 3){
+        //code in touchesBegan. check for horse touch
+        //clear text
+    }
+    //NSLog(@"%d",state);
+    if(state == 4){ //text is cleared. Make cow dance
+        [self danceHorse];
+        //[self initScrollingTracks];
+        [_train.physicsBody applyForce:CGVectorMake(1, 0)];
+        if(_train.position.x >= 820)
+            [self stopTrain];
+    }
+    if(state == 5){
+        horse.physicsBody.angularVelocity = 0;
+        //display next level
+        [self nextLevel];
+        
+    }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint location = [[touches anyObject] locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if(state==3 && [node.name isEqualToString:@"Button"]){
+        [_text removeFromParent];//clear text
+        state++;
+    }
+    /*
+    if([node.name isEqualToString: @"horse"]){
+        NSLog(@"hi");
+        [_text removeFromParent];//clear text
+        state++;
+    }
+     
+    */
+    //touches not working
+    if(state==5 && [node.name isEqual: @"level6"]){
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
     }
 }
 
