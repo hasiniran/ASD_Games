@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0116E4E81AC0B9DD00832B2F /* Level4.m in Sources */ = {isa = PBXBuildFile; fileRef = 0116E4E71AC0B9DD00832B2F /* Level4.m */; };
+		016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 016A9CAB1AC12CC500A87406 /* StopSign.png */; };
+		072A47CC1ABFE17B00353FEC /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		073371781A95A6250024872B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371771A95A6250024872B /* Train.png */; };
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
 		0733717F1A95B1D30024872B /* Level2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0733717E1A95B1D30024872B /* Level2.m */; };
@@ -71,6 +73,7 @@
 /* Begin PBXFileReference section */
 		0116E4E61AC0B96B00832B2F /* Level4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level4.h; sourceTree = "<group>"; };
 		0116E4E71AC0B9DD00832B2F /* Level4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level4.m; sourceTree = "<group>"; };
+		016A9CAB1AC12CC500A87406 /* StopSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StopSign.png; sourceTree = "<group>"; };
 		073371771A95A6250024872B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
 		073371791A95A6340024872B /* Rail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rail.png; sourceTree = "<group>"; };
 		0733717D1A95B1D30024872B /* Level2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
@@ -141,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				072A47CC1ABFE17B00353FEC /* AVFoundation.framework in Frameworks */,
+				072A47CC1ABFE17B00353FEC /* (null) in Frameworks */,
 				2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */,
 				2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */,
 				2552AC4619F8160900EE77C7 /* SpriteKit.framework in Frameworks */,
@@ -174,7 +177,6 @@
 		2552AC3319F8160900EE77C7 = {
 			isa = PBXGroup;
 			children = (
-				072A47CB1ABFE17B00353FEC /* AVFoundation.framework */,
 				253F0B461A829F7900D691E6 /* util */,
 				25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */,
 				25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */,
@@ -229,6 +231,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				016A9CAB1AC12CC500A87406 /* StopSign.png */,
 				07F8D6CB1ABE86C300F97244 /* BarnLarge.png */,
 				07ED6EAD1AB9FA5C007F0E41 /* Station2.png */,
 				07D7AF161AA11B2C0076A177 /* purpHead.png */,
@@ -300,6 +303,8 @@
 				076CF5FB1A9D1FCC001839A2 /* Level3.m */,
 				0116E4E61AC0B96B00832B2F /* Level4.h */,
 				0116E4E71AC0B9DD00832B2F /* Level4.m */,
+				07E3328E1ABC880400C2EEFE /* Level5.h */,
+				07E3328F1ABC880400C2EEFE /* Level5.m */,
 			);
 			name = trainGame;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
+				016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */,
 				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
