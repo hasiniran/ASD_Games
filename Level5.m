@@ -14,7 +14,7 @@
     SKSpriteNode *barn;
     SKSpriteNode *rail;
     SKSpriteNode *cow;
-    SKSpriteNode *chicken;
+    SKSpriteNode *pig;
     SKSpriteNode *horse;
     AVAudioPlayer *_audio;
     SKNode *_bgLayer;   //Permanent Layer (Mountains)
@@ -123,16 +123,16 @@
     cow.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:cow];
 }
--(void)addChicken{
-    chicken = [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];//change to train png
-    [chicken setScale:.3];
-    chicken.name = @"chicken";
-    chicken.position = CGPointMake(470, 280);
-    chicken.zPosition = -5;
-    chicken.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
-    chicken.physicsBody.affectedByGravity = NO;
-    chicken.physicsBody.allowsRotation = NO;
-    [_gameLayer addChild:chicken];
+-(void)addPig{
+    pig= [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];//change to train png
+    [pig setScale:.3];
+    pig.name = @"pig";
+    pig.position = CGPointMake(470, 280);
+    pig.zPosition = -5;
+    pig.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    pig.physicsBody.affectedByGravity = NO;
+    pig.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:pig];
 }
 -(void)addHorse{
     horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];//change to train png
@@ -189,7 +189,7 @@
 -(void)spawnAnimals{
     [self addHorse];
     [self addCow];
-    [self addChicken];
+    [self addPig];
 }
 
 -(void)animalSound{
@@ -240,7 +240,7 @@
     if(state ==1){  //train is stopped
         if(count >= 10){
             cow.physicsBody.velocity = CGVectorMake(0, 0);
-            chicken.physicsBody.velocity = CGVectorMake(0, 0);
+            pig.physicsBody.velocity = CGVectorMake(0, 0);
             horse.physicsBody.velocity = CGVectorMake(0, 0);
             state++;
             count =0;
@@ -248,10 +248,10 @@
         else{
             count++;
             [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
-            [chicken.physicsBody applyImpulse:CGVectorMake(-1, .5)];
+            [pig.physicsBody applyImpulse:CGVectorMake(-1, .5)];
             [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
             sleep(.5);
-            [chicken.physicsBody applyImpulse:CGVectorMake(-1, -1)];
+            [pig.physicsBody applyImpulse:CGVectorMake(-1, -1)];
             [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
         }
     }
