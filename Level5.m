@@ -25,6 +25,7 @@
     int count;
     int state; //keep track of train states
     int count2;
+    int chances;
     //check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
 }
 
@@ -33,6 +34,7 @@
     count = 0;
     state = 0;
     speed = 1;
+    chances = 3;
     if(self = [super initWithSize:size]){
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -227,7 +229,7 @@
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(240,200);
+    go.position = CGPointMake(230,200);
     go.zPosition = 50;
     [_gameLayer addChild:go]; //add node to screen
 }
@@ -253,7 +255,21 @@
     Button.name = @"level6";
     [self addChild:Button];
 }
-
+-(void)tryAgain{
+    SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
+    lives.fontColor = [SKColor redColor];
+    lives.position =CGPointMake(self.size.width/2, self.size.height/2 + 100);
+    
+    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
+    // run the sequence then delete the label
+    [lives runAction:flashAction completion:^{[lives removeFromParent];}];
+    
+    [_text addChild:lives];
+    if(chances <= 0){
+        //[self help];
+    }
+}
 -(void)update:(NSTimeInterval)currentTime{
     if(state == 0){ //train is moving
         if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
@@ -321,8 +337,9 @@
         state++;
     }
     if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])){
-        [_text removeFromParent];//clear text
-        NSLog(@"Error");
+        chances--;
+        [self tryAgain];
+        //[_text removeFromParent];//clear text
         //add helpful hint
     }
     /*if(state==3 && [node.name isEqual:@"Pig"]){
