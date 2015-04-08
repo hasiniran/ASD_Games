@@ -257,7 +257,7 @@
 }
 -(void)hint{
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
-    arrow.position = CGPointMake(550, 500);
+    arrow.position = CGPointMake(530, 500);
     [arrow setScale:.5];
     [_text addChild:arrow];
 }
@@ -269,12 +269,24 @@
     
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:1], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
+    if(chances == 0){
+        [self hint];
+    }
+    else if(chances < 0){
+        [_text removeFromParent];//clear text
+        state++;
+    }
+    
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
     
     [_text addChild:lives];
-    if(chances <= 0){
+   /*
+    if(chances == 0){
         [self hint];
     }
+    else if(chances < 0){
+        
+    }*/
 }
 -(void)update:(NSTimeInterval)currentTime{
     if(state == 0){ //train is moving
