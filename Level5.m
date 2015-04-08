@@ -255,6 +255,9 @@
     Button.name = @"level6";
     [self addChild:Button];
 }
+-(void)hint{
+    
+}
 -(void)tryAgain{
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
