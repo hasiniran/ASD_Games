@@ -210,14 +210,38 @@
 -(void)horseButton{
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Horse"; //Set the button text
-    go.name = @"Button";
+    go.name = @"Horse";
     go.hidden = YES;
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
     go.position = CGPointMake(500,430);
     go.zPosition = 50;
-    [_text addChild:go]; //add node to screen
+    [_gameLayer addChild:go]; //add node to screen
+}
+-(void)pigButton{
+    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    go.text = @"Pig"; //Set the button text
+    go.name = @"Pig";
+    go.hidden = NO;
+    go.yScale=2;
+    go.fontSize = 40;
+    go.fontColor = [SKColor blueColor];
+    go.position = CGPointMake(240,200);
+    go.zPosition = 50;
+    [_gameLayer addChild:go]; //add node to screen
+}
+-(void)cowButton{
+    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    go.text = @"Cow"; //Set the button text
+    go.name = @"Cow";
+    go.hidden = NO;
+    go.yScale=2;
+    go.fontSize = 40;
+    go.fontColor = [SKColor blueColor];
+    go.position = CGPointMake(750,200);
+    go.zPosition = 50;
+    [_gameLayer addChild:go]; //add node to screen
 }
 -(void)nextLevel{
     NSString * nxtLevel= @"Go to Level 6";
@@ -225,7 +249,7 @@
     Button.text = nxtLevel;
     Button.fontColor = [SKColor blueColor];
     Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(500, 600  );
+    Button.position = CGPointMake(500, 600);
     Button.name = @"level6";
     [self addChild:Button];
 }
@@ -267,16 +291,16 @@
         
         [self animalSound];
         [self horseButton];
+        [self pigButton];
+        [self cowButton];
         state++; //make sure animal sound does not play infinitely
     }
     if(state == 3){
         //code in touchesBegan. check for horse touch
         //clear text
     }
-    //NSLog(@"%d",state);
     if(state == 4){ //text is cleared. Make cow dance
         [self danceHorse];
-        //[self initScrollingTracks];
         [_train.physicsBody applyForce:CGVectorMake(1, 0)];
         if(_train.position.x >= 820)
             [self stopTrain];
@@ -288,15 +312,23 @@
         
     }
 }
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if(state==3 && [node.name isEqualToString:@"Button"]){
+    if(state==3 && [node.name isEqual:@"Horse"]){
         [_text removeFromParent];//clear text
         state++;
     }
+    if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])){
+        [_text removeFromParent];//clear text
+        NSLog(@"Error");
+        //add helpful hint
+    }
+    /*if(state==3 && [node.name isEqual:@"Pig"]){
+        [_text removeFromParent];//clear text
+        state++;
+    }*/
     /*
     if([node.name isEqualToString: @"horse"]){
         NSLog(@"hi");
