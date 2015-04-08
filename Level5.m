@@ -225,7 +225,7 @@
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Pig"; //Set the button text
     go.name = @"Pig";
-    go.hidden = NO;
+    go.hidden = YES;
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
@@ -237,7 +237,7 @@
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Cow"; //Set the button text
     go.name = @"Cow";
-    go.hidden = NO;
+    go.hidden = YES;
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
