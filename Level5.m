@@ -256,21 +256,24 @@
     [self addChild:Button];
 }
 -(void)hint{
-    
+    SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
+    arrow.position = CGPointMake(550, 500);
+    [arrow setScale:.5];
+    [_text addChild:arrow];
 }
 -(void)tryAgain{
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
     lives.fontColor = [SKColor redColor];
-    lives.position =CGPointMake(self.size.width/2, self.size.height/2 + 100);
+    lives.position =CGPointMake(self.size.width/2, self.size.height/2 + 200);
     
-    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
+    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:1], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
     
     [_text addChild:lives];
     if(chances <= 0){
-        //[self help];
+        [self hint];
     }
 }
 -(void)update:(NSTimeInterval)currentTime{
@@ -305,7 +308,7 @@
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         display.text=question;
         display.fontColor = [SKColor brownColor];
-        display.position = CGPointMake(self.size.width/2, 500);
+        display.position = CGPointMake(self.size.width/2, 550);
         [_text addChild:display];
         
         [self animalSound];
