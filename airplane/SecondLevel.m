@@ -145,8 +145,8 @@
 {
     
     __block SKAction* moveRunwayForever;
-    __block SKAction* moveSkyForever;
-    __block SKSpriteNode *sky;
+    //__block SKAction* moveSkyForever;
+    //__block SKSpriteNode *sky;
     __block SKSpriteNode *waves;
     SKAction* moveBackground;
     

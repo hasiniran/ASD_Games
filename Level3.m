@@ -158,17 +158,24 @@
         [self addClouds];
         NSString *question;            //Display question message
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        question = @"Pick up the passenger in purple";
+        question = @"Say the color of this passenger to pick him up";
         display.text=question;
         display.fontColor = [SKColor purpleColor];
         display.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self blueBoy];
         [self yellowBoy];
         [self purpleBoy];
+        [self hint];
         [_text addChild:display];
     }
 }
-
+-(void)hint{
+    SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
+    arrow.position = CGPointMake(850, 220);
+    arrow.zPosition = 100;
+    [arrow setScale:.5];
+    [_text addChild:arrow];
+}
 -(void)blueBoy{
     blueBoy = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBoy.png"];
     blueBoy.name = @"blueBoy";

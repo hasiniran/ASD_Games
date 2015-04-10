@@ -291,7 +291,7 @@
      {
          SKSpriteNode * bg = (SKSpriteNode *) node;
        //  CGFloat bgVelocity = -1*fabs(self.ship.physicsBody.velocity.dy);
-         CGFloat bgVelocity = -100;
+        // CGFloat bgVelocity = -100;
          CGPoint amtToMove = CGPointMultiplyScalar(CGPointMake(RUNWAY_VELOCITY,0),_dt);
          bg.position = CGPointAdd(bg.position, amtToMove);
          if (bg.position.x <= -bg.size.width)
@@ -305,7 +305,7 @@
      {
          SKSpriteNode * bg = (SKSpriteNode *) node;
          //  CGFloat bgVelocity = -1*fabs(self.ship.physicsBody.velocity.dy);
-         CGFloat bgVelocity = -10;
+        // CGFloat bgVelocity = -10;
          CGPoint amtToMove = CGPointMultiplyScalar(CGPointMake(SKY_VELOCITY,0),_dt);
          bg.position = CGPointAdd(bg.position, amtToMove);
          if (bg.position.x <= -bg.size.width)

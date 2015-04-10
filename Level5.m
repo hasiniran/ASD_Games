@@ -363,22 +363,7 @@
     if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])){
         chances--;
         [self tryAgain];
-        //[_text removeFromParent];//clear text
-        //add helpful hint
     }
-    /*if(state==3 && [node.name isEqual:@"Pig"]){
-        [_text removeFromParent];//clear text
-        state++;
-    }*/
-    /*
-    if([node.name isEqualToString: @"horse"]){
-        NSLog(@"hi");
-        [_text removeFromParent];//clear text
-        state++;
-    }
-     
-    */
-    //touches not working
     if(state==5 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
