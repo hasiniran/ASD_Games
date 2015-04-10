@@ -261,6 +261,16 @@
     [arrow setScale:.5];
     [_text addChild:arrow];
 }
+-(void)hint2{
+    NSString *nxtLevel= @"HORSE";
+    SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    Button.text = nxtLevel;
+    Button.fontColor = [SKColor brownColor];
+    Button.color = [SKColor yellowColor];
+    Button.position = CGPointMake(600, 480);
+    Button.name = @"level6";
+    [_text addChild:Button];
+}
 -(void)tryAgain{
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
@@ -269,8 +279,12 @@
     
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:1], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
-    if(chances == 0){
+    if(chances == 2){
         [self hint];
+    }
+    else if(chances == 1){
+        [self hint];
+        [self hint2];
     }
     else if(chances < 0){
         [_text removeFromParent];//clear text
@@ -319,7 +333,7 @@
         NSString *question= @"Pick animal that makes this noise";
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         display.text=question;
-        display.fontColor = [SKColor brownColor];
+        display.fontColor = [SKColor blackColor];
         display.position = CGPointMake(self.size.width/2, 550);
         [_text addChild:display];
         
