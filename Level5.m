@@ -267,7 +267,7 @@
     Button.text = nxtLevel;
     Button.fontColor = [SKColor brownColor];
     Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(600, 480);
+    Button.position = CGPointMake(650, 450);
     Button.name = @"level6";
     [_text addChild:Button];
 }
@@ -292,15 +292,7 @@
     }
     
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
-    
     [_text addChild:lives];
-   /*
-    if(chances == 0){
-        [self hint];
-    }
-    else if(chances < 0){
-        
-    }*/
 }
 -(void)update:(NSTimeInterval)currentTime{
     if(state == 0){ //train is moving
@@ -322,7 +314,7 @@
             [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
             [pig.physicsBody applyImpulse:CGVectorMake(-1, .5)];
             [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
-            sleep(.5);
+            //sleep(.5);
             [pig.physicsBody applyImpulse:CGVectorMake(-1, -1)];
             [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
         }
@@ -330,7 +322,7 @@
     if(state == 2){   //animals out of barn
         //display animals sounds
         //ask question
-        NSString *question= @"Pick animal that makes this noise";
+        NSString *question= @"Say the animal that makes this noise";
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         display.text=question;
         display.fontColor = [SKColor blackColor];
