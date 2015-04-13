@@ -13,6 +13,7 @@
 @implementation SecondLevel {
     int birdsDisplayed;
     int questionDisplayed;
+    int correctAnswers;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
     CGSize screenSize;
@@ -31,6 +32,19 @@
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
 
+        // Create bird sprites
+        SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
+        SKSpriteNode *lightPinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBird.png"];
+        SKSpriteNode *orangeBird = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBird.png"];
+        SKSpriteNode *pinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"PinkBird.png"];
+        SKSpriteNode *purpleBird = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBird.png"];
+        SKSpriteNode *yellowBird = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBird.png"];
+        self.birds = [NSArray arrayWithObjects:blueBird, lightPinkBird, orangeBird, pinkBird, purpleBird, yellowBird, nil];
+        for (SKSpriteNode *bird in self.birds)
+        {
+            bird.name = @"bird";
+        }
+
         // Create button
         correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         correctButton.text = @"6 birds";
@@ -48,12 +62,13 @@
 
         [self initalizingScrollingBackground];
         [self addShip];
-        [self addBirds];
+        [self birdsFlyIn];
         
         // Set birds displayed
         birdsDisplayed = 0;
         // Set question displayed
         questionDisplayed = 0;
+        correctAnswers = 0;
     }
     
     return self;
@@ -65,24 +80,15 @@
     [self addChild:incorrectButton];
 }
 
--(void)addBirds
+-(void)birdsFlyIn
 {
     /*
      * Birds fly in from side
     */
 
-    // Create bird sprites
-    SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
-    SKSpriteNode *lightPinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBird.png"];
-    SKSpriteNode *orangeBird = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBird.png"];
-    SKSpriteNode *pinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"PinkBird.png"];
-    SKSpriteNode *purpleBird = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBird.png"];
-    SKSpriteNode *yellowBird = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBird.png"];
-    self.birds = [NSArray arrayWithObjects:blueBird, lightPinkBird, orangeBird, pinkBird, purpleBird, yellowBird, nil];
-    
-
     // Set bird positions
-    int numBirds = 6;
+    int numBirds = arc4random_uniform(self.birds.count + 1)  + 1;
+    birdsDisplayed = numBirds;
     double maxHeight = screenSize.height*0.85;
     double dh = maxHeight * 1/8;
     double currentHeight = maxHeight;
@@ -90,8 +96,9 @@
     double dw = minWidth / numBirds;
     double currentWidth = minWidth;
     
-    for (SKSpriteNode *bird in self.birds)
+    for (int i = 0; i < numBirds; i++)
     {
+        SKSpriteNode *bird = self.birds[i];
         // Set bird initial position
         bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
         [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
@@ -106,6 +113,21 @@
         currentWidth += dw;
         [self addChild:bird];
     }
+}
+
+-(void)birdsFlyOut
+{
+    /*
+     * Birds fly out
+    */
+
+    // Set bird positions
+    [self enumerateChildNodesWithName:@"bird" usingBlock:^(SKNode *bird, BOOL *stop) {
+        [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+            birdsDisplayed--;
+        }];
+    }];
+
 }
 
 -(void)askQuestion
@@ -145,6 +167,10 @@
     
     // Display question and increment
     questionDisplayed++;
+}
+
+-(void)hideQuestion
+{
 }
 
 -(void)moveToNextScene
@@ -281,6 +307,7 @@
     else if ([node.name isEqualToString:@"incorrectButton"])
     {
         [self askQuestion];
+        [self birdsFlyOut];
     }
 }
 
