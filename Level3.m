@@ -165,7 +165,7 @@
         [self blueBoy];
         [self yellowBoy];
         [self purpleBoy];
-        //[self hint];
+        [self hint];
         [_text addChild:display];
     }
 }
@@ -183,14 +183,14 @@
         blueBoy.position=CGPointMake(930, 167);
     else if(check ==1){
         blueBoy.position = CGPointMake(700, 167);
-        SKLabelNode *blue= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        /*SKLabelNode *blue= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         blue.text = @"Blue"; //Set the button text
         blue.name = @"Blue";
         blue.fontSize = 20;
         blue.fontColor = [SKColor blueColor];
         blue.position = CGPointMake(700,250);
         blue.zPosition = 50;
-        [_text addChild:blue]; //add node to screen
+        [_text addChild:blue]; //add node to screen*/
     }
     blueBoy.zPosition = 30;
     [blueBoy setScale:.5];
@@ -207,14 +207,14 @@
         purpleBoy.position=CGPointMake(1020, 170);
     else{
         purpleBoy.position = CGPointMake(800, 170);
-        SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        /*SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         purple.text = @"Purple"; //Set the button text
         purple.name = @"Purple";
         purple.fontSize = 20;
         purple.fontColor = [SKColor purpleColor];
         purple.position = CGPointMake(800,250);
         purple.zPosition = 50;
-        [_text addChild:purple]; //add node to screen
+        [_text addChild:purple]; //add node to screen*/
     }
     purpleBoy.zPosition = 30;
     [purpleBoy setScale:.5];
@@ -224,6 +224,7 @@
     purpleBoy.physicsBody.collisionBitMask = NO;
     [_gameLayer addChild:purpleBoy];
 }
+
 -(void)yellowBoy{
     yellowBoy = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoy.png"];
     yellowBoy.name = @"yellowBoy";
@@ -231,14 +232,14 @@
         yellowBoy.position = CGPointMake(840, 170);
     else{
         yellowBoy.position = CGPointMake(600, 170);
-        SKLabelNode *yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        /*SKLabelNode *yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         yellow.text = @"Yellow"; //Set the button text
         yellow.name = @"Yellow";
         yellow.fontSize = 20;
         yellow.fontColor = [SKColor yellowColor];
         yellow.position = CGPointMake(600,250);
         yellow.zPosition = 50;
-        [_text addChild:yellow]; //add node to screen
+        [_text addChild:yellow]; //add node to screen*/
     }
     yellowBoy.zPosition = 31;
     [yellowBoy setScale:.5];
@@ -247,6 +248,38 @@
     yellowBoy.physicsBody.allowsRotation=NO;
     yellowBoy.physicsBody.collisionBitMask = NO;
     [_gameLayer addChild:yellowBoy];
+}
+
+-(void)labels{
+    purpleBoy.position = CGPointMake(800, 170);
+    SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    purple.text = @"Purple"; //Set the button text
+    purple.name = @"Purple";
+    purple.fontSize = 20;
+    purple.fontColor = [SKColor purpleColor];
+    purple.position = CGPointMake(800,250);
+    purple.zPosition = 50;
+    [_text addChild:purple]; //add node to screen
+    
+    blueBoy.position = CGPointMake(700, 167);
+    SKLabelNode *blue= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    blue.text = @"Blue"; //Set the button text
+    blue.name = @"Blue";
+    blue.fontSize = 20;
+    blue.fontColor = [SKColor blueColor];
+    blue.position = CGPointMake(700,250);
+    blue.zPosition = 50;
+    [_text addChild:blue]; //add node to screen
+    
+    yellowBoy.position = CGPointMake(600, 170);
+    SKLabelNode *yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    yellow.text = @"Yellow"; //Set the button text
+    yellow.name = @"Yellow";
+    yellow.fontSize = 20;
+    yellow.fontColor = [SKColor yellowColor];
+    yellow.position = CGPointMake(600,250);
+    yellow.zPosition = 50;
+    [_text addChild:yellow]; //add node to screen
 }
 
 -(void)station{
@@ -287,7 +320,7 @@
     NSString *question;            //Display question message
     SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    question = @"Try Again. Pick the PURPLE passenger";
+    question = @"Try Again. Say the color of this passenger";
     display.text=question;
     display.fontColor = [SKColor purpleColor];
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
@@ -298,6 +331,7 @@
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
+    [display runAction:flashAction completion:^{[display removeFromParent];}];
     
     [display removeFromParent];
     [_text addChild:lives];
@@ -308,6 +342,7 @@
     }
     else if(chances == 1){
         [self hint];
+        [self labels];
     }
     else if(chances <= 0){
         [self hint];
