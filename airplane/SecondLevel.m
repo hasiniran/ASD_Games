@@ -156,10 +156,12 @@
      * Birds fly out
     */
     
+    int numBirds = birdsDisplayed;
 
     // Set bird positions
-    for (SKSpriteNode *bird in birds)
+    for (int i = 0; i < numBirds; i++)
     {
+        SKSpriteNode *bird = birds[i];
         [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
             birdsDisplayed--;
             if (birdsDisplayed == 0)
@@ -168,6 +170,29 @@
         }];
     };
 
+}
+
+-(void)birdsFlyOutAndFlyBackIn
+{
+    /*
+     * Birds fly out
+    */
+    
+
+    int numBirds = birdsDisplayed;
+
+    // Set bird positions
+    for (int i = 0; i < numBirds; i++)
+    {
+        SKSpriteNode *bird = birds[i];
+        [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+            birdsDisplayed--;
+            if (birdsDisplayed == 0)
+            {
+                [self birdsFlyIn];
+            }
+        }];
+    };
 }
 
 -(void)askQuestion
@@ -351,8 +376,7 @@
         {
             question.hidden = YES;
             [self hideButtons];
-            [self birdsFlyOut];
-            [self birdsFlyIn];
+            [self birdsFlyOutAndFlyBackIn];
         }
     }
     else if ([node.name isEqualToString:@"incorrectButton"])
