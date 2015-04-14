@@ -165,7 +165,7 @@
         [self blueBoy];
         [self yellowBoy];
         [self purpleBoy];
-        [self hint];
+        //[self hint];
         [_text addChild:display];
     }
 }
@@ -302,7 +302,15 @@
     [display removeFromParent];
     [_text addChild:lives];
     [_text addChild:display];
-    if(chances <= 0){
+    
+    if(chances == 2){
+        [self hint];
+    }
+    else if(chances == 1){
+        [self hint];
+    }
+    else if(chances <= 0){
+        [self hint];
         [self help];
     }
 }
