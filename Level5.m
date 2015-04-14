@@ -267,7 +267,7 @@
     Button.text = nxtLevel;
     Button.fontColor = [SKColor brownColor];
     Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(650, 450);
+    Button.position = CGPointMake(630, 510);
     Button.name = @"level6";
     [_text addChild:Button];
 }
@@ -286,7 +286,7 @@
         [self hint];
         [self hint2];
     }
-    else if(chances < 0){
+    else if(chances <= 0){
         [_text removeFromParent];//clear text
         state++;
     }
