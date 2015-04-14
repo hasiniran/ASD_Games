@@ -26,7 +26,6 @@
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *sea ;
 @property (nonatomic, strong)    SKSpriteNode *wave ;
-@property (nonatomic, weak) NSArray *birds;
 
 -(SKAction*)moveBgContinuously;
 -(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;

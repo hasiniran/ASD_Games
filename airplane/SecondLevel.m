@@ -14,8 +14,10 @@
     int birdsDisplayed;
     int questionDisplayed;
     int correctAnswers;
+    NSArray *birds;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
+    SKLabelNode *question;
     CGSize screenSize;
 }
 /*
@@ -39,28 +41,44 @@
         SKSpriteNode *pinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"PinkBird.png"];
         SKSpriteNode *purpleBird = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBird.png"];
         SKSpriteNode *yellowBird = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBird.png"];
-        self.birds = [NSArray arrayWithObjects:blueBird, lightPinkBird, orangeBird, pinkBird, purpleBird, yellowBird, nil];
-        for (SKSpriteNode *bird in self.birds)
+        birds = [NSArray arrayWithObjects:blueBird, lightPinkBird, orangeBird, pinkBird, purpleBird, yellowBird, nil];
+        for (SKSpriteNode *bird in birds)
         {
             bird.name = @"bird";
         }
 
         // Create button
         correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        correctButton.text = @"6 birds";
         correctButton.name = @"correctButton";
         correctButton.fontSize = 40;
         correctButton.fontColor = [SKColor blueColor];
         correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
+        correctButton.hidden = YES;
 
         incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        incorrectButton.text = @"Not 6 birds";
         incorrectButton.name = @"incorrectButton";
         incorrectButton.fontSize = 40;
         incorrectButton.fontColor = [SKColor blueColor];
         incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
+        incorrectButton.hidden = YES;
+        
+        // Create question
+        question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+        question.fontSize = 50;
+        question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
+        question.name = @"numberOfBirdsQuestion";
+        question.hidden = YES;
 
         [self initalizingScrollingBackground];
+        [self addChild:question];
+        [self addChild:correctButton];
+        [self addChild:incorrectButton];
+        for (SKNode *bird in birds)
+        {
+            [self addChild:bird];
+            // Set bird initial position
+            bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
+        }
         [self addShip];
         [self birdsFlyIn];
         
@@ -74,21 +92,42 @@
     return self;
 }
 
+-(void)updateButtonsToMatchNumberOfBirds
+{
+    correctButton.text = [NSString stringWithFormat:@"%i birds", birdsDisplayed];
+    incorrectButton.text = [NSString stringWithFormat:@"Not %i birds", birdsDisplayed];
+}
+
 -(void)displayButtons
 {
-    [self addChild:correctButton];
-    [self addChild:incorrectButton];
+    /*
+     * Displays buttons
+    */
+    correctButton.hidden = NO;
+    incorrectButton.hidden = NO;
+}
+
+-(void)hideButtons
+{
+    /*
+     * Hides buttons
+    */
+    correctButton.hidden = YES;
+    incorrectButton.hidden = YES;
 }
 
 -(void)birdsFlyIn
 {
     /*
      * Birds fly in from side
+     * The number of birds will be random. 
+     * As
     */
 
     // Set bird positions
-    int numBirds = arc4random_uniform(self.birds.count + 1)  + 1;
-    birdsDisplayed = numBirds;
+    int numBirds = arc4random_uniform(birds.count + 1);
+    if (!numBirds)
+        numBirds = 1;
     double maxHeight = screenSize.height*0.85;
     double dh = maxHeight * 1/8;
     double currentHeight = maxHeight;
@@ -98,20 +137,16 @@
     
     for (int i = 0; i < numBirds; i++)
     {
-        SKSpriteNode *bird = self.birds[i];
-        // Set bird initial position
-        bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
+        SKSpriteNode *bird = birds[i];
         [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
             birdsDisplayed++;
             if (birdsDisplayed == numBirds)
             {
                 [self askQuestion];
-                [self displayButtons];
             }
         }];
         currentHeight -= dh;
         currentWidth += dw;
-        [self addChild:bird];
     }
 }
 
@@ -120,13 +155,18 @@
     /*
      * Birds fly out
     */
+    
 
     // Set bird positions
-    [self enumerateChildNodesWithName:@"bird" usingBlock:^(SKNode *bird, BOOL *stop) {
+    for (SKSpriteNode *bird in birds)
+    {
         [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
             birdsDisplayed--;
+            if (birdsDisplayed == 0)
+            {
+            }
         }];
-    }];
+    };
 
 }
 
@@ -136,34 +176,31 @@
      Choose question to be displayed
     */
     
-    SKLabelNode *question;
-    
     // Set text of question
     switch (questionDisplayed) {
         case 0:
             // Create text label
-            question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            question.name = @"numberOfBirdsQuestion";
-            question.fontSize = 50;
-            question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
             question.text = @"How many birds are in the air?";
-            [self addChild:question];
+            question.hidden = NO;
             break;
         case 1:
-            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
             question.text = @"Are you sure? How many birds are in the air?";
+            question.hidden = NO;
             break;
         case 2:
-            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
-            question.text = @"Can you say six?";
+            question.text = [NSString stringWithFormat:@"Can you say %i", birdsDisplayed];
+            question.hidden = NO;
             break;
         case 3:
             [self moveToNextScene];
             break;
         default:
-            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
             question.text = @"How many birds are in the air?";
     }
+    
+    // Set text of answers
+    [self updateButtonsToMatchNumberOfBirds];
+    [self displayButtons];
     
     // Display question and increment
     questionDisplayed++;
@@ -302,12 +339,25 @@
     
     if ([node.name isEqualToString:@"correctButton"])
     {
-        [self moveToNextScene];
+        questionDisplayed = 0;
+        correctAnswers++;
+        
+        if (correctAnswers == 3)
+        {
+            [self moveToNextScene];
+            question.hidden = YES;
+        }
+        else
+        {
+            question.hidden = YES;
+            [self hideButtons];
+            [self birdsFlyOut];
+            [self birdsFlyIn];
+        }
     }
     else if ([node.name isEqualToString:@"incorrectButton"])
     {
         [self askQuestion];
-        [self birdsFlyOut];
     }
 }
 
