@@ -104,7 +104,7 @@
         sprite.anchorPoint = CGPointZero;
         sprite.position = CGPointMake(i*sprite.size.width, 0);
         [sprite runAction:moveGroundSpriteForever];
-        [_gameLayer addChild:sprite];
+        [_bgLayer addChild:sprite];
     }
 }
 -(void)initScrollingBackground{   //scrolling background function
@@ -123,7 +123,6 @@
     }
 }
 -(void)nextLevel{
-    if(check == 2){
         NSString * retrymessage;            //Display Go Level 4 message
         retrymessage = @"Go to Level 4";
         SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -131,9 +130,7 @@
         retryButton.fontColor = [SKColor redColor];
         retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
         retryButton.name = @"level4";
-        [_gameLayer addChild:retryButton];
-        check++;
-    }
+        [_text addChild:retryButton];
 }
 
 -(void)stopTrain{
@@ -154,7 +151,7 @@
         
         rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];//change to train png
         rail.position = CGPointMake(917, 36);
-        [_gameLayer addChild:rail];
+        [_bgLayer addChild:rail];
         [self addClouds];
         NSString *question;            //Display question message
         SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -172,9 +169,11 @@
 -(void)hint{
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
     if(check == 1 )
-        arrow.position = CGPointMake(850, 220);
+        arrow.position = CGPointMake(850, 250);
     else if(check == 2)
         arrow.position = CGPointMake(750, 250);
+    else if(check ==3)
+        arrow.position = CGPointMake(650, 250);
     arrow.zPosition = 100;
     [arrow setScale:.5];
     [_text addChild:arrow];
@@ -254,35 +253,39 @@
 }
 
 -(void)labels{
-    purpleBoy.position = CGPointMake(800, 170);
-    SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    purple.text = @"Purple"; //Set the button text
-    purple.name = @"Purple";
-    purple.fontSize = 20;
-    purple.fontColor = [SKColor purpleColor];
-    purple.position = CGPointMake(800,250);
-    purple.zPosition = 50;
-    [_text addChild:purple]; //add node to screen
-    
-    blueBoy.position = CGPointMake(700, 167);
-    SKLabelNode *blue= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    blue.text = @"Blue"; //Set the button text
-    blue.name = @"Blue";
-    blue.fontSize = 20;
-    blue.fontColor = [SKColor blueColor];
-    blue.position = CGPointMake(700,250);
-    blue.zPosition = 50;
-    [_text addChild:blue]; //add node to screen
-    
-    yellowBoy.position = CGPointMake(600, 170);
-    SKLabelNode *yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    yellow.text = @"Yellow"; //Set the button text
-    yellow.name = @"Yellow";
-    yellow.fontSize = 20;
-    yellow.fontColor = [SKColor yellowColor];
-    yellow.position = CGPointMake(600,250);
-    yellow.zPosition = 50;
-    [_text addChild:yellow]; //add node to screen
+    if(check == 1){
+        purpleBoy.position = CGPointMake(800, 170);
+        SKLabelNode *purple= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        purple.text = @"Purple"; //Set the button text
+        purple.name = @"Purple";
+        purple.fontSize = 20;
+        purple.fontColor = [SKColor purpleColor];
+        purple.position = CGPointMake(800,250);
+        purple.zPosition = 50;
+        [_text addChild:purple]; //add node to screen
+    }
+    if(check <= 2){
+        blueBoy.position = CGPointMake(700, 167);
+        SKLabelNode *blue= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        blue.text = @"Blue"; //Set the button text
+        blue.name = @"Blue";
+        blue.fontSize = 20;
+        blue.fontColor = [SKColor blueColor];
+        blue.position = CGPointMake(700,250);
+        blue.zPosition = 50;
+        [_text addChild:blue]; //add node to screen
+    }
+    if(check <=3){
+        yellowBoy.position = CGPointMake(600, 170);
+        SKLabelNode *yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        yellow.text = @"Yellow"; //Set the button text
+        yellow.name = @"Yellow";
+        yellow.fontSize = 20;
+        yellow.fontColor = [SKColor yellowColor];
+        yellow.position = CGPointMake(600,250);
+        yellow.zPosition = 50;
+        [_text addChild:yellow]; //add node to screen
+    }
 }
 
 -(void)station{
@@ -318,6 +321,11 @@
         head.position = CGPointMake(280, 120);
         [head setScale:.5];
     }
+    else if(check==3){
+        head = [SKSpriteNode spriteNodeWithImageNamed:@"yellowHead.png"];
+        head.position = CGPointMake(170, 120);
+        [head setScale:.5];
+    }
     head.zPosition = 60;
     head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     head.physicsBody.affectedByGravity = NO;
@@ -337,6 +345,8 @@
         display.fontColor = [SKColor purpleColor];
     else if(check == 2)
         display.fontColor = [SKColor blueColor];
+    else if(check == 3)
+        display.fontColor = [SKColor yellowColor];
     
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
     lives.text =[NSString stringWithFormat:@"Chances: %i", chances];
@@ -366,8 +376,18 @@
 }
 -(void)help{
     speed = 1;
-    [purpleBoy removeFromParent];
-    [self addHeadToTrain];
+    if(check == 1){
+        [purpleBoy removeFromParent];
+        [self addHeadToTrain];
+    }
+    if(check == 2){
+        [blueBoy removeFromParent];
+        [self addHeadToTrain];
+    }
+    if(check == 3){
+        [yellowBoy removeFromParent];
+        [self addHeadToTrain];
+    }
     [_bgLayer removeFromParent];
     //[_gameLayer removeFromParent];
     _bgLayer = [SKNode node];
@@ -375,12 +395,12 @@
     [self initScrollingForeground];
     [self initScrollingBackground];
     [station.physicsBody applyForce:CGVectorMake(-35, 0)];
-    [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
-    [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
-    [_train.physicsBody applyForce:CGVectorMake(25, 0)];
-    [head.physicsBody applyForce:CGVectorMake(25, 0)];
+    //[yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+    //[blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+    //[_train.physicsBody applyForce:CGVectorMake(25, 0)];
+   // [head.physicsBody applyForce:CGVectorMake(25, 0)];
     count =0;
-    count2 =1;
+    count2 =0;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -390,17 +410,6 @@
         speed = 1;
         [purpleBoy removeFromParent];
         [self addHeadToTrain];
-        //[_bgLayer removeFromParent];
-        //[_gameLayer removeFromParent];
-        //_bgLayer = [SKNode node];
-        //[self addChild: _bgLayer];
-        //[self initScrollingForeground];
-        //[self initScrollingBackground];
-        //[station.physicsBody applyForce:CGVectorMake(-35, 0)];
-        //[yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
-        //[blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
-        //[_train.physicsBody applyForce:CGVectorMake(25, 0)];
-        //[head.physicsBody applyForce:CGVectorMake(25, 0)];
         count2=0;
     }
     else if(check==1 && [node.name  isEqual: @"yellowBoy"]){
@@ -419,6 +428,7 @@
     if(check == 2 && [node.name  isEqual: @"blueBoy"]){ //blue chck
         [blueBoy removeFromParent];
         [self addHeadToTrain];
+        count2 = 0;
     }
     else if(check==2 && [node.name  isEqual: @"yellowBoy"]){
         [_text removeFromParent];   //erase and re-add text
@@ -427,8 +437,22 @@
         [self tryAgain];
     }
     
+    if(check == 3&& [node.name  isEqual: @"yellowBoy"]){
+        [yellowBoy removeFromParent];
+        [self addHeadToTrain];
+        
+        [_bgLayer removeFromParent];
+        _bgLayer = [SKNode node];
+        [self addChild: _bgLayer];
+        [self initScrollingForeground];
+        [self initScrollingBackground];
+        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        count2 = 0;
+        count = 0;
+    }
     
-    if(check==3 && [node.name isEqual: @"level4"]){
+    
+    if(check==4 && [node.name isEqual: @"level4"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -452,12 +476,36 @@
         display.position = CGPointMake(self.size.width/2, self.size.height/2);
         [_text addChild:display];
         //display arrow
+        if(chances == 1)
+            [self labels];
         [self hint];
     }
-    if(check == 4){
+    if(check == 3 && count2 ==0){//blue and purp in train
+        count2++;
+        [_text removeFromParent];   //clear text
+        _text = [SKNode node];  //re init text
+        [self addChild:_text];
+        NSString *question;            //Display question message
+        SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        question = @"Say the color of this passenger to pick him up";
+        display.text=question;
+        display.fontColor = [SKColor yellowColor];
+        display.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [_text addChild:display];
+        //display arrow
+        if(chances == 1)
+            [self labels];
+        [self hint];
+    }
+    if(check == 4 && count2 == 0){
         if(count >= 30){
-            _train.physicsBody.velocity = CGVectorMake(0, 0);
-            head.physicsBody.velocity=CGVectorMake(0, 0);
+            count2++;
+            [_text removeFromParent];   //erase and re-add text
+            _text = [SKNode node];
+            [self addChild:_text];
+            NSLog(@"hi");
+            //_train.physicsBody.velocity = CGVectorMake(0, 0);
+            //head.physicsBody.velocity=CGVectorMake(0, 0);
             [self nextLevel];
         }
         

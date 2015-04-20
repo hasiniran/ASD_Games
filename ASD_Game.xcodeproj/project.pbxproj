@@ -14,6 +14,7 @@
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
 		0733717F1A95B1D30024872B /* Level2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0733717E1A95B1D30024872B /* Level2.m */; };
 		074407CC1AE575BB00389890 /* blueHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 074407CB1AE575BB00389890 /* blueHead.png */; };
+		074407CE1AE5790E00389890 /* yellowHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 074407CD1AE5790E00389890 /* yellowHead.png */; };
 		074D32C41A8BF9F1004C1C11 /* station.png in Resources */ = {isa = PBXBuildFile; fileRef = 074D32C31A8BF9F1004C1C11 /* station.png */; };
 		076CF5FC1A9D1FCC001839A2 /* Level3.m in Sources */ = {isa = PBXBuildFile; fileRef = 076CF5FB1A9D1FCC001839A2 /* Level3.m */; };
 		076CF5FE1A9D1FEA001839A2 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF5FD1A9D1FEA001839A2 /* Background.png */; };
@@ -84,6 +85,7 @@
 		0733717D1A95B1D30024872B /* Level2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
 		0733717E1A95B1D30024872B /* Level2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level2.m; sourceTree = "<group>"; };
 		074407CB1AE575BB00389890 /* blueHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueHead.png; sourceTree = "<group>"; };
+		074407CD1AE5790E00389890 /* yellowHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowHead.png; sourceTree = "<group>"; };
 		074D32C31A8BF9F1004C1C11 /* station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station.png; sourceTree = "<group>"; };
 		076CF5FA1A9D1FCC001839A2 /* Level3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level3.h; sourceTree = "<group>"; };
 		076CF5FB1A9D1FCC001839A2 /* Level3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level3.m; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				074407CD1AE5790E00389890 /* yellowHead.png */,
 				074407CB1AE575BB00389890 /* blueHead.png */,
 				016A9CAB1AC12CC500A87406 /* StopSign.png */,
 				07F9553D1AD5ABB00080668A /* arrow.png */,
@@ -431,6 +434,7 @@
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
+				074407CE1AE5790E00389890 /* yellowHead.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
