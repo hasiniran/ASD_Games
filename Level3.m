@@ -311,13 +311,14 @@
     if(check ==1 ){
         head = [SKSpriteNode spriteNodeWithImageNamed:@"purpHead.png"];
         head.position = CGPointMake(330, 120);
+        [head setScale:.7];
     }
     else if( check ==2){
         head = [SKSpriteNode spriteNodeWithImageNamed:@"blueHead.png"];
         head.position = CGPointMake(280, 120);
+        [head setScale:.5];
     }
     head.zPosition = 60;
-    [head setScale:.8];
     head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     head.physicsBody.affectedByGravity = NO;
     head.physicsBody.allowsRotation=NO;
