@@ -171,7 +171,10 @@
 }
 -(void)hint{
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
-    arrow.position = CGPointMake(850, 220);
+    if(check == 1 )
+        arrow.position = CGPointMake(850, 220);
+    else if(check == 2)
+        arrow.position = CGPointMake(750, 250);
     arrow.zPosition = 100;
     [arrow setScale:.5];
     [_text addChild:arrow];
@@ -369,14 +372,9 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //speed = 1;  //set speed to 1 which starts background scrolling
-    
-    //Level 2 connection
-    
      CGPoint location = [[touches anyObject] locationInNode:self];
      SKNode *node = [self nodeAtPoint:location];
-     
-    if([node.name  isEqual: @"purpleBoy"]){
+    if(check == 1 && [node.name  isEqual: @"purpleBoy"]){
         speed = 1;
         [purpleBoy removeFromParent];
         [self addHeadToTrain];
@@ -384,30 +382,32 @@
         //[_gameLayer removeFromParent];
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
-        [self initScrollingForeground];
-        [self initScrollingBackground];
-        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
-        [yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
-        [blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
-        [_train.physicsBody applyForce:CGVectorMake(25, 0)];
-        [head.physicsBody applyForce:CGVectorMake(25, 0)];
+        //[self initScrollingForeground];
+        //[self initScrollingBackground];
+        //[station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        //[yellowBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        //[blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
+        //[_train.physicsBody applyForce:CGVectorMake(25, 0)];
+        //[head.physicsBody applyForce:CGVectorMake(25, 0)];
         count =0;
         count2 =1;
     }
-    if([node.name  isEqual: @"yellowBoy"]){
+    else if(check==1 && [node.name  isEqual: @"yellowBoy"]){
         speed = 1;
         [_text removeFromParent];   //erase and re-add text
         _text = [SKNode node];
         [self addChild:_text];
         [self tryAgain];
     }
-    if([node.name  isEqual: @"blueBoy"]){
+    else if(check ==1 &&[node.name  isEqual: @"blueBoy"]){
         speed = 1;
         [_text removeFromParent];   //erase and re-add text
         _text = [SKNode node];
         [self addChild:_text];
         [self tryAgain];
     }
+    
+    
     if(check==3 && [node.name isEqual: @"level4"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
@@ -419,12 +419,27 @@
 
 -(void)update:(NSTimeInterval)currentTime{
     count++;
-    if(count2 == 1){
+    if(check == 2){//purple head in train
+        [_text removeFromParent];   //clear text
+        _text = [SKNode node];  //re init text
+        [self addChild:_text];
+        NSString *question;            //Display question message
+        SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        question = @"Say the color of this passenger to pick him up";
+        display.text=question;
+        display.fontColor = [SKColor blueColor];
+        display.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [_text addChild:display];
+        //display arrow
+        [self hint];
+    }
+    if(check == 4){
         if(count >= 30){
             _train.physicsBody.velocity = CGVectorMake(0, 0);
             head.physicsBody.velocity=CGVectorMake(0, 0);
             [self nextLevel];
         }
+        
     }
     else if(count >= 28){   //call next level function once train reaches right side of screen
         [self stopTrain];
