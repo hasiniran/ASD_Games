@@ -305,10 +305,17 @@
     _train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:_train];
 }
+
 -(void)addHeadToTrain{
     [_text removeFromParent];
-    head = [SKSpriteNode spriteNodeWithImageNamed:@"purpHead.png"];
-    head.position = CGPointMake(330, 120);
+    if(check ==1 ){
+        head = [SKSpriteNode spriteNodeWithImageNamed:@"purpHead.png"];
+        head.position = CGPointMake(330, 120);
+    }
+    else if( check ==2){
+        head = [SKSpriteNode spriteNodeWithImageNamed:@"blueHead.png"];
+        head.position = CGPointMake(280, 120);
+    }
     head.zPosition = 60;
     [head setScale:.8];
     head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -325,7 +332,11 @@
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     question = @"Try Again. Say the color of this passenger";
     display.text=question;
-    display.fontColor = [SKColor purpleColor];
+    if(check == 1)
+        display.fontColor = [SKColor purpleColor];
+    else if(check == 2)
+        display.fontColor = [SKColor blueColor];
+    
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
     lives.text =[NSString stringWithFormat:@"Chances: %i", chances];
     lives.fontColor = [SKColor redColor];
@@ -378,10 +389,10 @@
         speed = 1;
         [purpleBoy removeFromParent];
         [self addHeadToTrain];
-        [_bgLayer removeFromParent];
+        //[_bgLayer removeFromParent];
         //[_gameLayer removeFromParent];
-        _bgLayer = [SKNode node];
-        [self addChild: _bgLayer];
+        //_bgLayer = [SKNode node];
+        //[self addChild: _bgLayer];
         //[self initScrollingForeground];
         //[self initScrollingBackground];
         //[station.physicsBody applyForce:CGVectorMake(-35, 0)];
@@ -389,18 +400,26 @@
         //[blueBoy.physicsBody applyForce:CGVectorMake(-35, 0)];
         //[_train.physicsBody applyForce:CGVectorMake(25, 0)];
         //[head.physicsBody applyForce:CGVectorMake(25, 0)];
-        count =0;
-        count2 =1;
+        count2=0;
     }
     else if(check==1 && [node.name  isEqual: @"yellowBoy"]){
-        speed = 1;
         [_text removeFromParent];   //erase and re-add text
         _text = [SKNode node];
         [self addChild:_text];
         [self tryAgain];
     }
     else if(check ==1 &&[node.name  isEqual: @"blueBoy"]){
-        speed = 1;
+        [_text removeFromParent];   //erase and re-add text
+        _text = [SKNode node];
+        [self addChild:_text];
+        [self tryAgain];
+    }
+    
+    if(check == 2 && [node.name  isEqual: @"blueBoy"]){ //blue chck
+        [blueBoy removeFromParent];
+        [self addHeadToTrain];
+    }
+    else if(check==2 && [node.name  isEqual: @"yellowBoy"]){
         [_text removeFromParent];   //erase and re-add text
         _text = [SKNode node];
         [self addChild:_text];
@@ -419,7 +438,8 @@
 
 -(void)update:(NSTimeInterval)currentTime{
     count++;
-    if(check == 2){//purple head in train
+    if(check == 2 && count2==0){//purple head in train
+        count2++;
         [_text removeFromParent];   //clear text
         _text = [SKNode node];  //re init text
         [self addChild:_text];
