@@ -265,9 +265,18 @@
 }
 -(void)hint{
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
-    arrow.position = CGPointMake(530, 500);
+    if(state == 3){
+        arrow.position = CGPointMake(530, 500);
+    }
+    if(state == 5){
+        arrow.position = CGPointMake(290, 280);//pig
+    }
+    if(state == 7){
+            arrow.position = CGPointMake(800, 280); //cow
+    }
     [arrow setScale:.5];
     [_text addChild:arrow];
+
 }
 -(void)hint2{
     NSString *nxtLevel= @"HORSE";
@@ -376,12 +385,13 @@
         //check for pig touch
     }
     if(state == 8){//check for pig
-        count++;
+        //count++;
         [self danceCow];
-        _train.physicsBody.velocity = CGVectorMake(5, 0);
-        if(_train.position.x == 600){
+        _train.physicsBody.velocity = CGVectorMake(35, 0);
+        if(_train.position.x >= 750){
             [self nextLevel];
             _train.physicsBody.velocity = CGVectorMake(0, 0);
+            state++;
         }
     }
 }
@@ -420,7 +430,7 @@
         [self tryAgain];
     }
     
-    if(state==8 && [node.name isEqual: @"level6"]){
+    if(state==9 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
