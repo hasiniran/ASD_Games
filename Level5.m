@@ -206,15 +206,15 @@
 
 -(void)danceHorse{
     horse.physicsBody.allowsRotation = YES;
-    [horse.physicsBody applyAngularImpulse:7];
+    [horse.physicsBody applyAngularImpulse:5];
 }
 -(void)dancePig{
     pig.physicsBody.allowsRotation = YES;
-    [pig.physicsBody applyAngularImpulse:7];
+    [pig.physicsBody applyAngularImpulse:5];
 }
 -(void)danceCow{
     cow.physicsBody.allowsRotation = YES;
-    [cow.physicsBody applyAngularImpulse:7];
+    [cow.physicsBody applyAngularImpulse:5];
 }
 
 -(void)horseButton{
@@ -268,10 +268,10 @@
     if(state == 3){
         arrow.position = CGPointMake(530, 500);
     }
-    if(state == 5){
+    if(state == 5|| state == 4){
         arrow.position = CGPointMake(290, 270);//pig
     }
-    if(state == 7){
+    if(state == 7|| state == 6){
             arrow.position = CGPointMake(800, 280); //cow
     }
     [arrow setScale:.5];
@@ -286,20 +286,17 @@
         Button.position = CGPointMake(630, 510);
          Button.fontColor = [SKColor brownColor];
     }
-    if(state == 5){
+    if(state == 5 || state == 4){
         nxtLevel= @"PIG";
         Button.position = CGPointMake(350, 290);
          Button.fontColor = [SKColor magentaColor];
     }
-    if(state == 7){
+    if(state == 7 || state == 6){
         nxtLevel= @"COW";
         Button.position = CGPointMake(870, 290);
          Button.fontColor = [SKColor grayColor];
     }
     Button.text = nxtLevel;
-    Button.color = [SKColor yellowColor];
-    //Button.position = CGPointMake(630, 510);
-    //Button.name = @"level6";
     [_text addChild:Button];
 }
 -(void)question{
@@ -330,7 +327,7 @@
     }
     else if(chances <= 0){
         [_text removeFromParent];//clear text
-        state++;
+        state=9;
     }
     
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
@@ -380,6 +377,12 @@
         [self danceHorse];
         [self question];
         [self animalSound]; //pig sound
+        if(chances == 2)
+            [self hint];
+        else if(chances == 1){
+            [self hint];
+            [self hint2];
+        }
         state++;
     }
     if(state == 5){
@@ -389,6 +392,12 @@
         [self dancePig];
         [self question];
         [self animalSound]; //cow sound
+        if(chances == 2)
+            [self hint];
+        else if(chances == 1){
+            [self hint];
+            [self hint2];
+        }
         state++;
         //horse.physicsBody.angularVelocity = 0;
         //display next level
@@ -401,7 +410,10 @@
     if(state == 8){//check for pig
         //count++;
         [self danceCow];
-        _train.physicsBody.velocity = CGVectorMake(35, 0);
+        state++;
+    }
+    if(state == 9){//check for pig
+        _train.physicsBody.velocity = CGVectorMake(55, 0);
         if(_train.position.x >= 750){
             [self nextLevel];
             _train.physicsBody.velocity = CGVectorMake(0, 0);
@@ -444,7 +456,7 @@
         [self tryAgain];
     }
     
-    if(state==9 && [node.name isEqual: @"level6"]){
+    if(state==10 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
