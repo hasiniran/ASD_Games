@@ -366,6 +366,7 @@
         [self dancePig];
         [self question];
         [self animalSound]; //cow sound
+        state++;
         //horse.physicsBody.angularVelocity = 0;
         //display next level
         //[self nextLevel];
@@ -373,7 +374,6 @@
     }
     if(state == 7){
         //check for pig touch
-        count = 0;
     }
     if(state == 8){//check for pig
         count++;
