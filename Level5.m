@@ -269,7 +269,7 @@
         arrow.position = CGPointMake(530, 500);
     }
     if(state == 5){
-        arrow.position = CGPointMake(290, 280);//pig
+        arrow.position = CGPointMake(290, 270);//pig
     }
     if(state == 7){
             arrow.position = CGPointMake(800, 280); //cow
@@ -279,13 +279,27 @@
 
 }
 -(void)hint2{
-    NSString *nxtLevel= @"HORSE";
     SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    NSString *nxtLevel;
+    if(state == 3){
+        nxtLevel= @"HORSE";
+        Button.position = CGPointMake(630, 510);
+         Button.fontColor = [SKColor brownColor];
+    }
+    if(state == 5){
+        nxtLevel= @"PIG";
+        Button.position = CGPointMake(350, 290);
+         Button.fontColor = [SKColor magentaColor];
+    }
+    if(state == 7){
+        nxtLevel= @"COW";
+        Button.position = CGPointMake(870, 290);
+         Button.fontColor = [SKColor grayColor];
+    }
     Button.text = nxtLevel;
-    Button.fontColor = [SKColor brownColor];
     Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(630, 510);
-    Button.name = @"level6";
+    //Button.position = CGPointMake(630, 510);
+    //Button.name = @"level6";
     [_text addChild:Button];
 }
 -(void)question{
