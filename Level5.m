@@ -208,6 +208,14 @@
     horse.physicsBody.allowsRotation = YES;
     [horse.physicsBody applyAngularImpulse:7];
 }
+-(void)dancePig{
+    pig.physicsBody.allowsRotation = YES;
+    [pig.physicsBody applyAngularImpulse:7];
+}
+-(void)danceCow{
+    cow.physicsBody.allowsRotation = YES;
+    [cow.physicsBody applyAngularImpulse:7];
+}
 
 -(void)horseButton{
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -271,6 +279,17 @@
     Button.name = @"level6";
     [_text addChild:Button];
 }
+-(void)question{
+    NSString *question= @"Say the animal that makes this noise";
+    SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    display.text=question;
+    display.fontColor = [SKColor blackColor];
+    display.position = CGPointMake(self.size.width/2, 550);
+    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0]]];
+    [display runAction:flashAction];
+    
+    [_text addChild:display];
+}
 -(void)tryAgain{
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
@@ -322,12 +341,7 @@
     if(state == 2){   //animals out of barn
         //display animals sounds
         //ask question
-        NSString *question= @"Say the animal that makes this noise";
-        SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        display.text=question;
-        display.fontColor = [SKColor blackColor];
-        display.position = CGPointMake(self.size.width/2, 550);
-        [_text addChild:display];
+        [self question];
         
         [self animalSound];
         [self horseButton];
@@ -339,17 +353,36 @@
         //code in touchesBegan. check for horse touch
         //clear text
     }
-    if(state == 4){ //text is cleared. Make cow dance
+    if(state == 4){ //text is cleared. Make horse dance
         [self danceHorse];
-        [_train.physicsBody applyForce:CGVectorMake(1, 0)];
-        if(_train.position.x >= 820)
-            [self stopTrain];
+        [self question];
+        [self animalSound]; //pig sound
+        state++;
     }
     if(state == 5){
-        horse.physicsBody.angularVelocity = 0;
+        //check for pig touch
+    }
+    if(state == 6){//check for pig
+        [self dancePig];
+        [self question];
+        [self animalSound]; //cow sound
+        //horse.physicsBody.angularVelocity = 0;
         //display next level
-        [self nextLevel];
+        //[self nextLevel];
         
+    }
+    if(state == 7){
+        //check for pig touch
+        count = 0;
+    }
+    if(state == 8){//check for pig
+        count++;
+        [self danceCow];
+        _train.physicsBody.velocity = CGVectorMake(5, 0);
+        if(_train.position.x == 600){
+            [self nextLevel];
+            _train.physicsBody.velocity = CGVectorMake(0, 0);
+        }
     }
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -358,13 +391,36 @@
     
     if(state==3 && [node.name isEqual:@"Horse"]){
         [_text removeFromParent];//clear text
+        _text = [SKNode node];
+        [self addChild:_text];
         state++;
     }
     if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])){
         chances--;
         [self tryAgain];
     }
-    if(state==5 && [node.name isEqual: @"level6"]){
+    if(state==5 && [node.name isEqual: @"Pig"]){
+        [_text removeFromParent];//clear text
+        _text = [SKNode node];
+        [self addChild:_text];
+        state++;
+    }
+    if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])){
+        chances--;
+        [self tryAgain];
+    }
+    if(state==7 && [node.name isEqual: @"Cow"]){
+        [_text removeFromParent];//clear text
+        _text = [SKNode node];
+        [self addChild:_text];
+        state++;
+    }
+    if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])){
+        chances--;
+        [self tryAgain];
+    }
+    
+    if(state==8 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
