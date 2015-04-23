@@ -196,7 +196,16 @@
 
 -(void)animalSound{
     // Construct URL to sound file
-    NSString *path = [NSString stringWithFormat:@"%@/Horse Whinny.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSString *path;
+    if(state == 2){
+    path = [NSString stringWithFormat:@"%@/Horse Whinny.mp3", [[NSBundle mainBundle] resourcePath]];
+    }
+    if(state == 4){
+        path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
+    }
+    if(state == 6){
+        path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
+    }
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
     
     // Create audio player object and initialize with URL to sound
