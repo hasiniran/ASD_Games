@@ -467,7 +467,7 @@
     
     if(state==10 && [node.name isEqual: @"level6"]){
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
