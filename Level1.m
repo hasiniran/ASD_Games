@@ -15,6 +15,7 @@
     SKSpriteNode *station;
     SKSpriteNode *rail;
     SKSpriteNode *mountain;
+    SKLabelNode *skip;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -37,6 +38,16 @@
         [self addChild: _gameLayer];
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
+        
+        skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [_HUDLayer addChild:skip]; //add node to screen
+        
         
         SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         go.text = @"Go"; //Set the button text
@@ -195,6 +206,12 @@
     }
     else if ([node.name isEqualToString:@"Go"]) {
         [_train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+    }
+    if ([node.name isEqualToString:@"Skip"]) {
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
     }
 }
 
