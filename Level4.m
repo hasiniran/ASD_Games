@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Level4.h"
+#import "Level1.h"
 
 
 @implementation Level4{
@@ -18,6 +19,7 @@
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
+    SKLabelNode *skip;
     double speed;
 }
 
@@ -37,6 +39,15 @@
         [self train];
         [self stop];
         [self addMountain];
+        
+        skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [_HUDLayer addChild:skip]; //add node to screen
         
         [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
         [stop.physicsBody applyImpulse:CGVectorMake(-2, 0)];
@@ -170,14 +181,20 @@
     else if([node.name  isEqual: @"level5"]){ //display level 5, pick new node to click on...
         [self nextLevel];
     }
-    /* transition to next level
+    //transition to next level
     else if ([node.name isEqualToString:@"level5"]) { //transition to level 5
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
+        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
-    */
+    
+    if ([node.name isEqualToString:@"Skip"]) {
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+    }
 }
 
 

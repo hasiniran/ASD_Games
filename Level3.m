@@ -23,6 +23,7 @@
     SKSpriteNode *yellowBoy;
     SKSpriteNode *purpleBoy;
     SKSpriteNode *head;
+    SKLabelNode *skip;
     double speed;
     int count;
     int check; //keep track of train states
@@ -63,6 +64,14 @@
         [blueBoy.physicsBody applyImpulse:CGVectorMake(-5, 0)];
         [purpleBoy.physicsBody applyImpulse:CGVectorMake(-5, 0)];
         
+        skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [_HUDLayer addChild:skip]; //add node to screen
     }
     return self;
 }
@@ -453,6 +462,12 @@
     
     
     if(check==4 && [node.name isEqual: @"level4"]){
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+    }
+    if ([node.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
