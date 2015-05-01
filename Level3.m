@@ -365,7 +365,6 @@
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
-    [display runAction:flashAction completion:^{[display removeFromParent];}];
     
     [display removeFromParent];
     [_text addChild:lives];
