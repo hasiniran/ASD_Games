@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Actions.h"
 
 @interface SecondLevel : SKScene{
     SKAction *actionMoveDown;
@@ -27,5 +28,5 @@
 @property (nonatomic, strong)    SKSpriteNode *wave ;
 
 -(SKAction*)moveBgContinuously;
--(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;
+
 @end
