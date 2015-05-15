@@ -32,7 +32,7 @@
     //check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
 }
 
-
+//test
 
 -(id)initWithSize:(CGSize)size{
     count = 0;
