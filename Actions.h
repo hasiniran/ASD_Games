@@ -11,7 +11,11 @@
 
 #import <SpriteKit/SpriteKit.h>
 
--(SKAction*)moveBgContinuously;
+@interface Actions : SKScene{}
+
+-(void)moveImgContinuously:(NSString*)skNodeName:(NSTimeInterval) duration;
++(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;
+
 
 @end
 

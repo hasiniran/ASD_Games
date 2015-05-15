@@ -271,12 +271,12 @@
 //    moveBackground = [SKAction group:@[ [SKAction runActi],
 //                                         [SKAction runAction:moveSkyForever onChildWithName:@"sky"] ]];
     
-                    
-    
-    if(!sky.hasActions && !runway.hasActions) {
-       [self runAction:moveBackground];
-        
-    }
+//                    
+//    
+//    if(!sky.hasActions && !runway.hasActions) {
+//       [self runAction:moveBackground];
+//        
+//    }
     
     return moveBackground;
     
@@ -417,19 +417,13 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
                  
              }
          }];
-
-        
+     
     }
     
     if( self.ship.position.y >= [[UIScreen mainScreen] bounds].size.height*0.75 ){
-        
         [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
         self.ship.physicsBody.dynamic = NO;
         [self levelCompleted:TRUE];
-//        SKTransition *reveal = [SKTransition doorsCloseVerticalWithDuration:5];
-//        SKScene * gameOverScene = [[GameStartScene alloc] initWithSize:self.size];
-//        [self.view presentScene:gameOverScene transition: reveal];
-       // [self moveBg];
     }
     
     
