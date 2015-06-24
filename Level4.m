@@ -25,6 +25,7 @@
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
+    SKLabelNode *skip;
     double speed;
     int click;
     int sign;
@@ -59,6 +60,15 @@
 //        [self stopSign2];
 //        [self stopSign3];
         [self addMountain];
+        
+        skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [_HUDLayer addChild:skip]; //add node to screen
         
         [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
         [stopSign1.physicsBody applyImpulse:CGVectorMake(-2, 0)];

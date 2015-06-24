@@ -271,12 +271,12 @@
 //    moveBackground = [SKAction group:@[ [SKAction runActi],
 //                                         [SKAction runAction:moveSkyForever onChildWithName:@"sky"] ]];
     
-                    
-    
-    if(!sky.hasActions && !runway.hasActions) {
-       [self runAction:moveBackground];
-        
-    }
+//                    
+//    
+//    if(!sky.hasActions && !runway.hasActions) {
+//       [self runAction:moveBackground];
+//        
+//    }
     
     return moveBackground;
     
@@ -291,7 +291,7 @@
      {
          SKSpriteNode * bg = (SKSpriteNode *) node;
        //  CGFloat bgVelocity = -1*fabs(self.ship.physicsBody.velocity.dy);
-         CGFloat bgVelocity = -100;
+        // CGFloat bgVelocity = -100;
          CGPoint amtToMove = CGPointMultiplyScalar(CGPointMake(RUNWAY_VELOCITY,0),_dt);
          bg.position = CGPointAdd(bg.position, amtToMove);
          if (bg.position.x <= -bg.size.width)
@@ -305,7 +305,7 @@
      {
          SKSpriteNode * bg = (SKSpriteNode *) node;
          //  CGFloat bgVelocity = -1*fabs(self.ship.physicsBody.velocity.dy);
-         CGFloat bgVelocity = -10;
+        // CGFloat bgVelocity = -10;
          CGPoint amtToMove = CGPointMultiplyScalar(CGPointMake(SKY_VELOCITY,0),_dt);
          bg.position = CGPointAdd(bg.position, amtToMove);
          if (bg.position.x <= -bg.size.width)
@@ -417,19 +417,13 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
                  
              }
          }];
-
-        
+     
     }
     
     if( self.ship.position.y >= [[UIScreen mainScreen] bounds].size.height*0.75 ){
-        
         [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
         self.ship.physicsBody.dynamic = NO;
         [self levelCompleted:TRUE];
-//        SKTransition *reveal = [SKTransition doorsCloseVerticalWithDuration:5];
-//        SKScene * gameOverScene = [[GameStartScene alloc] initWithSize:self.size];
-//        [self.view presentScene:gameOverScene transition: reveal];
-       // [self moveBg];
     }
     
     

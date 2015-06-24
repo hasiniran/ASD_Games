@@ -28,6 +28,7 @@
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
+    SKLabelNode *skip;
     double speed;
     int numCows;
     int textDisplay;
@@ -58,6 +59,14 @@
         correct.zPosition = 50;
         [_HUDLayer addChild:correct];
         
+        skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [_HUDLayer addChild:skip]; //add node to screen
         
         SKLabelNode *incorrect = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         incorrect.text = @"Incorrect";
@@ -333,6 +342,12 @@
         [self displayText];
     }
     else if ([node.name isEqualToString:@"level3"]) { //transition to level 3
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+    }
+    if ([node.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
