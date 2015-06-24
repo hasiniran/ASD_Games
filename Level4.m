@@ -7,23 +7,34 @@
 //
 
 
+//option to stop specific node, specific actions for a node
+//stop background instead of train
+//wait for email from hasini
+
 #import <Foundation/Foundation.h>
 #import "Level4.h"
+#import "Level3.h" //change to 5
 
 
 @implementation Level4{
     SKSpriteNode *train;
-    SKSpriteNode *stop;
+    SKSpriteNode *stopSign1;
+//    SKSpriteNode *stopSign2;
+//    SKSpriteNode *stopSign3;
     SKSpriteNode *rail;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
     double speed;
+    int click;
+    int sign;
 }
 
 
 -(id)initWithSize:(CGSize)size{
     speed = 1; //start with train moving
+    click = 0;
+    sign = 0;
     if(self = [super initWithSize:size]){
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -32,14 +43,27 @@
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
         
+        SKLabelNode *stop = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        stop.text = @"Stop";
+        stop.name = @"stop";
+        stop.fontSize = 40;
+        stop.fontColor = [SKColor blueColor];
+        stop.position = CGPointMake(150,400);
+        stop.zPosition = 50;
+        [_HUDLayer addChild:stop];
+        
         [self initScrollingBackground]; //scolling sky
         [self initScrollingForeground]; //scolling tracks
         [self train];
-        [self stop];
+        [self stopSign1];
+//        [self stopSign2];
+//        [self stopSign3];
         [self addMountain];
         
         [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-        [stop.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        [stopSign1.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+//        [stopSign2.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+//        [stopSign3.physicsBody applyImpulse:CGVectorMake(-2, 0)];
     }
     return self;
 }
@@ -70,6 +94,66 @@
     }
 }
 
+
+-(void)stopSign1{
+    stopSign1 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
+    stopSign1.name = @"stop1";
+    stopSign1.position = CGPointMake(1075,260);
+    stopSign1.zPosition = 40;
+    stopSign1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    stopSign1.physicsBody.dynamic = YES;
+    stopSign1.physicsBody.affectedByGravity = NO;
+    stopSign1.physicsBody.allowsRotation = NO;
+    /*[stopSign runAction:[SKAction moveTo:CGPointMake(750, 260) duration:7] completion:^{
+        sign = 1;
+    }];
+    [stopSign runAction:[SKAction moveTo:CGPointMake(50, 260) duration:7] completion:^{
+        sign = 0;
+    }];*/
+    [_gameLayer addChild:stopSign1];
+  
+}
+
+/*
+-(void)stopSign2{
+    stopSign2 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
+    stopSign2.name = @"stop2";
+    stopSign2.position = CGPointMake(2075,260);
+    stopSign2.zPosition = 40;
+    stopSign2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    stopSign2.physicsBody.dynamic = YES;
+    stopSign2.physicsBody.affectedByGravity = NO;
+    stopSign2.physicsBody.allowsRotation = NO;
+//    [stopSign runAction:[SKAction moveTo:CGPointMake(750, 260) duration:7] completion:^{
+//     sign = 1;
+//     }];
+//     [stopSign runAction:[SKAction moveTo:CGPointMake(50, 260) duration:7] completion:^{
+//     sign = 0;
+//     }];
+//    [_gameLayer addChild:stopSign2];
+    
+}
+
+
+-(void)stopSign3{
+    stopSign3 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
+    stopSign3.name = @"stop3";
+    stopSign3.position = CGPointMake(3075,260);
+    stopSign3.zPosition = 40;
+    stopSign3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    stopSign3.physicsBody.dynamic = YES;
+    stopSign3.physicsBody.affectedByGravity = NO;
+    stopSign3.physicsBody.allowsRotation = NO;
+//    [stopSign runAction:[SKAction moveTo:CGPointMake(750, 260) duration:7] completion:^{
+//     sign = 1;
+//     }];
+//     [stopSign runAction:[SKAction moveTo:CGPointMake(50, 260) duration:7] completion:^{
+//     sign = 0;
+//     }];
+    [_gameLayer addChild:stopSign3];
+    
+}
+*/
 
 -(void)initScrollingForeground{ //Scrolling tracks function
     SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"]; //change runway to train tracks
@@ -115,6 +199,7 @@
     retryButton.color = [SKColor yellowColor];
     retryButton.position = CGPointMake(self.size.width/2, self.size.height/2);
     retryButton.name = @"level5";
+    retryButton.zPosition=265;
     [self addChild:retryButton];
 }
 
@@ -146,38 +231,25 @@
 }
 
 
--(void)stop{
-    stop = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
-    stop.name = @"stop";
-    stop.position = CGPointMake(1075,260);
-    stop.zPosition = 40;
-    stop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
-    stop.physicsBody.dynamic = YES;
-    stop.physicsBody.affectedByGravity = NO;
-    stop.physicsBody.allowsRotation = NO;
-    [_gameLayer addChild:stop];
-}
-
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name  isEqual: @"stop"]) {
-        [self stopTrain];
-    }
-    else if([node.name  isEqual: @"level5"]){ //display level 5, pick new node to click on...
+        click = 1; //train is stopped
+        self.physicsWorld.speed = 0.0;
+        speed = 0;
+      //  self.scene.view.paused = YES;
         [self nextLevel];
     }
-    /* transition to next level
+    // transition to next level
     else if ([node.name isEqualToString:@"level5"]) { //transition to level 5
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
+        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size]; //change to 5
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
-    */
 }
 
 
