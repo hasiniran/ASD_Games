@@ -6,6 +6,8 @@
 //  Maintained by Charles Shinaver since 3/30/15
 //  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
 //
+//  Top bird keeps getting cut off.  Must be fixed
+//
 
 #import "SecondLevel.h"
 #import "ThirdLevel.h"
@@ -262,13 +264,6 @@
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
     
 }
-
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
-}
-
 
 
 -(void)initalizingScrollingBackground

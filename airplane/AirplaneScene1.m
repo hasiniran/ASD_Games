@@ -339,7 +339,7 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
         flashLabel.position = CGPointMake(screenWidth/2, screenHeight/2);
         flashLabel.fontSize = 30;
         flashLabel.fontColor = [SKColor blueColor];
-        flashLabel.text = @"Level ! Completed !!";
+        flashLabel.text = @"Level 1 Completed !!";
         flashLabel.alpha =0;
         flashLabel.zPosition = 100;
         [self addChild:flashLabel];
