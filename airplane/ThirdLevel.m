@@ -1,153 +1,57 @@
 //
-//  SecondLevel.m
+//  ThirdLevel.m
 //  airplane
 //
-//  Created by Hasini Yatawatte on 1/26/15.
-//  Maintained by Charles Shinaver since 3/30/15
-//  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
+//  Created by Charles Shinaver on 3/31/15.
+//  Copyright (c) 2015 Charles Shinaver. All rights reserved.
 //
 
-#import "SecondLevel.h"
 #import "ThirdLevel.h"
 
-@implementation SecondLevel {
-    int birdsDisplayed;
+@implementation ThirdLevel {
     int questionDisplayed;
-    int correctAnswers;
-    NSArray *birds;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
-    SKLabelNode *question;
     CGSize screenSize;
 }
-/*
- * TODO 3 repetitions of birds coming in, random number each time
- * TODO Must get 3 in a row correct to move to next scene. Max of 5 tries
- * TODO Birds fly away after 3 questions asked
-*/
 
 -(id)initWithSize:(CGSize)size {
     
     
     if (self = [super initWithSize:size]) {
+        
+        
+        // Set screenSize for ease
+        screenSize = [[UIScreen mainScreen] bounds].size;
 
         [self initalizingScrollingBackground];
-        [self addChild:question];
-        [self addChild:correctButton];
-        [self addChild:incorrectButton];
-        for (SKNode *bird in birds)
-        {
-            [self addChild:bird];
-            // Set bird initial position
-            bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
-        }
         [self addShip];
+        
+        // Set question displayed
+        questionDisplayed = 0;
     }
     
     return self;
 }
 
--(void)updateButtonsToMatchNumberOfBirds
-{
-    correctButton.text = [NSString stringWithFormat:@"%i birds", birdsDisplayed];
-    incorrectButton.text = [NSString stringWithFormat:@"Not %i birds", birdsDisplayed];
-}
-
 -(void)displayButtons
 {
-    /*
-     * Displays buttons
-    */
-    correctButton.hidden = NO;
-    incorrectButton.hidden = NO;
-}
+    // Create button
+    correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    correctButton.text = @"6 birds";
+    correctButton.name = @"correctButton";
+    correctButton.fontSize = 40;
+    correctButton.fontColor = [SKColor blueColor];
+    correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
 
--(void)hideButtons
-{
-    /*
-     * Hides buttons
-    */
-    correctButton.hidden = YES;
-    incorrectButton.hidden = YES;
-}
-
--(void)birdsFlyIn
-{
-    /*
-     * Birds fly in from side
-     * The number of birds will be random. 
-     * As
-    */
-
-    // Set bird positions
-    int numBirds = arc4random_uniform(birds.count + 1);
-    if (!numBirds)
-        numBirds = 1;
-    double maxHeight = screenSize.height*0.85;
-    double dh = maxHeight * 1/8;
-    double currentHeight = maxHeight;
-    double minWidth = screenSize.width * .5;
-    double dw = minWidth / numBirds;
-    double currentWidth = minWidth;
-    
-    for (int i = 0; i < numBirds; i++)
-    {
-        SKSpriteNode *bird = birds[i];
-        [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
-            birdsDisplayed++;
-            if (birdsDisplayed == numBirds)
-            {
-                [self askQuestion];
-            }
-        }];
-        currentHeight -= dh;
-        currentWidth += dw;
-    }
-}
-
--(void)birdsFlyOut
-{
-    /*
-     * Birds fly out
-    */
-    
-    int numBirds = birdsDisplayed;
-
-    // Set bird positions
-    for (int i = 0; i < numBirds; i++)
-    {
-        SKSpriteNode *bird = birds[i];
-        [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
-            birdsDisplayed--;
-            if (birdsDisplayed == 0)
-            {
-            }
-        }];
-    };
-
-}
-
--(void)birdsFlyOutAndFlyBackIn
-{
-    /*
-     * Birds fly out
-    */
-    
-
-    int numBirds = birdsDisplayed;
-
-    // Set bird positions
-    for (int i = 0; i < numBirds; i++)
-    {
-        SKSpriteNode *bird = birds[i];
-        [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
-            birdsDisplayed--;
-            if (birdsDisplayed == 0)
-            {
-                [self birdsFlyIn];
-            }
-        }];
-    };
+    incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    incorrectButton.text = @"Not 6 birds";
+    incorrectButton.name = @"incorrectButton";
+    incorrectButton.fontSize = 40;
+    incorrectButton.fontColor = [SKColor blueColor];
+    incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
+    [self addChild:correctButton];
+    [self addChild:incorrectButton];
 }
 
 -(void)askQuestion
@@ -156,54 +60,51 @@
      Choose question to be displayed
     */
     
+    SKLabelNode *question;
+    
     // Set text of question
     switch (questionDisplayed) {
         case 0:
             // Create text label
+            question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            question.name = @"numberOfBirdsQuestion";
+            question.fontSize = 50;
+            question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
             question.text = @"How many birds are in the air?";
-            question.hidden = NO;
+            [self addChild:question];
             break;
         case 1:
+            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
             question.text = @"Are you sure? How many birds are in the air?";
-            question.hidden = NO;
             break;
         case 2:
-            question.text = [NSString stringWithFormat:@"Can you say %i", birdsDisplayed];
-            question.hidden = NO;
+            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
+            question.text = @"Can you say six?";
             break;
         case 3:
             [self moveToNextScene];
             break;
         default:
+            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
             question.text = @"How many birds are in the air?";
     }
     
-    // Set text of answers
-    [self updateButtonsToMatchNumberOfBirds];
-    [self displayButtons];
-    
     // Display question and increment
     questionDisplayed++;
-}
-
--(void)hideQuestion
-{
 }
 
 -(void)moveToNextScene
 {
     // Move to next scene
     SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    SecondLevel * scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
+    ThirdLevel * scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [self.view presentScene:scene transition: reveal];
 }
 
-
 -(void)addShip
 {
-
-    self.ship= [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
+    self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [self.ship setScale:0.5];
     self.ship.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
     
@@ -215,27 +116,18 @@
     [self addChild:self.ship ];
     
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
-  
-}
-
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
 }
 
 
 -(void)initalizingScrollingBackground
 {
-    
-    
     // Create ground
     
     seaTexture = [SKTexture textureWithImageNamed:@"Sea.png"];
     self.sea = [SKSpriteNode spriteNodeWithTexture:seaTexture];
     seaTexture.filteringMode = SKTextureFilteringNearest;
+      // Create ground
     
-    // Create sea texture
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:seaTexture];
         bg.position = CGPointMake(i * bg.size.width, 0);
@@ -243,11 +135,12 @@
         bg.name = @"sea";
         [self addChild:bg];
     }
-
+    
     waveTexture = [SKTexture textureWithImageNamed:@"Waves.png"];
     self.wave = [SKSpriteNode spriteNodeWithTexture:waveTexture];
     waveTexture.filteringMode = SKTextureFilteringNearest;
     // Create ground
+    
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:waveTexture];
         bg.position = CGPointMake(i * bg.size.width, 0);
@@ -259,6 +152,7 @@
     // Create skyline
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky-3.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
+
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
         [bg setScale:2];
@@ -270,53 +164,74 @@
     }
     
     // Create ground physics container
+    
     SKNode* dummy = [SKNode node];
     dummy.position = CGPointMake(0, 0);
     dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, seaTexture.size.height/2 -20)];
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
     [self moveBgContinuously];
+    
+    
+    
 }
 
-
+-(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval  {
+    SKAction* action = [SKAction moveByX:-width*1 y:0 duration: timeInterval* width*2];
+    return action;
+}
 
 
 -(SKAction*)moveBgContinuously
 {
-    __block SKAction* moveForever;
+    
+    __block SKAction* moveRunwayForever;
+    __block SKAction* moveSkyForever;
+    __block SKSpriteNode *sky;
     __block SKSpriteNode *waves;
     SKAction* moveBackground;
     
     [self enumerateChildNodesWithName:@"waves" usingBlock: ^(SKNode *node, BOOL *stop)
      {
          waves = (SKSpriteNode *)node;
-         SKAction* move = [Actions moveAction:waves.size.width: 0.01];
-         SKAction* reset = [Actions moveAction:-waves.size.width: 0.0];
-         moveForever = [SKAction repeatActionForever:[SKAction sequence:@[move,reset]]];
+         SKAction* moveRunway = [self moveAction:waves.size.width: 0.01];
+         SKAction* resetRunway = [self moveAction:-waves.size.width: 0.0];
+         moveRunwayForever = [SKAction repeatActionForever:[SKAction sequence:@[moveRunway,resetRunway]]];
          
          
          if( !waves.hasActions){
-             [waves runAction: moveForever];
+             [waves runAction: moveRunwayForever];
          }
      }];
-
+    
+    
+    
     if(!waves.hasActions) {
-       [self runAction:moveBackground];
+        [self runAction:moveBackground];
         
     }
+    
     return moveBackground;
+    
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"correctButton"])
+    {
+        [self moveToNextScene];
+    }
+    else if ([node.name isEqualToString:@"incorrectButton"])
+    {
+        [self askQuestion];
+    }
+    
 }
-
-
-
-
-
-
-
 
 @end

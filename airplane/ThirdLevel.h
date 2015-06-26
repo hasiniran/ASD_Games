@@ -1,16 +1,13 @@
 //
-//  SecondLevel.h
-//  airplane
+//  ThirdLevel.h //  airplane
 //
-//  Created by Hasini Yatawatte on 1/26/15.
-//  Maintained by Charles Shinaver since 3/30/15
-//  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
+//  Created by Charles Shinaver on 3/31/15.
+//  Copyright (c) 2015 Charles Shinaver. All rights reserved.
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Actions.h"
 
-@interface SecondLevel : SKScene{
+@interface ThirdLevel : SKScene{
     SKAction *actionMoveDown;
     CGRect screenRect;
     CGFloat screenHeight;
@@ -29,5 +26,4 @@
 @property (nonatomic, strong)    SKSpriteNode *wave ;
 
 -(SKAction*)moveBgContinuously;
-
 @end
