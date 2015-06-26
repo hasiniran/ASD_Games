@@ -30,6 +30,44 @@
     
     
     if (self = [super initWithSize:size]) {
+        
+        // Set screenSize for ease
+        screenSize = [[UIScreen mainScreen] bounds].size;
+
+        // Create bird sprites
+        SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
+        SKSpriteNode *lightPinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBird.png"];
+        SKSpriteNode *orangeBird = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBird.png"];
+        SKSpriteNode *pinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"PinkBird.png"];
+        SKSpriteNode *purpleBird = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBird.png"];
+        SKSpriteNode *yellowBird = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBird.png"];
+        birds = [NSArray arrayWithObjects:blueBird, lightPinkBird, orangeBird, pinkBird, purpleBird, yellowBird, nil];
+        for (SKSpriteNode *bird in birds)
+        {
+            bird.name = @"bird";
+        }
+
+        // Create button
+        correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        correctButton.name = @"correctButton";
+        correctButton.fontSize = 40;
+        correctButton.fontColor = [SKColor blueColor];
+        correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
+        correctButton.hidden = YES;
+
+        incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        incorrectButton.name = @"incorrectButton";
+        incorrectButton.fontSize = 40;
+        incorrectButton.fontColor = [SKColor blueColor];
+        incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
+        incorrectButton.hidden = YES;
+        
+        // Create question
+        question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+        question.fontSize = 50;
+        question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
+        question.name = @"numberOfBirdsQuestion";
+        question.hidden = YES;
 
         [self initalizingScrollingBackground];
         [self addChild:question];
@@ -42,6 +80,13 @@
             bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
         }
         [self addShip];
+        [self birdsFlyIn];
+        
+        // Set birds displayed
+        birdsDisplayed = 0;
+        // Set question displayed
+        questionDisplayed = 0;
+        correctAnswers = 0;
     }
     
     return self;
@@ -215,7 +260,7 @@
     [self addChild:self.ship ];
     
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
-  
+    
 }
 
 
@@ -223,6 +268,7 @@
     /* Called when a touch begins */
     
 }
+
 
 
 -(void)initalizingScrollingBackground
@@ -255,10 +301,12 @@
         bg.name = @"waves";
         [self addChild:bg];
     }
-    
+
     // Create skyline
+    
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky-3.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
+    
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
         [bg setScale:2];
@@ -276,6 +324,7 @@
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
     [self moveBgContinuously];
+    
 }
 
 
@@ -299,7 +348,7 @@
              [waves runAction: moveForever];
          }
      }];
-
+    
     if(!waves.hasActions) {
        [self runAction:moveBackground];
         
@@ -310,6 +359,31 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"correctButton"])
+    {
+        questionDisplayed = 0;
+        correctAnswers++;
+        
+        if (correctAnswers == 3)
+        {
+            [self moveToNextScene];
+            question.hidden = YES;
+        }
+        else
+        {
+            question.hidden = YES;
+            [self hideButtons];
+            [self birdsFlyOutAndFlyBackIn];
+        }
+    }
+    else if ([node.name isEqualToString:@"incorrectButton"])
+    {
+        [self askQuestion];
+    }
 }
 
 

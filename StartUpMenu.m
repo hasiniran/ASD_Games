@@ -64,15 +64,27 @@ SKScene * scene;
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [self.view presentScene:scene transition: reveal];
     
-    //if train button is pressed, Go to train game
-    if ([trainNode.name isEqualToString:@"Train"]) {
-        
-        SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
-        Level1 *scene= [Level1 sceneWithSize:self.view.bounds.size]; //changed level1 to level 4 to test
-        
-        scene.scaleMode = SKSceneScaleModeAspectFill;
-        [self.view presentScene:scene transition: reveal];
-    }
+    /* ######## */
+    //if ([node.name isEqualToString:@"Airplane"]) {
+    //    
+    //    SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
+    //    
+    //    AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];    //commented out in order to test Train game
+    //    scene.scaleMode = SKSceneScaleModeAspectFill;
+    //    [self.view presentScene:scene transition: reveal];
+    //    
+    //}
+    //
+    //
+    ////if train button is pressed, Go to train game
+    //if ([trainNode.name isEqualToString:@"Train"]) {
+    //    
+    //    SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
+    //    Level5 *scene= [Level5 sceneWithSize:self.view.bounds.size];
+    //    
+    //    scene.scaleMode = SKSceneScaleModeAspectFill;
+    //    [self.view presentScene:scene transition: reveal];
+    //}
     
     
 }

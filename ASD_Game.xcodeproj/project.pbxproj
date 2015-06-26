@@ -503,6 +503,7 @@
 				E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
+				E95017741ABFCF6000F7359E /* YellowBird.png in Resources */,
 				074407CE1AE5790E00389890 /* yellowHead.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
