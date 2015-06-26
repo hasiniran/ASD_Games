@@ -13,7 +13,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Level4.h"
-#import "Level1.h"
+#import "Level5.h"
 
 
 @implementation Level4{
@@ -256,14 +256,14 @@
     //transition to next level
     else if ([node.name isEqualToString:@"level5"]) { //transition to level 5
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
     
     if ([node.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        Level1 *scene = [Level1 sceneWithSize:self.view.bounds.size];
+        Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }

@@ -9,7 +9,15 @@
 /* Begin PBXBuildFile section */
 		0116E4E81AC0B9DD00832B2F /* Level4.m in Sources */ = {isa = PBXBuildFile; fileRef = 0116E4E71AC0B9DD00832B2F /* Level4.m */; };
 		016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 016A9CAB1AC12CC500A87406 /* StopSign.png */; };
-		072A47CC1ABFE17B00353FEC /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		01A25E111B3DA12A00D68AA9 /* Rms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A25E101B3DA12A00D68AA9 /* Rms.framework */; };
+		01A25E131B3DC11200D68AA9 /* Horse.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A25E121B3DC11200D68AA9 /* Horse.png */; };
+		01A25E151B3DC11B00D68AA9 /* Pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A25E141B3DC11B00D68AA9 /* Pig.png */; };
+		01D8485D1B3AF991008603B6 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01D848591B3AF991008603B6 /* AcousticModelEnglish.bundle */; };
+		01D8485E1B3AF991008603B6 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01D8485A1B3AF991008603B6 /* AcousticModelSpanish.bundle */; };
+		01D8485F1B3AF991008603B6 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D8485B1B3AF991008603B6 /* OpenEars.framework */; };
+		01D848601B3AF991008603B6 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D8485C1B3AF991008603B6 /* Slt.framework */; };
+		01D848631B3AF9B2008603B6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D848611B3AF9B2008603B6 /* AudioToolbox.framework */; };
+		01D848641B3AF9B2008603B6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D848621B3AF9B2008603B6 /* AVFoundation.framework */; };
 		073371781A95A6250024872B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371771A95A6250024872B /* Train.png */; };
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
 		0733717F1A95B1D30024872B /* Level2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0733717E1A95B1D30024872B /* Level2.m */; };
@@ -24,9 +32,6 @@
 		076CF6021A9D2049001839A2 /* Clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF6011A9D2049001839A2 /* Clouds.png */; };
 		076CF6041A9D2076001839A2 /* Sky2.png in Resources */ = {isa = PBXBuildFile; fileRef = 076CF6031A9D2076001839A2 /* Sky2.png */; };
 		078A114A1A82D77C00956F41 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A11491A82D77C00956F41 /* Level1.m */; };
-		07AF73F51AC1EC2A0092603C /* Horse Whinny.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 07AF73F41AC1EC2A0092603C /* Horse Whinny.mp3 */; };
-		07C4F2821AD248E500782860 /* Horse.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C4F2811AD248E500782860 /* Horse.png */; };
-		07C4F2841AD24A0200782860 /* Pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C4F2831AD24A0200782860 /* Pig.png */; };
 		07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07CCCB5D1A9FD39C00C62E25 /* BlueBoy.png */; };
 		07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF121AA115400076A177 /* PurpleBoy.png */; };
 		07D7AF151AA115470076A177 /* YellowBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D7AF141AA115470076A177 /* YellowBoy.png */; };
@@ -82,6 +87,15 @@
 		0116E4E61AC0B96B00832B2F /* Level4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level4.h; sourceTree = "<group>"; };
 		0116E4E71AC0B9DD00832B2F /* Level4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level4.m; sourceTree = "<group>"; };
 		016A9CAB1AC12CC500A87406 /* StopSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StopSign.png; sourceTree = "<group>"; };
+		01A25E101B3DA12A00D68AA9 /* Rms.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Rms.framework; sourceTree = "<group>"; };
+		01A25E121B3DC11200D68AA9 /* Horse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Horse.png; sourceTree = "<group>"; };
+		01A25E141B3DC11B00D68AA9 /* Pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pig.png; sourceTree = "<group>"; };
+		01D848591B3AF991008603B6 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
+		01D8485A1B3AF991008603B6 /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
+		01D8485B1B3AF991008603B6 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		01D8485C1B3AF991008603B6 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		01D848611B3AF9B2008603B6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		01D848621B3AF9B2008603B6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		073371771A95A6250024872B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
 		073371791A95A6340024872B /* Rail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rail.png; sourceTree = "<group>"; };
 		0733717D1A95B1D30024872B /* Level2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
@@ -99,9 +113,6 @@
 		076CF6031A9D2076001839A2 /* Sky2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sky2.png; sourceTree = "<group>"; };
 		078A11481A82D77C00956F41 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		078A11491A82D77C00956F41 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
-		07AF73F41AC1EC2A0092603C /* Horse Whinny.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Horse Whinny.mp3"; sourceTree = "<group>"; };
-		07C4F2811AD248E500782860 /* Horse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Horse.png; sourceTree = "<group>"; };
-		07C4F2831AD24A0200782860 /* Pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pig.png; sourceTree = "<group>"; };
 		07CCCB5D1A9FD39C00C62E25 /* BlueBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBoy.png; sourceTree = "<group>"; };
 		07D7AF121AA115400076A177 /* PurpleBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleBoy.png; sourceTree = "<group>"; };
 		07D7AF141AA115470076A177 /* YellowBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowBoy.png; sourceTree = "<group>"; };
@@ -160,11 +171,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				072A47CC1ABFE17B00353FEC /* (null) in Frameworks */,
+				01D848631B3AF9B2008603B6 /* AudioToolbox.framework in Frameworks */,
+				01A25E111B3DA12A00D68AA9 /* Rms.framework in Frameworks */,
+				01D848641B3AF9B2008603B6 /* AVFoundation.framework in Frameworks */,
+				01D848601B3AF991008603B6 /* Slt.framework in Frameworks */,
 				2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */,
 				2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */,
 				2552AC4619F8160900EE77C7 /* SpriteKit.framework in Frameworks */,
 				2552AC4019F8160900EE77C7 /* Foundation.framework in Frameworks */,
+				01D8485F1B3AF991008603B6 /* OpenEars.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +196,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01D848581B3AF991008603B6 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				01A25E101B3DA12A00D68AA9 /* Rms.framework */,
+				01D848591B3AF991008603B6 /* AcousticModelEnglish.bundle */,
+				01D8485A1B3AF991008603B6 /* AcousticModelSpanish.bundle */,
+				01D8485B1B3AF991008603B6 /* OpenEars.framework */,
+				01D8485C1B3AF991008603B6 /* Slt.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		253F0B461A829F7900D691E6 /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +244,9 @@
 		2552AC3E19F8160900EE77C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01D848611B3AF9B2008603B6 /* AudioToolbox.framework */,
+				01D848621B3AF9B2008603B6 /* AVFoundation.framework */,
+				01D848581B3AF991008603B6 /* Framework */,
 				2552AC3F19F8160900EE77C7 /* Foundation.framework */,
 				2552AC4119F8160900EE77C7 /* CoreGraphics.framework */,
 				2552AC4319F8160900EE77C7 /* UIKit.framework */,
@@ -247,14 +277,13 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01A25E141B3DC11B00D68AA9 /* Pig.png */,
+				01A25E121B3DC11200D68AA9 /* Horse.png */,
 				076584C01AE995DA00F6FBD1 /* cow.mp3 */,
 				076584BE1AE995CB00F6FBD1 /* pig.mp3 */,
 				074407CD1AE5790E00389890 /* yellowHead.png */,
 				074407CB1AE575BB00389890 /* blueHead.png */,
 				016A9CAB1AC12CC500A87406 /* StopSign.png */,
-				07AF73F41AC1EC2A0092603C /* Horse Whinny.mp3 */,
-				07C4F2831AD24A0200782860 /* Pig.png */,
-				07C4F2811AD248E500782860 /* Horse.png */,
 				07F9553D1AD5ABB00080668A /* arrow.png */,
 				07F8D6CB1ABE86C300F97244 /* BarnLarge.png */,
 				07ED6EAD1AB9FA5C007F0E41 /* Station2.png */,
@@ -418,29 +447,30 @@
 				076584BF1AE995CB00F6FBD1 /* pig.mp3 in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
 				07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */,
+				01A25E151B3DC11B00D68AA9 /* Pig.png in Resources */,
 				2521EC051A76335D00E844F1 /* Waves.png in Resources */,
 				07F8D6CC1ABE86C300F97244 /* BarnLarge.png in Resources */,
 				07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */,
+				01D8485D1B3AF991008603B6 /* AcousticModelEnglish.bundle in Resources */,
 				076CF6021A9D2049001839A2 /* Clouds.png in Resources */,
 				07D7AF171AA11B2C0076A177 /* purpHead.png in Resources */,
 				2525D8A51A355719009816BB /* Runway.png in Resources */,
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
 				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
-				07C4F2841AD24A0200782860 /* Pig.png in Resources */,
+				01D8485E1B3AF991008603B6 /* AcousticModelSpanish.bundle in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
 				076CF6041A9D2076001839A2 /* Sky2.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
-				07C4F2821AD248E500782860 /* Horse.png in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
 				016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */,
 				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
+				01A25E131B3DC11200D68AA9 /* Horse.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				07F9553E1AD5ABB00080668A /* arrow.png in Resources */,
 				074407CC1AE575BB00389890 /* blueHead.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
-				07AF73F51AC1EC2A0092603C /* Horse Whinny.mp3 in Resources */,
 				076584C11AE995DA00F6FBD1 /* cow.mp3 in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
@@ -606,6 +636,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "airplane/airplane-Prefix.pch";
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
@@ -621,6 +655,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "airplane/airplane-Prefix.pch";
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
