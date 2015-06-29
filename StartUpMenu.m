@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "StartupMenu.h"
-#import "SecondLevel.h"
-
-
 
 @implementation StartupMenu
 

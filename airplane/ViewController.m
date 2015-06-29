@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "GameStartScene.h"
+//#import "GameStartScene.h"
 #import "AirplaneScene1.h"
 
 @implementation ViewController
@@ -16,9 +16,7 @@ SKScene * scene;
 
 - (void)viewDidLoad
 {
-
     SKView * skView = (SKView *)self.view;
-    
     if (!skView.scene) {
         skView.showsFPS = YES;
         skView.showsNodeCount = YES;
@@ -30,10 +28,6 @@ SKScene * scene;
         // Present the scene.
         [skView presentScene:scene];
     }
-    
-
-    
-
 }
 
 
@@ -100,9 +94,8 @@ SKScene * scene;
 //     NSLog(@"clicked !!!!");
 //}
 //
+
 - (IBAction)LaunchAirplaneGame:(id)sender {
-    
-    
     
     SKView * skView = (SKView *)self.view;
     
