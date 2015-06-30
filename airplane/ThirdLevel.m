@@ -107,9 +107,7 @@
     self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [self.ship setScale:0.5];
     self.ship.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
-    
-    
-    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];;
+    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];
     self.ship.physicsBody.dynamic = YES;
     self.ship.physicsBody.allowsRotation = NO;
     // self.ship.physicsBody.affectedByGravity = YES

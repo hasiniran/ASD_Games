@@ -40,17 +40,12 @@
         [background addChild:go];
 
         [self addChild:background];
-       
     }
-    
     return self;
 }
 
-
-
 -(void)addShip
 {
-
 
     self.ship= [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [self.ship setScale:0.5];
@@ -64,7 +59,6 @@
      [self addChild:self.ship ];
     
 
-    
     self.physicsWorld.gravity = CGVectorMake( 0.0, -0.5 );
     self.actionMoveUp = [SKAction moveByX:0 y:30 duration:.2];
     actionMoveDown = [SKAction moveByX:0 y:-30 duration:.2];

@@ -16,20 +16,20 @@
     int birdsDisplayed;
     int questionDisplayed;
     int correctAnswers;
-    NSArray *birds;
+    NSArray *birds, *balloons;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
     SKLabelNode *question;
     CGSize screenSize;
 }
 /*
- * TODO 3 repetitions of birds coming in, random number each time
+ * TODO 3 repetitions of objects coming in, random number each time
+        first birds, then balloons, then clouds
  * TODO Must get 3 in a row correct to move to next scene. Max of 5 tries
- * TODO Birds fly away after 3 questions asked
+ * TODO Objects fly away after 3 questions asked
 */
 
 -(id)initWithSize:(CGSize)size {
-    
     
     if (self = [super initWithSize:size]) {
         
@@ -47,6 +47,19 @@
         for (SKSpriteNode *bird in birds)
         {
             bird.name = @"bird";
+        }
+        
+        //Create balloon sprites
+        SKSpriteNode *blueBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBalloon.png"];
+        SKSpriteNode *lightPinkBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBalloon.png"];
+        SKSpriteNode *orangeBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBalloon.png"];
+        SKSpriteNode *pinkBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"PinkBalloon.png"];
+        SKSpriteNode *purpleBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBalloon.png"];
+        SKSpriteNode *yellowBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBalloon.png"];
+        balloons = [NSArray arrayWithObjects:blueBalloon, lightPinkBalloon, orangeBalloon, pinkBalloon, purpleBalloon, yellowBalloon, nil];
+        for (SKSpriteNode *balloon in balloons)
+        {
+            balloon.name = @"balloon";
         }
 
         // Create button
@@ -203,6 +216,7 @@
      Choose question to be displayed
     */
     
+  
     // Set text of question
     switch (questionDisplayed) {
         case 0:
@@ -218,19 +232,23 @@
             question.text = [NSString stringWithFormat:@"Can you say %i", birdsDisplayed];
             question.hidden = NO;
             break;
-        case 3:
-            [self moveToNextScene];
-            break;
+      /*  case 3:
+            question.hidden = YES;
+            questionDisplayed = 0;
+            [self hideButtons];
+            [self birdsFlyOutAndFlyBackIn];
+            break;*/
         default:
             question.text = @"How many birds are in the air?";
     }
     
+    // Display question and increment
+    questionDisplayed++;
+    
     // Set text of answers
     [self updateButtonsToMatchNumberOfBirds];
     [self displayButtons];
-    
-    // Display question and increment
-    questionDisplayed++;
+
 }
 
 -(void)hideQuestion
@@ -241,37 +259,30 @@
 {
     // Move to next scene
     SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    SecondLevel * scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
+    ThirdLevel *scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
+    exit(0);
     [self.view presentScene:scene transition: reveal];
 }
 
-
 -(void)addShip
 {
-
     self.ship= [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [self.ship setScale:0.5];
     self.ship.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
     
-    
-    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];;
+    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];
     self.ship.physicsBody.dynamic = YES;
     self.ship.physicsBody.allowsRotation = NO;
     // self.ship.physicsBody.affectedByGravity = YES
     [self addChild:self.ship ];
     
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
-    
 }
-
 
 -(void)initalizingScrollingBackground
 {
-    
-    
     // Create ground
-    
     seaTexture = [SKTexture textureWithImageNamed:@"Sea.png"];
     self.sea = [SKSpriteNode spriteNodeWithTexture:seaTexture];
     seaTexture.filteringMode = SKTextureFilteringNearest;
@@ -322,9 +333,6 @@
     
 }
 
-
-
-
 -(SKAction*)moveBgContinuously
 {
     __block SKAction* moveForever;
@@ -363,6 +371,9 @@
         questionDisplayed = 0;
         correctAnswers++;
         
+        /*switch statement that chooses which method to use
+         *
+        */
         if (correctAnswers == 3)
         {
             [self moveToNextScene];
@@ -372,12 +383,31 @@
         {
             question.hidden = YES;
             [self hideButtons];
-            [self birdsFlyOutAndFlyBackIn];
+            switch (correctAnswers){
+                case 0:
+                    [self birdsFlyOutAndFlyBackIn];
+                    break;
+                case 1:
+                    [self birdsFlyOutAndFlyBackIn];
+                    break;
+                case 2:
+                    [self birdsFlyOutAndFlyBackIn];
+                    break;
+            }
+            
+          //  [self birdsFlyOutAndFlyBackIn];
         }
     }
     else if ([node.name isEqualToString:@"incorrectButton"])
     {
-        [self askQuestion];
+        if(questionDisplayed < 3){
+            [self askQuestion];
+        }
+        else{
+            question.hidden = YES;
+            [self hideButtons];
+            [self birdsFlyOutAndFlyBackIn];
+        }
     }
 }
 

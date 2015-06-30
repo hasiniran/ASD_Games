@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-//#import "GameStartScene.h"
-#import "AirplaneScene1.h"
+//#import "GameStartScene.h"  //not needed, unknown functionality
+//#import "AirplaneScene1.h" //not needed either, imported in ViewController.h from StartUpMenu.h
 
 @implementation ViewController
 

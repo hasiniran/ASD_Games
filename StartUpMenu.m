@@ -47,13 +47,12 @@ SKScene * scene;
     
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
-    
+    SKNode *planeNode = [self nodeAtPoint:location];
     SKNode *trainNode = [self nodeAtPoint:location];
     
     //launch the first scene of the airplane game if the Airplane button is touched
    
-    /* For demo */
+    /* For demo
     SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
     
     SecondLevel *scene = [SecondLevel sceneWithSize:self.view.bounds.size];
@@ -61,12 +60,12 @@ SKScene * scene;
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [self.view presentScene:scene transition: reveal];
     
-    /* ######## */
-    if ([node.name isEqualToString:@"Airplane"]) {
+     ######## */
+    if ([planeNode.name isEqualToString:@"Airplane"]) {
         
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
         
-        AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];    //commented out in order to test Train game
+        AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         
