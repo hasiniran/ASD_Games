@@ -71,12 +71,12 @@
 		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
 		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
 		25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */; };
-		291A82A11B4248E900E7B9C4 /* BlueBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 291A829B1B4248E900E7B9C4 /* BlueBalloon.png */; };
-		291A82A21B4248E900E7B9C4 /* LightPinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 291A829C1B4248E900E7B9C4 /* LightPinkBalloon.png */; };
-		291A82A31B4248E900E7B9C4 /* OrangeBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 291A829D1B4248E900E7B9C4 /* OrangeBalloon.png */; };
-		291A82A41B4248E900E7B9C4 /* PinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 291A829E1B4248E900E7B9C4 /* PinkBalloon.png */; };
-		291A82A51B4248E900E7B9C4 /* PurpleBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 291A829F1B4248E900E7B9C4 /* PurpleBalloon.png */; };
-		291A82A61B4248E900E7B9C4 /* YellowBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 291A82A01B4248E900E7B9C4 /* YellowBalloon.png */; };
+		A5D04AEB1B4340C4001E2A48 /* BlueBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */; };
+		A5D04AEC1B4340C4001E2A48 /* LightPinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */; };
+		A5D04AED1B4340C4001E2A48 /* OrangeBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */; };
+		A5D04AEE1B4340C4001E2A48 /* PinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE81B4340C4001E2A48 /* PinkBalloon.png */; };
+		A5D04AEF1B4340C4001E2A48 /* PurpleBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */; };
+		A5D04AF01B4340C4001E2A48 /* YellowBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */; };
 		E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E95017691ABFCF6000F7359E /* BlueBird.png */; };
 		E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176A1ABFCF6000F7359E /* LightPinkBird.png */; };
 		E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176B1ABFCF6000F7359E /* OrangeBird.png */; };
@@ -177,12 +177,12 @@
 		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
 		25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpMenu.m; sourceTree = "<group>"; };
 		25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupMenu.h; sourceTree = "<group>"; };
-		291A829B1B4248E900E7B9C4 /* BlueBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueBalloon.png; path = "../../Downloads/documents-export-2015-06-29/BlueBalloon.png"; sourceTree = "<group>"; };
-		291A829C1B4248E900E7B9C4 /* LightPinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightPinkBalloon.png; path = "../../Downloads/documents-export-2015-06-29/LightPinkBalloon.png"; sourceTree = "<group>"; };
-		291A829D1B4248E900E7B9C4 /* OrangeBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBalloon.png; path = "../../Downloads/documents-export-2015-06-29/OrangeBalloon.png"; sourceTree = "<group>"; };
-		291A829E1B4248E900E7B9C4 /* PinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PinkBalloon.png; path = "../../Downloads/documents-export-2015-06-29/PinkBalloon.png"; sourceTree = "<group>"; };
-		291A829F1B4248E900E7B9C4 /* PurpleBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBalloon.png; path = "../../Downloads/documents-export-2015-06-29/PurpleBalloon.png"; sourceTree = "<group>"; };
-		291A82A01B4248E900E7B9C4 /* YellowBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBalloon.png; path = "../../Downloads/documents-export-2015-06-29/YellowBalloon.png"; sourceTree = "<group>"; };
+		A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueBalloon.png; path = ../BlueBalloon.png; sourceTree = "<group>"; };
+		A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightPinkBalloon.png; path = ../LightPinkBalloon.png; sourceTree = "<group>"; };
+		A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBalloon.png; path = ../OrangeBalloon.png; sourceTree = "<group>"; };
+		A5D04AE81B4340C4001E2A48 /* PinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PinkBalloon.png; path = ../PinkBalloon.png; sourceTree = "<group>"; };
+		A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBalloon.png; path = ../PurpleBalloon.png; sourceTree = "<group>"; };
+		A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBalloon.png; path = ../YellowBalloon.png; sourceTree = "<group>"; };
 		E95017691ABFCF6000F7359E /* BlueBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBird.png; sourceTree = "<group>"; };
 		E950176A1ABFCF6000F7359E /* LightPinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPinkBird.png; sourceTree = "<group>"; };
 		E950176B1ABFCF6000F7359E /* OrangeBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBird.png; sourceTree = "<group>"; };
@@ -293,12 +293,12 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				291A829B1B4248E900E7B9C4 /* BlueBalloon.png */,
-				291A829C1B4248E900E7B9C4 /* LightPinkBalloon.png */,
-				291A829D1B4248E900E7B9C4 /* OrangeBalloon.png */,
-				291A829E1B4248E900E7B9C4 /* PinkBalloon.png */,
-				291A829F1B4248E900E7B9C4 /* PurpleBalloon.png */,
-				291A82A01B4248E900E7B9C4 /* YellowBalloon.png */,
+				A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */,
+				A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */,
+				A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */,
+				A5D04AE81B4340C4001E2A48 /* PinkBalloon.png */,
+				A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */,
+				A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */,
 				01A25E141B3DC11B00D68AA9 /* Pig.png */,
 				01A25E121B3DC11200D68AA9 /* Horse.png */,
 				076584C01AE995DA00F6FBD1 /* cow.mp3 */,
@@ -475,11 +475,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				291A82A21B4248E900E7B9C4 /* LightPinkBalloon.png in Resources */,
 				073371781A95A6250024872B /* Train.png in Resources */,
-				291A82A11B4248E900E7B9C4 /* BlueBalloon.png in Resources */,
 				076CF5FE1A9D1FEA001839A2 /* Background.png in Resources */,
 				2525D8A71A3557F1009816BB /* Sky.png in Resources */,
+				A5D04AF01B4340C4001E2A48 /* YellowBalloon.png in Resources */,
 				076584BF1AE995CB00F6FBD1 /* pig.mp3 in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
 				07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */,
@@ -496,17 +495,17 @@
 				01D8485E1B3AF991008603B6 /* AcousticModelSpanish.bundle in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
 				E95017721ABFCF6000F7359E /* PinkBird.png in Resources */,
+				A5D04AEF1B4340C4001E2A48 /* PurpleBalloon.png in Resources */,
 				E95017731ABFCF6000F7359E /* PurpleBird.png in Resources */,
-				291A82A31B4248E900E7B9C4 /* OrangeBalloon.png in Resources */,
-				291A82A61B4248E900E7B9C4 /* YellowBalloon.png in Resources */,
 				E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */,
+				A5D04AED1B4340C4001E2A48 /* OrangeBalloon.png in Resources */,
 				076CF6041A9D2076001839A2 /* Sky2.png in Resources */,
 				E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
-				291A82A51B4248E900E7B9C4 /* PurpleBalloon.png in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
+				A5D04AEC1B4340C4001E2A48 /* LightPinkBalloon.png in Resources */,
 				016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */,
 				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				01A25E131B3DC11200D68AA9 /* Horse.png in Resources */,
@@ -517,10 +516,11 @@
 				076584C11AE995DA00F6FBD1 /* cow.mp3 in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */,
+				A5D04AEB1B4340C4001E2A48 /* BlueBalloon.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
+				A5D04AEE1B4340C4001E2A48 /* PinkBalloon.png in Resources */,
 				E95017741ABFCF6000F7359E /* YellowBird.png in Resources */,
-				291A82A41B4248E900E7B9C4 /* PinkBalloon.png in Resources */,
 				074407CE1AE5790E00389890 /* yellowHead.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
