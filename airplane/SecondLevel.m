@@ -17,7 +17,7 @@
     int questionDisplayed;
     int correctAnswers;
     int level; //0 = birds, 1 = balloons, 2 = clouds
-    NSArray *birds, *balloons;
+    NSArray *birds, *balloons, *UFOs;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
     SKLabelNode *question;
@@ -43,7 +43,7 @@
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
         
-        objectNames = [NSMutableArray arrayWithObjects:@"birds", @"balloons", @"clouds", nil];
+        objectNames = [NSMutableArray arrayWithObjects:@"birds", @"balloons", @"UFOs", nil];
         
         // Create bird sprites
         SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
@@ -69,6 +69,19 @@
         for (SKSpriteNode *balloon in balloons)
         {
             balloon.name = @"balloon";
+        }
+        
+        //create UFO sprites
+        SKSpriteNode *UFO1 = [SKSpriteNode spriteNodeWithImageNamed:@"UFO.png"];
+        SKSpriteNode *UFO2 = [SKSpriteNode spriteNodeWithImageNamed:@"UFO.png"];
+        SKSpriteNode *UFO3 = [SKSpriteNode spriteNodeWithImageNamed:@"UFO.png"];
+        SKSpriteNode *UFO4 = [SKSpriteNode spriteNodeWithImageNamed:@"UFO.png"];
+        SKSpriteNode *UFO5 = [SKSpriteNode spriteNodeWithImageNamed:@"UFO.png"];
+        SKSpriteNode *UFO6 = [SKSpriteNode spriteNodeWithImageNamed:@"UFO.png"];
+        UFOs = [NSArray arrayWithObjects:UFO1, UFO2, UFO3, UFO4, UFO5, UFO6, nil];
+        for (SKSpriteNode *UFO in UFOs)
+        {
+            UFO.name = @"UFO";
         }
 
         // Create button
@@ -112,6 +125,13 @@
             balloon.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
         }
         
+        for (SKNode *UFO in UFOs)
+        {
+            [self addChild:UFO];
+            // Set balloon initial position
+            UFO.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
+        }
+        
         [self addShip];
         [self birdsFlyIn];
         
@@ -147,6 +167,62 @@
     */
     correctButton.hidden = YES;
     incorrectButton.hidden = YES;
+}
+
+-(void)ufosFlyIn
+{
+    /*
+     * UFOs fly in from side
+     * The number of UFOs will be random.
+     * As
+     */
+    
+    // Set ufo positions
+    int numUFOs = arc4random_uniform(UFOs.count + 1);
+    if (!numUFOs)
+        numUFOs = 1;
+    double maxHeight = screenSize.height*0.85;
+    double dh = maxHeight * 1/8;
+    double currentHeight = maxHeight;
+    double minWidth = screenSize.width * .5;
+    double dw = minWidth / numUFOs;
+    double currentWidth = minWidth;
+    
+    for (int i = 0; i < numUFOs; i++)
+    {
+        SKSpriteNode *UFO = UFOs[i];
+        [UFO runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
+            objectsDisplayed++;
+            if (objectsDisplayed == numUFOs)
+            {
+                [self askQuestion];
+            }
+        }];
+        currentHeight -= dh;
+        currentWidth += dw;
+    }
+}
+
+-(void)ufosFlyOutAndFlyBackIn
+{
+    /*
+     * UFOs fly out
+     */
+    
+    int numUFOs = objectsDisplayed;
+    
+    // Set UFO positions
+    for (int i = 0; i < numUFOs; i++)
+    {
+        SKSpriteNode *UFO = UFOs[i];
+        [UFO runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+            objectsDisplayed--;
+            if (objectsDisplayed == 0)
+            {
+                [self ufosFlyIn];
+            }
+        }];
+    };
 }
 
 -(void)balloonsFlyIn
@@ -478,7 +554,7 @@
                     break;
                 case 2:
                     [self balloonsFlyOut];
-                    [self birdsFlyIn];
+                    [self ufosFlyIn];
                     break;
             }
             
@@ -501,7 +577,7 @@
                     [self balloonsFlyOutAndFlyBackIn];
                     break;
                 case 2:
-                    exit(0);
+                    [self ufosFlyOutAndFlyBackIn];
                     break;
             }
         }
