@@ -65,7 +65,7 @@ SKScene * scene;
         
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
         
-        AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];
+        SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         

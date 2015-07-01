@@ -13,20 +13,27 @@
 #import "ThirdLevel.h"
 
 @implementation SecondLevel {
-    int birdsDisplayed;
+    int objectsDisplayed;
     int questionDisplayed;
     int correctAnswers;
+    int level; //0 = birds, 1 = balloons, 2 = clouds
     NSArray *birds, *balloons;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
     SKLabelNode *question;
     CGSize screenSize;
+    NSMutableArray *objectNames;
 }
 /*
  * TODO 3 repetitions of objects coming in, random number each time
         first birds, then balloons, then clouds
  * TODO Must get 3 in a row correct to move to next scene. Max of 5 tries
  * TODO Objects fly away after 3 questions asked
+ 
+ 
+ birds and balloons finished
+ 
+ clouds or some other object must be finished now
 */
 
 -(id)initWithSize:(CGSize)size {
@@ -35,7 +42,9 @@
         
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
-
+        
+        objectNames = [NSMutableArray arrayWithObjects:@"birds", @"balloons", @"clouds", nil];
+        
         // Create bird sprites
         SKSpriteNode *blueBird = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBird.png"];
         SKSpriteNode *lightPinkBird = [SKSpriteNode spriteNodeWithImageNamed:@"LightPinkBird.png"];
@@ -88,17 +97,26 @@
         [self addChild:question];
         [self addChild:correctButton];
         [self addChild:incorrectButton];
+        
         for (SKNode *bird in birds)
         {
             [self addChild:bird];
             // Set bird initial position
-            bird.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
+            bird.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
         }
+        
+        for (SKNode *balloon in balloons)
+        {
+            [self addChild:balloon];
+            // Set balloon initial position
+            balloon.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
+        }
+        
         [self addShip];
         [self birdsFlyIn];
         
-        // Set birds displayed
-        birdsDisplayed = 0;
+        // Set objectsDisplayed
+        objectsDisplayed = 0;
         // Set question displayed
         questionDisplayed = 0;
         correctAnswers = 0;
@@ -109,8 +127,8 @@
 
 -(void)updateButtonsToMatchNumberOfBirds
 {
-    correctButton.text = [NSString stringWithFormat:@"%i birds", birdsDisplayed];
-    incorrectButton.text = [NSString stringWithFormat:@"Not %i birds", birdsDisplayed];
+    correctButton.text = [NSString stringWithFormat:@"%i %@", objectsDisplayed, objectNames[correctAnswers]];
+    incorrectButton.text = [NSString stringWithFormat:@"Not %i %@", objectsDisplayed, objectNames[correctAnswers]];
 }
 
 -(void)displayButtons
@@ -129,6 +147,84 @@
     */
     correctButton.hidden = YES;
     incorrectButton.hidden = YES;
+}
+
+-(void)balloonsFlyIn
+{
+    /*
+     * Balloons fly in from side
+     * The number of balloons will be random.
+     * As
+     */
+    
+    // Set bird positions
+    int numBalloons = arc4random_uniform(balloons.count + 1);
+    if (!numBalloons)
+        numBalloons = 1;
+    double maxHeight = screenSize.height*0.85;
+    double dh = maxHeight * 1/8;
+    double currentHeight = maxHeight;
+    double minWidth = screenSize.width * .5;
+    double dw = minWidth / numBalloons;
+    double currentWidth = minWidth;
+    
+    for (int i = 0; i < numBalloons; i++)
+    {
+        SKSpriteNode *balloon = balloons[i];
+        [balloon runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
+            objectsDisplayed++;
+            if (objectsDisplayed == numBalloons)
+            {
+                [self askQuestion];
+            }
+        }];
+        currentHeight -= dh;
+        currentWidth += dw;
+    }
+}
+
+-(void)balloonsFlyOut
+{
+    /*
+     * Balloons fly out
+     */
+    
+    int numBalloons = objectsDisplayed;
+    
+    // Set bird positions
+    for (int i = 0; i < numBalloons; i++)
+    {
+        SKSpriteNode *balloon = balloons[i];
+        [balloon runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+            objectsDisplayed--;
+            if (objectsDisplayed == 0)
+            {
+            }
+        }];
+    };
+    
+}
+
+-(void)balloonsFlyOutAndFlyBackIn
+{
+    /*
+     * Balloonss fly out
+     */
+    
+    int numBalloons = objectsDisplayed;
+    
+    // Set balloon positions
+    for (int i = 0; i < numBalloons; i++)
+    {
+        SKSpriteNode *balloon = balloons[i];
+        [balloon runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+            objectsDisplayed--;
+            if (objectsDisplayed == 0)
+            {
+                [self balloonsFlyIn];
+            }
+        }];
+    };
 }
 
 -(void)birdsFlyIn
@@ -154,8 +250,8 @@
     {
         SKSpriteNode *bird = birds[i];
         [bird runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
-            birdsDisplayed++;
-            if (birdsDisplayed == numBirds)
+            objectsDisplayed++;
+            if (objectsDisplayed == numBirds)
             {
                 [self askQuestion];
             }
@@ -171,15 +267,15 @@
      * Birds fly out
     */
     
-    int numBirds = birdsDisplayed;
+    int numBirds = objectsDisplayed;
 
     // Set bird positions
     for (int i = 0; i < numBirds; i++)
     {
         SKSpriteNode *bird = birds[i];
         [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
-            birdsDisplayed--;
-            if (birdsDisplayed == 0)
+            objectsDisplayed--;
+            if (objectsDisplayed == 0)
             {
             }
         }];
@@ -193,16 +289,15 @@
      * Birds fly out
     */
     
-
-    int numBirds = birdsDisplayed;
+    int numBirds = objectsDisplayed;
 
     // Set bird positions
     for (int i = 0; i < numBirds; i++)
     {
         SKSpriteNode *bird = birds[i];
         [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
-            birdsDisplayed--;
-            if (birdsDisplayed == 0)
+            objectsDisplayed--;
+            if (objectsDisplayed == 0)
             {
                 [self birdsFlyIn];
             }
@@ -216,28 +311,21 @@
      Choose question to be displayed
     */
     
-  
     // Set text of question
     switch (questionDisplayed) {
         case 0:
             // Create text label
-            question.text = @"How many birds are in the air?";
+            question.text =  [NSString stringWithFormat:@"How many %@ are in the air?", objectNames[correctAnswers]];
             question.hidden = NO;
             break;
         case 1:
-            question.text = @"Are you sure? How many birds are in the air?";
+            question.text = [NSString stringWithFormat:@"Are you sure? How many %@ are in the air?", objectNames[correctAnswers]];
             question.hidden = NO;
             break;
         case 2:
-            question.text = [NSString stringWithFormat:@"Can you say %i", birdsDisplayed];
+            question.text = [NSString stringWithFormat:@"Can you say %i", objectsDisplayed];
             question.hidden = NO;
             break;
-      /*  case 3:
-            question.hidden = YES;
-            questionDisplayed = 0;
-            [self hideButtons];
-            [self birdsFlyOutAndFlyBackIn];
-            break;*/
         default:
             question.text = @"How many birds are in the air?";
     }
@@ -384,18 +472,16 @@
             question.hidden = YES;
             [self hideButtons];
             switch (correctAnswers){
-                case 0:
-                    [self birdsFlyOutAndFlyBackIn];
-                    break;
                 case 1:
-                    [self birdsFlyOutAndFlyBackIn];
+                    [self birdsFlyOut];
+                    [self balloonsFlyIn];
                     break;
                 case 2:
-                    [self birdsFlyOutAndFlyBackIn];
+                    [self balloonsFlyOut];
+                    [self birdsFlyIn];
                     break;
             }
             
-          //  [self birdsFlyOutAndFlyBackIn];
         }
     }
     else if ([node.name isEqualToString:@"incorrectButton"])
@@ -404,9 +490,20 @@
             [self askQuestion];
         }
         else{
+            questionDisplayed = 0;
             question.hidden = YES;
             [self hideButtons];
-            [self birdsFlyOutAndFlyBackIn];
+            switch (correctAnswers){
+                case 0:
+                    [self birdsFlyOutAndFlyBackIn];
+                    break;
+                case 1:
+                    [self balloonsFlyOutAndFlyBackIn];
+                    break;
+                case 2:
+                    exit(0);
+                    break;
+            }
         }
     }
 }
