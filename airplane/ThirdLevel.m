@@ -34,6 +34,10 @@
         purpleBoat.name = @"PurpleBoat";
         yellowBoat.name = @"YellowBoat";
         
+        SKSpriteNode *sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sun.png"];
+        sun.position = CGPointMake(screenSize.width*.85, screenSize.height*.8);
+       
+        
         boats = [NSArray arrayWithObjects:orangeBoat, purpleBoat, yellowBoat, nil];
         
         [self initalizingScrollingBackground];
@@ -44,7 +48,7 @@
             [self addChild:boat];
             boat.position = CGPointMake(screenSize.width *1.2, screenSize.height*.2);
         }
-
+        [self addChild:sun];
         [self addShip];
         [self boatsIn];
         

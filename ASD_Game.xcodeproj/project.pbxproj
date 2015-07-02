@@ -81,6 +81,7 @@
 		A5D04AF61B458EAE001E2A48 /* OrangeBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */; };
 		A5D04AF71B458EAE001E2A48 /* PurpleBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */; };
 		A5D04AF81B458EAE001E2A48 /* YellowBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF51B458EAE001E2A48 /* YellowBoat.png */; };
+		A5D04AFA1B45FF30001E2A48 /* Sun.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF91B45FF30001E2A48 /* Sun.png */; };
 		E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E95017691ABFCF6000F7359E /* BlueBird.png */; };
 		E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176A1ABFCF6000F7359E /* LightPinkBird.png */; };
 		E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176B1ABFCF6000F7359E /* OrangeBird.png */; };
@@ -191,6 +192,7 @@
 		A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBoat.png; path = ../OrangeBoat.png; sourceTree = "<group>"; };
 		A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBoat.png; path = ../PurpleBoat.png; sourceTree = "<group>"; };
 		A5D04AF51B458EAE001E2A48 /* YellowBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBoat.png; path = ../YellowBoat.png; sourceTree = "<group>"; };
+		A5D04AF91B45FF30001E2A48 /* Sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sun.png; path = ../Sun.png; sourceTree = "<group>"; };
 		E95017691ABFCF6000F7359E /* BlueBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBird.png; sourceTree = "<group>"; };
 		E950176A1ABFCF6000F7359E /* LightPinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPinkBird.png; sourceTree = "<group>"; };
 		E950176B1ABFCF6000F7359E /* OrangeBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBird.png; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5D04AF91B45FF30001E2A48 /* Sun.png */,
 				A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */,
 				A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */,
 				A5D04AF51B458EAE001E2A48 /* YellowBoat.png */,
@@ -527,6 +530,7 @@
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				07F9553E1AD5ABB00080668A /* arrow.png in Resources */,
 				074407CC1AE575BB00389890 /* blueHead.png in Resources */,
+				A5D04AFA1B45FF30001E2A48 /* Sun.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				076584C11AE995DA00F6FBD1 /* cow.mp3 in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
