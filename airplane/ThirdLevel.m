@@ -12,7 +12,10 @@
     int questionDisplayed;
     SKLabelNode *correctButton;
     SKLabelNode *incorrectButton;
+    SKLabelNode *question;
     CGSize screenSize;
+    NSArray *boats;
+    int correctAnswers;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -20,32 +23,78 @@
     
     if (self = [super initWithSize:size]) {
         
-        
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
-
-        [self initalizingScrollingBackground];
-        [self addShip];
+       
+        // Create boat sprites
+        SKSpriteNode *orangeBoat = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBoat.png"];
+        SKSpriteNode *purpleBoat = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoat.png"];
+        SKSpriteNode *yellowBoat = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoat.png"];
+        orangeBoat.name = @"OrangeBoat";
+        purpleBoat.name = @"PurpleBoat";
+        yellowBoat.name = @"YellowBoat";
         
-        // Set question displayed
-        questionDisplayed = 0;
+        boats = [NSArray arrayWithObjects:orangeBoat, purpleBoat, yellowBoat, nil];
+        
+        [self initalizingScrollingBackground];
+        
+        //set boat initial position
+        for (SKNode *boat in boats)
+        {
+            [self addChild:boat];
+            boat.position = CGPointMake(screenSize.width *1.2, screenSize.height*.2);
+        }
+
+        [self addShip];
+        [self boatsIn];
+        
+        correctAnswers = 0;
     }
     
     return self;
+}
+
+-(void)boatsIn
+{
+    /*
+     * boats in from side
+     */
+    
+    double currentWidth = screenSize.width*.55;
+    double currentHeight = screenSize.height*.2;
+    double dw = screenSize.width*.5/boats.count;
+    for (int i = 0; i < boats.count; i++)
+    {
+        SKSpriteNode *boat = boats[i];
+        [boat runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{  [self askQuestion];}];
+        currentWidth += dw;
+    }
+  
+}
+
+-(void)boatsLeave
+{
+    double dw = screenSize.width*.5/boats.count;
+    double width = -dw*boats.count;
+    for (int i = 0; i < boats.count; i++){
+        SKSpriteNode *boat = boats[i];
+        [boat runAction:[SKAction moveTo:CGPointMake(width, screenSize.width*.2) duration:5] completion:^{[self moveToNextScene];}];
+        width += dw;
+    }
 }
 
 -(void)displayButtons
 {
     // Create button
     correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    correctButton.text = @"6 birds";
+    correctButton.text = @"6 boats";
     correctButton.name = @"correctButton";
     correctButton.fontSize = 40;
     correctButton.fontColor = [SKColor blueColor];
     correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
 
     incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    incorrectButton.text = @"Not 6 birds";
+    incorrectButton.text = @"Not 6 boats";
     incorrectButton.name = @"incorrectButton";
     incorrectButton.fontSize = 40;
     incorrectButton.fontColor = [SKColor blueColor];
@@ -60,9 +109,26 @@
      Choose question to be displayed
     */
     
-    SKLabelNode *question;
-    
-    // Set text of question
+    question.hidden = YES;
+    question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    question.name = @"colorofBoatQuestion";
+    question.fontSize = 50;
+    question.position = CGPointMake(screenSize.width*.6, screenSize.height *.5);
+  
+    switch(correctAnswers){
+        case 0:
+            question.text = @"What color is the first ship?";
+            break;
+        case 1:
+            question.text = @"What color is the second ship?";
+            break;
+        case 2:
+            question.text = @"What color is the third ship?";
+            break;
+    }
+     question.hidden = NO;
+    [self addChild:question];
+   /* // Set text of question
     switch (questionDisplayed) {
         case 0:
             // Create text label
@@ -91,15 +157,17 @@
     
     // Display question and increment
     questionDisplayed++;
+    */
 }
 
 -(void)moveToNextScene
 {
+    exit(0);
     // Move to next scene
-    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    ThirdLevel * scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    [self.view presentScene:scene transition: reveal];
+  //  SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+  //  FourthLevel * scene = [FourthLevel sceneWithSize:self.view.bounds.size];
+  //  scene.scaleMode = SKSceneScaleModeAspectFill;
+  //  [self.view presentScene:scene transition: reveal];
 }
 
 -(void)addShip
@@ -110,7 +178,7 @@
     self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];
     self.ship.physicsBody.dynamic = YES;
     self.ship.physicsBody.allowsRotation = NO;
-    // self.ship.physicsBody.affectedByGravity = YES
+    //self.ship.physicsBody.affectedByGravity = YES;
     [self addChild:self.ship ];
     
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
@@ -147,7 +215,7 @@
         [self addChild:bg];
     }
     
-    // Create skyline
+   // Create skyline
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky-3.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
 
@@ -160,6 +228,7 @@
         bg.name = @"sky";
         [self addChild:bg];
     }
+   
     
     // Create ground physics container
     
@@ -179,7 +248,7 @@
     return action;
 }
 
-
+/*
 -(SKAction*)moveBgContinuously
 {
     
@@ -212,6 +281,31 @@
     return moveBackground;
     
     
+}*/
+-(SKAction*)moveBgContinuously
+{
+    __block SKAction* moveForever;
+    __block SKSpriteNode *waves;
+    SKAction* moveBackground;
+    
+    [self enumerateChildNodesWithName:@"waves" usingBlock: ^(SKNode *node, BOOL *stop)
+     {
+         waves = (SKSpriteNode *)node;
+         SKAction* move = [Actions moveAction:waves.size.width: 0.01];
+         SKAction* reset = [Actions moveAction:-waves.size.width: 0.0];
+         moveForever = [SKAction repeatActionForever:[SKAction sequence:@[move,reset]]];
+         
+         
+         if( !waves.hasActions){
+             [waves runAction: moveForever];
+         }
+     }];
+    
+    if(!waves.hasActions) {
+        [self runAction:moveBackground];
+        
+    }
+    return moveBackground;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -220,16 +314,25 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
-    
-    if ([node.name isEqualToString:@"correctButton"])
-    {
-        [self moveToNextScene];
+
+    switch (correctAnswers) {
+        case 0:
+            if([node.name isEqualToString:@"OrangeBoat"])
+                correctAnswers++;
+            break;
+        case 1:
+            if([node.name isEqualToString:@"PurpleBoat"])
+                correctAnswers++;
+            break;
+        case 2:
+            if([node.name isEqualToString:@"YellowBoat"])
+                [self boatsLeave];
+            break;
+        default:
+            break;
     }
-    else if ([node.name isEqualToString:@"incorrectButton"])
-    {
-        [self askQuestion];
-    }
-    
+   
+    [self askQuestion];
 }
 
 @end

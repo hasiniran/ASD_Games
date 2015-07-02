@@ -9,6 +9,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "Actions.h"
+#import "ThirdLevel.h"
 
 @interface SecondLevel : SKScene{
     SKAction *actionMoveDown;

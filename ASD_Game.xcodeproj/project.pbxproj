@@ -78,6 +78,9 @@
 		A5D04AEF1B4340C4001E2A48 /* PurpleBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */; };
 		A5D04AF01B4340C4001E2A48 /* YellowBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */; };
 		A5D04AF21B4476C0001E2A48 /* UFO.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF11B4476C0001E2A48 /* UFO.png */; };
+		A5D04AF61B458EAE001E2A48 /* OrangeBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */; };
+		A5D04AF71B458EAE001E2A48 /* PurpleBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */; };
+		A5D04AF81B458EAE001E2A48 /* YellowBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF51B458EAE001E2A48 /* YellowBoat.png */; };
 		E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E95017691ABFCF6000F7359E /* BlueBird.png */; };
 		E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176A1ABFCF6000F7359E /* LightPinkBird.png */; };
 		E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176B1ABFCF6000F7359E /* OrangeBird.png */; };
@@ -185,6 +188,9 @@
 		A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBalloon.png; path = ../PurpleBalloon.png; sourceTree = "<group>"; };
 		A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBalloon.png; path = ../YellowBalloon.png; sourceTree = "<group>"; };
 		A5D04AF11B4476C0001E2A48 /* UFO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UFO.png; path = ../UFO.png; sourceTree = "<group>"; };
+		A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBoat.png; path = ../OrangeBoat.png; sourceTree = "<group>"; };
+		A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBoat.png; path = ../PurpleBoat.png; sourceTree = "<group>"; };
+		A5D04AF51B458EAE001E2A48 /* YellowBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBoat.png; path = ../YellowBoat.png; sourceTree = "<group>"; };
 		E95017691ABFCF6000F7359E /* BlueBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBird.png; sourceTree = "<group>"; };
 		E950176A1ABFCF6000F7359E /* LightPinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPinkBird.png; sourceTree = "<group>"; };
 		E950176B1ABFCF6000F7359E /* OrangeBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBird.png; sourceTree = "<group>"; };
@@ -295,6 +301,9 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */,
+				A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */,
+				A5D04AF51B458EAE001E2A48 /* YellowBoat.png */,
 				A5D04AF11B4476C0001E2A48 /* UFO.png */,
 				A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */,
 				A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */,
@@ -509,8 +518,10 @@
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
 				A5D04AF21B4476C0001E2A48 /* UFO.png in Resources */,
+				A5D04AF81B458EAE001E2A48 /* YellowBoat.png in Resources */,
 				A5D04AEC1B4340C4001E2A48 /* LightPinkBalloon.png in Resources */,
 				016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */,
+				A5D04AF61B458EAE001E2A48 /* OrangeBoat.png in Resources */,
 				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				01A25E131B3DC11200D68AA9 /* Horse.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
@@ -526,6 +537,7 @@
 				A5D04AEE1B4340C4001E2A48 /* PinkBalloon.png in Resources */,
 				E95017741ABFCF6000F7359E /* YellowBird.png in Resources */,
 				074407CE1AE5790E00389890 /* yellowHead.png in Resources */,
+				A5D04AF71B458EAE001E2A48 /* PurpleBoat.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

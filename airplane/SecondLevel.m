@@ -10,7 +10,7 @@
 //
 
 #import "SecondLevel.h"
-#import "ThirdLevel.h"
+
 
 @implementation SecondLevel {
     int objectsDisplayed;
@@ -425,7 +425,6 @@
     SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
     ThirdLevel *scene = [ThirdLevel sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
-    exit(0);
     [self.view presentScene:scene transition: reveal];
 }
 
@@ -583,12 +582,5 @@
         }
     }
 }
-
-
-
-
-
-
-
 
 @end
