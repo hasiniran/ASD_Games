@@ -82,6 +82,7 @@
 		A5D04AF71B458EAE001E2A48 /* PurpleBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */; };
 		A5D04AF81B458EAE001E2A48 /* YellowBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF51B458EAE001E2A48 /* YellowBoat.png */; };
 		A5D04AFA1B45FF30001E2A48 /* Sun.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF91B45FF30001E2A48 /* Sun.png */; };
+		A5D04AFF1B460219001E2A48 /* FourthLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D04AFE1B460219001E2A48 /* FourthLevel.m */; };
 		E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E95017691ABFCF6000F7359E /* BlueBird.png */; };
 		E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176A1ABFCF6000F7359E /* LightPinkBird.png */; };
 		E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176B1ABFCF6000F7359E /* OrangeBird.png */; };
@@ -193,6 +194,8 @@
 		A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBoat.png; path = ../PurpleBoat.png; sourceTree = "<group>"; };
 		A5D04AF51B458EAE001E2A48 /* YellowBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBoat.png; path = ../YellowBoat.png; sourceTree = "<group>"; };
 		A5D04AF91B45FF30001E2A48 /* Sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sun.png; path = ../Sun.png; sourceTree = "<group>"; };
+		A5D04AFD1B460219001E2A48 /* FourthLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourthLevel.h; path = airplane/FourthLevel.h; sourceTree = "<group>"; };
+		A5D04AFE1B460219001E2A48 /* FourthLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourthLevel.m; path = airplane/FourthLevel.m; sourceTree = "<group>"; };
 		E95017691ABFCF6000F7359E /* BlueBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBird.png; sourceTree = "<group>"; };
 		E950176A1ABFCF6000F7359E /* LightPinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPinkBird.png; sourceTree = "<group>"; };
 		E950176B1ABFCF6000F7359E /* OrangeBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBird.png; sourceTree = "<group>"; };
@@ -381,15 +384,17 @@
 			children = (
 				2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */,
 				2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */,
+				2552AC5919F8160900EE77C7 /* AirplaneScene1.h */,
+				2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */,
+				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
+				2521EBFB1A761C8F00E844F1 /* SecondLevel.m */,
 				E9A7FFA41ACAF3100032FDBD /* ThirdLevel.h */,
 				E9A7FFA51ACAF3100032FDBD /* ThirdLevel.m */,
+				A5D04AFD1B460219001E2A48 /* FourthLevel.h */,
+				A5D04AFE1B460219001E2A48 /* FourthLevel.m */,
 				2521EBF31A75BD0200E844F1 /* GameStartScene.sks */,
 				2521EBF51A75BDA600E844F1 /* GameStartScene.m */,
 				2521EBF71A75BDC300E844F1 /* GameStartScene.h */,
-				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
-				2521EBFB1A761C8F00E844F1 /* SecondLevel.m */,
-				2552AC5919F8160900EE77C7 /* AirplaneScene1.h */,
-				2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */,
 			);
 			name = airplaneGame;
 			sourceTree = "<group>";
@@ -569,6 +574,7 @@
 				078A114A1A82D77C00956F41 /* Level1.m in Sources */,
 				2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */,
 				2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */,
+				A5D04AFF1B460219001E2A48 /* FourthLevel.m in Sources */,
 				2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */,
 				2552AC5B19F8160900EE77C7 /* AirplaneScene1.m in Sources */,
 				0733717F1A95B1D30024872B /* Level2.m in Sources */,
