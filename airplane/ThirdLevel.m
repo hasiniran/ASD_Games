@@ -9,38 +9,64 @@
 #import "ThirdLevel.h"
 
 @implementation ThirdLevel {
-    int questionDisplayed;
-    SKLabelNode *correctButton;
-    SKLabelNode *incorrectButton;
+    SKLabelNode *correctButton, *incorrectButton;
     SKLabelNode *question;
     CGSize screenSize;
     NSArray *boats;
-    int correctAnswers;
+    int correctAnswers, questionDisplayed;
+    NSMutableArray *shipPlace, *shipColor;
+    SKSpriteNode *orangeBoat, *purpleBoat, *yellowBoat;
 }
 
 -(id)initWithSize:(CGSize)size {
     
+    shipPlace = [NSMutableArray arrayWithObjects:@"first", @"second", @"third", nil];
+    shipColor = [NSMutableArray arrayWithObjects:@"Orange", @"Purple", @"Yellow", nil];
     
     if (self = [super initWithSize:size]) {
-        
+
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
        
+        [self initalizingScrollingBackground];
+
         // Create boat sprites
-        SKSpriteNode *orangeBoat = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBoat.png"];
-        SKSpriteNode *purpleBoat = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoat.png"];
-        SKSpriteNode *yellowBoat = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoat.png"];
-        orangeBoat.name = @"OrangeBoat";
-        purpleBoat.name = @"PurpleBoat";
-        yellowBoat.name = @"YellowBoat";
+        orangeBoat = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBoat.png"];
+        purpleBoat = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoat.png"];
+        yellowBoat = [SKSpriteNode spriteNodeWithImageNamed:@"YellowBoat.png"];
+        orangeBoat.name = @"Orange";
+        purpleBoat.name = @"Purple";
+        yellowBoat.name = @"Yellow";
         
         SKSpriteNode *sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sun.png"];
         sun.position = CGPointMake(screenSize.width*.85, screenSize.height*.8);
        
-        
         boats = [NSArray arrayWithObjects:orangeBoat, purpleBoat, yellowBoat, nil];
+       
+        //question specifications
+        question.hidden = YES;
+        question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+        question.name = @"colorofBoatQuestion";
+        question.fontSize = 50;
+        question.position = CGPointMake(screenSize.width*.5, screenSize.height *.5);
         
-        [self initalizingScrollingBackground];
+        // Create button
+        correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        correctButton.text = @"Orange";
+        correctButton.name = @"correctButton";
+        correctButton.fontSize = 40;
+        correctButton.fontColor = [SKColor blueColor];
+        correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
+        
+        incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        incorrectButton.text = @"Not Orange";
+        incorrectButton.name = @"incorrectButton";
+        incorrectButton.fontSize = 40;
+        incorrectButton.fontColor = [SKColor blueColor];
+        incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
+        
+        [self addChild:correctButton];
+        [self addChild:incorrectButton];
         
         //set boat initial position
         for (SKNode *boat in boats)
@@ -49,10 +75,13 @@
             boat.position = CGPointMake(screenSize.width *1.2, screenSize.height*.2);
         }
         [self addChild:sun];
+        [self addChild:question];
+        correctAnswers = 0;
+        questionDisplayed = 0;
         [self addShip];
         [self boatsIn];
-        
-        correctAnswers = 0;
+        [self hideButtons];
+
     }
     
     return self;
@@ -70,7 +99,9 @@
     for (int i = 0; i < boats.count; i++)
     {
         SKSpriteNode *boat = boats[i];
-        [boat runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{  [self askQuestion];}];
+        [boat runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
+            [self askQuestion];
+            [self displayButtons];}];
         currentWidth += dw;
     }
   
@@ -89,89 +120,52 @@
 
 -(void)displayButtons
 {
-    // Create button
-    correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    correctButton.text = @"6 boats";
-    correctButton.name = @"correctButton";
-    correctButton.fontSize = 40;
-    correctButton.fontColor = [SKColor blueColor];
-    correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
-
-    incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    incorrectButton.text = @"Not 6 boats";
-    incorrectButton.name = @"incorrectButton";
-    incorrectButton.fontSize = 40;
-    incorrectButton.fontColor = [SKColor blueColor];
-    incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
-    [self addChild:correctButton];
-    [self addChild:incorrectButton];
+    correctButton.hidden = NO;
+    incorrectButton.hidden = NO;
 }
 
+-(void)hideButtons
+{
+    correctButton.hidden = YES;
+    incorrectButton.hidden = YES;
+}
+
+-(void)updateButtons
+{
+    
+    correctButton.text = [NSString stringWithFormat:@"%@", shipColor[correctAnswers]];
+    incorrectButton.text = [NSString stringWithFormat:@"Not %@", shipColor[correctAnswers]];
+}
 -(void)askQuestion
 {
     /*
      Choose question to be displayed
     */
-    
-    question.hidden = YES;
-    question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    question.name = @"colorofBoatQuestion";
-    question.fontSize = 50;
-    question.position = CGPointMake(screenSize.width*.6, screenSize.height *.5);
-  
-    switch(correctAnswers){
-        case 0:
-            question.text = @"What color is the first ship?";
-            break;
-        case 1:
-            question.text = @"What color is the second ship?";
-            break;
-        case 2:
-            question.text = @"What color is the third ship?";
-            break;
-    }
-     question.hidden = NO;
-    [self addChild:question];
-   /* // Set text of question
+  //  question.hidden = YES;
     switch (questionDisplayed) {
         case 0:
-            // Create text label
-            question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            question.name = @"numberOfBirdsQuestion";
-            question.fontSize = 50;
-            question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
-            question.text = @"How many birds are in the air?";
-            [self addChild:question];
+            question.text = [NSString stringWithFormat:@"What is the color of the %@ ship?", shipPlace[correctAnswers]];
             break;
         case 1:
-            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
-            question.text = @"Are you sure? How many birds are in the air?";
+            question.text = [NSString stringWithFormat:@"Are you sure? What color is the %@ ship?", shipPlace[correctAnswers]];
             break;
         case 2:
-            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
-            question.text = @"Can you say six?";
-            break;
-        case 3:
-            [self moveToNextScene];
+            question.text = [NSString stringWithFormat:@"Can you say %@?", shipColor[correctAnswers]];
             break;
         default:
-            question = (SKLabelNode *)[self childNodeWithName:@"numberOfBirdsQuestion"];
-            question.text = @"How many birds are in the air?";
+            question.text = [NSString stringWithFormat:@"%i", questionDisplayed];
+            break;
     }
-    
-    // Display question and increment
-    questionDisplayed++;
-    */
+    question.hidden = NO;
 }
 
 -(void)moveToNextScene
 {
-    exit(0);
     // Move to next scene
-  //  SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-  //  FourthLevel * scene = [FourthLevel sceneWithSize:self.view.bounds.size];
-  //  scene.scaleMode = SKSceneScaleModeAspectFill;
-  //  [self.view presentScene:scene transition: reveal];
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    FourthLevel *scene = [FourthLevel sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.view presentScene:scene transition: reveal];
 }
 
 -(void)addShip
@@ -255,36 +249,25 @@
 /*
 -(SKAction*)moveBgContinuously
 {
-    
     __block SKAction* moveRunwayForever;
     __block SKAction* moveSkyForever;
     __block SKSpriteNode *sky;
     __block SKSpriteNode *waves;
     SKAction* moveBackground;
-    
     [self enumerateChildNodesWithName:@"waves" usingBlock: ^(SKNode *node, BOOL *stop)
      {
          waves = (SKSpriteNode *)node;
          SKAction* moveRunway = [self moveAction:waves.size.width: 0.01];
          SKAction* resetRunway = [self moveAction:-waves.size.width: 0.0];
          moveRunwayForever = [SKAction repeatActionForever:[SKAction sequence:@[moveRunway,resetRunway]]];
-         
-         
          if( !waves.hasActions){
              [waves runAction: moveRunwayForever];
          }
      }];
-    
-    
-    
     if(!waves.hasActions) {
         [self runAction:moveBackground];
-        
     }
-    
     return moveBackground;
-    
-    
 }*/
 -(SKAction*)moveBgContinuously
 {
@@ -314,29 +297,28 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
-    
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 
-    switch (correctAnswers) {
-        case 0:
-            if([node.name isEqualToString:@"OrangeBoat"])
-                correctAnswers++;
-            break;
-        case 1:
-            if([node.name isEqualToString:@"PurpleBoat"])
-                correctAnswers++;
-            break;
-        case 2:
-            if([node.name isEqualToString:@"YellowBoat"])
-                [self boatsLeave];
-            break;
-        default:
-            break;
+    if([node.name isEqualToString:@"correctButton"]){
+        if(correctAnswers == 2)
+            [self boatsLeave];
+        else {
+            correctAnswers++;
+            questionDisplayed = 0;
+            [self askQuestion];
+            [self updateButtons];
+        }
+
     }
-   
-    [self askQuestion];
+    else if ([node.name isEqualToString:@"incorrectButton"]){
+        questionDisplayed++;
+        if (questionDisplayed == 3) {
+            questionDisplayed = 0;
+        }
+        [self askQuestion];
+    }
 }
 
 @end
