@@ -6,10 +6,19 @@
 //  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
-#import "Level1.h"
-#import "Level5.h"
 
-@interface Level3 : SKScene
+#ifndef ASD_Game_Level3_h
+#define ASD_Game_Level3_h
+
+
+#import <SpriteKit/SpriteKit.h>
+#import "Level4.h" //transitions to level 4
+
+
+@interface Level3 : SKScene {}
+
 
 @end
+
+
+#endif
