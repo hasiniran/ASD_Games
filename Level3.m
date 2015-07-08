@@ -441,60 +441,64 @@
     CGPoint location = [[touches anyObject] locationInNode:self];
     button = [self nodeAtPoint:location];
     
-    if(check == 1 && [button.name  isEqual: @"purpleBoy"]) {
-        speed = 1;
-        [purpleBoy removeFromParent];
-        [self addHeadToTrain];
-        count2 = 0;
+    if(check == 1) {
+        if([button.name  isEqual: @"purpleBoy"]) {
+            speed = 1;
+            [purpleBoy removeFromParent];
+            [self addHeadToTrain];
+            count2 = 0;
+        }
+        else if([button.name  isEqual: @"yellowBoy"]) {
+            [text removeFromParent];   //erase and re-add text
+            text = [SKNode node];
+            [self addChild:text];
+            [self tryAgain];
+        }
+        else if([button.name  isEqual: @"blueBoy"]) {
+            [text removeFromParent];   //erase and re-add text
+            text = [SKNode node];
+            [self addChild:text];
+            [self tryAgain];
+        }
     }
-    else if(check == 1 && [button.name  isEqual: @"yellowBoy"]) {
-        [text removeFromParent];   //erase and re-add text
-        text = [SKNode node];
-        [self addChild:text];
-        [self tryAgain];
+    else if(check == 2) {
+        if([button.name  isEqual: @"blueBoy"]) { //blue chck
+            [blueBoy removeFromParent];
+            [self addHeadToTrain];
+            count2 = 0;
+        }
+        else if([button.name  isEqual: @"yellowBoy"]) {
+            [text removeFromParent];   //erase and re-add text
+            text = [SKNode node];
+            [self addChild:text];
+            [self tryAgain];
+        }
     }
-    else if(check == 1 && [button.name  isEqual: @"blueBoy"]) {
-        [text removeFromParent];   //erase and re-add text
-        text = [SKNode node];
-        [self addChild:text];
-        [self tryAgain];
-    }
-    
-    if(check == 2 && [button.name  isEqual: @"blueBoy"]) { //blue chck
-        [blueBoy removeFromParent];
-        [self addHeadToTrain];
-        count2 = 0;
-    }
-    else if(check == 2 && [button.name  isEqual: @"yellowBoy"]) {
-        [text removeFromParent];   //erase and re-add text
-        text = [SKNode node];
-        [self addChild:text];
-        [self tryAgain];
-    }
-    
-    if(check == 3 && [button.name  isEqual: @"yellowBoy"]) {
-        [yellowBoy removeFromParent];
-        [self addHeadToTrain];
+    else if(check == 3) {
+        if([button.name  isEqual: @"yellowBoy"]) {
+            [yellowBoy removeFromParent];
+            [self addHeadToTrain];
         
-        [_bgLayer removeFromParent];
-        _bgLayer = [SKNode node];
-        [self addChild: _bgLayer];
+            [_bgLayer removeFromParent];
+            _bgLayer = [SKNode node];
+            [self addChild: _bgLayer];
         
-        [self ScrollingForeground];
-        [self ScrollingBackground];
+            [self ScrollingForeground];
+            [self ScrollingBackground];
         
-        [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+            [station.physicsBody applyForce:CGVectorMake(-35, 0)];
         
-        count2 = 0;
-        count = 0;
+            count2 = 0;
+            count = 0;
+        }
     }
-    
-    
-    if(check == 4 && [button.name isEqual: @"level4"]) {
+    else if(check == 4) {
+        if ([button.name isEqual: @"level4"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
+        }
     }
     else if ([button.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
@@ -507,59 +511,59 @@
 
 -(void)update:(NSTimeInterval)currentTime {
     count++;
+    if (count2 == 0) {
+        if(check == 2) {//purple head in train
+            count2++;
+        
+            [text removeFromParent];   //clear text
+            text = [SKNode node];  //re init text
+            [self addChild:text];
+        
+            display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            display.text = @"Say the color of this passenger to pick him up";
+            display.fontColor = [SKColor blueColor];
+            display.position = CGPointMake(self.size.width/2, self.size.height/2);
+            [text addChild:display];
+        
+            //display arrow
+            if(chances == 1)
+                [self labels];
+            [self hint];
+        }
     
-    if(check == 2 && count2 == 0) {//purple head in train
-        count2++;
-        
-        [text removeFromParent];   //clear text
-        text = [SKNode node];  //re init text
-        [self addChild:text];
-        
-        display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        display.text = @"Say the color of this passenger to pick him up";
-        display.fontColor = [SKColor blueColor];
-        display.position = CGPointMake(self.size.width/2, self.size.height/2);
-        [text addChild:display];
-        
-        //display arrow
-        if(chances == 1)
-            [self labels];
-        [self hint];
-    }
-    
-    if(check == 3 && count2 == 0) { //blue and purp in train
-        count2++;
-        
-        [text removeFromParent];   //clear text
-        text = [SKNode node];
-        [self addChild:text];
-        
-        display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        display.text = @"Say the color of this passenger to pick him up";
-        display.fontColor = [SKColor yellowColor];
-        display.position = CGPointMake(self.size.width/2, self.size.height/2);
-        [text addChild:display];
-        
-        //display arrow
-        if(chances == 1)
-            [self labels];
-        [self hint];
-    }
-    
-    if(check == 4 && count2 == 0) {
-        if(count >= 30) {
+        else if(check == 3) { //blue and purp in train
             count2++;
             
-            [text removeFromParent]; //erase and re-add text
+            [text removeFromParent];   //clear text
             text = [SKNode node];
             [self addChild:text];
-            
-            [self nextLevel];
+        
+            display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            display.text = @"Say the color of this passenger to pick him up";
+            display.fontColor = [SKColor yellowColor];
+            display.position = CGPointMake(self.size.width/2, self.size.height/2);
+            [text addChild:display];
+        
+            //display arrow
+            if(chances == 1)
+                [self labels];
+            [self hint];
         }
-    }
     
-    else if(count >= 28) { //call next level function once train reaches right side of screen
-        [self stopTrain];
+        else if(check == 4) {
+            if(count >= 30) {
+                count2++;
+            
+                [text removeFromParent]; //erase and re-add text
+                text = [SKNode node];
+                [self addChild:text];
+            
+                [self nextLevel];
+            }
+        }
+        else if(count >= 28) { //call next level function once train reaches right side of screen
+                [self stopTrain];
+        }
     }
 }
 
