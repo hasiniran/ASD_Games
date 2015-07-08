@@ -7,8 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "SecondLevel.h"
-
+#include "SecondLevel.h"
 
 static const uint32_t shipCategory =  0x1 << 0;
 static const uint32_t obstacleCategory =  0x1 << 1;

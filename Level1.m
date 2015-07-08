@@ -218,7 +218,6 @@
 -(void)update:(NSTimeInterval)currentTime{
     if(_train.position.x >= 600){   //call next level function once train reaches right side of screen
         [self nextLevel];
-    
     }
 }
     

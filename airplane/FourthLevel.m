@@ -188,12 +188,11 @@
 
 -(void)moveToNextScene
 {
-    exit(0);
     // Move to next scene
-   /* SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    FourthLevel *scene = [FourthLevel sceneWithSize:self.view.bounds.size];
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    FifthLevel *scene = [FifthLevel sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
-    [self.view presentScene:scene transition: reveal];*/
+    [self.view presentScene:scene transition: reveal];
 }
 
 -(void)addShip
