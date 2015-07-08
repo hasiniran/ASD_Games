@@ -21,6 +21,9 @@ SKScene * scene;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        //initialize synthesizer
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        
         SKLabelNode *Game1 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         Game1.text = @"Airplane Game"; //Set the button text
         Game1.name = @"Airplane";
@@ -56,10 +59,19 @@ SKScene * scene;
     instructions++;
     
     if (instructions == 1) { //initial instructions
+        AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Click on the train or airplane to start playing!"];
+        instruction1.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 10) { //wait 10 secs -- follow up 1
+        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Choose a game!"];
+        instruction2.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction2];
     }
     else if (instructions == 20) { //wait 10 secs -- follow up 2
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Pick a game to play!"];
+        instruction3.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction3];
     }
     else if (instructions > 29) { //wait another 10 secs -- restart instructions
         instructions = 0;
@@ -77,6 +89,10 @@ SKScene * scene;
     instructionTimer = nil;
     
     if ([node.name isEqualToString:@"Airplane"]) {
+        AVSpeechUtterance *airplaneTransition = [[AVSpeechUtterance alloc] initWithString:@"Let's play the airplane game!"];
+        airplaneTransition.rate = 0.1;
+        [self.synthesizer speakUtterance:airplaneTransition];
+        
         //Transition to airplane level 1
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
         AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];
@@ -86,6 +102,10 @@ SKScene * scene;
     
     //if train button is pressed, Go to train game
     else if ([node.name isEqualToString:@"Train"]) {
+        AVSpeechUtterance *trainTransition = [[AVSpeechUtterance alloc] initWithString:@"Let's play the train game!"];
+        trainTransition.rate = 0.1;
+        [self.synthesizer speakUtterance:trainTransition];
+        
         //Transition to train level 1
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
         Level1 *scene= [Level1 sceneWithSize:self.view.bounds.size];

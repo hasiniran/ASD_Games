@@ -16,8 +16,14 @@
 #import "AirplaneScene1.h"
 #import "Level1.h"
 
+//Voice Synthesis imports
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface StartupMenu : SKScene{}
+
+
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
 
 
 @end
