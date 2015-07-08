@@ -6,15 +6,18 @@
 //  Copyright (c) 2015 Kim Forbes. All rights reserved.
 //
 
+
 #ifndef ASD_Game_Level2_h
 #define ASD_Game_Level2_h
-#import <SpriteKit/SpriteKit.h>
-#import "Level3.h"
 
-@interface Level2 : SKScene{
-    
-}
+
+#import <SpriteKit/SpriteKit.h>
+#import "Level3.h" //transitions to level 3 of train game
+
+@interface Level2 : SKScene{}
+
 
 @end
+
 
 #endif
