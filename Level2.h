@@ -14,7 +14,14 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Level3.h" //transitions to level 3 of train game
 
+//Voice Synthesis imports
+#import <AVFoundation/AVFoundation.h>
+
+
 @interface Level2 : SKScene{}
+
+
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
 
 
 @end

@@ -40,6 +40,9 @@
     numCows = (arc4random_uniform(4)+1); //random number of cows, 1-5
     
     if(self = [super initWithSize:size]){
+        //initialize synthesizer
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        
         //add layers
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -264,27 +267,51 @@
 -(void)displayText { //text to count the cows
     if (textDisplay == 0) {
         instructionText.text = @"Level 2";
+        
+        AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 2"];
+        instruction1.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction1];
     }
     else if (textDisplay == 12) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear previous text
         instructionText.text = @"How many cows do you see?";
+        
+        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"How many cows do you see?"];
+        instruction2.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction2];
     }
     else if (textDisplay == 20) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
         instructionText.text = @"Can you count the cows?";
+        
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Can you count the cows?"];
+        instruction3.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction3];
     }
     else if (textDisplay == 30) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
         if (numCows ==1) {
             instructionText.text = @"Is there 1 cow?";
+            
+            AVSpeechUtterance *instruction4a = [[AVSpeechUtterance alloc] initWithString:@"Is there 1 cow?"];
+            instruction4a.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction4a];
         }
         else {
             instructionText.text = [NSString stringWithFormat: @"Are there %i cows?", numCows];
+            
+            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Are there %i cows?", numCows]];
+            instruction4b.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction4b];
         }
     }
     else if (textDisplay == 40) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
         instructionText.text = [NSString stringWithFormat: @"Can you say %i?", numCows];
+        
+        AVSpeechUtterance *instruction5 = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Can you say %i?", numCows]];
+        instruction5.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction5];
     }
     textDisplay++;
 }
@@ -298,6 +325,10 @@
     nextButton.position = CGPointMake(self.size.width/2, self.size.height/2);
     nextButton.name = @"level3";
     [_HUDLayer addChild:nextButton];
+    
+    AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! Continue on to level 3."];
+    next.rate = 0.1;
+    [self.synthesizer speakUtterance:next];
 }
 
 
@@ -309,6 +340,10 @@
     tryAgainButton.name = @"level2";
     [_HUDLayer addChild:tryAgainButton];
     
+    AVSpeechUtterance *again = [[AVSpeechUtterance alloc] initWithString:@"Let's try Level 2 again"];
+    again.rate = 0.1;
+    [self.synthesizer speakUtterance:again];
+    
     instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear instructions
     instructionText.text = [NSString stringWithFormat: @" "];
 }
@@ -317,6 +352,10 @@
 -(void)update:(NSTimeInterval) currentTime{
     if(cow1.position.x <= 0){   //call tryAgain function once cows start to disappear off screen
         [self tryAgain];
+        
+        //stop repeating instructions
+        [instructionTimer invalidate];
+        instructionTimer = nil;
     }
 }
 
@@ -327,6 +366,10 @@
     
     if([button.name  isEqualToString: @"Correct"]) { //display level 3
         [self nextLevel];
+        
+        //stop repeating instructions
+        [instructionTimer invalidate];
+        instructionTimer = nil;
     }
     else if ([button.name isEqualToString:@"level3"]) { //transition to level 3
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
