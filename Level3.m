@@ -500,7 +500,7 @@
         [self.view presentScene:scene transition: reveal];
         }
     }
-    else if ([button.name isEqualToString:@"Skip"]) {
+    if ([button.name isEqualToString:@"Skip"]) { //not else if so that the skip button can be accessed throughout the level, even after the level has been started
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
