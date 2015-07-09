@@ -366,7 +366,7 @@
 }
 
 
--(void)tryAgain {
+-(void)incorrect {
     chances--;
     
     display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -452,13 +452,13 @@
             [text removeFromParent];   //erase and re-add text
             text = [SKNode node];
             [self addChild:text];
-            [self tryAgain];
+            [self incorrect];
         }
         else if([button.name  isEqual: @"blueBoy"]) {
             [text removeFromParent];   //erase and re-add text
             text = [SKNode node];
             [self addChild:text];
-            [self tryAgain];
+            [self incorrect];
         }
     }
     else if(check == 2) {
@@ -471,7 +471,7 @@
             [text removeFromParent];   //erase and re-add text
             text = [SKNode node];
             [self addChild:text];
-            [self tryAgain];
+            [self incorrect];
         }
     }
     else if(check == 3) {
