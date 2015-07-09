@@ -31,6 +31,7 @@
     double speed;
     int textDisplay;
     int numCows;
+    int again;
 }
 
 
@@ -38,6 +39,7 @@
     speed = 1; //start with train moving
     textDisplay = 0;
     numCows = (arc4random_uniform(4)+1); //random number of cows, 1-5
+    again = 0;
     
     if(self = [super initWithSize:size]){
         //initialize synthesizer
@@ -340,9 +342,12 @@
     tryAgainButton.name = @"level2";
     [_HUDLayer addChild:tryAgainButton];
     
-    AVSpeechUtterance *again = [[AVSpeechUtterance alloc] initWithString:@"Let's try Level 2 again"];
-    again.rate = 0.1;
-    [self.synthesizer speakUtterance:again];
+    if (again == 0) { //voice synthesis only occurs once
+        AVSpeechUtterance *againSpeech = [[AVSpeechUtterance alloc] initWithString:@"Let's try Level 2 again"];
+        againSpeech.rate = 0.1;
+        [self.synthesizer speakUtterance:againSpeech];
+    }
+    again++;
     
     instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear instructions
     instructionText.text = [NSString stringWithFormat: @" "];
@@ -352,10 +357,6 @@
 -(void)update:(NSTimeInterval) currentTime{
     if(cow1.position.x <= 0){   //call tryAgain function once cows start to disappear off screen
         [self tryAgain];
-        
-        //stop repeating instructions
-        [instructionTimer invalidate];
-        instructionTimer = nil;
     }
 }
 
