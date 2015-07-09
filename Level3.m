@@ -401,9 +401,7 @@
         [self hint];
         [self labels];
     }
-    else if(chances == 0) {
-     //   [self hint];
-     //   [self help];
+    else if(chances <= 0) {
         [self tryAgain];
     }
 }
@@ -440,6 +438,10 @@
 
 
 -(void)tryAgain { //replay level 3 if not completed
+    [text removeFromParent];   //clear text
+    text = [SKNode node];
+    [self addChild:text];
+    
     tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     tryAgainButton.text = @"Try Again";
     tryAgainButton.fontColor = [SKColor blueColor];
