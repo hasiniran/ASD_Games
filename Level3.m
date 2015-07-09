@@ -32,6 +32,7 @@
     SKLabelNode *purple;
     SKLabelNode *blue;
     SKLabelNode *yellow;
+    SKLabelNode *tryAgainButton;
     double speed;
     int count;
     int check; //keep track of train states -- check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
@@ -401,8 +402,9 @@
         [self labels];
     }
     else if(chances == 0) {
-        [self hint];
-        [self help];
+     //   [self hint];
+     //   [self help];
+        [self tryAgain];
     }
 }
 
@@ -434,6 +436,16 @@
 
     count = 0;
     count2 = 0;
+}
+
+
+-(void)tryAgain { //replay level 3 if not completed
+    tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    tryAgainButton.text = @"Try Again";
+    tryAgainButton.fontColor = [SKColor blueColor];
+    tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    tryAgainButton.name = @"level3";
+    [text addChild:tryAgainButton];
 }
 
 
@@ -499,6 +511,12 @@
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         }
+    }
+    if ([button.name isEqual: @"level3"]) {
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
     }
     if ([button.name isEqualToString:@"Skip"]) { //not else if so that the skip button can be accessed throughout the level, even after the level has been started
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
