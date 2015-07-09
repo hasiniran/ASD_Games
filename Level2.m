@@ -383,6 +383,10 @@
         Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
+        
+        //stop repeating instructions
+        [instructionTimer invalidate];
+        instructionTimer = nil;
     }
     else if ([button.name isEqualToString:@"level2"]) { //transition to level 2 again
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
