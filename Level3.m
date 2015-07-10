@@ -441,7 +441,12 @@
     [text removeFromParent];   //clear text
     text = [SKNode node];
     [self addChild:text];
-    
+/*
+    //disable touches on the people (but not the words) -- DOES NOT WORK!!!
+    purpleBoy.userInteractionEnabled = NO;
+    blueBoy.userInteractionEnabled = NO;
+    yellowBoy.userInteractionEnabled = NO;
+*/
     tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     tryAgainButton.text = @"Try Again";
     tryAgainButton.fontColor = [SKColor blueColor];
@@ -455,72 +460,74 @@
     CGPoint location = [[touches anyObject] locationInNode:self];
     button = [self nodeAtPoint:location];
     
-    if(check == 1) {
-        if([button.name  isEqual: @"purpleBoy"]) {
-            speed = 1;
-            [purpleBoy removeFromParent];
-            [self addHeadToTrain];
-            count2 = 0;
+    if (chances > 0) { //disable people clicks after using up all 3 tries
+        if(check == 1) {
+            if([button.name  isEqual: @"purpleBoy"]) {
+                speed = 1;
+                [purpleBoy removeFromParent];
+                [self addHeadToTrain];
+                count2 = 0;
+            }
+            else if([button.name  isEqual: @"yellowBoy"]) {
+                [text removeFromParent];   //erase and re-add text
+                text = [SKNode node];
+                [self addChild:text];
+                [self incorrect];
+            }
+            else if([button.name  isEqual: @"blueBoy"]) {
+                [text removeFromParent];   //erase and re-add text
+                text = [SKNode node];
+                [self addChild:text];
+                [self incorrect];
+            }
         }
-        else if([button.name  isEqual: @"yellowBoy"]) {
-            [text removeFromParent];   //erase and re-add text
-            text = [SKNode node];
-            [self addChild:text];
-            [self incorrect];
+        else if(check == 2) {
+            if([button.name  isEqual: @"blueBoy"]) { //blue chck
+                [blueBoy removeFromParent];
+                [self addHeadToTrain];
+                count2 = 0;
+            }
+            else if([button.name  isEqual: @"yellowBoy"]) {
+                [text removeFromParent];   //erase and re-add text
+                text = [SKNode node];
+                [self addChild:text];
+                [self incorrect];
+            }
         }
-        else if([button.name  isEqual: @"blueBoy"]) {
-            [text removeFromParent];   //erase and re-add text
-            text = [SKNode node];
-            [self addChild:text];
-            [self incorrect];
+        else if(check == 3) {
+            if([button.name  isEqual: @"yellowBoy"]) {
+                [yellowBoy removeFromParent];
+                [self addHeadToTrain];
+        
+                [_bgLayer removeFromParent];
+                _bgLayer = [SKNode node];
+                [self addChild: _bgLayer];
+        
+                [self ScrollingForeground];
+                [self ScrollingBackground];
+        
+                [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+        
+                count2 = 0;
+                count = 0;
+            }
         }
     }
-    else if(check == 2) {
-        if([button.name  isEqual: @"blueBoy"]) { //blue chck
-            [blueBoy removeFromParent];
-            [self addHeadToTrain];
-            count2 = 0;
-        }
-        else if([button.name  isEqual: @"yellowBoy"]) {
-            [text removeFromParent];   //erase and re-add text
-            text = [SKNode node];
-            [self addChild:text];
-            [self incorrect];
-        }
-    }
-    else if(check == 3) {
-        if([button.name  isEqual: @"yellowBoy"]) {
-            [yellowBoy removeFromParent];
-            [self addHeadToTrain];
-        
-            [_bgLayer removeFromParent];
-            _bgLayer = [SKNode node];
-            [self addChild: _bgLayer];
-        
-            [self ScrollingForeground];
-            [self ScrollingBackground];
-        
-            [station.physicsBody applyForce:CGVectorMake(-35, 0)];
-        
-            count2 = 0;
-            count = 0;
-        }
-    }
-    else if(check == 4) {
-        if ([button.name isEqual: @"level4"]) {
+    
+    //clicks to level transitions
+    if ([button.name isEqual: @"level4"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
-        }
     }
-    if ([button.name isEqual: @"level3"]) {
+    else if ([button.name isEqual: @"level3"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level3 *scene = [Level3 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
-    if ([button.name isEqualToString:@"Skip"]) { //not else if so that the skip button can be accessed throughout the level, even after the level has been started
+    else if ([button.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
