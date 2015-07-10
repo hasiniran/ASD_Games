@@ -441,12 +441,7 @@
     [text removeFromParent];   //clear text
     text = [SKNode node];
     [self addChild:text];
-/*
-    //disable touches on the people (but not the words) -- DOES NOT WORK!!!
-    purpleBoy.userInteractionEnabled = NO;
-    blueBoy.userInteractionEnabled = NO;
-    yellowBoy.userInteractionEnabled = NO;
-*/
+
     tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     tryAgainButton.text = @"Try Again";
     tryAgainButton.fontColor = [SKColor blueColor];
