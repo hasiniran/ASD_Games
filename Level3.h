@@ -14,8 +14,14 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Level4.h" //transitions to level 4
 
+//Voice Synthesis imports
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface Level3 : SKScene {}
+
+
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
 
 
 @end

@@ -27,6 +27,7 @@
     SKNode *button;
     SKLabelNode *skip;
     SKLabelNode *nextButton;
+    SKLabelNode *level;
     SKLabelNode *display;
     SKLabelNode *lives;
     SKLabelNode *purple;
@@ -48,6 +49,9 @@
     chances = 3; //lives
     
     if(self = [super initWithSize:size]) {
+        //initialize synthesizer
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        
         //add layers
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -85,6 +89,15 @@
         skip.position = CGPointMake(850,600);
         skip.zPosition = 50;
         [_HUDLayer addChild:skip];
+        
+        level = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        level.name = @"levelname";
+        level.fontSize = 40;
+        level.fontColor = [SKColor redColor];
+        level.position = CGPointMake(500,500);
+        level.zPosition = 50;
+        level.text = @"Level 3";
+        [text addChild:level];
     }
     return self;
 }
@@ -155,12 +168,16 @@
 
 
 -(void)nextLevel {
-        nextButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        nextButton.text = @"Go to Level 4";
-        nextButton.fontColor = [SKColor redColor];
-        nextButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-        nextButton.name = @"level4";
-        [text addChild:nextButton];
+    nextButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    nextButton.text = @"Go to Level 4";
+    nextButton.fontColor = [SKColor redColor];
+    nextButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    nextButton.name = @"level4";
+    [text addChild:nextButton];
+    
+    AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! Continue on to level 4."];
+    next.rate = 0.1;
+    [self.synthesizer speakUtterance:next];
 }
 
 
@@ -178,10 +195,14 @@
         [self addChild: _gameLayer];
         
         display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        display.text = @"Say the color of this passenger to pick him up";
+        display.text = @"Say the color of this passenger to pick him up.";
         display.fontColor = [SKColor purpleColor];
         display.position = CGPointMake(self.size.width/2, self.size.height/2);
         [text addChild:display];
+        
+        AVSpeechUtterance *instruction2a = [[AVSpeechUtterance alloc] initWithString:@"Level 3. Say the color of this passenger to pick him up."];
+        instruction2a.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction2a];
         
         [self ScrollingForeground];
         [self train];
@@ -337,16 +358,28 @@
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
     if (chances == 2) {
         display.text = @"What color is this passenger's hat?";
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"What color is this passenger's hat?"];
+        instruction3.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction3];
     }
     else if (chances == 1) {
         if(check == 1) {
             display.text = @"Can you say he is wearing PURPLE?";
+            AVSpeechUtterance *instruction4p = [[AVSpeechUtterance alloc] initWithString:@"Can you say he is wearing PURPLE?"];
+            instruction4p.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction4p];
         }
         else if(check == 2) {
             display.text = @"Can you say he is wearing BLUE?";
+            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:@"Can you say he is wearing BLUE?"];
+            instruction4b.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction4b];
         }
         else if(check == 3) {
             display.text = @"Can you say he is wearing YELLOW?";
+            AVSpeechUtterance *instruction4y = [[AVSpeechUtterance alloc] initWithString:@"Can you say he is wearing YELLOW?"];
+            instruction4y.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction4y];
         }
     }
     
@@ -416,6 +449,10 @@
     [text removeFromParent];   //clear text
     text = [SKNode node];
     [self addChild:text];
+    
+    AVSpeechUtterance *againSpeech = [[AVSpeechUtterance alloc] initWithString:@"Let's try Level 3 again"];
+    againSpeech.rate = 0.1;
+    [self.synthesizer speakUtterance:againSpeech];
 
     tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     tryAgainButton.text = @"Try Again";
@@ -521,6 +558,10 @@
             display.fontColor = [SKColor blueColor];
             display.position = CGPointMake(self.size.width/2, self.size.height/2);
             [text addChild:display];
+            
+            AVSpeechUtterance *instruction2b = [[AVSpeechUtterance alloc] initWithString:@"Say the color of this passenger to pick him up."];
+            instruction2b.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction2b];
         
             [self hint];
         }
@@ -538,6 +579,10 @@
             display.position = CGPointMake(self.size.width/2, self.size.height/2);
             [text addChild:display];
         
+            AVSpeechUtterance *instruction2c = [[AVSpeechUtterance alloc] initWithString:@"Say the color of this passenger to pick him up."];
+            instruction2c.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction2c];
+            
             [self hint];
         }
     
