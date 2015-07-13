@@ -11,66 +11,71 @@
 #import "Level4.h"
 #import <AVFoundation/AVFoundation.h>
 
-@implementation Level4{
-    SKSpriteNode *_train;
+
+@implementation Level4 {
+    SKSpriteNode *train;
     SKSpriteNode *barn;
     SKSpriteNode *rail;
     SKSpriteNode *cow;
     SKSpriteNode *pig;
     SKSpriteNode *horse;
-    AVAudioPlayer *_audio;
-    SKNode *_bgLayer;   //Permanent Layer (Mountains)
-    SKNode *_HUDLayer;  //Static Layer
-    SKNode *_gameLayer; //Moving Layer
-    SKNode *_text;      //TextLayer
+    AVAudioPlayer *audio;
+    SKNode *_bgLayer;
+    SKNode *_HUDLayer;
+    SKNode *_gameLayer;
+    SKNode *text;
     SKLabelNode *skip;
     double speed;
     int count;
-    int state; //keep track of train states
+    int state;
     int count2;
     int chances;
-    //check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
 }
 
-/******MAIN******/
--(id)initWithSize:(CGSize)size{
+
+-(id)initWithSize:(CGSize)size {
     count = 0;
     state = 0;
     speed = 1;
     chances = 3;
-    if(self = [super initWithSize:size]){
+    
+    if(self = [super initWithSize:size]) {
+        //add layers
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
         [self addChild: _gameLayer];
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
-        _text = [SKNode node];
-        [self addChild:_text];
+        text = [SKNode node];
+        [self addChild:text];
         
+        //add objects
         [self addMountain];
-        [self initScrollingClouds];
+        //[self ScrollingForeground]; -- combine this with a stop and addTracks function later
+        [self ScrollingBackground];
         [self addBarn];
         [self addTracks];
         [self train];
-        [_train.physicsBody applyForce:CGVectorMake(65, 0)];
+        [train.physicsBody applyForce:CGVectorMake(65, 0)];
         
-        
+        //skip button
         skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        skip.text = @"SKIP"; //Set the button text
+        skip.text = @"SKIP";
         skip.name = @"Skip";
         skip.fontSize = 40;
         skip.fontColor = [SKColor orangeColor];
         skip.position = CGPointMake(850,600);
         skip.zPosition = 50;
-        [_HUDLayer addChild:skip]; //add node to screen
+        [_HUDLayer addChild:skip];
     }
     return self;
 }
 
-/******STATIONARY OBJECTS**********/
--(void)addMountain{
+
+-(void)addMountain {
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"background_mount.png"];
+    
     for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
         [sprite setScale:2];
@@ -81,20 +86,10 @@
     }
 }
 
--(void)addClouds{
-    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];
-    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
-        [sprite setScale:1];
-        sprite.zPosition=-20;
-        sprite.anchorPoint=CGPointZero;
-        sprite.position=CGPointMake(i*sprite.size.width, 500);
-        [_bgLayer addChild:sprite];
-    }
-}
 
--(void)addTracks{
+-(void)addTracks {
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Rail.png"];
+    
     for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
         [sprite setScale:1];
@@ -105,8 +100,9 @@
     }
 }
 
--(void)addBarn{
-    barn = [SKSpriteNode spriteNodeWithImageNamed:@"BarnLarge.png"];//change to train png
+
+-(void)addBarn {
+    barn = [SKSpriteNode spriteNodeWithImageNamed:@"BarnLarge.png"];
     barn.position = CGPointMake(550, 300);
     barn.zPosition = 5;
     barn.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
@@ -116,19 +112,21 @@
     [_gameLayer addChild:barn];
 }
 
--(void)train{   //Moving object
-    _train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];//change to train png
-    _train.position = CGPointMake(50, 100);
-    _train.zPosition = 50;
-    _train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
-    _train.physicsBody.dynamic = YES;
-    _train.physicsBody.affectedByGravity = NO;
-    _train.physicsBody.allowsRotation = NO;
-    [_gameLayer addChild:_train];
+
+-(void)train {
+    train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];
+    train.position = CGPointMake(50, 100);
+    train.zPosition = 50;
+    train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    train.physicsBody.dynamic = YES;
+    train.physicsBody.affectedByGravity = NO;
+    train.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:train];
 }
 
--(void)addCow{
-    cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];//change to train png
+
+-(void)addCow {
+    cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
     cow.name = @"cow";
     cow.position = CGPointMake(530, 280);
     cow.zPosition = -5;
@@ -137,8 +135,10 @@
     cow.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:cow];
 }
--(void)addPig{
-    pig= [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];//change to train png
+
+
+-(void)addPig {
+    pig= [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];
     [pig setScale:.3];
     pig.name = @"pig";
     pig.position = CGPointMake(470, 280);
@@ -148,8 +148,10 @@
     pig.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:pig];
 }
--(void)addHorse{
-    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];//change to train png
+
+
+-(void)addHorse {
+    horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];
     horse.name = @"horse";
     [horse setScale:.4];
     horse.position = CGPointMake(500, 330);
@@ -161,14 +163,14 @@
     [_gameLayer addChild:horse];
 }
 
-/******MOVING OBJECTS**********/
--(void)initScrollingTracks{ //Scrolling tracks function
+
+-(void)ScrollingForeground { //Scrolling tracks
     SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"]; //change runway to train tracks
     SKAction *moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:.02*speed*groundTexture.size.width*2];
     SKAction *resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
     SKAction *moveGroundSpriteForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
     
-    for(int i=0; i<2 +self.frame.size.width/(groundTexture.size.width);i++){      //place image
+    for(int i=0; i<2 +self.frame.size.width/(groundTexture.size.width);i++) {      //place image
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
         [sprite setScale:1];
         sprite.zPosition = 10;
@@ -179,12 +181,14 @@
     }
 }
 
--(void)initScrollingClouds{   //scrolling CLOUDS function
+
+-(void)ScrollingBackground {   //scrolling clouds
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];        //reuse sky image
     SKAction *moveBg= [SKAction moveByX:-backgroundTexture.size.width y:0 duration: 0.1*speed*backgroundTexture.size.width]; //move Bg
     SKAction *resetBg = [SKAction moveByX:backgroundTexture.size.width*2 y:0 duration:0];   //reset background
     SKAction *moveBackgroundForever = [SKAction repeatActionForever:[SKAction sequence:@[moveBg, resetBg]]];    //repeat moveBg and resetBg
-    for(int i =0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++){     //place image
+    
+    for(int i =0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {     //place image
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
         [sprite setScale:1];
         sprite.zPosition=-20;
@@ -195,50 +199,59 @@
     }
 }
 
--(void)stopTrain{
+
+-(void)stopTrain {
     state++;    //train is stopped
-    _train.physicsBody.velocity = CGVectorMake(0, 0);
+    train.physicsBody.velocity = CGVectorMake(0, 0);
 }
 
--(void)spawnAnimals{
+
+-(void)spawnAnimals {
     [self addHorse];
     [self addCow];
     [self addPig];
 }
 
--(void)animalSound{
+
+-(void)animalSound {
     // Construct URL to sound file
     NSString *path;
-    if(state == 2){
+    if(state == 2) {
         path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
     }
-    if(state == 4){
+    if(state == 4) {
         path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
     }
-    if(state == 6){
+    if(state == 6) {
         path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
     }
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
     
     // Create audio player object and initialize with URL to sound
-    _audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
-    [_audio play];
+    audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    [audio play];
 }
 
--(void)danceHorse{
+
+-(void)danceHorse {
     horse.physicsBody.allowsRotation = YES;
     [horse.physicsBody applyAngularImpulse:5];
 }
--(void)dancePig{
+
+
+-(void)dancePig {
     pig.physicsBody.allowsRotation = YES;
     [pig.physicsBody applyAngularImpulse:5];
 }
--(void)danceCow{
+
+
+-(void)danceCow {
     cow.physicsBody.allowsRotation = YES;
     [cow.physicsBody applyAngularImpulse:5];
 }
 
--(void)horseButton{
+
+-(void)horseButton {
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Horse"; //Set the button text
     go.name = @"Horse";
@@ -250,7 +263,9 @@
     go.zPosition = 50;
     [_gameLayer addChild:go]; //add node to screen
 }
--(void)pigButton{
+
+
+-(void)pigButton {
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Pig"; //Set the button text
     go.name = @"Pig";
@@ -262,7 +277,9 @@
     go.zPosition = 50;
     [_gameLayer addChild:go]; //add node to screen
 }
--(void)cowButton{
+
+
+-(void)cowButton {
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     go.text = @"Cow"; //Set the button text
     go.name = @"Cow";
@@ -274,7 +291,9 @@
     go.zPosition = 50;
     [_gameLayer addChild:go]; //add node to screen
 }
--(void)nextLevel{
+
+
+-(void)nextLevel {
     NSString * nxtLevel= @"Go to Level 5";
     SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     Button.text = nxtLevel;
@@ -284,24 +303,31 @@
     Button.name = @"level5";
     [self addChild:Button];
 }
--(void)hint{
-    SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];//change to train png
+
+
+-(void)hint {
+    SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
+    
     if(state == 3){
         arrow.position = CGPointMake(530, 500);
     }
-    if(state == 5|| state == 4){
+    if(state == 5 || state == 4){
         arrow.position = CGPointMake(290, 270);//pig
     }
-    if(state == 7|| state == 6){
+    if(state == 7 || state == 6){
         arrow.position = CGPointMake(800, 280); //cow
     }
+    
     [arrow setScale:.5];
-    [_text addChild:arrow];
+    [text addChild:arrow];
     
 }
--(void)hint2{
+
+
+-(void)hint2 {
     SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     NSString *nxtLevel;
+    
     if(state == 3){
         nxtLevel= @"HORSE";
         Button.position = CGPointMake(630, 510);
@@ -318,9 +344,11 @@
         Button.fontColor = [SKColor grayColor];
     }
     Button.text = nxtLevel;
-    [_text addChild:Button];
+    [text addChild:Button];
 }
--(void)question{
+
+
+-(void)question {
     NSString *question= @"Say the animal that makes this noise";
     SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     display.text=question;
@@ -329,9 +357,11 @@
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0]]];
     [display runAction:flashAction];
     
-    [_text addChild:display];
+    [text addChild:display];
 }
--(void)tryAgain{
+
+
+-(void)tryAgain {
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
     lives.fontColor = [SKColor redColor];
@@ -339,37 +369,40 @@
     
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:1], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
-    if(chances == 2){
+    
+    if(chances == 2) {
         [self hint];
     }
-    else if(chances == 1){
+    else if(chances == 1) {
         [self hint];
         [self hint2];
     }
-    else if(chances <= 0){
-        [_text removeFromParent];//clear text
+    else if(chances <= 0) {
+        [text removeFromParent];//clear text
         state=9;
     }
     
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
-    [_text addChild:lives];
+    [text addChild:lives];
 }
--(void)update:(NSTimeInterval)currentTime{
-    if(state == 0){ //train is moving
-        if(_train.position.x >= 350){   //call next level function once train reaches right side of screen
+
+
+-(void)update:(NSTimeInterval)currentTime {
+    if(state == 0) { //train is moving
+        if(train.position.x >= 350){   //call next level function once train reaches right side of screen
             [self stopTrain];
             [self spawnAnimals];
         }
     }
-    if(state ==1){  //train is stopped
-        if(count >= 10){
+    if(state == 1) {  //train is stopped
+        if(count >= 10) {
             cow.physicsBody.velocity = CGVectorMake(0, 0);
             pig.physicsBody.velocity = CGVectorMake(0, 0);
             horse.physicsBody.velocity = CGVectorMake(0, 0);
             state++;
-            count =0;
+            count = 0;
         }
-        else{
+        else {
             count++;
             [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
             [pig.physicsBody applyImpulse:CGVectorMake(-1, .5)];
@@ -379,7 +412,7 @@
             [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
         }
     }
-    if(state == 2){   //animals out of barn
+    if(state == 2) {   //animals out of barn
         //display animals sounds
         //ask question
         [self question];
@@ -390,11 +423,11 @@
         [self cowButton];
         state++; //make sure animal sound does not play infinitely
     }
-    if(state == 3){
+    if(state == 3) {
         //code in touchesBegan. check for horse touch
         //clear text
     }
-    if(state == 4){ //text is cleared. Make horse dance
+    if(state == 4) { //text is cleared. Make horse dance
         [self danceHorse];
         [self question];
         [self animalSound]; //pig sound
@@ -406,10 +439,10 @@
         }
         state++;
     }
-    if(state == 5){
+    if(state == 5) {
         //check for pig touch
     }
-    if(state == 6){//check for pig
+    if(state == 6) {//check for pig
         [self dancePig];
         [self question];
         [self animalSound]; //cow sound
@@ -425,64 +458,66 @@
         //[self nextLevel];
         
     }
-    if(state == 7){
-        //check for pig touch
+    if(state == 7) {
+        //check for cow touch
     }
-    if(state == 8){//check for pig
+    if(state == 8) {//check for cow
         //count++;
         [self danceCow];
         state++;
     }
-    if(state == 9){//check for pig
-        _train.physicsBody.velocity = CGVectorMake(55, 0);
-        if(_train.position.x >= 750){
+    if(state == 9) {//level complete
+        train.physicsBody.velocity = CGVectorMake(55, 0);
+        if(train.position.x >= 750){
             [self nextLevel];
-            _train.physicsBody.velocity = CGVectorMake(0, 0);
+            train.physicsBody.velocity = CGVectorMake(0, 0);
             state++;
         }
     }
 }
+
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if(state==3 && [node.name isEqual:@"Horse"]){
-        [_text removeFromParent];//clear text
-        _text = [SKNode node];
-        [self addChild:_text];
+    if(state==3 && [node.name isEqual:@"Horse"]) {
+        [text removeFromParent];//clear text
+        text = [SKNode node];
+        [self addChild:text];
         state++;
     }
-    if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])){
+    if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])) {
         chances--;
         [self tryAgain];
     }
-    if(state==5 && [node.name isEqual: @"Pig"]){
-        [_text removeFromParent];//clear text
-        _text = [SKNode node];
-        [self addChild:_text];
+    if(state==5 && [node.name isEqual: @"Pig"]) {
+        [text removeFromParent];//clear text
+        text = [SKNode node];
+        [self addChild:text];
         state++;
     }
-    if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])){
+    if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])) {
         chances--;
         [self tryAgain];
     }
-    if(state==7 && [node.name isEqual: @"Cow"]){
-        [_text removeFromParent];//clear text
-        _text = [SKNode node];
-        [self addChild:_text];
+    if(state==7 && [node.name isEqual: @"Cow"]) {
+        [text removeFromParent];//clear text
+        text = [SKNode node];
+        [self addChild:text];
         state++;
     }
-    if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])){
+    if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])) {
         chances--;
         [self tryAgain];
     }
-    
-    if(state==10 && [node.name isEqual: @"level5"]){
+    if(state==10 && [node.name isEqual: @"level5"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
+    
     if ([node.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
