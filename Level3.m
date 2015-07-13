@@ -270,43 +270,6 @@
 }
 
 
--(void)labels {
-    if(check == 1) {
-        purpleBoy.position = CGPointMake(800, 170);
-        purple = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        purple.text = @"Purple"; //Set the button text
-        purple.name = @"Purple";
-        purple.fontSize = 20;
-        purple.fontColor = [SKColor purpleColor];
-        purple.position = CGPointMake(800,250);
-        purple.zPosition = 50;
-        [text addChild:purple]; //add node to screen
-    }
-    else if(check == 2) {
-        blueBoy.position = CGPointMake(700, 167);
-        blue = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        blue.text = @"Blue"; //Set the button text
-        blue.name = @"Blue";
-        blue.fontSize = 20;
-        blue.fontColor = [SKColor blueColor];
-        blue.position = CGPointMake(700,250);
-        blue.zPosition = 50;
-        [text addChild:blue]; //add node to screen
-    }
-    else if(check == 3) {
-        yellowBoy.position = CGPointMake(600, 170);
-        yellow = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        yellow.text = @"Yellow"; //Set the button text
-        yellow.name = @"Yellow";
-        yellow.fontSize = 20;
-        yellow.fontColor = [SKColor yellowColor];
-        yellow.position = CGPointMake(600,250);
-        yellow.zPosition = 50;
-        [text addChild:yellow]; //add node to screen
-    }
-}
-
-
 -(void)station {
     station = [SKSpriteNode spriteNodeWithImageNamed:@"Station2.png"];
     station.position = CGPointMake(850, 160);
@@ -371,8 +334,21 @@
     chances--;
     
     display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    display.text = @"Try Again. Say the color of this passenger";
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
+    if (chances == 2) {
+        display.text = @"What color is this passenger's hat?";
+    }
+    else if (chances == 1) {
+        if(check == 1) {
+            display.text = @"Can you say he is wearing PURPLE?";
+        }
+        else if(check == 2) {
+            display.text = @"Can you say he is wearing BLUE?";
+        }
+        else if(check == 3) {
+            display.text = @"Can you say he is wearing YELLOW?";
+        }
+    }
     
     if(check == 1)
         display.fontColor = [SKColor purpleColor];
@@ -399,7 +375,6 @@
     }
     else if(chances == 1) {
         [self hint];
-        [self labels];
     }
     else if(chances <= 0) {
         [self tryAgain];
@@ -547,9 +522,6 @@
             display.position = CGPointMake(self.size.width/2, self.size.height/2);
             [text addChild:display];
         
-            //display arrow
-            if(chances == 1)
-                [self labels];
             [self hint];
         }
     
@@ -566,9 +538,6 @@
             display.position = CGPointMake(self.size.width/2, self.size.height/2);
             [text addChild:display];
         
-            //display arrow
-            if(chances == 1)
-                [self labels];
             [self hint];
         }
     
