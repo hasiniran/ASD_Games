@@ -52,11 +52,10 @@
         [self addChild:text];
         
         //add objects
-        [self addMountain];
+        [self mountain];
         [self ScrollingForeground];
         [self ScrollingBackground];
-        [self addBarn];
-        //[self addTracks];
+        [self barn];
         [self train];
         [train.physicsBody applyForce:CGVectorMake(65, 0)];
         
@@ -74,7 +73,7 @@
 }
 
 
--(void)addMountain {
+-(void)mountain {
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"background_mount.png"];
     
     for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
@@ -88,7 +87,7 @@
 }
 
 
--(void)addClouds {
+-(void)clouds {
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];
     
     for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
@@ -102,7 +101,7 @@
 }
 
 
--(void)addTracks {
+-(void)tracks {
     SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Rail.png"];
     
     for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
@@ -116,14 +115,15 @@
 }
 
 
--(void)addBarn {
+-(void)barn {
     barn = [SKSpriteNode spriteNodeWithImageNamed:@"BarnLarge.png"];
-    barn.position = CGPointMake(550, 300);
+    [barn setScale:1.5]; //make barn proportionately larger
+    barn.position = CGPointMake(550, 330);
     barn.zPosition = 5;
     barn.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     barn.physicsBody.affectedByGravity = NO;
     barn.physicsBody.allowsRotation = NO;
-    barn.physicsBody.dynamic=NO;
+    barn.physicsBody.dynamic = NO;
     [_gameLayer addChild:barn];
 }
 
@@ -140,10 +140,10 @@
 }
 
 
--(void)addCow {
+-(void)cow {
     cow = [SKSpriteNode spriteNodeWithImageNamed:@"Cow.png"];
     cow.name = @"cow";
-    cow.position = CGPointMake(530, 280);
+    cow.position = CGPointMake(740, 280);
     cow.zPosition = -5;
     cow.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     cow.physicsBody.affectedByGravity = NO;
@@ -152,11 +152,11 @@
 }
 
 
--(void)addPig {
+-(void)pig {
     pig= [SKSpriteNode spriteNodeWithImageNamed:@"Pig.png"];
     [pig setScale:.3];
     pig.name = @"pig";
-    pig.position = CGPointMake(470, 280);
+    pig.position = CGPointMake(380, 340);
     pig.zPosition = -5;
     pig.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     pig.physicsBody.affectedByGravity = NO;
@@ -165,11 +165,11 @@
 }
 
 
--(void)addHorse {
+-(void)horse {
     horse = [SKSpriteNode spriteNodeWithImageNamed:@"Horse.png"];
     horse.name = @"horse";
     [horse setScale:.4];
-    horse.position = CGPointMake(500, 330);
+    horse.position = CGPointMake(720, 330);
     horse.zPosition = -5;
     horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     horse.physicsBody.affectedByGravity = NO;
@@ -221,10 +221,10 @@
 }
 
 
--(void)spawnAnimals {
-    [self addHorse];
-    [self addCow];
-    [self addPig];
+-(void)animals {
+    [self cow];
+    [self pig];
+    [self horse];
 }
 
 
@@ -410,12 +410,12 @@
             _bgLayer = [SKNode node];
             [self addChild: _bgLayer];
             
-            [self addTracks];
-            [self addMountain];
-            [self addClouds];
-            [self addBarn];
+            [self mountain];
+            [self clouds];
+            [self tracks];
+            [self barn];
             [self stopTrain];
-            [self spawnAnimals];
+            [self animals];
         }
     }
     if(state == 1) {  //train is stopped
