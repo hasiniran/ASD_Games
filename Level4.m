@@ -8,6 +8,7 @@
 //
 
 
+#import <Foundation/Foundation.h>
 #import "Level4.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -52,10 +53,10 @@
         
         //add objects
         [self addMountain];
-        //[self ScrollingForeground]; -- combine this with a stop and addTracks function later
+        [self ScrollingForeground];
         [self ScrollingBackground];
         [self addBarn];
-        [self addTracks];
+        //[self addTracks];
         [self train];
         [train.physicsBody applyForce:CGVectorMake(65, 0)];
         
@@ -83,6 +84,20 @@
         sprite.anchorPoint=CGPointZero;
         sprite.position=CGPointMake(i*sprite.size.width, 100);
         [_HUDLayer addChild:sprite];
+    }
+}
+
+
+-(void)addClouds {
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"Clouds.png"];
+    
+    for (int i=0; i<2+self.frame.size.width/(backgroundTexture.size.width*2); i++) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+        [sprite setScale:1];
+        sprite.zPosition=-20;
+        sprite.anchorPoint=CGPointZero;
+        sprite.position=CGPointMake(i*sprite.size.width, 500);
+        [_bgLayer addChild:sprite];
     }
 }
 
@@ -177,7 +192,7 @@
         sprite.anchorPoint = CGPointZero;
         sprite.position = CGPointMake(i*sprite.size.width, 0);
         [sprite runAction:moveGroundSpriteForever];
-        [_gameLayer addChild:sprite];
+        [_bgLayer addChild:sprite];
     }
 }
 
@@ -389,7 +404,16 @@
 
 -(void)update:(NSTimeInterval)currentTime {
     if(state == 0) { //train is moving
-        if(train.position.x >= 350){   //call next level function once train reaches right side of screen
+        if(train.position.x >= 350){ //stop train movement in front of barn
+            [_bgLayer removeFromParent];
+            
+            _bgLayer = [SKNode node];
+            [self addChild: _bgLayer];
+            
+            [self addTracks];
+            [self addMountain];
+            [self addClouds];
+            [self addBarn];
             [self stopTrain];
             [self spawnAnimals];
         }
