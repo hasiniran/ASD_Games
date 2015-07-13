@@ -415,36 +415,6 @@
 }
 
 
--(void)help {
-    speed = 1;
-    
-    if(check == 1) {
-        [purpleBoy removeFromParent];
-        [self addHeadToTrain];
-    }
-    else if(check == 2) {
-        [blueBoy removeFromParent];
-        [self addHeadToTrain];
-    }
-    else if(check == 3) {
-        [yellowBoy removeFromParent];
-        [self addHeadToTrain];
-    }
-    
-    [_bgLayer removeFromParent];
-    _bgLayer = [SKNode node];
-    [self addChild: _bgLayer];
-    
-    [self ScrollingForeground];
-    [self ScrollingBackground];
-    
-    [station.physicsBody applyForce:CGVectorMake(-35, 0)];
-
-    count = 0;
-    count2 = 0;
-}
-
-
 -(void)tryAgain { //replay level 3 if not completed
     [text removeFromParent];   //clear text
     text = [SKNode node];
@@ -513,7 +483,7 @@
                 [self ScrollingForeground];
                 [self ScrollingBackground];
         
-                [station.physicsBody applyForce:CGVectorMake(-35, 0)];
+                [station.physicsBody applyImpulse:CGVectorMake(-2, 0)]; //"train" starts moving again so station has to move away
         
                 count2 = 0;
                 count = 0;
