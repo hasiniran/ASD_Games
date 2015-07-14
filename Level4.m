@@ -249,24 +249,7 @@
     [audio play];
 }
 */
-/*
--(void)danceHorse {
-    horse.physicsBody.allowsRotation = YES;
-    [horse.physicsBody applyAngularImpulse:5];
-}
 
-
--(void)dancePig {
-    pig.physicsBody.allowsRotation = YES;
-    [pig.physicsBody applyAngularImpulse:5];
-}
-
-
--(void)danceCow {
-    cow.physicsBody.allowsRotation = YES;
-    [cow.physicsBody applyAngularImpulse:5];
-}
-*/
 
 //buttons for each animal to register click -- placed over the sprite of the animal
 -(void)horseButton {
@@ -323,22 +306,21 @@
 }
 
 
--(void)hint {
+-(void)hint { //points arrow at animal to be chosen
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
     
-    if(state == 3){
-        arrow.position = CGPointMake(530, 500);
+    if(state == 3){ //horse
+        arrow.position = CGPointMake(780, 480);
     }
-    if(state == 5 || state == 4){
-        arrow.position = CGPointMake(290, 270);//pig
+    if(state == 4 || state == 5){
+        arrow.position = CGPointMake(280, 360);//pig
     }
-    if(state == 7 || state == 6){
-        arrow.position = CGPointMake(800, 280); //cow
+    if(state == 6 || state == 7){
+        arrow.position = CGPointMake(945, 310); //cow
     }
     
-    [arrow setScale:.5];
+    [arrow setScale:.8];
     [text addChild:arrow];
-    
 }
 
 /*
@@ -393,11 +375,10 @@
     }
     else if(chances == 1) {
         [self hint];
-//        [self hint2];
     }
     else if(chances <= 0) {
         [text removeFromParent];//clear text
-        state=10;
+        [self tryAgain]; //try level again if all chances are used up
     }
     
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
@@ -405,7 +386,7 @@
 }
 
 
--(void)tryAgain { //replay level 3 if not completed
+-(void)tryAgain { //replay level 4 if not completed
     [text removeFromParent];   //clear text
     text = [SKNode node];
     [self addChild:text];
@@ -444,14 +425,11 @@
             state++;
             count = 0;
         }
-        else {
+        else { //move animals out from behind barn
             count++;
-            [cow.physicsBody applyImpulse:CGVectorMake(1, .5)];
-            [pig.physicsBody applyImpulse:CGVectorMake(-1, .5)];
+            [cow.physicsBody applyImpulse:CGVectorMake(2, -.5)];
+            [pig.physicsBody applyImpulse:CGVectorMake(-2, -.5)];
             [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
-            //sleep(.5);
-            [pig.physicsBody applyImpulse:CGVectorMake(-1, -1)];
-            [cow.physicsBody applyImpulse:CGVectorMake(1, -1)];
         }
     }
     if(state == 2) {   //animals out of barn
@@ -470,14 +448,12 @@
         //clear text
     }
     if(state == 4) { //text is cleared. Make horse dance
-//        [self danceHorse];
         [self question];
 //        [self animalSound]; //pig sound
         if(chances == 2)
             [self hint];
         else if(chances == 1){
             [self hint];
-//            [self hint2];
         }
         state++;
     }
@@ -485,39 +461,29 @@
         //check for pig touch
     }
     if(state == 6) {//check for pig
-//        [self dancePig];
         [self question];
 //        [self animalSound]; //cow sound
         if(chances == 2)
             [self hint];
         else if(chances == 1){
             [self hint];
-//            [self hint2];
        }
         state++;
-        //horse.physicsBody.angularVelocity = 0;
-        //display next level
-        //[self nextLevel];
-        
     }
     if(state == 7) {
         //check for cow touch
     }
     if(state == 8) {//check for cow
         //count++;
-//        [self danceCow];
         state++;
     }
-    if(state == 9) {//level complete
+    if(state == 9) { //level complete
         train.physicsBody.velocity = CGVectorMake(55, 0);
         if(train.position.x >= 750){
             [self nextLevel];
             train.physicsBody.velocity = CGVectorMake(0, 0);
             state++;
         }
-    }
-    if(state == 10) {//out of chances
-        [self tryAgain];
     }
 }
 
