@@ -406,8 +406,6 @@
 
 -(void)update:(NSTimeInterval)currentTime {
     if(state == 0) { //train is moving
-        //NSLog(@"State %i", state);
-        
         if(train.position.x >= 350){ //stop train movement in front of barn
             [_bgLayer removeFromParent];
             
@@ -423,8 +421,6 @@
         }
     }
     if(state == 1) {  //train is stopped
-        NSLog(@"State %i", state);
-        
         if(count >= 10) {
             cow.physicsBody.velocity = CGVectorMake(0, 0);
             pig.physicsBody.velocity = CGVectorMake(0, 0);
@@ -443,8 +439,6 @@
         }
     }
     if(state == 2) {   //animals out of barn
-        NSLog(@"State %i", state);
-        
         //display animals sounds
         //ask question
         [self question];
@@ -456,13 +450,10 @@
         state++; //make sure animal sound does not play infinitely
     }
     if(state == 3) {
-        NSLog(@"State %i", state);
         //code in touchesBegan. check for horse touch
         //clear text
     }
     if(state == 4) { //text is cleared. Make horse dance
-        NSLog(@"State %i", state);
-
 //        [self danceHorse];
         [self question];
 //        [self animalSound]; //pig sound
@@ -475,13 +466,9 @@
         state++;
     }
     if(state == 5) {
-        NSLog(@"State %i", state);
-        
         //check for pig touch
     }
     if(state == 6) {//check for pig
-        NSLog(@"State %i", state);
-
 //        [self dancePig];
         [self question];
 //        [self animalSound]; //cow sound
@@ -498,19 +485,14 @@
         
     }
     if(state == 7) {
-        NSLog(@"State %i", state);
         //check for cow touch
     }
     if(state == 8) {//check for cow
-        NSLog(@"State %i", state);
-        
         //count++;
 //        [self danceCow];
         state++;
     }
     if(state == 9) {//level complete
-        NSLog(@"State %i", state);
-        
         train.physicsBody.velocity = CGVectorMake(55, 0);
         if(train.position.x >= 750){
             [self nextLevel];
@@ -524,19 +506,6 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInNode:self];
     node = [self nodeAtPoint:location];
-    
-    if ([node.name isEqual: @"Horse"]) {
-        NSLog(@"Horse clicked");
-    }
-    else if ([node.name isEqual: @"Pig"]) {
-        NSLog(@"Pig clicked");
-    }
-    else if ([node.name isEqual: @"Cow"]) {
-        NSLog(@"Cow clicked");
-    }
-    else if ([node.name isEqual: @"barn"]) {
-        NSLog(@"Barn clicked");
-    }
     
     if(state==3 && [node.name isEqual:@"Horse"]) {
         [text removeFromParent];//clear text
