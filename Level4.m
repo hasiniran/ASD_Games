@@ -27,6 +27,9 @@
     SKNode *text;
     SKNode *node;
     SKLabelNode *skip;
+    SKLabelNode *horseButton;
+    SKLabelNode *pigButton;
+    SKLabelNode *cowButton;
     SKLabelNode *tryAgainButton;
     SKLabelNode *display;
     double speed;
@@ -257,44 +260,44 @@
 
 //buttons for each animal to register click -- placed over the sprite of the animal
 -(void)horseButton {
-    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    go.text = @"Horse";
-    go.name = @"Horse";
-    go.hidden = YES; //hide button so it appears to be just the image
-    go.yScale=2;
-    go.fontSize = 40;
-    go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(720,380); //x,y values of position are different from the object
-    go.zPosition = 50;
-    [_gameLayer addChild:go];
+    horseButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    horseButton.text = @"Horse";
+    horseButton.name = @"horseButton";
+    horseButton.hidden = YES; //hide button so it appears to be just the image
+    horseButton.yScale=2;
+    horseButton.fontSize = 40;
+    horseButton.fontColor = [SKColor blueColor];
+    horseButton.position = CGPointMake(720,380); //x,y values of position are different from the object
+    horseButton.zPosition = 50;
+    [_gameLayer addChild:horseButton];
 }
 
 
 -(void)pigButton {
-    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    go.text = @"Pig";
-    go.name = @"Pig";
-    go.hidden = YES;
-    go.yScale=2;
-    go.fontSize = 40;
-    go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(214,265);
-    go.zPosition = 50;
-    [_gameLayer addChild:go];
+    pigButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    pigButton.text = @"Pig";
+    pigButton.name = @"pigButton";
+    pigButton.hidden = YES;
+    pigButton.yScale=2;
+    pigButton.fontSize = 40;
+    pigButton.fontColor = [SKColor blueColor];
+    pigButton.position = CGPointMake(214,265);
+    pigButton.zPosition = 50;
+    [_gameLayer addChild:pigButton];
 }
 
 
 -(void)cowButton {
-    SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    go.text = @"Cow";
-    go.name = @"Cow";
-    go.hidden = YES;
-    go.yScale=2;
-    go.fontSize = 40;
-    go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(905,210);
-    go.zPosition = 50;
-    [_gameLayer addChild:go];
+    cowButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    cowButton.text = @"Cow";
+    cowButton.name = @"cowButton";
+    cowButton.hidden = YES;
+    cowButton.yScale=2;
+    cowButton.fontSize = 40;
+    cowButton.fontColor = [SKColor blueColor];
+    cowButton.position = CGPointMake(905,210);
+    cowButton.zPosition = 50;
+    [_gameLayer addChild:cowButton];
 }
 
 
@@ -462,11 +465,11 @@
     node = [self nodeAtPoint:location];
     
     if(state==3) {
-        if([node.name isEqual:@"Horse"]) { //correct
+        if([node.name isEqual:@"horseButton"]) { //correct
             state++;
             display.text = @"Say the animal that makes this noise";
         }
-        else if([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"]) { //incorrect
+        else if([node.name isEqual:@"cowButton"] || [node.name isEqual:@"pigButton"]) { //incorrect
             chances--;
             [self incorrect];
 
@@ -481,11 +484,11 @@
         }
     }
     else if(state==4) {
-        if([node.name isEqual: @"Pig"]) { //correct
+        if([node.name isEqual: @"pigButton"]) { //correct
             state++;
             display.text = @"Say the animal that makes this noise";
         }
-        else if([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"]) { //incorrect
+        else if([node.name isEqual:@"cowButton"] || [node.name isEqual:@"horseButton"]) { //incorrect
             chances--;
             [self incorrect];
             
@@ -500,14 +503,14 @@
         }
     }
     else if(state==5) {
-        if([node.name isEqual: @"Cow"]) { //correct -> display next level
+        if([node.name isEqual: @"cowButton"]) { //correct -> display next level
             [text removeFromParent];//clear text
             text = [SKNode node];
             [self addChild:text];
             state++;
             [self nextLevel];
         }
-        else if([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"]) { //incorrect
+        else if([node.name isEqual:@"pigButton"] || [node.name isEqual:@"horseButton"]) { //incorrect
             chances--;
             [self incorrect];
             
