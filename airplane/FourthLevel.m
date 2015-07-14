@@ -17,13 +17,15 @@
     NSMutableArray *shipPlace, *shipColor;
     SKSpriteNode *orangeBoat, *purpleBoat, *yellowBoat;
     SKSpriteNode *captainBoy, *package, *sun, *airplane;
+    AVSpeechUtterance *instruction;
 }
 
 -(id)initWithSize:(CGSize)size {
     
     shipPlace = [NSMutableArray arrayWithObjects:@"first", @"second", @"third", nil];
     shipColor = [NSMutableArray arrayWithObjects:@"Orange", @"Purple", @"Yellow", nil];
-    
+    self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+
     if (self = [super initWithSize:size]) {
         
         // Set screenSize for ease
@@ -122,9 +124,12 @@
         if(i == captainsBoat)
             [captainBoy runAction:[SKAction moveTo:CGPointMake(currentWidth-40, currentHeight) duration:5]];
         [boat runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
+            if(i == boats.count - 1){
             [self askQuestion];
             [self updateButtons];
-            [self displayButtons];}];
+            [self displayButtons];
+            }
+        }];
         currentWidth += dw;
     }
 }
@@ -184,6 +189,9 @@
             break;
     }
     question.hidden = NO;
+    instruction = [[AVSpeechUtterance alloc] initWithString:question.text];
+    instruction.rate = 0.1;
+    [self.synthesizer speakUtterance:instruction];
 }
 
 -(void)moveToNextScene

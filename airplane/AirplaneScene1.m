@@ -9,20 +9,21 @@
 #import "AirplaneScene1.h"
 
 @implementation AirplaneScene1
-
+{
+    int instructions;
+    NSTimer *instructionTimer;
+    SKLabelNode *instructionText;
+}
 
 -(id)initWithSize:(CGSize)size {
-    
-    
-    
     screenRect = [[UIScreen mainScreen] bounds];
     screenHeight = screenRect.size.height;
     screenWidth = screenRect.size.width;
-    
+    instructions = 0;
+    //initialize synthesizer
+    self.synthesizer = [[AVSpeechSynthesizer alloc] init];
     
     if (self = [super initWithSize:size]) {
-
-
        [self initalizingScrollingBackground];
        [self addShip];
 
@@ -39,13 +40,65 @@
         background.position = CGPointMake(self.size.width/2, 40);
         [background addChild:go];
         [self addChild:background];
+        
+        //instructions
+        instructionText = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        instructionText.name = @"instructionText";
+        instructionText.fontSize = 40;
+        instructionText.fontColor = [SKColor redColor];
+        instructionText.position = CGPointMake(500,500);
+        instructionText.zPosition = 50;
+        [self addChild:instructionText];
+        [self timer];
     }
     return self;
 }
 
+-(void)timer {
+    instructionTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(giveInstructions) userInfo:nil repeats:YES];
+}
+
+-(void)giveInstructions { //keep repeating different instructions
+    //instructions start at 1 to delay for game selection message
+    if (instructions == 1) { //level declaration
+        instructionText.text = @"Level 1";
+        
+        AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 1"];
+        instruction1.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction1];
+    }
+    else if (instructions == 3) { //initial instructions
+        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear previous text
+        instructionText.text = @"Tell the plane to go!"; //place new text
+        
+        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Tell the plane to go!"];
+        instruction2.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction2];
+    }
+    else if (instructions == 11) { //wait 10 secs -- follow up 1
+        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
+        instructionText.text = @"Help the plane move by saying go!";
+        
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Help the plane move by saying go!"];
+        instruction3.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction3];
+    }
+    else if (instructions == 21) { //wait 10 secs -- follow up 2
+        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
+        instructionText.text = @"Can you say go?";
+        
+        AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Can you say go?"];
+        instruction4.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction4];
+    }
+    else if (instructions > 30) { //wait another 10 secs -- restart instructions
+        instructions = 1;
+    }
+    instructions++;
+}
+
 -(void)addShip
 {
-
     self.ship= [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [self.ship setScale:0.5];
     self.ship.position = CGPointMake(screenWidth/2-100, 100);
@@ -60,8 +113,6 @@
     self.actionMoveUp = [SKAction moveByX:0 y:30 duration:.2];
     actionMoveDown = [SKAction moveByX:0 y:-30 duration:.2];
     actionMoveRight = [SKAction moveByX:30 y:0  duration:.2];
-    
-    
 }
 
 
@@ -71,18 +122,17 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
+    //stop repeating instructions
+    [instructionTimer invalidate];
+    instructionTimer = nil;
     
     if ([node.name isEqualToString:@"level2"]) {
-        
-    
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
         
     }else if ([node.name isEqualToString:@"Go"]) {
-       
-        
             if(self.ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75){
         
                 [self.ship.physicsBody applyImpulse:CGVectorMake(0, 30)];

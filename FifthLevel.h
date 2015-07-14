@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Actions.h"
 #import "FifthLevel.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface FifthLevel : SKScene{
     SKAction *actionMoveDown;
@@ -25,6 +26,8 @@
 @property (nonatomic, strong)    SKSpriteNode *bg ;
 @property (nonatomic, strong)    SKSpriteNode *sea ;
 @property (nonatomic, strong)    SKSpriteNode *wave ;
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
+
 
 -(SKAction*)moveBgContinuously;
 @end

@@ -23,6 +23,11 @@
     SKLabelNode *question;
     CGSize screenSize;
     NSMutableArray *objectNames;
+    int instructions;
+    NSTimer *instructionTimer;
+    SKLabelNode *instructionText;
+    AVSpeechUtterance *instruction;
+
 }
 /*
  * TODO 3 repetitions of objects coming in, random number each time
@@ -39,6 +44,10 @@
 -(id)initWithSize:(CGSize)size {
     
     if (self = [super initWithSize:size]) {
+        
+        instructions = 0;
+        //initialize synthesizer
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
         
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
@@ -134,7 +143,7 @@
         
         [self addShip];
         [self birdsFlyIn];
-        
+       // [self timer];
         // Set objectsDisplayed
         objectsDisplayed = 0;
         // Set question displayed
@@ -144,6 +153,10 @@
     
     return self;
 }
+
+/*-(void)timer {
+    instructionTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(giveInstructions) userInfo:nil repeats:YES];
+}*/
 
 -(void)updateButtonsToMatchNumberOfBirds
 {
@@ -408,7 +421,9 @@
     
     // Display question and increment
     questionDisplayed++;
-    
+    instruction = [[AVSpeechUtterance alloc] initWithString:question.text];
+    instruction.rate = 0.1;
+    [self.synthesizer speakUtterance:instruction];
     // Set text of answers
     [self updateButtonsToMatchNumberOfBirds];
     [self displayButtons];

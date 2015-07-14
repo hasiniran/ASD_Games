@@ -16,13 +16,15 @@
     int correctAnswers, questionDisplayed;
     NSMutableArray *shipPlace, *shipColor;
     SKSpriteNode *orangeBoat, *purpleBoat, *yellowBoat;
+    AVSpeechUtterance *instruction;
 }
 
 -(id)initWithSize:(CGSize)size {
     
     shipPlace = [NSMutableArray arrayWithObjects:@"first", @"second", @"third", nil];
     shipColor = [NSMutableArray arrayWithObjects:@"Orange", @"Purple", @"Yellow", nil];
-    
+    self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+
     if (self = [super initWithSize:size]) {
 
         // Set screenSize for ease
@@ -78,11 +80,9 @@
         [self addChild:question];
         correctAnswers = 0;
         questionDisplayed = 0;
-        [self addShip];
-        [self boatsIn];
         [self hideButtons];
-
-    }
+        [self addShip];
+        [self boatsIn];    }
     
     return self;
 }
@@ -100,11 +100,13 @@
     {
         SKSpriteNode *boat = boats[i];
         [boat runAction:[SKAction moveTo:CGPointMake(currentWidth, currentHeight) duration:5] completion:^{
-            [self askQuestion];
-            [self displayButtons];}];
+            if(i == boats.count - 1){
+                [self askQuestion];
+                [self displayButtons];
+            }
+           }];
         currentWidth += dw;
     }
-  
 }
 
 -(void)boatsLeave
@@ -157,6 +159,10 @@
             break;
     }
     question.hidden = NO;
+    instruction = [[AVSpeechUtterance alloc] initWithString:question.text];
+    instruction.rate = 0.1;
+    [self.synthesizer speakUtterance:instruction];
+
 }
 
 -(void)moveToNextScene

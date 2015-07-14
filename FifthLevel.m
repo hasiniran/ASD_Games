@@ -17,11 +17,17 @@
     SKAction* moveSkyForever;
     SKSpriteNode *sky, *buildings;
     SKSpriteNode *runway;
+    AVSpeechUtterance *instruction;
+    int instructions;
+    NSTimer *instructionTimer;
+    SKLabelNode *instructionText;
+
 }
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
         
@@ -43,10 +49,53 @@
         
         [self addChild:background];
         [self addChild:moon];
-        [self addShip];        
+        [self addShip];
+        [self timer];
     }
     
     return self;
+}
+-(void)timer {
+    instructionTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(giveInstructions) userInfo:nil repeats:YES];
+}
+
+-(void)giveInstructions { //keep repeating different instructions
+    //instructions start at 1 to delay for game selection message
+    if (instructions == 1) { //level declaration
+        instructionText.text = @"Level 5";
+        
+        AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 5"];
+        instruction1.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction1];
+    }
+    else if (instructions == 3) { //initial instructions
+        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear previous text
+        instructionText.text = @"Tell the plane to go down!"; //place new text
+        
+        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Tell the plane to go down!"];
+        instruction2.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction2];
+    }
+    else if (instructions == 11) { //wait 10 secs -- follow up 1
+        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
+        instructionText.text = @"Help the plane move down by saying down!";
+        
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
+        instruction3.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction3];
+    }
+    else if (instructions == 21) { //wait 10 secs -- follow up 2
+        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
+        instructionText.text = @"Can you say down?";
+        
+        AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
+        instruction4.rate = 0.1;
+        [self.synthesizer speakUtterance:instruction4];
+    }
+    else if (instructions > 30) { //wait another 10 secs -- restart instructions
+        instructions = 1;
+    }
+    instructions++;
 }
 
 -(void)changeButton
