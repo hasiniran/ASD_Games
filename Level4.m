@@ -443,10 +443,7 @@
         [self cowButton];
         state++; //make sure animal sound does not play infinitely
     }
-    if(state == 3) {
-        //code in touchesBegan. check for horse touch
-        //clear text
-    }
+    //state 3 == wait for Horse touch
     if(state == 4) { //text is cleared. Make horse dance
         [self question];
 //        [self animalSound]; //pig sound
@@ -457,9 +454,7 @@
         }
         state++;
     }
-    if(state == 5) {
-        //check for pig touch
-    }
+    //state 5 == wait for Pig touch
     if(state == 6) {//check for pig
         [self question];
 //        [self animalSound]; //cow sound
@@ -470,9 +465,7 @@
        }
         state++;
     }
-    if(state == 7) {
-        //check for cow touch
-    }
+    //state 7 == wait for Cow touch
     if(state == 8) {//check for cow
         //count++;
         state++;
@@ -492,51 +485,56 @@
     CGPoint location = [[touches anyObject] locationInNode:self];
     node = [self nodeAtPoint:location];
     
-    if(state==3 && [node.name isEqual:@"Horse"]) {
-        [text removeFromParent];//clear text
-        text = [SKNode node];
-        [self addChild:text];
-        state++;
+    if(state==3) {
+        if([node.name isEqual:@"Horse"]) { //correct
+            [text removeFromParent];//clear text
+            text = [SKNode node];
+            [self addChild:text];
+            state++;
+        }
+        else if([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"]) { //incorrect
+            chances--;
+            [self incorrect];
+        }
     }
-    if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])) {
-        chances--;
-        [self incorrect];
+    if(state==5) {
+        if([node.name isEqual: @"Pig"]) { //correct
+            [text removeFromParent];//clear text
+            text = [SKNode node];
+            [self addChild:text];
+            state++;
+        }
+        else if([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"]) { //incorrect
+            chances--;
+            [self incorrect];
+        }
     }
-    if(state==5 && [node.name isEqual: @"Pig"]) {
-        [text removeFromParent];//clear text
-        text = [SKNode node];
-        [self addChild:text];
-        state++;
+    if(state==7) {
+        if([node.name isEqual: @"Cow"]) { //correct
+            [text removeFromParent];//clear text
+            text = [SKNode node];
+            [self addChild:text];
+            state++;
+        }
+        else if([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"]) { //incorrect
+            chances--;
+            [self incorrect];
+        }
     }
-    if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])) {
-        chances--;
-        [self incorrect];
-    }
-    if(state==7 && [node.name isEqual: @"Cow"]) {
-        [text removeFromParent];//clear text
-        text = [SKNode node];
-        [self addChild:text];
-        state++;
-    }
-    if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])) {
-        chances--;
-        [self incorrect];
-    }
-    if(state==9 && [node.name isEqual: @"level5"]) {
+    
+    if([node.name isEqual: @"level5"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
-    
-    if ([node.name isEqual:@"Skip"]) {
+    else if([node.name isEqual:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
-    
-    if([node.name  isEqual:@"level4"]) {
+    else if([node.name  isEqual:@"level4"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
