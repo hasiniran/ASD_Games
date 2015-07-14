@@ -321,7 +321,7 @@
     [self addChild:Button];
 }
 
-/*
+
 -(void)hint {
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
     
@@ -339,7 +339,7 @@
     [text addChild:arrow];
     
 }
-*/
+
 /*
 -(void)hint2 {
     SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -388,10 +388,10 @@
     // run the sequence then delete the label
     
     if(chances == 2) {
-//        [self hint];
+        [self hint];
     }
     else if(chances == 1) {
-//        [self hint];
+        [self hint];
 //        [self hint2];
     }
     else if(chances <= 0) {
@@ -423,7 +423,7 @@
         }
     }
     if(state == 1) {  //train is stopped
-        //NSLog(@"State %i", state);
+        NSLog(@"State %i", state);
         
         if(count >= 10) {
             cow.physicsBody.velocity = CGVectorMake(0, 0);
@@ -456,60 +456,60 @@
         state++; //make sure animal sound does not play infinitely
     }
     if(state == 3) {
-        //NSLog(@"State %i", state);
+        NSLog(@"State %i", state);
         //code in touchesBegan. check for horse touch
         //clear text
     }
     if(state == 4) { //text is cleared. Make horse dance
-        //NSLog(@"State %i", state);
-/*
+        NSLog(@"State %i", state);
+
 //        [self danceHorse];
         [self question];
 //        [self animalSound]; //pig sound
         if(chances == 2)
-//            [self hint];
+            [self hint];
         else if(chances == 1){
-//            [self hint];
+            [self hint];
 //            [self hint2];
         }
         state++;
-  */  }
+    }
     if(state == 5) {
-        //NSLog(@"State %i", state);
+        NSLog(@"State %i", state);
         
         //check for pig touch
     }
     if(state == 6) {//check for pig
-/*        //NSLog(@"State %i", state);
-        
+        NSLog(@"State %i", state);
+
 //        [self dancePig];
         [self question];
 //        [self animalSound]; //cow sound
         if(chances == 2)
-//            [self hint];
+            [self hint];
         else if(chances == 1){
-//            [self hint];
+            [self hint];
 //            [self hint2];
        }
         state++;
         //horse.physicsBody.angularVelocity = 0;
-*/        //display next level
+        //display next level
         //[self nextLevel];
         
     }
     if(state == 7) {
-        //NSLog(@"State %i", state);
+        NSLog(@"State %i", state);
         //check for cow touch
     }
     if(state == 8) {//check for cow
-        //NSLog(@"State %i", state);
+        NSLog(@"State %i", state);
         
         //count++;
 //        [self danceCow];
         state++;
     }
     if(state == 9) {//level complete
-       // NSLog(@"State %i", state);
+        NSLog(@"State %i", state);
         
         train.physicsBody.velocity = CGVectorMake(55, 0);
         if(train.position.x >= 750){
@@ -538,34 +538,33 @@
         NSLog(@"Barn clicked");
     }
     
-    if(state==3 && [node.name isEqual:@"horse"]) {
+    if(state==3 && [node.name isEqual:@"Horse"]) {
         [text removeFromParent];//clear text
         text = [SKNode node];
         [self addChild:text];
         state++;
-        NSLog(@"Horse clicked");
     }
-    if(state==3 && ([node.name isEqual:@"cow"] || [node.name isEqual:@"pig"])) {
+    if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])) {
         chances--;
         [self tryAgain];
     }
-    if(state==5 && [node.name isEqual: @"pig"]) {
+    if(state==5 && [node.name isEqual: @"Pig"]) {
         [text removeFromParent];//clear text
         text = [SKNode node];
         [self addChild:text];
         state++;
     }
-    if(state==5 && ([node.name isEqual:@"cow"] || [node.name isEqual:@"horse"])) {
+    if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])) {
         chances--;
         [self tryAgain];
     }
-    if(state==7 && [node.name isEqual: @"cow"]) {
+    if(state==7 && [node.name isEqual: @"Cow"]) {
         [text removeFromParent];//clear text
         text = [SKNode node];
         [self addChild:text];
         state++;
     }
-    if(state==7 && ([node.name isEqual:@"pig"] || [node.name isEqual:@"horse"])) {
+    if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])) {
         chances--;
         [self tryAgain];
     }
