@@ -31,7 +31,6 @@
     double speed;
     int count;
     int state;
-    int count2;
     int chances;
 }
 
@@ -312,10 +311,10 @@
     if(state == 3){ //horse
         arrow.position = CGPointMake(780, 480);
     }
-    if(state == 4 || state == 5){
+    if(state == 4){
         arrow.position = CGPointMake(280, 360);//pig
     }
-    if(state == 6 || state == 7){
+    if(state == 5){
         arrow.position = CGPointMake(945, 310); //cow
     }
     
@@ -444,33 +443,9 @@
         state++; //make sure animal sound does not play infinitely
     }
     //state 3 == wait for Horse touch
-    if(state == 4) { //text is cleared. Make horse dance
-        [self question];
-//        [self animalSound]; //pig sound
-        if(chances == 2)
-            [self hint];
-        else if(chances == 1){
-            [self hint];
-        }
-        state++;
-    }
-    //state 5 == wait for Pig touch
-    if(state == 6) {//check for pig
-        [self question];
-//        [self animalSound]; //cow sound
-        if(chances == 2)
-            [self hint];
-        else if(chances == 1){
-            [self hint];
-       }
-        state++;
-    }
-    //state 7 == wait for Cow touch
-    if(state == 8) {//check for cow
-        //count++;
-        state++;
-    }
-    if(state == 9) { //level complete
+    //state 4 == wait for Pig touch
+    //state 5 == wait for Cow touch
+    if(state == 6) { //level complete
         train.physicsBody.velocity = CGVectorMake(55, 0);
         if(train.position.x >= 750){
             [self nextLevel];
@@ -497,7 +472,7 @@
             [self incorrect];
         }
     }
-    if(state==5) {
+    else if(state==4) {
         if([node.name isEqual: @"Pig"]) { //correct
             [text removeFromParent];//clear text
             text = [SKNode node];
@@ -509,7 +484,7 @@
             [self incorrect];
         }
     }
-    if(state==7) {
+    else if(state==5) {
         if([node.name isEqual: @"Cow"]) { //correct
             [text removeFromParent];//clear text
             text = [SKNode node];
