@@ -28,6 +28,7 @@
     SKNode *node;
     SKLabelNode *skip;
     SKLabelNode *tryAgainButton;
+    SKLabelNode *display;
     double speed;
     int count;
     int state;
@@ -69,6 +70,10 @@
         skip.position = CGPointMake(850,600);
         skip.zPosition = 50;
         [_HUDLayer addChild:skip];
+        
+        //level name
+        [self instructions];
+        display.text = @"Level 4";
     }
     return self;
 }
@@ -293,6 +298,18 @@
 }
 
 
+-(void)instructions {
+    [text removeFromParent];//clear text
+    text = [SKNode node];
+    [self addChild:text];
+    
+    display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    display.fontColor = [SKColor redColor];
+    display.position = CGPointMake(self.size.width/2, 550);
+    [text addChild:display];
+}
+
+
 -(void)nextLevel {
     NSString * nxtLevel= @"Go to Level 5";
     SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -347,19 +364,6 @@
 }
 */
 
--(void)question {
-    NSString *question= @"Say the animal that makes this noise";
-    SKLabelNode *display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    display.text=question;
-    display.fontColor = [SKColor blackColor];
-    display.position = CGPointMake(self.size.width/2, 550);
-    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0]]];
-    [display runAction:flashAction];
-    
-    [text addChild:display];
-}
-
-
 -(void)incorrect {
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
@@ -369,13 +373,7 @@
     SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:1], [SKAction fadeOutWithDuration:1/3.0]]];
     // run the sequence then delete the label
     
-    if(chances == 2) {
-        [self hint];
-    }
-    else if(chances == 1) {
-        [self hint];
-    }
-    else if(chances <= 0) {
+    if(chances <= 0) {
         [text removeFromParent];//clear text
         [self tryAgain]; //try level again if all chances are used up
     }
@@ -434,7 +432,8 @@
     if(state == 2) {   //animals out of barn
         //display animals sounds
         //ask question
-        [self question];
+        [self instructions];
+        display.text = @"Say the animal that makes this noise";
         
 //        [self animalSound];
         [self horseButton];
@@ -457,43 +456,69 @@
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self instructions];
+    
     CGPoint location = [[touches anyObject] locationInNode:self];
     node = [self nodeAtPoint:location];
     
     if(state==3) {
         if([node.name isEqual:@"Horse"]) { //correct
-            [text removeFromParent];//clear text
-            text = [SKNode node];
-            [self addChild:text];
             state++;
+            display.text = @"Say the animal that makes this noise";
         }
         else if([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"]) { //incorrect
             chances--;
             [self incorrect];
+
+            if(chances == 2) {
+                display.text = @"What animal makes this sound?";
+                [self hint];
+            }
+            else if(chances == 1) {
+                display.text = @"It's the horse.  Can you say HORSE?";
+                [self hint];
+            }
         }
     }
     else if(state==4) {
         if([node.name isEqual: @"Pig"]) { //correct
-            [text removeFromParent];//clear text
-            text = [SKNode node];
-            [self addChild:text];
             state++;
+            display.text = @"Say the animal that makes this noise";
         }
         else if([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"]) { //incorrect
             chances--;
             [self incorrect];
+            
+            if(chances == 2) {
+                display.text = @"What animal makes this sound?";
+                [self hint];
+            }
+            else if(chances == 1) {
+                display.text = @"It's the pig.  Can you say PIG?";
+                [self hint];
+            }
         }
     }
     else if(state==5) {
-        if([node.name isEqual: @"Cow"]) { //correct
+        if([node.name isEqual: @"Cow"]) { //correct -> display next level
             [text removeFromParent];//clear text
             text = [SKNode node];
             [self addChild:text];
             state++;
+            [self nextLevel];
         }
         else if([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"]) { //incorrect
             chances--;
             [self incorrect];
+            
+            if(chances == 2) {
+                display.text = @"What animal makes this sound?";
+                [self hint];
+            }
+            else if(chances == 1) {
+                display.text = @"It's the cow.  Can you say COW?";
+                [self hint];
+            }
         }
     }
     
