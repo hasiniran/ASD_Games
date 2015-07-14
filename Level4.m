@@ -25,6 +25,7 @@
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
     SKNode *text;
+    SKNode *node;
     SKLabelNode *skip;
     double speed;
     int count;
@@ -148,7 +149,7 @@
     cow.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     cow.physicsBody.affectedByGravity = NO;
     cow.physicsBody.allowsRotation = NO;
-    [_gameLayer addChild:cow];
+    [_HUDLayer addChild:cow];
 }
 
 
@@ -161,7 +162,7 @@
     pig.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     pig.physicsBody.affectedByGravity = NO;
     pig.physicsBody.allowsRotation = NO;
-    [_gameLayer addChild:pig];
+    [_HUDLayer addChild:pig];
 }
 
 
@@ -174,8 +175,8 @@
     horse.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
     horse.physicsBody.affectedByGravity = NO;
     horse.physicsBody.allowsRotation = NO;
-    horse.physicsBody.collisionBitMask=NO;
-    [_gameLayer addChild:horse];
+    horse.physicsBody.collisionBitMask = NO;
+    [_HUDLayer addChild:horse];
 }
 
 
@@ -227,7 +228,7 @@
     [self horse];
 }
 
-
+/*
 -(void)animalSound {
     // Construct URL to sound file
     NSString *path;
@@ -246,8 +247,8 @@
     audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     [audio play];
 }
-
-
+*/
+/*
 -(void)danceHorse {
     horse.physicsBody.allowsRotation = YES;
     [horse.physicsBody applyAngularImpulse:5];
@@ -264,47 +265,48 @@
     cow.physicsBody.allowsRotation = YES;
     [cow.physicsBody applyAngularImpulse:5];
 }
+*/
 
-
+//buttons for each animal to register click -- placed over the sprite of the animal
 -(void)horseButton {
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    go.text = @"Horse"; //Set the button text
+    go.text = @"Horse";
     go.name = @"Horse";
-    go.hidden = YES;
+    go.hidden = YES; //hide button so it appears to be just the image
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(500,430);
+    go.position = CGPointMake(720,380); //x,y values of position are different from the object
     go.zPosition = 50;
-    [_gameLayer addChild:go]; //add node to screen
+    [_gameLayer addChild:go];
 }
 
 
 -(void)pigButton {
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    go.text = @"Pig"; //Set the button text
+    go.text = @"Pig";
     go.name = @"Pig";
     go.hidden = YES;
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(230,200);
+    go.position = CGPointMake(214,265);
     go.zPosition = 50;
-    [_gameLayer addChild:go]; //add node to screen
+    [_gameLayer addChild:go];
 }
 
 
 -(void)cowButton {
     SKLabelNode *go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    go.text = @"Cow"; //Set the button text
+    go.text = @"Cow";
     go.name = @"Cow";
     go.hidden = YES;
     go.yScale=2;
     go.fontSize = 40;
     go.fontColor = [SKColor blueColor];
-    go.position = CGPointMake(750,200);
+    go.position = CGPointMake(905,210);
     go.zPosition = 50;
-    [_gameLayer addChild:go]; //add node to screen
+    [_gameLayer addChild:go];
 }
 
 
@@ -319,7 +321,7 @@
     [self addChild:Button];
 }
 
-
+/*
 -(void)hint {
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
     
@@ -337,8 +339,8 @@
     [text addChild:arrow];
     
 }
-
-
+*/
+/*
 -(void)hint2 {
     SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     NSString *nxtLevel;
@@ -361,7 +363,7 @@
     Button.text = nxtLevel;
     [text addChild:Button];
 }
-
+*/
 
 -(void)question {
     NSString *question= @"Say the animal that makes this noise";
@@ -386,11 +388,11 @@
     // run the sequence then delete the label
     
     if(chances == 2) {
-        [self hint];
+//        [self hint];
     }
     else if(chances == 1) {
-        [self hint];
-        [self hint2];
+//        [self hint];
+//        [self hint2];
     }
     else if(chances <= 0) {
         [text removeFromParent];//clear text
@@ -404,6 +406,8 @@
 
 -(void)update:(NSTimeInterval)currentTime {
     if(state == 0) { //train is moving
+        //NSLog(@"State %i", state);
+        
         if(train.position.x >= 350){ //stop train movement in front of barn
             [_bgLayer removeFromParent];
             
@@ -419,6 +423,8 @@
         }
     }
     if(state == 1) {  //train is stopped
+        //NSLog(@"State %i", state);
+        
         if(count >= 10) {
             cow.physicsBody.velocity = CGVectorMake(0, 0);
             pig.physicsBody.velocity = CGVectorMake(0, 0);
@@ -437,60 +443,74 @@
         }
     }
     if(state == 2) {   //animals out of barn
+        NSLog(@"State %i", state);
+        
         //display animals sounds
         //ask question
         [self question];
         
-        [self animalSound];
+//        [self animalSound];
         [self horseButton];
         [self pigButton];
         [self cowButton];
         state++; //make sure animal sound does not play infinitely
     }
     if(state == 3) {
+        //NSLog(@"State %i", state);
         //code in touchesBegan. check for horse touch
         //clear text
     }
     if(state == 4) { //text is cleared. Make horse dance
-        [self danceHorse];
+        //NSLog(@"State %i", state);
+/*
+//        [self danceHorse];
         [self question];
-        [self animalSound]; //pig sound
+//        [self animalSound]; //pig sound
         if(chances == 2)
-            [self hint];
+//            [self hint];
         else if(chances == 1){
-            [self hint];
-            [self hint2];
+//            [self hint];
+//            [self hint2];
         }
         state++;
-    }
+  */  }
     if(state == 5) {
+        //NSLog(@"State %i", state);
+        
         //check for pig touch
     }
     if(state == 6) {//check for pig
-        [self dancePig];
+/*        //NSLog(@"State %i", state);
+        
+//        [self dancePig];
         [self question];
-        [self animalSound]; //cow sound
+//        [self animalSound]; //cow sound
         if(chances == 2)
-            [self hint];
+//            [self hint];
         else if(chances == 1){
-            [self hint];
-            [self hint2];
-        }
+//            [self hint];
+//            [self hint2];
+       }
         state++;
         //horse.physicsBody.angularVelocity = 0;
-        //display next level
+*/        //display next level
         //[self nextLevel];
         
     }
     if(state == 7) {
+        //NSLog(@"State %i", state);
         //check for cow touch
     }
     if(state == 8) {//check for cow
+        //NSLog(@"State %i", state);
+        
         //count++;
-        [self danceCow];
+//        [self danceCow];
         state++;
     }
     if(state == 9) {//level complete
+       // NSLog(@"State %i", state);
+        
         train.physicsBody.velocity = CGVectorMake(55, 0);
         if(train.position.x >= 750){
             [self nextLevel];
@@ -503,35 +523,49 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+    node = [self nodeAtPoint:location];
     
-    if(state==3 && [node.name isEqual:@"Horse"]) {
+    if ([node.name isEqual: @"Horse"]) {
+        NSLog(@"Horse clicked");
+    }
+    else if ([node.name isEqual: @"Pig"]) {
+        NSLog(@"Pig clicked");
+    }
+    else if ([node.name isEqual: @"Cow"]) {
+        NSLog(@"Cow clicked");
+    }
+    else if ([node.name isEqual: @"barn"]) {
+        NSLog(@"Barn clicked");
+    }
+    
+    if(state==3 && [node.name isEqual:@"horse"]) {
         [text removeFromParent];//clear text
         text = [SKNode node];
         [self addChild:text];
         state++;
+        NSLog(@"Horse clicked");
     }
-    if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])) {
+    if(state==3 && ([node.name isEqual:@"cow"] || [node.name isEqual:@"pig"])) {
         chances--;
         [self tryAgain];
     }
-    if(state==5 && [node.name isEqual: @"Pig"]) {
+    if(state==5 && [node.name isEqual: @"pig"]) {
         [text removeFromParent];//clear text
         text = [SKNode node];
         [self addChild:text];
         state++;
     }
-    if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])) {
+    if(state==5 && ([node.name isEqual:@"cow"] || [node.name isEqual:@"horse"])) {
         chances--;
         [self tryAgain];
     }
-    if(state==7 && [node.name isEqual: @"Cow"]) {
+    if(state==7 && [node.name isEqual: @"cow"]) {
         [text removeFromParent];//clear text
         text = [SKNode node];
         [self addChild:text];
         state++;
     }
-    if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])) {
+    if(state==7 && ([node.name isEqual:@"pig"] || [node.name isEqual:@"horse"])) {
         chances--;
         [self tryAgain];
     }
