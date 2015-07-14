@@ -27,6 +27,7 @@
     SKNode *text;
     SKNode *node;
     SKLabelNode *skip;
+    SKLabelNode *tryAgainButton;
     double speed;
     int count;
     int state;
@@ -378,7 +379,7 @@
 }
 
 
--(void)tryAgain {
+-(void)incorrect {
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
     lives.fontColor = [SKColor redColor];
@@ -396,11 +397,26 @@
     }
     else if(chances <= 0) {
         [text removeFromParent];//clear text
-        state=9;
+        state=10;
     }
     
     [lives runAction:flashAction completion:^{[lives removeFromParent];}];
     [text addChild:lives];
+}
+
+
+-(void)tryAgain { //replay level 3 if not completed
+    [text removeFromParent];   //clear text
+    text = [SKNode node];
+    [self addChild:text];
+    
+    tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    tryAgainButton.text = @"Try Again";
+    tryAgainButton.fontColor = [SKColor blueColor];
+    tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    tryAgainButton.zPosition = 10;
+    tryAgainButton.name = @"level4";
+    [text addChild:tryAgainButton];
 }
 
 
@@ -500,6 +516,9 @@
             state++;
         }
     }
+    if(state == 10) {//out of chances
+        [self tryAgain];
+    }
 }
 
 
@@ -515,7 +534,7 @@
     }
     if(state==3 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Pig"])) {
         chances--;
-        [self tryAgain];
+        [self incorrect];
     }
     if(state==5 && [node.name isEqual: @"Pig"]) {
         [text removeFromParent];//clear text
@@ -525,7 +544,7 @@
     }
     if(state==5 && ([node.name isEqual:@"Cow"] || [node.name isEqual:@"Horse"])) {
         chances--;
-        [self tryAgain];
+        [self incorrect];
     }
     if(state==7 && [node.name isEqual: @"Cow"]) {
         [text removeFromParent];//clear text
@@ -535,18 +554,25 @@
     }
     if(state==7 && ([node.name isEqual:@"Pig"] || [node.name isEqual:@"Horse"])) {
         chances--;
-        [self tryAgain];
+        [self incorrect];
     }
-    if(state==10 && [node.name isEqual: @"level5"]) {
+    if(state==9 && [node.name isEqual: @"level5"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
     
-    if ([node.name isEqualToString:@"Skip"]) {
+    if ([node.name isEqual:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
+    }
+    
+    if([node.name  isEqual:@"level4"]) {
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
