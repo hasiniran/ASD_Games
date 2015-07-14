@@ -30,9 +30,6 @@
     SKLabelNode *level;
     SKLabelNode *display;
     SKLabelNode *lives;
-    SKLabelNode *purple;
-    SKLabelNode *blue;
-    SKLabelNode *yellow;
     SKLabelNode *tryAgainButton;
     double speed;
     int count;
