@@ -20,7 +20,7 @@
     SKSpriteNode *cow;
     SKSpriteNode *pig;
     SKSpriteNode *horse;
-    AVAudioPlayer *audio;
+    SKSpriteNode *arrow;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -30,9 +30,13 @@
     SKLabelNode *horseButton;
     SKLabelNode *pigButton;
     SKLabelNode *cowButton;
+    SKLabelNode *lives;
+    SKLabelNode *nextButton;
     SKLabelNode *tryAgainButton;
     SKLabelNode *display;
     NSTimer *sounds;
+    NSString *soundFile;
+    AVAudioPlayer *audio;
     double speed;
     int count;
     int state;
@@ -229,12 +233,6 @@
 }
 
 
--(void)stopTrain {
-    state++;    //train is stopped
-    train.physicsBody.velocity = CGVectorMake(0, 0);
-}
-
-
 -(void)animals {
     [self cow];
     [self pig];
@@ -242,28 +240,26 @@
 }
 
 
--(void)timer { //keep accessing displayText until child starts playing
+-(void)timer { //keep playing animal sounds through level
     sounds = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(animalSound) userInfo:nil repeats:YES];
 }
 
 
 -(void)animalSound {
     // Construct URL to sound file
-    NSString *path;
-    
     if(interval == 1 || interval == (mult*space)) { //Play sound immediately with instructions, then incrementally (different increments set depending on length of recording)
         if(state == 3) {//horse
-            path = [NSString stringWithFormat:@"%@/Horse Whinny-3.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
+            soundFile = [NSString stringWithFormat:@"%@/Horse Whinny-3.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
         }
         else if(state == 4) {//pig
-            path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
+            soundFile = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
         }
         else if(state == 5) {//cow
-            path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
+            soundFile = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
         }
         mult++;
     
-        NSURL *soundUrl = [NSURL fileURLWithPath:path];
+        NSURL *soundUrl = [NSURL fileURLWithPath:soundFile];
     
         // Create audio player object and initialize with URL to sound
         audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
@@ -329,14 +325,13 @@
 
 
 -(void)nextLevel {
-    NSString * nxtLevel= @"Go to Level 5";
-    SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    Button.text = nxtLevel;
-    Button.fontColor = [SKColor blueColor];
-    Button.color = [SKColor yellowColor];
-    Button.position = CGPointMake(500, 600);
-    Button.name = @"level5";
-    [self addChild:Button];
+    nextButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    nextButton.text = @"Go to Level 5";
+    nextButton.fontColor = [SKColor blueColor];
+    nextButton.color = [SKColor yellowColor];
+    nextButton.position = CGPointMake(500, 600);
+    nextButton.name = @"level5";
+    [self addChild:nextButton];
     
     AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! Continue on to level 5."];
     next.rate = 0.1;
@@ -345,7 +340,7 @@
 
 
 -(void)hint { //points arrow at animal to be chosen
-    SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
+    arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
     
     if(state == 3){ //horse
         arrow.position = CGPointMake(780, 480);
@@ -363,7 +358,7 @@
 
 
 -(void)incorrect {
-    SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     lives.text =[NSString stringWithFormat:@"Chances: %d", chances];
     lives.fontColor = [SKColor redColor];
     lives.position =CGPointMake(self.size.width/2, self.size.height/2 + 200);
@@ -415,21 +410,25 @@
         
         state++;
     }
-    if(state == 0) { //train is moving
+    else if(state == 0) { //train is moving
         if(train.position.x >= 350){ //stop train movement in front of barn
             [_bgLayer removeFromParent];
             _bgLayer = [SKNode node];
             [self addChild: _bgLayer];
             
+            train.physicsBody.velocity = CGVectorMake(0, 0); //stop train
+            
+            //re-add objects without movement
             [self mountain];
             [self clouds];
             [self tracks];
             [self barn];
-            [self stopTrain];
             [self animals];
+            
+            state++;
         }
     }
-    if(state == 1) {  //train is stopped
+    else if(state == 1) {  //train is stopped
         if(count >= 10) {
             cow.physicsBody.velocity = CGVectorMake(0, 0);
             pig.physicsBody.velocity = CGVectorMake(0, 0);
@@ -444,8 +443,7 @@
             [horse.physicsBody applyImpulse:CGVectorMake(0, 1)];
         }
     }
-    if(state == 2) {   //animals out of barn
-        //display animals sounds
+    else if(state == 2) {   //animals out of barn
         //ask question
         [self instructions];
         display.text = @"Say the animal that makes this noise";
@@ -455,18 +453,19 @@
         [self.synthesizer speakUtterance:instruction1];
         
         space = 2; //play horse whinny every other time
-        [self timer];
+        [self timer]; //start playing animal sounds
+        
         [self horseButton];
         [self pigButton];
         [self cowButton];
-        state++; //make sure animal sound does not play infinitely
+        state++;
     }
     
     //state 3 == wait for Horse touch
     //state 4 == wait for Pig touch
     //state 5 == wait for Cow touch
     
-    if(state == 6) { //level complete
+    else if(state == 6) { //level complete
         //stop timer for playing sounds
         [sounds invalidate];
         sounds = nil;
@@ -475,7 +474,7 @@
         train.physicsBody.velocity = CGVectorMake(55, 0);
         state++;
     }
-    if(state == 7) { //keep moving train off screen
+    else if(state == 7) { //keep moving train off screen
         if(train.position.x >= 1350) //train stops after off screen
             train.physicsBody.velocity = CGVectorMake(0, 0);
     }
@@ -590,7 +589,7 @@
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
-    if([button.name isEqual:@"level4"]) {
+    else if([button.name isEqual:@"level4"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -601,6 +600,10 @@
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
+        
+        //stop timer for playing sounds
+        [sounds invalidate];
+        sounds = nil;
     }
 }
 
