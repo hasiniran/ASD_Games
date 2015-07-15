@@ -400,7 +400,7 @@
     tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
     tryAgainButton.zPosition = 10;
     tryAgainButton.name = @"level4";
-    [text addChild:tryAgainButton];
+    [self addChild:tryAgainButton];
 }
 
 
