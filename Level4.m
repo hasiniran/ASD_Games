@@ -239,13 +239,13 @@
 -(void)animalSound {
     // Construct URL to sound file
     NSString *path;
-    if(state == 2) {
-        path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
+    if(state == 2) {//horse
+        path = [NSString stringWithFormat:@"%@/Horse Whinny-3.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
     }
-    if(state == 3) {
+    if(state == 3) {//pig
         path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
     }
-    if(state == 4) {
+    if(state == 4) {//cow
         path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
     }
     NSURL *soundUrl = [NSURL fileURLWithPath:path];

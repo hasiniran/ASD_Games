@@ -11,6 +11,7 @@
 		016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 016A9CAB1AC12CC500A87406 /* StopSign.png */; };
 		01A25E131B3DC11200D68AA9 /* Horse.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A25E121B3DC11200D68AA9 /* Horse.png */; };
 		01A25E151B3DC11B00D68AA9 /* Pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A25E141B3DC11B00D68AA9 /* Pig.png */; };
+		01BAAFFD1B56BDB7006A42B9 /* Horse Whinny-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01BAAFFC1B56BDB7006A42B9 /* Horse Whinny-3.mp3 */; };
 		01D848641B3AF9B2008603B6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D848621B3AF9B2008603B6 /* AVFoundation.framework */; };
 		073371781A95A6250024872B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371771A95A6250024872B /* Train.png */; };
 		0733717A1A95A6340024872B /* Rail.png in Resources */ = {isa = PBXBuildFile; fileRef = 073371791A95A6340024872B /* Rail.png */; };
@@ -89,6 +90,7 @@
 		016A9CAB1AC12CC500A87406 /* StopSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StopSign.png; sourceTree = "<group>"; };
 		01A25E121B3DC11200D68AA9 /* Horse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Horse.png; sourceTree = "<group>"; };
 		01A25E141B3DC11B00D68AA9 /* Pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pig.png; sourceTree = "<group>"; };
+		01BAAFFC1B56BDB7006A42B9 /* Horse Whinny-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Horse Whinny-3.mp3"; sourceTree = "<group>"; };
 		01D848611B3AF9B2008603B6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01D848621B3AF9B2008603B6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		073371771A95A6250024872B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01BAAFFC1B56BDB7006A42B9 /* Horse Whinny-3.mp3 */,
 				01A25E141B3DC11B00D68AA9 /* Pig.png */,
 				01A25E121B3DC11200D68AA9 /* Horse.png */,
 				076584C01AE995DA00F6FBD1 /* cow.mp3 */,
@@ -446,6 +449,7 @@
 				07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */,
 				076CF6021A9D2049001839A2 /* Clouds.png in Resources */,
 				07D7AF171AA11B2C0076A177 /* purpHead.png in Resources */,
+				01BAAFFD1B56BDB7006A42B9 /* Horse Whinny-3.mp3 in Resources */,
 				2525D8A51A355719009816BB /* Runway.png in Resources */,
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
 				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
