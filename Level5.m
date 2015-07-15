@@ -14,6 +14,7 @@
 
 @implementation Level5 {
     SKSpriteNode *train;
+    SKSpriteNode *rail;
     SKSpriteNode *stopSign1;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
@@ -115,6 +116,13 @@
 }
 
 
+-(void)rail {
+    rail = [SKSpriteNode spriteNodeWithImageNamed:@"Rail.png"];
+    rail.position = CGPointMake(917, 36);
+    [_bgLayer addChild:rail];
+}
+
+
 -(void)stopSign1 {
     stopSign1 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
     stopSign1.name = @"stop1";
@@ -183,16 +191,21 @@
 
 
 -(void)stopTrain {
-    //code to stop the train, instead of message display
-    NSString * stopmessage;
-    stopmessage = @"stopped";
-    SKLabelNode *stopButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    stopButton.text = stopmessage;
-    stopButton.fontColor = [SKColor blueColor];
-    stopButton.color = [SKColor yellowColor];
-    stopButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-    stopButton.name = @"stopped";
-    [self addChild:stopButton];
+    speed = 0;
+        
+    [_bgLayer removeFromParent];
+    [_gameLayer removeFromParent];
+        
+    _bgLayer = [SKNode node];
+    [self addChild: _bgLayer];
+    _gameLayer = [SKNode node];
+    [self addChild: _gameLayer];
+        
+    [self ScrollingForeground];
+    [self train];
+    [self rail];
+    [self clouds];
+    //[self stopSign1]; -- have stop sign stop as well
 }
 
 
@@ -201,10 +214,11 @@
     button = [self nodeAtPoint:location];
     
     if ([button.name  isEqual: @"stop"]) {
-        click = 1; //train is stopped
-        self.physicsWorld.speed = 0.0;
-        speed = 0;
+        //click = 1; //train is stopped
+        //self.physicsWorld.speed = 0.0;
+        //speed = 0;
         //  self.scene.view.paused = YES;
+        [self stopTrain];
         [self nextLevel];
     }
     else if ([button.name isEqualToString:@"level5"]) { //change to transition to next level/completion screen
