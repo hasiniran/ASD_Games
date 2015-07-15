@@ -361,30 +361,6 @@
     [text addChild:arrow];
 }
 
-/*
--(void)hint2 {
-    SKLabelNode *Button = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    NSString *nxtLevel;
-    
-    if(state == 3){
-        nxtLevel= @"HORSE";
-        Button.position = CGPointMake(630, 510);
-        Button.fontColor = [SKColor brownColor];
-    }
-    if(state == 5 || state == 4){
-        nxtLevel= @"PIG";
-        Button.position = CGPointMake(350, 290);
-        Button.fontColor = [SKColor magentaColor];
-    }
-    if(state == 7 || state == 6){
-        nxtLevel= @"COW";
-        Button.position = CGPointMake(870, 290);
-        Button.fontColor = [SKColor grayColor];
-    }
-    Button.text = nxtLevel;
-    [text addChild:Button];
-}
-*/
 
 -(void)incorrect {
     SKLabelNode *lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -485,19 +461,23 @@
         [self cowButton];
         state++; //make sure animal sound does not play infinitely
     }
+    
     //state 3 == wait for Horse touch
     //state 4 == wait for Pig touch
     //state 5 == wait for Cow touch
+    
     if(state == 6) { //level complete
         //stop timer for playing sounds
         [sounds invalidate];
         sounds = nil;
         
+        [self nextLevel];
         train.physicsBody.velocity = CGVectorMake(55, 0);
-        if(train.position.x >= 750){
-            [self nextLevel];
+        state++;
+    }
+    if(state == 7) { //keep moving train off screen
+        if(train.position.x >= 1350) //train stops after off screen
             train.physicsBody.velocity = CGVectorMake(0, 0);
-        }
     }
 }
 
@@ -582,7 +562,6 @@
             text = [SKNode node];
             [self addChild:text];
             state++;
-            [self nextLevel];
         }
         else if([button.name isEqual:@"pigButton"] || [button.name isEqual:@"horseButton"]) { //incorrect
             chances--;
