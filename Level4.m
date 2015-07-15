@@ -32,10 +32,14 @@
     SKLabelNode *cowButton;
     SKLabelNode *tryAgainButton;
     SKLabelNode *display;
+    NSTimer *sounds;
     double speed;
     int count;
     int state;
     int chances;
+    int interval; //used to increment animal sounds
+    int mult;
+    int space;
 }
 
 
@@ -44,6 +48,8 @@
     state = -1;
     speed = 1;
     chances = 3;
+    interval = 1;
+    mult = 1;
     
     if(self = [super initWithSize:size]) {
         //initialize synthesizer
@@ -236,23 +242,34 @@
 }
 
 
+-(void)timer { //keep accessing displayText until child starts playing
+    sounds = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(animalSound) userInfo:nil repeats:YES];
+}
+
+
 -(void)animalSound {
     // Construct URL to sound file
     NSString *path;
-    if(state == 2) {//horse
-        path = [NSString stringWithFormat:@"%@/Horse Whinny-3.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
-    }
-    if(state == 3) {//pig
-        path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
-    }
-    if(state == 4) {//cow
-        path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
-    }
-    NSURL *soundUrl = [NSURL fileURLWithPath:path];
     
-    // Create audio player object and initialize with URL to sound
-    audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
-    [audio play];
+    if(interval == 1 || interval == (mult*space)) { //Play sound immediately with instructions, then incrementally (different increments set depending on length of recording)
+        if(state == 3) {//horse
+            path = [NSString stringWithFormat:@"%@/Horse Whinny-3.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
+        }
+        else if(state == 4) {//pig
+            path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
+        }
+        else if(state == 5) {//cow
+            path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
+        }
+        mult++;
+    
+        NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    
+        // Create audio player object and initialize with URL to sound
+        audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+        [audio play];
+    }
+    interval++;
 }
 
 
@@ -379,6 +396,10 @@
     // run the sequence then delete the label
     
     if(chances <= 0) {
+        //stop timer for playing sounds
+        [sounds invalidate];
+        sounds = nil;
+        
         [text removeFromParent];//clear text
         [self tryAgain]; //try level again if all chances are used up
     }
@@ -457,7 +478,8 @@
         instruction1.rate = 0.1;
         [self.synthesizer speakUtterance:instruction1];
         
-        [self animalSound];
+        space = 2; //play horse whinny every other time
+        [self timer];
         [self horseButton];
         [self pigButton];
         [self cowButton];
@@ -467,11 +489,14 @@
     //state 4 == wait for Pig touch
     //state 5 == wait for Cow touch
     if(state == 6) { //level complete
+        //stop timer for playing sounds
+        [sounds invalidate];
+        sounds = nil;
+        
         train.physicsBody.velocity = CGVectorMake(55, 0);
         if(train.position.x >= 750){
             [self nextLevel];
             train.physicsBody.velocity = CGVectorMake(0, 0);
-            state++;
         }
     }
 }
@@ -491,7 +516,10 @@
             instruction2.rate = 0.1;
             [self.synthesizer speakUtterance:instruction2];
             
-            [self animalSound];
+            space = 1; //play pig oink every time
+            interval = 1; //restart interval
+            mult = 1;
+            
             state++;
         }
         else if([button.name isEqual:@"cowButton"] || [button.name isEqual:@"pigButton"]) { //incorrect
@@ -522,7 +550,10 @@
             instruction3.rate = 0.1;
             [self.synthesizer speakUtterance:instruction3];
             
-            [self animalSound];
+            space = 4; //play cow moo every fourth time
+            interval = 1; //restart interval
+            mult = 1;
+            
             state++;
         }
         else if([button.name isEqual:@"cowButton"] || [button.name isEqual:@"horseButton"]) { //incorrect
@@ -581,7 +612,6 @@
         [self.view presentScene:scene transition: reveal];
     }
     if([button.name isEqual:@"level4"]) {
-        NSLog(@"Try Again button clicked");
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
