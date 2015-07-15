@@ -235,17 +235,17 @@
     [self horse];
 }
 
-/*
+
 -(void)animalSound {
     // Construct URL to sound file
     NSString *path;
     if(state == 2) {
         path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]]; //changed to pig.mp3 from Horse Whinny.mp3
     }
-    if(state == 4) {
+    if(state == 3) {
         path = [NSString stringWithFormat:@"%@/pig.mp3", [[NSBundle mainBundle] resourcePath]];
     }
-    if(state == 6) {
+    if(state == 4) {
         path = [NSString stringWithFormat:@"%@/cow.mp3", [[NSBundle mainBundle] resourcePath]];
     }
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
@@ -254,7 +254,6 @@
     audio = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     [audio play];
 }
-*/
 
 
 //buttons for each animal to register click -- placed over the sprite of the animal
@@ -458,7 +457,7 @@
         instruction1.rate = 0.1;
         [self.synthesizer speakUtterance:instruction1];
         
-//        [self animalSound];
+        [self animalSound];
         [self horseButton];
         [self pigButton];
         [self cowButton];
@@ -486,12 +485,14 @@
     
     if(state==3) {
         if([button.name isEqual:@"horseButton"]) { //correct
-            state++;
             display.text = @"Say the animal that makes this noise";
             
             AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Say the animal that makes this noise"];
             instruction2.rate = 0.1;
             [self.synthesizer speakUtterance:instruction2];
+            
+            [self animalSound];
+            state++;
         }
         else if([button.name isEqual:@"cowButton"] || [button.name isEqual:@"pigButton"]) { //incorrect
             chances--;
@@ -515,12 +516,14 @@
     }
     else if(state==4) {
         if([button.name isEqual: @"pigButton"]) { //correct
-            state++;
             display.text = @"Say the animal that makes this noise";
             
             AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Say the animal that makes this noise"];
             instruction3.rate = 0.1;
             [self.synthesizer speakUtterance:instruction3];
+            
+            [self animalSound];
+            state++;
         }
         else if([button.name isEqual:@"cowButton"] || [button.name isEqual:@"horseButton"]) { //incorrect
             chances--;
