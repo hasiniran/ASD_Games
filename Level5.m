@@ -43,6 +43,9 @@
     chances = 3;
     
     if(self = [super initWithSize:size]) {
+        //initialize synthesizer
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        
         //add layers
         _bgLayer = [SKNode node];
         [self addChild: _bgLayer];
@@ -85,6 +88,10 @@
         instructions.fontColor = [SKColor redColor];
         instructions.position = CGPointMake(self.size.width/2, 550);
         [text addChild:instructions];
+        
+        AVSpeechUtterance *level = [[AVSpeechUtterance alloc] initWithString:@"Level 5."];
+        level.rate = 0.1;
+        [self.synthesizer speakUtterance:level];
         [self timer]; //wait for level declaration, then play first instruction
         
         //start train moving
@@ -284,6 +291,12 @@
     }
     
     [self nextLevel]; //after stopping, call next level function
+    if (click >= 0) {
+        AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! You completed the level"];
+        next.rate = 0.1;
+        [self.synthesizer speakUtterance:next];
+        click = -1; //stop speech from playing more than once
+    }
 }
 
 
@@ -301,6 +314,10 @@
     instructions.fontColor = [SKColor redColor];
     instructions.position = CGPointMake(self.size.width/2, 550);
     [text addChild:instructions];
+    
+    AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Tell the train to stop"];
+    instruction1.rate = 0.1;
+    [self.synthesizer speakUtterance:instruction1];
 }
 
 
@@ -328,6 +345,10 @@
             instructions.fontColor = [SKColor redColor];
             instructions.position = CGPointMake(self.size.width/2, 550);
             [text addChild:instructions];
+            
+            AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Follow the sign by telling the train to stop"];
+            instruction2.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction2];
         }
         else if (chances == 2 && stopSign2.position.x <= 550) {
             chances--;
@@ -343,14 +364,24 @@
             instructions.fontColor = [SKColor redColor];
             instructions.position = CGPointMake(self.size.width/2, 550);
             [text addChild:instructions];
+            
+            AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Can you say stop?"];
+            instruction3.rate = 0.1;
+            [self.synthesizer speakUtterance:instruction3];
         }
         else if (chances == 1 && stopSign3.position.x <= 550) {
             chances--;
         }
     }
     
-    if (chances == 0) {
+    if (chances == 0 && click >= 0) {
         [self tryAgain];
+        
+        AVSpeechUtterance *again = [[AVSpeechUtterance alloc] initWithString:@"You missed all your stops.  Let's try level 5 again"];
+        again.rate = 0.1;
+        [self.synthesizer speakUtterance:again];
+        
+        click--; //stop speech from playing more than once
     }
 }
 

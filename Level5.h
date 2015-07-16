@@ -15,8 +15,14 @@
 #import <SpriteKit/SpriteKit.h>
 //import transition to final screen?
 
+//Voice Synthesis imports
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface Level5 : SKScene {}
+
+
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
 
 
 @end
