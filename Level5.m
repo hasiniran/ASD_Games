@@ -16,6 +16,7 @@
     SKSpriteNode *train;
     SKSpriteNode *rail;
     SKSpriteNode *stopSign1;
+    SKSpriteNode *stopSign2;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -26,6 +27,7 @@
     double speed;
     int click;
     int sign;
+    int chances;
 }
 
 
@@ -33,6 +35,7 @@
     speed = 1; //start with train moving
     click = 0;
     sign = 0;
+    chances = 3;
     
     if(self = [super initWithSize:size]) {
         //add layers
@@ -137,6 +140,20 @@
 }
 
 
+-(void)stopSign2 {
+    stopSign2 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
+    stopSign2.name = @"stop1";
+    stopSign2.position = CGPointMake(1075,260);
+    stopSign2.zPosition = 40;
+    stopSign2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    stopSign2.physicsBody.dynamic = YES;
+    stopSign2.physicsBody.affectedByGravity = NO;
+    stopSign2.physicsBody.allowsRotation = NO;
+    [stopSign2 runAction:[SKAction moveTo:CGPointMake(-225, 260) duration:60] completion:^{}];
+    [_gameLayer addChild:stopSign2];
+}
+
+
 -(void)ScrollingForeground { //Scrolling tracks function
     SKTexture *groundTexture = [SKTexture textureWithImageNamed:@"Rail.png"]; //change runway to train tracks
     SKAction *moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:.02*speed*groundTexture.size.width*2];
@@ -201,15 +218,35 @@
     train.position = CGPointMake(250, 100);
     [self rail];
     [self clouds];
-    [self stopSign1];
-    stopSign1.position = CGPointMake(550, 260);
+    
+    if(chances == 3) {
+        [self stopSign1];
+        stopSign1.position = CGPointMake(550, 260);
+    }
+    else if(chances == 2) {
+        [self stopSign2];
+        stopSign2.position = CGPointMake(550, 260);
+    }
+    
     [self nextLevel]; //after stopping, call next level function
 }
 
 
 -(void)update:(NSTimeInterval)currentTime {
-    if (click == 1 && stopSign1.position.x <= 550)
-        [self stopTrain];
+    if (click == 1) {
+        if (chances == 3 && stopSign1.position.x <= 550)
+            [self stopTrain];
+        else if (chances == 2 && stopSign2.position.x <= 550)
+            [self stopTrain];
+    }
+    
+    if (click == 0) {
+        if (chances == 3 && stopSign1.position.x <= 550) {
+            chances--;
+            [self stopSign2]; //start second stop sign
+            [stopSign2.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        }
+    }
 }
 
 
@@ -219,11 +256,6 @@
     
     if ([button.name  isEqual: @"stop"]) {
         click = 1; //train is stopped
-        //self.physicsWorld.speed = 0.0;
-        //speed = 0;
-        //  self.scene.view.paused = YES;
-        //[self stopTrain];
-        //[self nextLevel];
     }
     else if ([button.name isEqualToString:@"level5"]) { //change to transition to next level/completion screen
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
