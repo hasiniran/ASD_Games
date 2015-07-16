@@ -59,7 +59,7 @@
         [self mountain];
         
         //skip button
-        skip= [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         skip.text = @"SKIP"; //Set the button text
         skip.name = @"Skip";
         skip.fontSize = 40;
@@ -108,7 +108,7 @@
     train = [SKSpriteNode spriteNodeWithImageNamed:@"Train.png"];
     train.position = CGPointMake(60, 100);
     train.zPosition = 50;
-    train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(25, 20)];
+    train.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(55, 20)]; //x used to be 25
     train.physicsBody.dynamic = YES;
     train.physicsBody.affectedByGravity = NO;
     train.physicsBody.allowsRotation = NO;
@@ -128,16 +128,11 @@
     stopSign1.name = @"stop1";
     stopSign1.position = CGPointMake(1075,260);
     stopSign1.zPosition = 40;
-    stopSign1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    stopSign1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
     stopSign1.physicsBody.dynamic = YES;
     stopSign1.physicsBody.affectedByGravity = NO;
     stopSign1.physicsBody.allowsRotation = NO;
-    /*[stopSign runAction:[SKAction moveTo:CGPointMake(750, 260) duration:7] completion:^{
-     sign = 1;
-     }];
-     [stopSign runAction:[SKAction moveTo:CGPointMake(50, 260) duration:7] completion:^{
-     sign = 0;
-     }];*/
+    [stopSign1 runAction:[SKAction moveTo:CGPointMake(-225, 260) duration:60] completion:^{}];
     [_gameLayer addChild:stopSign1];
 }
 
@@ -203,9 +198,18 @@
         
     [self ScrollingForeground];
     [self train];
+    train.position = CGPointMake(250, 100);
     [self rail];
     [self clouds];
-    //[self stopSign1]; -- have stop sign stop as well
+    [self stopSign1];
+    stopSign1.position = CGPointMake(550, 260);
+    [self nextLevel]; //after stopping, call next level function
+}
+
+
+-(void)update:(NSTimeInterval)currentTime {
+    if (click == 1 && stopSign1.position.x <= 550)
+        [self stopTrain];
 }
 
 
@@ -214,12 +218,12 @@
     button = [self nodeAtPoint:location];
     
     if ([button.name  isEqual: @"stop"]) {
-        //click = 1; //train is stopped
+        click = 1; //train is stopped
         //self.physicsWorld.speed = 0.0;
         //speed = 0;
         //  self.scene.view.paused = YES;
-        [self stopTrain];
-        [self nextLevel];
+        //[self stopTrain];
+        //[self nextLevel];
     }
     else if ([button.name isEqualToString:@"level5"]) { //change to transition to next level/completion screen
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
