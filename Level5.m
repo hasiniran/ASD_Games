@@ -21,11 +21,14 @@
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
+    SKNode *text;
     SKNode *button;
     SKLabelNode *skip;
     SKLabelNode *nextButton;
     SKLabelNode *stop;
     SKLabelNode *tryAgainButton;
+    SKLabelNode *instructions;
+    NSTimer *inst1;
     double speed;
     int click;
     int sign;
@@ -47,7 +50,10 @@
         [self addChild: _gameLayer];
         _HUDLayer = [SKNode node];
         [self addChild: _HUDLayer];
+        text = [SKNode node];
+        [self addChild: text];
         
+        //stop button
         stop = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         stop.text = @"Stop";
         stop.name = @"stop";
@@ -73,7 +79,15 @@
         skip.zPosition = 50;
         [_HUDLayer addChild:skip]; //add node to screen
         
-        //set physics bodies
+        //level
+        instructions = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        instructions.text = @"Level 5";
+        instructions.fontColor = [SKColor redColor];
+        instructions.position = CGPointMake(self.size.width/2, 550);
+        [text addChild:instructions];
+        [self timer]; //wait for level declaration, then play first instruction
+        
+        //start train moving
         [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
         [stopSign1.physicsBody applyImpulse:CGVectorMake(-2, 0)];
     }
@@ -207,11 +221,16 @@
 
 
 -(void)nextLevel { //transition to next level/finish screen
+    //remove instructions
+    [text removeFromParent];
+    text = [SKNode node];
+    [self addChild: text];
+    
     nextButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     nextButton.text = @"Go to Level 5";
     nextButton.fontColor = [SKColor blueColor];
     nextButton.color = [SKColor yellowColor];
-    nextButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    nextButton.position = CGPointMake(self.size.width/2, 550);
     nextButton.name = @"level5";
     nextButton.zPosition=50;
     [self addChild:nextButton];
@@ -219,10 +238,15 @@
 
 
 -(void)tryAgain { //replay level 5 if not completed
+    //remove instructions
+    [text removeFromParent];
+    text = [SKNode node];
+    [self addChild: text];
+    
     tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     tryAgainButton.text = @"Try Again";
     tryAgainButton.fontColor = [SKColor blueColor];
-    tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    tryAgainButton.position = CGPointMake(self.size.width/2, 550);
     tryAgainButton.zPosition = 50;
     tryAgainButton.name = @"level5";
     [self addChild:tryAgainButton];
@@ -263,6 +287,23 @@
 }
 
 
+-(void)timer { //wait 5 seconds for level declaration before first instructions are displayed
+    inst1 = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(firstInst) userInfo:nil repeats:NO];
+}
+
+
+-(void)firstInst { //first instructions
+    [text removeFromParent];
+    text = [SKNode node];
+    [self addChild: text];
+    instructions = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    instructions.text = @"Tell the train to stop";
+    instructions.fontColor = [SKColor redColor];
+    instructions.position = CGPointMake(self.size.width/2, 550);
+    [text addChild:instructions];
+}
+
+
 -(void)update:(NSTimeInterval)currentTime {
     if (click == 1) {
         if (chances == 3 && stopSign1.position.x <= 550)
@@ -277,11 +318,31 @@
             chances--;
             [self stopSign2]; //start second stop sign
             [stopSign2.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+            
+            //new instructions
+            [text removeFromParent];
+            text = [SKNode node];
+            [self addChild: text];
+            instructions = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            instructions.text = @"Follow the sign by telling the train to stop";
+            instructions.fontColor = [SKColor redColor];
+            instructions.position = CGPointMake(self.size.width/2, 550);
+            [text addChild:instructions];
         }
         else if (chances == 2 && stopSign2.position.x <= 550) {
             chances--;
-            [self stopSign3]; //start second stop sign
+            [self stopSign3]; //start third stop sign
             [stopSign3.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+            
+            //new instructions
+            [text removeFromParent];
+            text = [SKNode node];
+            [self addChild: text];
+            instructions = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            instructions.text = @"Can you say stop?";
+            instructions.fontColor = [SKColor redColor];
+            instructions.position = CGPointMake(self.size.width/2, 550);
+            [text addChild:instructions];
         }
         else if (chances == 1 && stopSign3.position.x <= 550) {
             chances--;
