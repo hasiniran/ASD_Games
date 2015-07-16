@@ -17,6 +17,7 @@
     SKSpriteNode *rail;
     SKSpriteNode *stopSign1;
     SKSpriteNode *stopSign2;
+    SKSpriteNode *stopSign3;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -24,6 +25,7 @@
     SKLabelNode *skip;
     SKLabelNode *nextButton;
     SKLabelNode *stop;
+    SKLabelNode *tryAgainButton;
     double speed;
     int click;
     int sign;
@@ -142,7 +144,7 @@
 
 -(void)stopSign2 {
     stopSign2 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
-    stopSign2.name = @"stop1";
+    stopSign2.name = @"stop2";
     stopSign2.position = CGPointMake(1075,260);
     stopSign2.zPosition = 40;
     stopSign2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
@@ -151,6 +153,20 @@
     stopSign2.physicsBody.allowsRotation = NO;
     [stopSign2 runAction:[SKAction moveTo:CGPointMake(-225, 260) duration:60] completion:^{}];
     [_gameLayer addChild:stopSign2];
+}
+
+
+-(void)stopSign3 {
+    stopSign3 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
+    stopSign3.name = @"stop3";
+    stopSign3.position = CGPointMake(1075,260);
+    stopSign3.zPosition = 40;
+    stopSign3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    stopSign3.physicsBody.dynamic = YES;
+    stopSign3.physicsBody.affectedByGravity = NO;
+    stopSign3.physicsBody.allowsRotation = NO;
+    [stopSign3 runAction:[SKAction moveTo:CGPointMake(-225, 260) duration:60] completion:^{}];
+    [_gameLayer addChild:stopSign3];
 }
 
 
@@ -202,6 +218,17 @@
 }
 
 
+-(void)tryAgain { //replay level 5 if not completed
+    tryAgainButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    tryAgainButton.text = @"Try Again";
+    tryAgainButton.fontColor = [SKColor blueColor];
+    tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+    tryAgainButton.zPosition = 10;
+    tryAgainButton.name = @"level5";
+    [self addChild:tryAgainButton];
+}
+
+
 -(void)stopTrain {
     speed = 0;
         
@@ -227,6 +254,10 @@
         [self stopSign2];
         stopSign2.position = CGPointMake(550, 260);
     }
+    else if(chances == 1) {
+        [self stopSign3];
+        stopSign3.position = CGPointMake(550, 260);
+    }
     
     [self nextLevel]; //after stopping, call next level function
 }
@@ -238,14 +269,27 @@
             [self stopTrain];
         else if (chances == 2 && stopSign2.position.x <= 550)
             [self stopTrain];
+        else if (chances == 1 && stopSign3.position.x <= 550)
+            [self stopTrain];
     }
-    
-    if (click == 0) {
+    else if (click == 0) {
         if (chances == 3 && stopSign1.position.x <= 550) {
             chances--;
             [self stopSign2]; //start second stop sign
             [stopSign2.physicsBody applyImpulse:CGVectorMake(-2, 0)];
         }
+        else if (chances == 2 && stopSign2.position.x <= 550) {
+            chances--;
+            [self stopSign3]; //start second stop sign
+            [stopSign3.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+        }
+        else if (chances == 1 && stopSign3.position.x <= 550) {
+            chances--;
+        }
+    }
+    
+    if (chances == 0) {
+        [self tryAgain];
     }
 }
 
@@ -257,7 +301,7 @@
     if ([button.name  isEqual: @"stop"]) {
         click = 1; //train is stopped
     }
-    else if ([button.name isEqualToString:@"level5"]) { //change to transition to next level/completion screen
+    else if ([button.name isEqualToString:@"level5"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level5 *scene = [Level5 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -269,6 +313,7 @@
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
+    //include touch to transition to next level/completion screen
 }
 
 
