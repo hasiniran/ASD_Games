@@ -145,7 +145,7 @@
 -(void)stopSign2 {
     stopSign2 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
     stopSign2.name = @"stop2";
-    stopSign2.position = CGPointMake(1075,260);
+    stopSign2.position = CGPointMake(1275,260);
     stopSign2.zPosition = 40;
     stopSign2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
     stopSign2.physicsBody.dynamic = YES;
@@ -159,7 +159,7 @@
 -(void)stopSign3 {
     stopSign3 = [SKSpriteNode spriteNodeWithImageNamed:@"StopSign.png"];
     stopSign3.name = @"stop3";
-    stopSign3.position = CGPointMake(1075,260);
+    stopSign3.position = CGPointMake(1275,260);
     stopSign3.zPosition = 40;
     stopSign3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
     stopSign3.physicsBody.dynamic = YES;
@@ -213,7 +213,7 @@
     nextButton.color = [SKColor yellowColor];
     nextButton.position = CGPointMake(self.size.width/2, self.size.height/2);
     nextButton.name = @"level5";
-    nextButton.zPosition=265;
+    nextButton.zPosition=50;
     [self addChild:nextButton];
 }
 
@@ -223,7 +223,7 @@
     tryAgainButton.text = @"Try Again";
     tryAgainButton.fontColor = [SKColor blueColor];
     tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-    tryAgainButton.zPosition = 10;
+    tryAgainButton.zPosition = 50;
     tryAgainButton.name = @"level5";
     [self addChild:tryAgainButton];
 }
