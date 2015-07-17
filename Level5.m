@@ -33,6 +33,7 @@
     int click;
     int sign;
     int chances;
+    int audio;
 }
 
 
@@ -41,6 +42,7 @@
     click = 0;
     sign = 0;
     chances = 3;
+    audio = 1;
     
     if(self = [super initWithSize:size]) {
         //initialize synthesizer
@@ -291,11 +293,11 @@
     }
     
     [self nextLevel]; //after stopping, call next level function
-    if (click >= 0) {
+    if (audio == 1) {
         AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! You completed the level"];
         next.rate = 0.1;
         [self.synthesizer speakUtterance:next];
-        click = -1; //stop speech from playing more than once
+        audio = 0; //stop speech from playing more than once
     }
 }
 
@@ -374,14 +376,14 @@
         }
     }
     
-    if (chances == 0 && click >= 0) {
+    if (chances == 0 && audio == 1) {
         [self tryAgain];
         
         AVSpeechUtterance *again = [[AVSpeechUtterance alloc] initWithString:@"You missed all your stops.  Let's try level 5 again"];
         again.rate = 0.1;
         [self.synthesizer speakUtterance:again];
         
-        click--; //stop speech from playing more than once
+        audio--; //stop speech from playing more than once
     }
 }
 
