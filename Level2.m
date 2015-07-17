@@ -271,7 +271,8 @@
         instructionText.text = @"Level 2";
         
         AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 2"];
-        instruction1.rate = 0.1;
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction1.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction1];
     }
     else if (textDisplay == 12) {
@@ -279,7 +280,8 @@
         instructionText.text = @"How many cows do you see?";
         
         AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"How many cows do you see?"];
-        instruction2.rate = 0.1;
+        instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction2.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2];
     }
     else if (textDisplay == 20) {
@@ -287,7 +289,8 @@
         instructionText.text = @"Can you count the cows?";
         
         AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Can you count the cows?"];
-        instruction3.rate = 0.1;
+        instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (textDisplay == 30) {
@@ -296,14 +299,16 @@
             instructionText.text = @"Is there 1 cow?";
             
             AVSpeechUtterance *instruction4a = [[AVSpeechUtterance alloc] initWithString:@"Is there 1 cow?"];
-            instruction4a.rate = 0.1;
+            instruction4a.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction4a.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4a];
         }
         else {
             instructionText.text = [NSString stringWithFormat: @"Are there %i cows?", numCows];
             
             AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Are there %i cows?", numCows]];
-            instruction4b.rate = 0.1;
+            instruction4b.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction4b.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4b];
         }
     }
@@ -312,7 +317,8 @@
         instructionText.text = [NSString stringWithFormat: @"Can you say %i?", numCows];
         
         AVSpeechUtterance *instruction5 = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Can you say %i?", numCows]];
-        instruction5.rate = 0.1;
+        instruction5.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction5.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction5];
     }
     textDisplay++;
@@ -329,7 +335,8 @@
     [_HUDLayer addChild:nextButton];
     
     AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! Continue on to level 3."];
-    next.rate = 0.1;
+    next.rate = AVSpeechUtteranceMinimumSpeechRate;
+    next.pitchMultiplier = 1.5;
     [self.synthesizer speakUtterance:next];
 }
 
@@ -344,7 +351,8 @@
     
     if (again == 0) { //voice synthesis only occurs once
         AVSpeechUtterance *againSpeech = [[AVSpeechUtterance alloc] initWithString:@"Let's try Level 2 again"];
-        againSpeech.rate = 0.1;
+        againSpeech.rate = AVSpeechUtteranceMinimumSpeechRate;
+        againSpeech.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:againSpeech];
     }
     again++;

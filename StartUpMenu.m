@@ -60,17 +60,20 @@ SKScene * scene;
     
     if (instructions == 1) { //initial instructions
         AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Click on the train or airplane to start playing!"];
-        instruction1.rate = 0.1;
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction1.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 10) { //wait 10 secs -- follow up 1
         AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Choose a game!"];
-        instruction2.rate = 0.1;
+        instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction2.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2];
     }
     else if (instructions == 20) { //wait 10 secs -- follow up 2
         AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Pick a game to play!"];
-        instruction3.rate = 0.1;
+        instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (instructions > 29) { //wait another 10 secs -- restart instructions
@@ -90,7 +93,8 @@ SKScene * scene;
     
     if ([node.name isEqualToString:@"Airplane"]) {
         AVSpeechUtterance *airplaneTransition = [[AVSpeechUtterance alloc] initWithString:@"Let's play the airplane game!"];
-        airplaneTransition.rate = 0.1;
+        airplaneTransition.rate = AVSpeechUtteranceMinimumSpeechRate;
+        airplaneTransition.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:airplaneTransition];
         
         //Transition to airplane level 1
@@ -103,7 +107,8 @@ SKScene * scene;
     //if train button is pressed, Go to train game
     else if ([node.name isEqualToString:@"Train"]) {
         AVSpeechUtterance *trainTransition = [[AVSpeechUtterance alloc] initWithString:@"Let's play the train game!"];
-        trainTransition.rate = 0.1;
+        trainTransition.rate = AVSpeechUtteranceMinimumSpeechRate;
+        trainTransition.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:trainTransition];
         
         //Transition to train level 1

@@ -199,7 +199,8 @@
         instructionText.text = @"Level 1";
         
         AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 1"];
-        instruction1.rate = 0.1;
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction1.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 3) { //initial instructions
@@ -207,7 +208,8 @@
         instructionText.text = @"Tell the train to go!"; //place new text
         
         AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Tell the train to go!"];
-        instruction2.rate = 0.1;
+        instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction2.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2];
     }
     else if (instructions == 11) { //wait 10 secs -- follow up 1
@@ -215,7 +217,8 @@
         instructionText.text = @"Help the train move by saying go!";
         
         AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Help the train move by saying go!"];
-        instruction3.rate = 0.1;
+        instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (instructions == 21) { //wait 10 secs -- follow up 2
@@ -223,7 +226,8 @@
         instructionText.text = @"Can you say go?";
         
         AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Can you say go?"];
-        instruction4.rate = 0.1;
+        instruction4.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction4.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction4];
     }
     else if (instructions > 30) { //wait another 10 secs -- restart instructions
@@ -256,7 +260,8 @@
         [_HUDLayer addChild:nextButton];
         
         AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! Continue on to level 2."];
-        next.rate = 0.1;
+        next.rate = AVSpeechUtteranceMinimumSpeechRate;
+        next.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:next];
         
         first = false;

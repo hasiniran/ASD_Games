@@ -92,7 +92,8 @@
         [text addChild:instructions];
         
         AVSpeechUtterance *level = [[AVSpeechUtterance alloc] initWithString:@"Level 5."];
-        level.rate = 0.1;
+        level.rate = AVSpeechUtteranceMinimumSpeechRate;
+        level.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:level];
         [self timer]; //wait for level declaration, then play first instruction
         
@@ -295,7 +296,8 @@
     [self nextLevel]; //after stopping, call next level function
     if (audio == 1) {
         AVSpeechUtterance *next = [[AVSpeechUtterance alloc] initWithString:@"Good Job! You completed the level"];
-        next.rate = 0.1;
+        next.rate = AVSpeechUtteranceMinimumSpeechRate;
+        next.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:next];
         audio = 0; //stop speech from playing more than once
     }
@@ -318,7 +320,8 @@
     [text addChild:instructions];
     
     AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Tell the train to stop"];
-    instruction1.rate = 0.1;
+    instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+    instruction1.pitchMultiplier = 1.5;
     [self.synthesizer speakUtterance:instruction1];
 }
 
@@ -349,7 +352,8 @@
             [text addChild:instructions];
             
             AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Follow the sign by telling the train to stop"];
-            instruction2.rate = 0.1;
+            instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction2.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction2];
         }
         else if (chances == 2 && stopSign2.position.x <= 550) {
@@ -368,7 +372,8 @@
             [text addChild:instructions];
             
             AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Can you say stop?"];
-            instruction3.rate = 0.1;
+            instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction3.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction3];
         }
         else if (chances == 1 && stopSign3.position.x <= 550) {
@@ -380,7 +385,8 @@
         [self tryAgain];
         
         AVSpeechUtterance *again = [[AVSpeechUtterance alloc] initWithString:@"You missed all your stops.  Let's try level 5 again"];
-        again.rate = 0.1;
+        again.rate = AVSpeechUtteranceMinimumSpeechRate;
+        again.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:again];
         
         audio--; //stop speech from playing more than once
