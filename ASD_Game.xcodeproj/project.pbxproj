@@ -71,6 +71,8 @@
 		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
 		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
 		25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */; };
+		A52EE2F31B5D8AC6009B6234 /* RapidEarsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52EE2F21B5D8AC6009B6234 /* RapidEarsDemo.framework */; };
+		A52EE2F71B614D01009B6234 /* RejectoDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52EE2F61B614D01009B6234 /* RejectoDemo.framework */; };
 		A5D04AEB1B4340C4001E2A48 /* BlueBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */; };
 		A5D04AEC1B4340C4001E2A48 /* LightPinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */; };
 		A5D04AED1B4340C4001E2A48 /* OrangeBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */; };
@@ -189,6 +191,8 @@
 		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
 		25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpMenu.m; sourceTree = "<group>"; };
 		25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupMenu.h; sourceTree = "<group>"; };
+		A52EE2F21B5D8AC6009B6234 /* RapidEarsDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RapidEarsDemo.framework; sourceTree = "<group>"; };
+		A52EE2F61B614D01009B6234 /* RejectoDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RejectoDemo.framework; sourceTree = "<group>"; };
 		A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueBalloon.png; path = ../BlueBalloon.png; sourceTree = "<group>"; };
 		A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightPinkBalloon.png; path = ../LightPinkBalloon.png; sourceTree = "<group>"; };
 		A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBalloon.png; path = ../OrangeBalloon.png; sourceTree = "<group>"; };
@@ -225,9 +229,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D848631B3AF9B2008603B6 /* AudioToolbox.framework in Frameworks */,
+				A52EE2F31B5D8AC6009B6234 /* RapidEarsDemo.framework in Frameworks */,
 				01A25E111B3DA12A00D68AA9 /* Rms.framework in Frameworks */,
 				01D848641B3AF9B2008603B6 /* AVFoundation.framework in Frameworks */,
 				01D848601B3AF991008603B6 /* Slt.framework in Frameworks */,
+				A52EE2F71B614D01009B6234 /* RejectoDemo.framework in Frameworks */,
 				2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */,
 				2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */,
 				2552AC4619F8160900EE77C7 /* SpriteKit.framework in Frameworks */,
@@ -282,6 +288,8 @@
 				2552AC5719F8160900EE77C7 /* ViewController.m */,
 				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
 				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
+				A52EE2F61B614D01009B6234 /* RejectoDemo.framework */,
+				A52EE2F21B5D8AC6009B6234 /* RapidEarsDemo.framework */,
 				255647A41A8280AD0018D2C9 /* trainGame */,
 				255647A31A8280710018D2C9 /* airplaneGame */,
 				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
@@ -738,10 +746,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "airplane/airplane-Prefix.pch";
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -757,10 +767,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "airplane/airplane-Prefix.pch";
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

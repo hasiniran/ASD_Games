@@ -7,7 +7,6 @@
 //
 
 #import "AirplaneScene1.h"
-
 @implementation AirplaneScene1
 {
     int instructions;
@@ -64,7 +63,7 @@
         instructionText.text = @"Level 1";
         
         AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 1"];
-        instruction1.rate = 0.1;
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 3) { //initial instructions
@@ -72,7 +71,7 @@
         instructionText.text = @"Tell the plane to go!"; //place new text
         
         AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Tell the plane to go!"];
-        instruction2.rate = 0.1;
+        instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction2];
     }
     else if (instructions == 11) { //wait 10 secs -- follow up 1
@@ -80,7 +79,7 @@
         instructionText.text = @"Help the plane move by saying go!";
         
         AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Help the plane move by saying go!"];
-        instruction3.rate = 0.1;
+        instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (instructions == 21) { //wait 10 secs -- follow up 2
@@ -88,7 +87,7 @@
         instructionText.text = @"Can you say go?";
         
         AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Can you say go?"];
-        instruction4.rate = 0.1;
+        instruction4.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction4];
     }
     else if (instructions > 30) { //wait another 10 secs -- restart instructions

@@ -160,7 +160,7 @@
     }
     question.hidden = NO;
     instruction = [[AVSpeechUtterance alloc] initWithString:question.text];
-    instruction.rate = 0.1;
+    instruction.rate = AVSpeechUtteranceMinimumSpeechRate;
     [self.synthesizer speakUtterance:instruction];
 
 }

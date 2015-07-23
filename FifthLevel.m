@@ -65,7 +65,7 @@
         instructionText.text = @"Level 5";
         
         AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 5"];
-        instruction1.rate = 0.1;
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 3) { //initial instructions
@@ -73,7 +73,7 @@
         instructionText.text = @"Tell the plane to go down!"; //place new text
         
         AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Tell the plane to go down!"];
-        instruction2.rate = 0.1;
+        instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction2];
     }
     else if (instructions == 11) { //wait 10 secs -- follow up 1
@@ -81,7 +81,7 @@
         instructionText.text = @"Help the plane move down by saying down!";
         
         AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
-        instruction3.rate = 0.1;
+        instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (instructions == 21) { //wait 10 secs -- follow up 2
@@ -89,7 +89,7 @@
         instructionText.text = @"Can you say down?";
         
         AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
-        instruction4.rate = 0.1;
+        instruction4.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction4];
     }
     else if (instructions > 30) { //wait another 10 secs -- restart instructions

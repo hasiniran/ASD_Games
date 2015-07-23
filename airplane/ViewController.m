@@ -29,9 +29,6 @@ SKScene * scene;
         [skView presentScene:scene];
     }
 }
-
-
-
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
@@ -40,7 +37,6 @@ SKScene * scene;
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
-
 
 - (BOOL)shouldAutorotate
 {

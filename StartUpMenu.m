@@ -93,7 +93,7 @@ SKScene * scene;
         
         //Transition to airplane level 1
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
-        AirplaneScene1 * scene = [AirplaneScene1 sceneWithSize:self.view.bounds.size];
+        SecondLevel * scene = [SecondLevel sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
@@ -106,7 +106,7 @@ SKScene * scene;
         
         //Transition to train level 1
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration :1.0];
-        Level1 *scene= [Level1 sceneWithSize:self.view.bounds.size];
+        Level1  *scene= [Level1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     }
