@@ -346,12 +346,12 @@
             text = [SKNode node];
             [self addChild: text];
             instructions = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            instructions.text = @"Follow the sign by telling the train to stop";
+            instructions.text = @"Stop the train";
             instructions.fontColor = [SKColor redColor];
             instructions.position = CGPointMake(self.size.width/2, 550);
             [text addChild:instructions];
             
-            AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Follow the sign by telling the train to stop"];
+            AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Stop the train"];
             instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction2.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction2];
@@ -366,12 +366,12 @@
             text = [SKNode node];
             [self addChild: text];
             instructions = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            instructions.text = @"Can you say stop?";
+            instructions.text = @"Say stop";
             instructions.fontColor = [SKColor redColor];
             instructions.position = CGPointMake(self.size.width/2, 550);
             [text addChild:instructions];
             
-            AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Can you say stop?"];
+            AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Say stop"];
             instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction3.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction3];

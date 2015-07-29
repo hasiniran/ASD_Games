@@ -277,46 +277,66 @@
     }
     else if (textDisplay == 12) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear previous text
-        instructionText.text = @"How many cows do you see?";
+        instructionText.text = @"Count the cows.";
         
-        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"How many cows do you see?"];
+        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Count the cows."];
         instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction2.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2];
     }
     else if (textDisplay == 20) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
-        instructionText.text = @"Can you count the cows?";
+        instructionText.text = @"Count the cows.";
         
-        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Can you count the cows?"];
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Count the cows."];
         instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (textDisplay == 30) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
-        if (numCows ==1) {
-            instructionText.text = @"Is there 1 cow?";
-            
-            AVSpeechUtterance *instruction4a = [[AVSpeechUtterance alloc] initWithString:@"Is there 1 cow?"];
+        instructionText.text = @"Repeat after me";
+        AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Repeat after me"];
+        instruction4.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction4.pitchMultiplier = 1.5;
+        [self.synthesizer speakUtterance:instruction4];
+        
+        if (numCows == 1) {
+            AVSpeechUtterance *instruction4a = [[AVSpeechUtterance alloc] initWithString:@"One"];
             instruction4a.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4a.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4a];
         }
-        else {
-            instructionText.text = [NSString stringWithFormat: @"Are there %i cows?", numCows];
-            
-            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Are there %i cows?", numCows]];
+        else if (numCows == 2) {
+            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:@"One Two"];
             instruction4b.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4b.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4b];
         }
+        else if (numCows == 3) {
+            AVSpeechUtterance *instruction4c = [[AVSpeechUtterance alloc] initWithString:@"One Two Three"];
+            instruction4c.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction4c.pitchMultiplier = 1.5;
+            [self.synthesizer speakUtterance:instruction4c];
+        }
+        else if (numCows == 4) {
+            AVSpeechUtterance *instruction4d = [[AVSpeechUtterance alloc] initWithString:@"One Two Three Four"];
+            instruction4d.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction4d.pitchMultiplier = 1.5;
+            [self.synthesizer speakUtterance:instruction4d];
+        }
+        else if (numCows == 5) {
+            AVSpeechUtterance *instruction4e = [[AVSpeechUtterance alloc] initWithString:@"One Two Three Four Five"];
+            instruction4e.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction4e.pitchMultiplier = 1.5;
+            [self.synthesizer speakUtterance:instruction4e];
+        }
     }
     else if (textDisplay == 40) {
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
-        instructionText.text = [NSString stringWithFormat: @"Can you say %i?", numCows];
+        instructionText.text = [NSString stringWithFormat: @"Say %i", numCows];
         
-        AVSpeechUtterance *instruction5 = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Can you say %i?", numCows]];
+        AVSpeechUtterance *instruction5 = [[AVSpeechUtterance alloc] initWithString:[NSString stringWithFormat: @"Say %i", numCows]];
         instruction5.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction5.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction5];

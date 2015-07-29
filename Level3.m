@@ -356,30 +356,30 @@
     display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
     if (chances == 2) {
-        display.text = @"What color is this passenger's hat?";
-        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"What color is this passenger's hat?"];
+        display.text = @"Say the color of this passenger's hat.";
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Say the color of this passenger's hat."];
         instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
     }
     else if (chances == 1) {
         if(check == 1) {
-            display.text = @"Can you say he is wearing PURPLE?";
-            AVSpeechUtterance *instruction4p = [[AVSpeechUtterance alloc] initWithString:@"Can you say he is wearing PURPLE?"];
+            display.text = @"Say PURPLE";
+            AVSpeechUtterance *instruction4p = [[AVSpeechUtterance alloc] initWithString:@"Say PURPLE"];
             instruction4p.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4p.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4p];
         }
         else if(check == 2) {
-            display.text = @"Can you say he is wearing BLUE?";
-            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:@"Can you say he is wearing BLUE?"];
+            display.text = @"Say BLUE";
+            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:@"Say BLUE"];
             instruction4b.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4b.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4b];
         }
         else if(check == 3) {
-            display.text = @"Can you say he is wearing YELLOW?";
-            AVSpeechUtterance *instruction4y = [[AVSpeechUtterance alloc] initWithString:@"Can you say he is wearing YELLOW?"];
+            display.text = @"Say YELLOW";
+            AVSpeechUtterance *instruction4y = [[AVSpeechUtterance alloc] initWithString:@"Say YELLOW"];
             instruction4y.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4y.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4y];

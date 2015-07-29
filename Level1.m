@@ -223,9 +223,9 @@
     }
     else if (instructions == 21) { //wait 10 secs -- follow up 2
         instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
-        instructionText.text = @"Can you say go?";
+        instructionText.text = @"Say go!";
         
-        AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Can you say go?"];
+        AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Say go!"];
         instruction4.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction4.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction4];

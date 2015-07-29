@@ -511,16 +511,16 @@
             [self incorrect];
 
             if(chances == 2) {
-                display.text = @"What animal makes this sound?";
-                AVSpeechUtterance *instruction1a = [[AVSpeechUtterance alloc] initWithString:@"What animal makes this sound?"];
+                display.text = @"Say the name of this animal";
+                AVSpeechUtterance *instruction1a = [[AVSpeechUtterance alloc] initWithString:@"Say the name of this animal"];
                 instruction1a.rate = AVSpeechUtteranceMinimumSpeechRate;
                 instruction1a.pitchMultiplier = 1.5;
                 [self.synthesizer speakUtterance:instruction1a];
                 [self hint];
             }
             else if(chances == 1) {
-                display.text = @"It's the horse.  Can you say HORSE?";
-                AVSpeechUtterance *instruction1b = [[AVSpeechUtterance alloc] initWithString:@"It's the horse. Can you say HORSE?"];
+                display.text = @"It's the horse.  Say HORSE";
+                AVSpeechUtterance *instruction1b = [[AVSpeechUtterance alloc] initWithString:@"It's the horse. Say HORSE"];
                 instruction1b.rate = AVSpeechUtteranceMinimumSpeechRate;
                 instruction1b.pitchMultiplier = 1.5;
                 [self.synthesizer speakUtterance:instruction1b];
@@ -548,16 +548,16 @@
             [self incorrect];
             
             if(chances == 2) {
-                display.text = @"What animal makes this sound?";
-                AVSpeechUtterance *instruction2a = [[AVSpeechUtterance alloc] initWithString:@"What animal makes this sound?"];
+                display.text = @"Say the name of this animal";
+                AVSpeechUtterance *instruction2a = [[AVSpeechUtterance alloc] initWithString:@"Say the name of this animal"];
                 instruction2a.rate = AVSpeechUtteranceMinimumSpeechRate;
                 instruction2a.pitchMultiplier = 1.5;
                 [self.synthesizer speakUtterance:instruction2a];
                 [self hint];
             }
             else if(chances == 1) {
-                display.text = @"It's the pig.  Can you say PIG?";
-                AVSpeechUtterance *instruction2b = [[AVSpeechUtterance alloc] initWithString:@"It's the pig. Can you say PIG?"];
+                display.text = @"It's the pig.  Say PIG";
+                AVSpeechUtterance *instruction2b = [[AVSpeechUtterance alloc] initWithString:@"It's the pig. Say PIG"];
                 instruction2b.rate = AVSpeechUtteranceMinimumSpeechRate;
                 instruction2b.pitchMultiplier = 1.5;
                 [self.synthesizer speakUtterance:instruction2b];
@@ -577,16 +577,16 @@
             [self incorrect];
             
             if(chances == 2) {
-                display.text = @"What animal makes this sound?";
-                AVSpeechUtterance *instruction3a = [[AVSpeechUtterance alloc] initWithString:@"What animal makes this sound?"];
+                display.text = @"Say the name of this animal";
+                AVSpeechUtterance *instruction3a = [[AVSpeechUtterance alloc] initWithString:@"Say the name of this animal"];
                 instruction3a.rate = AVSpeechUtteranceMinimumSpeechRate;
                 instruction3a.pitchMultiplier = 1.5;
                 [self.synthesizer speakUtterance:instruction3a];
                 [self hint];
             }
             else if(chances == 1) {
-                display.text = @"It's the cow.  Can you say COW?";
-                AVSpeechUtterance *instruction3b = [[AVSpeechUtterance alloc] initWithString:@"It's the cow.  Can you say COW?"];
+                display.text = @"It's the cow.  Say COW";
+                AVSpeechUtterance *instruction3b = [[AVSpeechUtterance alloc] initWithString:@"It's the cow.  Say COW"];
                 instruction3b.rate = AVSpeechUtteranceMinimumSpeechRate;
                 instruction3b.pitchMultiplier = 1.5;
                 [self.synthesizer speakUtterance:instruction3b];
