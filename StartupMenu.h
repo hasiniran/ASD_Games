@@ -19,11 +19,15 @@
 //Voice Synthesis imports
 #import <AVFoundation/AVFoundation.h>
 
+//Voice Recognition imports
+#import <OpenEars/OEEventsObserver.h>
 
-@interface StartupMenu : SKScene{}
+
+@interface StartupMenu : SKScene <OEEventsObserverDelegate> {}
 
 
 @property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
+@property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
 
 @end
