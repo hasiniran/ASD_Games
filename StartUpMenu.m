@@ -32,7 +32,7 @@ SKScene * scene;
     if (self = [super initWithSize:size]) {
         //initialize voice synthesizer
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
-        
+/*
         //initialize voice recognition
         OELanguageModelGenerator *languageModelGenerator = [[OELanguageModelGenerator alloc] init];
         dictionary = [NSArray arrayWithObjects:@"TRAIN", @"AIRPLANE", @"PLANE", nil];
@@ -52,7 +52,7 @@ SKScene * scene;
         
         self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
         [self.openEarsEventsObserver setDelegate:self];
-        
+*/
         SKLabelNode *Game1 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         Game1.text = @"Airplane Game"; //Set the button text
         Game1.name = @"Airplane";
@@ -92,28 +92,28 @@ SKScene * scene;
         instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction1.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction1];
-        [[OEPocketsphinxController sharedInstance] suspendRecognition];
+//        [[OEPocketsphinxController sharedInstance] suspendRecognition];
     }
     else if (instructions == 10) { //wait 10 secs -- follow up 1
         AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Choose a game!"];
         instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction2.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2];
-        [[OEPocketsphinxController sharedInstance] suspendRecognition];
+//        [[OEPocketsphinxController sharedInstance] suspendRecognition];
     }
     else if (instructions == 20) { //wait 10 secs -- follow up 2
         AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Pick a game to play!"];
         instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
-        [[OEPocketsphinxController sharedInstance] suspendRecognition];
+//        [[OEPocketsphinxController sharedInstance] suspendRecognition];
     }
     else if (instructions > 29) { //wait another 10 secs -- restart instructions
         instructions = 0;
     }
-    else {
+/*    else {
         [[OEPocketsphinxController sharedInstance] resumeRecognition];
-    }
+    }*/
 }
 
 
@@ -125,11 +125,11 @@ SKScene * scene;
     //stop repeating instructions
     [instructionTimer invalidate];
     instructionTimer = nil;
-    
+/*
     //stop listening
     [[OEPocketsphinxController sharedInstance] suspendRecognition];
     [[OEPocketsphinxController sharedInstance] stopListening];
-    
+*/
     if ([node.name isEqualToString:@"Airplane"]) {
         AVSpeechUtterance *airplaneTransition = [[AVSpeechUtterance alloc] initWithString:@"Let's play the airplane game!"];
         airplaneTransition.rate = AVSpeechUtteranceMinimumSpeechRate;
@@ -158,7 +158,7 @@ SKScene * scene;
     }
 }
 
-
+/*
 //Voice Recognition internal dialogue
 -(void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
@@ -203,6 +203,6 @@ SKScene * scene;
 -(void) testRecognitionCompleted {
     NSLog(@"A test file that was submitted for recognition is now complete.");
 }
-
+*/
 
 @end

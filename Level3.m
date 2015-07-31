@@ -191,18 +191,18 @@
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
         [self addChild: _gameLayer];
-        
+
         display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         display.text = @"Say the color of this passenger to pick him up.";
         display.fontColor = [SKColor purpleColor];
         display.position = CGPointMake(self.size.width/2, self.size.height/2);
         [text addChild:display];
-        
+
         AVSpeechUtterance *instruction2a = [[AVSpeechUtterance alloc] initWithString:@"Level 3. Say the color of this passenger to pick him up."];
         instruction2a.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction2a.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2a];
-        
+
         [self ScrollingForeground];
         [self train];
         [self station];
