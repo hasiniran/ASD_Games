@@ -482,6 +482,18 @@
         if(train.position.x >= 1350) //train stops after off screen
             train.physicsBody.velocity = CGVectorMake(0, 0);
     }
+    
+    if (state > 3) { //after animals are correctly selected, they are sent back to the barn and this is their stop function -- all stops happen even if selections overlap
+        if (horse.position.y <= 270) {
+            horse.physicsBody.velocity = CGVectorMake(0, 0);
+        }
+        else if (pig.position.x >= 350) { //WHY WONT THE PIG STOP?!?!?
+            pig.physicsBody.velocity = CGVectorMake(0, 0);
+        }
+        else if (cow.position.x <= 620) {
+            cow.physicsBody.velocity = CGVectorMake(0, 0);
+        }
+    }
 }
 
 
@@ -493,13 +505,15 @@
     
     if(state==3) {
         if([button.name isEqual:@"horseButton"]) { //correct
+            //move horse back into barn
+            [horse.physicsBody applyImpulse:CGVectorMake(-2, -2)];
+    
+            //start pig instructions
             display.text = @"Say the animal that makes this noise";
-            
             AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Say the animal that makes this noise"];
             instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction2.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction2];
-            
             space = 1; //play pig oink every time
             interval = 1; //restart interval
             mult = 1;
@@ -530,13 +544,15 @@
     }
     else if(state==4) {
         if([button.name isEqual: @"pigButton"]) { //correct
-            display.text = @"Say the animal that makes this noise";
+            //move pig back into barn
+            [pig.physicsBody applyImpulse:CGVectorMake(2, 0)];
             
+            //start cow instructions
+            display.text = @"Say the animal that makes this noise";
             AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Say the animal that makes this noise"];
             instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction3.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction3];
-            
             space = 4; //play cow moo every fourth time
             interval = 1; //restart interval
             mult = 1;
@@ -567,6 +583,9 @@
     }
     else if(state==5) {
         if([button.name isEqual: @"cowButton"]) { //correct -> display next level
+            //move cow back into barn
+            [cow.physicsBody applyImpulse:CGVectorMake(-2, 0)];
+            
             [text removeFromParent];//clear text
             text = [SKNode node];
             [self addChild:text];
