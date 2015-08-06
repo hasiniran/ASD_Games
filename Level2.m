@@ -27,6 +27,11 @@
     SKLabelNode *nextButton;
     SKLabelNode *tryAgainButton;
     SKLabelNode *instructionText;
+    SKLabelNode *oneLabel;
+    SKLabelNode *twoLabel;
+    SKLabelNode *threeLabel;
+    SKLabelNode *fourLabel;
+    SKLabelNode *fiveLabel;
     NSTimer *instructionTimer;
     double speed;
     int textDisplay;
@@ -218,24 +223,121 @@
 }
 
 
--(void)addCows { //put random number of cows into scene
+//number labels for the cows -- hidden until selected
+-(void)oneLabel {
+    oneLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    oneLabel.text = @"1";
+    oneLabel.name = @"oneLabel";
+    oneLabel.hidden = YES; //hide button so it appears to be just the image
+    oneLabel.fontSize = 40;
+    oneLabel.fontColor = [SKColor blueColor];
+    oneLabel.position = CGPointMake(1075,300); //x,y values of position are different from the object
+    oneLabel.zPosition = 150;
+    oneLabel.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    oneLabel.physicsBody.dynamic = YES;
+    oneLabel.physicsBody.affectedByGravity = NO;
+    oneLabel.physicsBody.allowsRotation = NO;
+    [oneLabel runAction:[SKAction moveTo:CGPointMake(-225, 300) duration:60] completion:^{}];
+    [_gameLayer addChild:oneLabel];
+}
+
+-(void)twoLabel {
+    twoLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    twoLabel.text = @"2";
+    twoLabel.name = @"twoLabel";
+    twoLabel.hidden = YES; //hide button so it appears to be just the image
+    twoLabel.fontSize = 40;
+    twoLabel.fontColor = [SKColor blueColor];
+    twoLabel.position = CGPointMake(1150,400); //x,y values of position are different from the object
+    twoLabel.zPosition = 150;
+    twoLabel.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    twoLabel.physicsBody.dynamic = YES;
+    twoLabel.physicsBody.affectedByGravity = NO;
+    twoLabel.physicsBody.allowsRotation = NO;
+    [twoLabel runAction:[SKAction moveTo:CGPointMake(-150, 400) duration:60] completion:^{}];
+    [_gameLayer addChild:twoLabel];
+}
+
+-(void)threeLabel {
+    threeLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    threeLabel.text = @"3";
+    threeLabel.name = @"threeLabel";
+    threeLabel.hidden = YES; //hide button so it appears to be just the image
+    threeLabel.fontSize = 40;
+    threeLabel.fontColor = [SKColor blueColor];
+    threeLabel.position = CGPointMake(1175,200); //x,y values of position are different from the object
+    threeLabel.zPosition = 150;
+    threeLabel.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    threeLabel.physicsBody.dynamic = YES;
+    threeLabel.physicsBody.affectedByGravity = NO;
+    threeLabel.physicsBody.allowsRotation = NO;
+    [threeLabel runAction:[SKAction moveTo:CGPointMake(-150, 200) duration:60] completion:^{}];
+    [_gameLayer addChild:threeLabel];
+}
+
+-(void)fourLabel {
+    fourLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    fourLabel.text = @"4";
+    fourLabel.name = @"fourLabel";
+    fourLabel.hidden = YES; //hide button so it appears to be just the image
+    fourLabel.fontSize = 40;
+    fourLabel.fontColor = [SKColor blueColor];
+    fourLabel.position = CGPointMake(1275,250); //x,y values of position are different from the object
+    fourLabel.zPosition = 150;
+    fourLabel.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    fourLabel.physicsBody.dynamic = YES;
+    fourLabel.physicsBody.affectedByGravity = NO;
+    fourLabel.physicsBody.allowsRotation = NO;
+    [fourLabel runAction:[SKAction moveTo:CGPointMake(-50, 250) duration:60] completion:^{}];
+    [_gameLayer addChild:fourLabel];
+}
+
+-(void)fiveLabel {
+    fiveLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    fiveLabel.text = @"5";
+    fiveLabel.name = @"fiveLabel";
+    fiveLabel.hidden = YES; //hide button so it appears to be just the image
+    fiveLabel.fontSize = 40;
+    fiveLabel.fontColor = [SKColor blueColor];
+    fiveLabel.position = CGPointMake(1275,350); //x,y values of position are different from the object
+    fiveLabel.zPosition = 150;
+    fiveLabel.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(40, 20)];
+    fiveLabel.physicsBody.dynamic = YES;
+    fiveLabel.physicsBody.affectedByGravity = NO;
+    fiveLabel.physicsBody.allowsRotation = NO;
+    [fiveLabel runAction:[SKAction moveTo:CGPointMake(-50, 350) duration:60] completion:^{}];
+    [_gameLayer addChild:fiveLabel];
+}
+
+
+-(void)addCows { //put random number of cows + number labels into scene
     if(numCows == 1) {
         [self cow1];
+        [self oneLabel];
     }
     else if(numCows == 2) {
         [self cow1];
         [self cow2];
+        [self oneLabel];
+        [self twoLabel];
     }
     else if(numCows == 3) {
         [self cow1];
         [self cow2];
         [self cow3];
+        [self oneLabel];
+        [self twoLabel];
+        [self threeLabel];
     }
     else if(numCows == 4) {
         [self cow1];
         [self cow2];
         [self cow3];
         [self cow4];
+        [self oneLabel];
+        [self twoLabel];
+        [self threeLabel];
+        [self fourLabel];
     }
     else if(numCows == 5) {
         [self cow1];
@@ -243,6 +345,11 @@
         [self cow3];
         [self cow4];
         [self cow5];
+        [self oneLabel];
+        [self twoLabel];
+        [self threeLabel];
+        [self fourLabel];
+        [self fiveLabel];
     }
 }
 
@@ -421,6 +528,33 @@
         Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
+    }
+    
+    //once cow is correctly counted/clicked, its number will appear as the completion animation
+    if ([button.name isEqualToString:@"oneLabel"]) {
+        oneLabel.hidden = NO;
+    }
+    else if ([button.name isEqualToString:@"twoLabel"]) {
+        oneLabel.hidden = NO;
+        twoLabel.hidden = NO;
+    }
+    else if ([button.name isEqualToString:@"threeLabel"]) {
+        oneLabel.hidden = NO;
+        twoLabel.hidden = NO;
+        threeLabel.hidden = NO;
+    }
+    else if ([button.name isEqualToString:@"fourLabel"]) {
+        oneLabel.hidden = NO;
+        twoLabel.hidden = NO;
+        threeLabel.hidden = NO;
+        fourLabel.hidden = NO;
+    }
+    else if ([button.name isEqualToString:@"fiveLabel"]) {
+        oneLabel.hidden = NO;
+        twoLabel.hidden = NO;
+        threeLabel.hidden = NO;
+        fourLabel.hidden = NO;
+        fiveLabel.hidden = NO;
     }
 }
 
