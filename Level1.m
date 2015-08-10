@@ -15,6 +15,7 @@
     SKSpriteNode *train;
     SKSpriteNode *station;
     SKSpriteNode *rail;
+    SKSpriteNode *smoke;
     SKLabelNode *skip;
     SKLabelNode *go;
     SKLabelNode *nextButton;
@@ -66,7 +67,7 @@
         go.fontSize = 40;
         go.fontColor = [SKColor blueColor];
         go.position = CGPointMake(500,200);
-        go.zPosition = 50;  
+        go.zPosition = 150;
         [_HUDLayer addChild:go]; //add node to screen
         
         //instructions
@@ -153,6 +154,19 @@
     train.physicsBody.affectedByGravity = NO;
     train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:train];
+}
+
+
+-(void)smoke {   //Moving object
+    smoke = [SKSpriteNode spriteNodeWithImageNamed:@"trainsmoke.jpg"]; //ask Adriana to make better smoke image/sprite
+    smoke.position = CGPointMake(315, 285);
+    smoke.zPosition = 50;
+    [smoke setScale:.5];
+    smoke.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(50, 20)];
+    smoke.physicsBody.dynamic = YES;
+    smoke.physicsBody.affectedByGravity = NO;
+    smoke.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:smoke];
 }
 
 
@@ -297,6 +311,7 @@
         [self ScrollingForeground];
         
         [self train];
+        [self smoke]; //visible smoke to indicate train movement
         [self station];
         station.physicsBody.velocity = CGVectorMake(-25, 0); //move station out of scene as train moves forward
         
@@ -314,6 +329,7 @@
     }
     else if ([button.name isEqualToString:@"Go"]) {
         [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        [smoke.physicsBody applyImpulse:CGVectorMake(1, 0)];
     }
     else if ([button.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];

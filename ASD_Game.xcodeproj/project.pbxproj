@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0116E4E81AC0B9DD00832B2F /* Level4.m in Sources */ = {isa = PBXBuildFile; fileRef = 0116E4E71AC0B9DD00832B2F /* Level4.m */; };
+		013802481B7307E50098BE94 /* TrainSmoke.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 013802471B7307E50098BE94 /* TrainSmoke.jpg */; };
 		016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 016A9CAB1AC12CC500A87406 /* StopSign.png */; };
 		01A25E131B3DC11200D68AA9 /* Horse.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A25E121B3DC11200D68AA9 /* Horse.png */; };
 		01A25E151B3DC11B00D68AA9 /* Pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A25E141B3DC11B00D68AA9 /* Pig.png */; };
@@ -91,6 +92,7 @@
 /* Begin PBXFileReference section */
 		0116E4E61AC0B96B00832B2F /* Level4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level4.h; sourceTree = "<group>"; };
 		0116E4E71AC0B9DD00832B2F /* Level4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level4.m; sourceTree = "<group>"; };
+		013802471B7307E50098BE94 /* TrainSmoke.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TrainSmoke.jpg; sourceTree = "<group>"; };
 		016A9CAB1AC12CC500A87406 /* StopSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StopSign.png; sourceTree = "<group>"; };
 		01A25E121B3DC11200D68AA9 /* Horse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Horse.png; sourceTree = "<group>"; };
 		01A25E141B3DC11B00D68AA9 /* Pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pig.png; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				013802471B7307E50098BE94 /* TrainSmoke.jpg */,
 				01BAAFFC1B56BDB7006A42B9 /* Horse Whinny-3.mp3 */,
 				01A25E141B3DC11B00D68AA9 /* Pig.png */,
 				01A25E121B3DC11200D68AA9 /* Horse.png */,
@@ -497,6 +500,7 @@
 				076584C11AE995DA00F6FBD1 /* cow.mp3 in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */,
+				013802481B7307E50098BE94 /* TrainSmoke.jpg in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
 				E95017741ABFCF6000F7359E /* YellowBird.png in Resources */,
