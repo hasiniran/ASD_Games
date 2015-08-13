@@ -18,6 +18,10 @@
     SKSpriteNode *stopSign1;
     SKSpriteNode *stopSign2;
     SKSpriteNode *stopSign3;
+    SKSpriteNode *trainLightBlackL;
+    SKSpriteNode *trainLightBlackR;
+    SKSpriteNode *trainLightRedL;
+    SKSpriteNode *trainLightRedR;
     SKNode *_bgLayer;
     SKNode *_HUDLayer;
     SKNode *_gameLayer;
@@ -71,6 +75,10 @@
         [self ScrollingBackground]; //scrolling sky
         [self ScrollingForeground]; //scrolling tracks
         [self train];
+        [self trainLightBlackL];
+        [self trainLightBlackR];
+        [self trainLightRedL];
+        [self trainLightRedR];
         [self stopSign1];
         [self mountain];
         
@@ -99,6 +107,10 @@
         
         //start train moving
         [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        [trainLightBlackL.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        [trainLightBlackR.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        [trainLightRedL.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        [trainLightRedR.physicsBody applyImpulse:CGVectorMake(1, 0)];
         [stopSign1.physicsBody applyImpulse:CGVectorMake(-2, 0)];
     }
     return self;
@@ -142,6 +154,60 @@
     train.physicsBody.affectedByGravity = NO;
     train.physicsBody.allowsRotation = NO;
     [_gameLayer addChild:train];
+}
+
+
+-(void)trainLightBlackL {
+    trainLightBlackL = [SKSpriteNode spriteNodeWithImageNamed:@"BlackCircle.png"];
+    [trainLightBlackL setScale:.01];
+    trainLightBlackL.position = CGPointMake(320,50);
+    trainLightBlackL.zPosition = 100;
+    trainLightBlackL.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(55, 20)];
+    trainLightBlackL.physicsBody.dynamic = YES;
+    trainLightBlackL.physicsBody.affectedByGravity = NO;
+    trainLightBlackL.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:trainLightBlackL];
+}
+
+
+-(void)trainLightBlackR {
+    trainLightBlackR = [SKSpriteNode spriteNodeWithImageNamed:@"BlackCircle.png"];
+    [trainLightBlackR setScale:.01];
+    trainLightBlackR.position = CGPointMake(360,50);
+    trainLightBlackR.zPosition = 100;
+    trainLightBlackR.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(55, 20)];
+    trainLightBlackR.physicsBody.dynamic = YES;
+    trainLightBlackR.physicsBody.affectedByGravity = NO;
+    trainLightBlackR.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:trainLightBlackR];
+}
+
+
+-(void)trainLightRedL {
+    trainLightRedL = [SKSpriteNode spriteNodeWithImageNamed:@"RedCircle.png"];
+    [trainLightRedL setScale:.06];
+    trainLightRedL.position = CGPointMake(320,50);
+    trainLightRedL.zPosition = 60;
+    trainLightRedL.hidden = YES;
+    trainLightRedL.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(55, 20)];
+    trainLightRedL.physicsBody.dynamic = YES;
+    trainLightRedL.physicsBody.affectedByGravity = NO;
+    trainLightRedL.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:trainLightRedL];
+}
+
+
+-(void)trainLightRedR {
+    trainLightRedR = [SKSpriteNode spriteNodeWithImageNamed:@"RedCircle.png"];
+    [trainLightRedR setScale:.06];
+    trainLightRedR.position = CGPointMake(360,50);
+    trainLightRedR.zPosition = 60;
+    trainLightRedR.hidden = YES;
+    trainLightRedR.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(55, 20)];
+    trainLightRedR.physicsBody.dynamic = YES;
+    trainLightRedR.physicsBody.affectedByGravity = NO;
+    trainLightRedR.physicsBody.allowsRotation = NO;
+    [_gameLayer addChild:trainLightRedR];
 }
 
 
@@ -400,6 +466,10 @@
     
     if ([button.name  isEqual: @"stop"]) {
         click = 1; //train is stopped
+        trainLightRedL.hidden = NO;
+        trainLightRedR.hidden = NO;
+        trainLightBlackL.hidden = YES;
+        trainLightBlackR.hidden = YES;
     }
     else if ([button.name isEqualToString:@"level5"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
