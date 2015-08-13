@@ -523,6 +523,10 @@
         Level4 *scene = [Level4 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
+        
+        //stop repeating instructions
+        [instructionTimer invalidate];
+        instructionTimer = nil;
     }
 }
 
