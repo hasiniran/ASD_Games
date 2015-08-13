@@ -29,13 +29,14 @@
     SKLabelNode *nextButton;
     SKLabelNode *level;
     SKLabelNode *display;
-    SKLabelNode *lives;
     SKLabelNode *tryAgainButton;
+    NSTimer *instructionTimer;
     double speed;
     int count;
     int check; //keep track of train states -- check 0 = moving, check 1 = stop, check 2 = moving, check 4 display
     int count2;
     int chances;
+    int textDisplay;
 }
 
 
@@ -44,6 +45,7 @@
     count = 0;
     check = 0;
     chances = 3; //lives
+    textDisplay = 0;
     
     if(self = [super initWithSize:size]) {
         //initialize synthesizer
@@ -191,14 +193,8 @@
         [self addChild: _bgLayer];
         _gameLayer = [SKNode node];
         [self addChild: _gameLayer];
-
-        display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        display.text = @"Say the color of this passenger to pick him up.";
-        display.fontColor = [SKColor purpleColor];
-        display.position = CGPointMake(self.size.width/2, self.size.height/2);
-        [text addChild:display];
-
-        AVSpeechUtterance *instruction2a = [[AVSpeechUtterance alloc] initWithString:@"Level 3. Say the color of this passenger to pick him up."];
+        
+        AVSpeechUtterance *instruction2a = [[AVSpeechUtterance alloc] initWithString:@"Level 3"];
         instruction2a.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction2a.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction2a];
@@ -213,6 +209,7 @@
         [self yellowBoy];
         [self purpleBoy];
         [self hint];
+        [self timer];
     }
 }
 
@@ -350,40 +347,83 @@
 }
 
 
+-(void)timer { //keep accessing displayText until child starts playing
+    instructionTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(incorrect) userInfo:nil repeats:YES];
+}
+
+
 -(void)incorrect {
-    chances--;
+    textDisplay++;
     
     display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     display.position = CGPointMake(self.size.width/2, self.size.height/2);
-    if (chances == 2) {
-        display.text = @"Say the color of this passenger's hat.";
-        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Say the color of this passenger's hat."];
+    if (textDisplay == 1) {
+        [text removeFromParent];
+        text = [SKNode node];
+        [self addChild:text];
+        
+        display.text = @"Tell this passenger to HOP ON.";
+        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Tell this passenger to HOP ON"];
         instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction3.pitchMultiplier = 1.5;
         [self.synthesizer speakUtterance:instruction3];
     }
-    else if (chances == 1) {
+    else if (textDisplay == 12) {
+        [text removeFromParent];   //clear text
+        text = [SKNode node];  //re init text
+        [self addChild:text];
+        
         if(check == 1) {
-            display.text = @"Say PURPLE";
-            AVSpeechUtterance *instruction4p = [[AVSpeechUtterance alloc] initWithString:@"Say PURPLE"];
+            display.text = @"Pick up this passenger by saying HOP ON PURPLE";
+            AVSpeechUtterance *instruction4p = [[AVSpeechUtterance alloc] initWithString:@"Pick up this passenger by saying HOP ON PURPLE"];
             instruction4p.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4p.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4p];
         }
         else if(check == 2) {
-            display.text = @"Say BLUE";
-            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:@"Say BLUE"];
+            display.text = @"Pick up this passenger by saying HOP ON BLUE";
+            AVSpeechUtterance *instruction4b = [[AVSpeechUtterance alloc] initWithString:@"Pick up this passenger by saying HOP ON BLUE"];
             instruction4b.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4b.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4b];
         }
         else if(check == 3) {
-            display.text = @"Say YELLOW";
-            AVSpeechUtterance *instruction4y = [[AVSpeechUtterance alloc] initWithString:@"Say YELLOW"];
+            display.text = @"Pick up this passenger by saying HOP ON YELLOW";
+            AVSpeechUtterance *instruction4y = [[AVSpeechUtterance alloc] initWithString:@"Pick up this passenger by saying HOP ON YELLOW"];
             instruction4y.rate = AVSpeechUtteranceMinimumSpeechRate;
             instruction4y.pitchMultiplier = 1.5;
             [self.synthesizer speakUtterance:instruction4y];
         }
+    }
+    else if (textDisplay == 20) {
+        [text removeFromParent];   //clear text
+        text = [SKNode node];  //re init text
+        [self addChild:text];
+        
+        if(check == 1) {
+            display.text = @"Say HOP ON PURPLE";
+            AVSpeechUtterance *instruction5p = [[AVSpeechUtterance alloc] initWithString:@"Say HOP ON PURPLE"];
+            instruction5p.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction5p.pitchMultiplier = 1.5;
+            [self.synthesizer speakUtterance:instruction5p];
+        }
+        else if(check == 2) {
+            display.text = @"Say HOP ON BLUE";
+            AVSpeechUtterance *instruction5b = [[AVSpeechUtterance alloc] initWithString:@"Say HOP ON BLUE"];
+            instruction5b.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction5b.pitchMultiplier = 1.5;
+            [self.synthesizer speakUtterance:instruction5b];
+        }
+        else if(check == 3) {
+            display.text = @"Say HOP ON YELLOW";
+            AVSpeechUtterance *instruction5y = [[AVSpeechUtterance alloc] initWithString:@"Say HOP ON YELLOW"];
+            instruction5y.rate = AVSpeechUtteranceMinimumSpeechRate;
+            instruction5y.pitchMultiplier = 1.5;
+            [self.synthesizer speakUtterance:instruction5y];
+        }
+    }
+    else if (textDisplay == 30) {
+        textDisplay = 0; //start instructions over
     }
     
     if(check == 1)
@@ -392,27 +432,14 @@
         display.fontColor = [SKColor blueColor];
     else if(check == 3)
         display.fontColor = [SKColor yellowColor];
-    
-    lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    lives.text =[NSString stringWithFormat:@"Chances: %i", chances];
-    lives.fontColor = [SKColor redColor];
-    lives.position =CGPointMake(self.size.width/2, self.size.height/2 + 100);
-    
-    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeInWithDuration:1/3.0],[SKAction waitForDuration:2], [SKAction fadeOutWithDuration:1/3.0]]];
-    // run the sequence then delete the label
-    [lives runAction:flashAction completion:^{[lives removeFromParent];}];
-    
+
     [display removeFromParent];
-    [text addChild:lives];
     [text addChild:display];
-    
-    if(chances == 2) {
+
+    if(chances > 0) {
         [self hint];
     }
-    else if(chances == 1) {
-        [self hint];
-    }
-    else if(chances <= 0) {
+    else if(chances == 0) {
         [self tryAgain];
     }
 }
@@ -434,6 +461,8 @@
     tryAgainButton.position = CGPointMake(self.size.width/2, self.size.height/2);
     tryAgainButton.name = @"level3";
     [text addChild:tryAgainButton];
+    
+    chances--; //try again declared only once
 }
 
 
@@ -442,56 +471,37 @@
     button = [self nodeAtPoint:location];
     
     if (chances > 0) { //disable people clicks after using up all 3 tries
-        if(check == 1) {
-            if([button.name  isEqual: @"purpleBoy"]) {
-                speed = 1;
-                [purpleBoy removeFromParent];
-                [self addHeadToTrain];
-                count2 = 0;
-            }
-            else if([button.name  isEqual: @"yellowBoy"]) {
-                [text removeFromParent];   //erase and re-add text
-                text = [SKNode node];
-                [self addChild:text];
-                [self incorrect];
-            }
-            else if([button.name  isEqual: @"blueBoy"]) {
-                [text removeFromParent];   //erase and re-add text
-                text = [SKNode node];
-                [self addChild:text];
-                [self incorrect];
-            }
+        if(check == 1 && [button.name  isEqual: @"purpleBoy"]) {
+            speed = 1;
+            [purpleBoy removeFromParent];
+            [self addHeadToTrain];
+            count2 = 0;
+            textDisplay = 0; //restart instructions
         }
-        else if(check == 2) {
-            if([button.name  isEqual: @"blueBoy"]) { //blue chck
-                [blueBoy removeFromParent];
-                [self addHeadToTrain];
-                count2 = 0;
-            }
-            else if([button.name  isEqual: @"yellowBoy"]) {
-                [text removeFromParent];   //erase and re-add text
-                text = [SKNode node];
-                [self addChild:text];
-                [self incorrect];
-            }
+        else if(check == 2 && [button.name  isEqual: @"blueBoy"]) { //blue chck
+            [blueBoy removeFromParent];
+            [self addHeadToTrain];
+            count2 = 0;
+            textDisplay = 0; //restart instructions
         }
-        else if(check == 3) {
-            if([button.name  isEqual: @"yellowBoy"]) {
-                [yellowBoy removeFromParent];
-                [self addHeadToTrain];
+        else if(check == 3 && [button.name  isEqual: @"yellowBoy"]) {
+            [yellowBoy removeFromParent];
+            [self addHeadToTrain];
         
-                [_bgLayer removeFromParent];
-                _bgLayer = [SKNode node];
-                [self addChild: _bgLayer];
+            [_bgLayer removeFromParent];
+            _bgLayer = [SKNode node];
+            [self addChild: _bgLayer];
         
-                [self ScrollingForeground];
-                [self ScrollingBackground];
+            [self ScrollingForeground];
+            [self ScrollingBackground];
         
-                [station.physicsBody applyImpulse:CGVectorMake(-2, 0)]; //"train" starts moving again so station has to move away
+            [station.physicsBody applyImpulse:CGVectorMake(-2, 0)]; //"train" starts moving again so station has to move away
         
-                count2 = 0;
-                count = 0;
-            }
+            count2 = 0;
+            count = 0;
+        }
+        else {
+            chances--;
         }
     }
     
@@ -527,17 +537,6 @@
             text = [SKNode node];  //re init text
             [self addChild:text];
         
-            display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            display.text = @"Say the color of this passenger to pick him up";
-            display.fontColor = [SKColor blueColor];
-            display.position = CGPointMake(self.size.width/2, self.size.height/2);
-            [text addChild:display];
-            
-            AVSpeechUtterance *instruction2b = [[AVSpeechUtterance alloc] initWithString:@"Say the color of this passenger to pick him up."];
-            instruction2b.rate = AVSpeechUtteranceMinimumSpeechRate;
-            instruction2b.pitchMultiplier = 1.5;
-            [self.synthesizer speakUtterance:instruction2b];
-        
             [self hint];
         }
     
@@ -547,22 +546,15 @@
             [text removeFromParent];   //clear text
             text = [SKNode node];
             [self addChild:text];
-        
-            display = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            display.text = @"Say the color of this passenger to pick him up";
-            display.fontColor = [SKColor yellowColor];
-            display.position = CGPointMake(self.size.width/2, self.size.height/2);
-            [text addChild:display];
-        
-            AVSpeechUtterance *instruction2c = [[AVSpeechUtterance alloc] initWithString:@"Say the color of this passenger to pick him up."];
-            instruction2c.rate = AVSpeechUtteranceMinimumSpeechRate;
-            instruction2c.pitchMultiplier = 1.5;
-            [self.synthesizer speakUtterance:instruction2c];
-            
+
             [self hint];
         }
     
         else if(check == 4) {
+            //stop repeating instructions
+            [instructionTimer invalidate];
+            instructionTimer = nil;
+            
             if(count >= 30) {
                 count2++;
             
