@@ -44,7 +44,7 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 
 @property (nonatomic, strong)  SKSpriteNode *ship;
 @property (nonatomic,strong)   SKAction *actionMoveUp;
-@property (nonatomic, strong)    SKSpriteNode *bg ;
+//@property (nonatomic, strong)    SKSpriteNode *bg ;
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *runway ;
 

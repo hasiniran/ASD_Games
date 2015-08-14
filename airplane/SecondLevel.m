@@ -201,7 +201,7 @@
     }*/
 }
 
--(void)birdSpin:(NSInteger) num
+-(void)birdSpin:(NSInteger)num
 {
     [birds[num] runAction: [SKAction rotateByAngle:2*M_PI duration:0.5]];
 }
@@ -214,13 +214,14 @@
         [self birdSpin:numberSaid];
         numberSaid++;
     }
-    if(numberSaid == objectsDisplayed)
+    if(1/*numberSaid == objectsDisplayed*/)
     {
         correctAnswers++;
         instruction = [[AVSpeechUtterance alloc] initWithString:@"Good job"];
         instruction.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction.pitchMultiplier = 1;
         [self.synthesizer speakUtterance:instruction];
+        [self birdsFlyOut];
     }
     /*if([hypothesis isEqualToString:words[objectsDisplayed-1]])
     {
@@ -566,7 +567,7 @@
     [self.synthesizer speakUtterance:instruction];
     // Set text of answers
     while(self.synthesizer.speaking)
-    {    }
+    {}
     [self recognizeSpeech];
 }
 
@@ -596,47 +597,43 @@
 
 -(void)initalizingScrollingBackground
 {
-    // Create ground
+    // Create the sea
     seaTexture = [SKTexture textureWithImageNamed:@"Sea.png"];
-    self.sea = [SKSpriteNode spriteNodeWithTexture:seaTexture];
     seaTexture.filteringMode = SKTextureFilteringNearest;
     
     // Create sea texture
     for (int i = 0; i < 3; i++) {
-        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:seaTexture];
-        bg.position = CGPointMake(i * bg.size.width, 0);
-        bg.anchorPoint = CGPointZero;
-        bg.name = @"sea";
-        [self addChild:bg];
+        _bg = [SKSpriteNode spriteNodeWithTexture:seaTexture];
+        _bg.position = CGPointMake(i * _bg.size.width, 0);
+        _bg.anchorPoint = CGPointZero;
+        _bg.name = @"sea";
+        [self addChild:_bg];
     }
 
     waveTexture = [SKTexture textureWithImageNamed:@"Waves.png"];
-    self.wave = [SKSpriteNode spriteNodeWithTexture:waveTexture];
     waveTexture.filteringMode = SKTextureFilteringNearest;
     // Create ground
     for (int i = 0; i < 3; i++) {
-        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:waveTexture];
-        bg.position = CGPointMake(i * bg.size.width, 0);
-        bg.anchorPoint = CGPointZero;
-        bg.name = @"waves";
-        [self addChild:bg];
+        _bg = [SKSpriteNode spriteNodeWithTexture:waveTexture];
+        _bg.position = CGPointMake(i * _bg.size.width, 0);
+        _bg.anchorPoint = CGPointZero;
+        _bg.name = @"waves";
+        [self addChild:_bg];
     }
 
     // Create skyline
-    
-    SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky-3.png"];
+    skylineTexture = [SKTexture textureWithImageNamed:@"Sky-3.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
-    
     for (int i = 0; i < 3; i++) {
-        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
-        [bg setScale:2];
-        bg.position = CGPointMake(i * bg.size.width, seaTexture.size.height );
-        //  bg.zPosition = -200;
-        bg.anchorPoint = CGPointZero;
-        bg.name = @"sky";
-        [self addChild:bg];
+        self.bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
+        [_bg setScale:2];
+        _bg.position = CGPointMake(i * _bg.size.width, seaTexture.size.height );
+        _bg.zPosition = -200;
+        _bg.anchorPoint = CGPointZero;
+        _bg.name = @"sky";
+        [self addChild:_bg];
     }
-    
+
     // Create ground physics container
     SKNode* dummy = [SKNode node];
     dummy.position = CGPointMake(0, 0);
@@ -644,7 +641,6 @@
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
     [self moveBgContinuously];
-    
 }
 
 -(SKAction*)moveBgContinuously
@@ -659,8 +655,6 @@
          SKAction* move = [Actions moveAction:waves.size.width: 0.01];
          SKAction* reset = [Actions moveAction:-waves.size.width: 0.0];
          moveForever = [SKAction repeatActionForever:[SKAction sequence:@[move,reset]]];
-         
-         
          if( !waves.hasActions){
              [waves runAction: moveForever];
          }
@@ -668,7 +662,6 @@
     
     if(!waves.hasActions) {
        [self runAction:moveBackground];
-        
     }
     return moveBackground;
 }

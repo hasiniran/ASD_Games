@@ -19,8 +19,7 @@
     CGFloat screenHeight;
     CGFloat screenWidth;
     SKAction *actionMoveRight;
-    SKTexture* seaTexture;
-    SKTexture* waveTexture;
+    SKTexture *seaTexture, *waveTexture, *skylineTexture;
     SKAction* moveGroundSpritesForever;
 }
 
