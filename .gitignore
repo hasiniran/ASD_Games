@@ -210,3 +210,5 @@ xcuserdata
 
 # Vim files
 .ycm*
+
+*.xcuserstate
