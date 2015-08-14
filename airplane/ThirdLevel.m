@@ -9,18 +9,19 @@
 #import "ThirdLevel.h"
 
 @implementation ThirdLevel {
-    SKLabelNode *correctButton, *incorrectButton;
+    SKLabelNode *correctButton, *incorrectButton, *skip;
     SKLabelNode *question;
     CGSize screenSize;
     NSArray *boats;
     int correctAnswers, questionDisplayed;
     NSMutableArray *shipPlace, *shipColor;
-    SKSpriteNode *orangeBoat, *purpleBoat, *yellowBoat;
+    SKSpriteNode *orangeBoat, *purpleBoat, *yellowBoat, *arrow;
     AVSpeechUtterance *instruction;
 }
 
 -(id)initWithSize:(CGSize)size {
     
+
     shipPlace = [NSMutableArray arrayWithObjects:@"first", @"second", @"third", nil];
     shipColor = [NSMutableArray arrayWithObjects:@"Orange", @"Purple", @"Yellow", nil];
     self.synthesizer = [[AVSpeechSynthesizer alloc] init];
@@ -31,7 +32,16 @@
         screenSize = [[UIScreen mainScreen] bounds].size;
        
         [self initalizingScrollingBackground];
-
+      
+        skip = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [self addChild:skip]; //add node to screen
+        
         // Create boat sprites
         orangeBoat = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBoat.png"];
         purpleBoat = [SKSpriteNode spriteNodeWithImageNamed:@"PurpleBoat.png"];
@@ -42,7 +52,9 @@
         
         SKSpriteNode *sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sun.png"];
         sun.position = CGPointMake(screenSize.width*.85, screenSize.height*.8);
-       
+
+        arrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow.png"];
+
         boats = [NSArray arrayWithObjects:orangeBoat, purpleBoat, yellowBoat, nil];
        
         //question specifications
@@ -82,11 +94,30 @@
         questionDisplayed = 0;
         [self hideButtons];
         [self addShip];
-        [self boatsIn];    }
+        [self boatsIn];
+    }
     
     return self;
 }
 
+-(void) updateArrow{
+    if(correctAnswers == 0 )
+        arrow.position = CGPointMake(650, 250);
+    else if(correctAnswers == 1)
+        arrow.position = CGPointMake(800, 250);
+    else if(correctAnswers == 2)
+        arrow.position = CGPointMake(950, 250);
+    arrow.zPosition = 100;
+    [arrow setScale:.5];
+
+}
+-(void)pointArrow{
+       [self addChild:arrow];
+}
+
+-(void)hideArrow{
+    arrow.hidden = TRUE;
+}
 -(void)boatsIn
 {
     /*
@@ -103,6 +134,9 @@
             if(i == boats.count - 1){
                 [self askQuestion];
                 [self displayButtons];
+                [self updateArrow];
+                [self pointArrow];
+
             }
            }];
         currentWidth += dw;
@@ -134,7 +168,6 @@
 
 -(void)updateButtons
 {
-    
     correctButton.text = [NSString stringWithFormat:@"%@", shipColor[correctAnswers]];
     incorrectButton.text = [NSString stringWithFormat:@"Not %@", shipColor[correctAnswers]];
 }
@@ -146,13 +179,13 @@
   //  question.hidden = YES;
     switch (questionDisplayed) {
         case 0:
-            question.text = [NSString stringWithFormat:@"What is the color of the %@ ship?", shipPlace[correctAnswers]];
+            question.text = [NSString stringWithFormat:@"What is the color of this ship?"];
             break;
         case 1:
-            question.text = [NSString stringWithFormat:@"Are you sure? What color is the %@ ship?", shipPlace[correctAnswers]];
+            question.text = [NSString stringWithFormat:@"What color is this ship?"];
             break;
         case 2:
-            question.text = [NSString stringWithFormat:@"Can you say %@?", shipColor[correctAnswers]];
+            question.text = [NSString stringWithFormat:@"Say %@.", shipColor[correctAnswers]];
             break;
         default:
             question.text = [NSString stringWithFormat:@"%i", questionDisplayed];
@@ -308,13 +341,16 @@
     SKNode *node = [self nodeAtPoint:location];
 
     if([node.name isEqualToString:@"correctButton"]){
-        if(correctAnswers == 2)
+        if(correctAnswers == 2){
             [self boatsLeave];
+            [self hideArrow];
+        }
         else {
             correctAnswers++;
             questionDisplayed = 0;
             [self askQuestion];
             [self updateButtons];
+            [self updateArrow];
         }
 
     }
@@ -325,6 +361,10 @@
         }
         [self askQuestion];
     }
+    if ([node.name isEqualToString:@"Skip"]) {
+        [self moveToNextScene];
+    }
+
 }
 
 @end

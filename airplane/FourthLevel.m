@@ -9,7 +9,7 @@
 #import "FourthLevel.h"
 
 @implementation FourthLevel {
-    SKLabelNode *correctButton, *incorrectButton;
+    SKLabelNode *correctButton, *incorrectButton, *skip;
     SKLabelNode *question;
     CGSize screenSize;
     NSArray *boats;
@@ -21,6 +21,7 @@
 }
 
 -(id)initWithSize:(CGSize)size {
+
     
     shipPlace = [NSMutableArray arrayWithObjects:@"first", @"second", @"third", nil];
     shipColor = [NSMutableArray arrayWithObjects:@"Orange", @"Purple", @"Yellow", nil];
@@ -32,6 +33,15 @@
         screenSize = [[UIScreen mainScreen] bounds].size;
         
         [self initalizingScrollingBackground];
+        
+        skip = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [self addChild:skip]; //add node to screen
         
         // Create boat sprites
         orangeBoat = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeBoat.png"];
@@ -179,10 +189,10 @@
             question.text = @"What color ship is the captain on?";
             break;
         case 1:
-            question.text = @"Are you sure? What color is the ship?";
+            question.text = @"What color is the ship?";
             break;
         case 2:
-            question.text = [NSString stringWithFormat:@"Can you say %@?", shipColor[captainsBoat]];
+            question.text = [NSString stringWithFormat:@"Say %@.", shipColor[captainsBoat]];
             break;
         default:
             question.text = [NSString stringWithFormat:@"%i", questionDisplayed];
@@ -347,6 +357,10 @@
         }
         [self askQuestion];
     }
+    if ([node.name isEqualToString:@"Skip"]) {
+        [self moveToNextScene];
+    }
+
 }
 
 @end

@@ -5,9 +5,7 @@
 //  Created by Hasini Yatawatte on 1/26/15.
 //  Maintained by Charles Shinaver since 3/30/15
 //  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
-//
-//  Top bird keeps getting cut off.  Must be fixed
-//
+
 
 #import "SecondLevel.h"
 
@@ -21,12 +19,12 @@
 
 @implementation SecondLevel {
     int objectsDisplayed;
+    int numberSaid;
     int questionDisplayed;
     int correctAnswers;
     int level; //0 = birds, 1 = balloons, 2 = clouds
     NSArray *birds, *balloons, *UFOs;
-    SKLabelNode *correctButton;
-    SKLabelNode *incorrectButton;
+    SKLabelNode *skip;
     SKLabelNode *question;
     CGSize screenSize;
     NSMutableArray *objectNames;
@@ -36,22 +34,10 @@
     AVSpeechUtterance *instruction;
     NSString *lmPath, *dicPath;
     NSArray *words;
-
-
 }
 
 
-/*
- * TODO 3 repetitions of objects coming in, random number each time
-        first birds, then balloons, then clouds
- * TODO Must get 3 in a row correct to move to next scene. Max of 5 tries
- * TODO Objects fly away after 3 questions asked
- 
- 
- birds and balloons finished
- 
- clouds or some other object must be finished now
-*/
+/**/
 
 -(id)initWithSize:(CGSize)size {
     
@@ -62,11 +48,10 @@
 
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        words = [NSArray arrayWithObjects:@"ONE",@"TWO",@"THREE",@"FOUR",@"FIVE",@"SIX", /*@"HOW MANY ARE IN THE AIR", @"BIRDS", @"BALLOONS", @"U.F.OS", @"ARE YOU SURE",*/ nil];
+        words = [NSArray arrayWithObjects:@"ONE",@"TWO",@"THREE",@"FOUR",@"FIVE",@"SIX",/*@"HOW MANY ARE IN THE AIR", @"BIRDS", @"BALLOONS", @"U.F.OS", @"ARE YOU SURE",*/ nil];
         NSString *name = @"NameIWantForMyLanguageModelFiles";
       /*  NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]]; // Change "AcousticModelEnglish" to "AcousticModelSpanish" to create a Spanish language model instead of an English one.
       */
-        
         
         NSError *err = [lmGenerator generateRejectingLanguageModelFromArray:words
                                                              withFilesNamed:name
@@ -88,11 +73,13 @@
             NSLog(@"Error: %@",[err localizedDescription]);
         }
         instructions = 0;
+        
         //initialize synthesizer
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        
         // Set screenSize for ease
         screenSize = [[UIScreen mainScreen] bounds].size;
-        
+ 
         objectNames = [NSMutableArray arrayWithObjects:@"birds", @"balloons", @"U.F.Os", nil];
         
         // Create bird sprites
@@ -135,19 +122,14 @@
         }
 
         // Create button
-        correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        correctButton.name = @"correctButton";
-        correctButton.fontSize = 40;
-        correctButton.fontColor = [SKColor blueColor];
-        correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
-        correctButton.hidden = YES;
-
-        incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        incorrectButton.name = @"incorrectButton";
-        incorrectButton.fontSize = 40;
-        incorrectButton.fontColor = [SKColor blueColor];
-        incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
-        incorrectButton.hidden = YES;
+        skip = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [self addChild:skip]; //add node to screen
         
         // Create question
         question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
@@ -158,8 +140,6 @@
 
         [self initalizingScrollingBackground];
         [self addChild:question];
-        [self addChild:correctButton];
-        [self addChild:incorrectButton];
         
         for (SKNode *bird in birds)
         {
@@ -190,8 +170,8 @@
         // Set question displayed
         questionDisplayed = 0;
         correctAnswers = 0;
+        numberSaid = 0;
     }
-    
     return self;
 }
 
@@ -205,29 +185,48 @@
     [[OEPocketsphinxController sharedInstance] startRealtimeListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]]; // Starts the rapid recognition loop. Change "AcousticModelEnglish" to "AcousticModelSpanish" in order to perform Spanish language recognition.
     /*
     [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO]; // Change "AcousticModelEnglish" to "AcousticModelSpanish" to perform Spanish recognition instead of English.
-     */
+    */
 }
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
-    [self correctHypothesis:hypothesis];
+    if([recognitionScore intValue] > -100000)
+        [self correctHypothesis:hypothesis];
+    /*else{
+        [[OEPocketsphinxController sharedInstance] stopListening];
+        instruction = [[AVSpeechUtterance alloc] initWithString:@"Please repeat."];
+        instruction.rate = AVSpeechUtteranceMinimumSpeechRate;
+        instruction.pitchMultiplier = 1.2;
+        [self.synthesizer speakUtterance:instruction];
+    }*/
+}
+
+-(void)birdSpin:(NSInteger) num
+{
+    [birds[num] runAction: [SKAction rotateByAngle:2*M_PI duration:0.5]];
 }
 
 -(void)correctHypothesis:(NSString *)hypothesis
 {
     NSLog(@"%d", objectsDisplayed);
-    if([hypothesis isEqualToString:words[objectsDisplayed-1]])
+    if([hypothesis isEqualToString:words[numberSaid]])
     {
-        questionDisplayed = 0;
+        [self birdSpin:numberSaid];
+        numberSaid++;
+    }
+    if(numberSaid == objectsDisplayed)
+    {
         correctAnswers++;
         instruction = [[AVSpeechUtterance alloc] initWithString:@"Good job"];
         instruction.rate = AVSpeechUtteranceMinimumSpeechRate;
         instruction.pitchMultiplier = 1;
         [self.synthesizer speakUtterance:instruction];
-        
-        /*switch statement that chooses which method to use
-         *
-         */
+    }
+    /*if([hypothesis isEqualToString:words[objectsDisplayed-1]])
+    {
+        questionDisplayed = 0;
+        correctAnswers++;
+     
         if (correctAnswers == 3)
         {
             [self moveToNextScene];
@@ -236,7 +235,6 @@
         else
         {
             question.hidden = YES;
-            [self hideButtons];
             switch (correctAnswers){
                 case 1:
                     [self birdsFlyOut];
@@ -258,7 +256,6 @@
         else{
             questionDisplayed = 0;
             question.hidden = YES;
-            [self hideButtons];
             switch (correctAnswers){
                 case 0:
                     [self birdsFlyOutAndFlyBackIn];
@@ -270,7 +267,8 @@
                     [self ufosFlyOutAndFlyBackIn];
                     break;
             }
-        }    }
+        }
+    }*/
 }
 
 - (void) pocketsphinxDidStartListening {
@@ -314,37 +312,13 @@
 }
 
 - (void) rapidEarsDidReceiveLiveSpeechHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore {
-    NSLog(@"rapidEarsDidReceiveLiveSpeechHypothesis: %@",hypothesis);
-    [self correctHypothesis:hypothesis];
-
+    NSLog(@"rapidEarsDidReceiveLiveSpeechHypothesis: %@, %@",hypothesis, recognitionScore);
+    if([recognitionScore intValue] > -7000)
+        [self correctHypothesis:hypothesis];
 }
 
 - (void) rapidEarsDidReceiveFinishedSpeechHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore {
     NSLog(@"rapidEarsDidReceiveFinishedSpeechHypothesis: %@",hypothesis);
-}
-
--(void)updateButtonsToMatchNumberOfBirds
-{
-    correctButton.text = [NSString stringWithFormat:@"%i %@", objectsDisplayed, objectNames[correctAnswers]];
-    incorrectButton.text = [NSString stringWithFormat:@"Not %i %@", objectsDisplayed, objectNames[correctAnswers]];
-}
-
--(void)displayButtons
-{
-    /*
-     * Displays buttons
-    */
-    correctButton.hidden = NO;
-    incorrectButton.hidden = NO;
-}
-
--(void)hideButtons
-{
-    /*
-     * Hides buttons
-    */
-    correctButton.hidden = YES;
-    incorrectButton.hidden = YES;
 }
 
 -(void)ufosFlyIn
@@ -569,15 +543,15 @@
     switch (questionDisplayed) {
         case 0:
             // Create text label
-            question.text =  [NSString stringWithFormat:@"How many %@ are in the air?", objectNames[correctAnswers]];
+            question.text =  [NSString stringWithFormat:@"Count the %@ in the air.", objectNames[correctAnswers]];
             question.hidden = NO;
             break;
         case 1:
-            question.text = [NSString stringWithFormat:@"Are you sure? How many %@ are in the air?", objectNames[correctAnswers]];
+            question.text = [NSString stringWithFormat:@"Count the %@ in the air.", objectNames[correctAnswers]];
             question.hidden = NO;
             break;
         case 2:
-            question.text = [NSString stringWithFormat:@"Can you say %i %@?", objectsDisplayed, objectNames[correctAnswers]];
+            question.text = [NSString stringWithFormat:@"Say %i %@?", objectsDisplayed, objectNames[correctAnswers]];
             question.hidden = NO;
             break;
         default:
@@ -588,7 +562,7 @@
     questionDisplayed++;
     instruction = [[AVSpeechUtterance alloc] initWithString:question.text];
     instruction.rate = AVSpeechUtteranceMinimumSpeechRate;
-    instruction.pitchMultiplier = 1;
+    instruction.pitchMultiplier = 1.5;
     [self.synthesizer speakUtterance:instruction];
     // Set text of answers
     while(self.synthesizer.speaking)
@@ -701,61 +675,12 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
-    
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
-    if ([node.name isEqualToString:@"correctButton"])
-    {
-      /*  questionDisplayed = 0;
-        correctAnswers++;
-        
-        /*switch statement that chooses which method to use
-         *
-        */
-    /*    if (correctAnswers == 3)
-        {
-            [self moveToNextScene];
-            question.hidden = YES;
-        }
-        else
-        {
-            question.hidden = YES;
-            [self hideButtons];
-            switch (correctAnswers){
-                case 1:
-                    [self birdsFlyOut];
-                    [self balloonsFlyIn];
-                    break;
-                case 2:
-                    [self balloonsFlyOut];
-                    [self ufosFlyIn];
-                    break;
-            }
-            
-        }*/
-    }
-    else if ([node.name isEqualToString:@"incorrectButton"])
-    {
-        /*if(questionDisplayed < 3){
-            [self askQuestion];
-        }
-        else{
-            questionDisplayed = 0;
-            question.hidden = YES;
-            [self hideButtons];
-            switch (correctAnswers){
-                case 0:
-                    [self birdsFlyOutAndFlyBackIn];
-                    break;
-                case 1:
-                    [self balloonsFlyOutAndFlyBackIn];
-                    break;
-                case 2:
-                    [self ufosFlyOutAndFlyBackIn];
-                    break;
-            }
-        }*/
+    
+    if ([node.name isEqualToString:@"Skip"]) {
+        [self moveToNextScene];
     }
 }
 

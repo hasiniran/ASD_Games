@@ -11,7 +11,8 @@
 {
     int instructions;
     NSTimer *instructionTimer;
-    SKLabelNode *instructionText;
+    SKLabelNode *instructionText, *skip;
+    AVSpeechUtterance *instruction1;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -25,6 +26,15 @@
     if (self = [super initWithSize:size]) {
        [self initalizingScrollingBackground];
        [self addShip];
+
+        skip = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [self addChild:skip]; //add node to screen
 
         
         // add the Go button
@@ -61,34 +71,27 @@
     //instructions start at 1 to delay for game selection message
     if (instructions == 1) { //level declaration
         instructionText.text = @"Level 1";
-        
-        AVSpeechUtterance *instruction1 = [[AVSpeechUtterance alloc] initWithString:@"Level 1"];
+        instruction1 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
         instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
         [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 3) { //initial instructions
-        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"]; //clear previous text
         instructionText.text = @"Tell the plane to go!"; //place new text
-        
-        AVSpeechUtterance *instruction2 = [[AVSpeechUtterance alloc] initWithString:@"Tell the plane to go!"];
-        instruction2.rate = AVSpeechUtteranceMinimumSpeechRate;
-        [self.synthesizer speakUtterance:instruction2];
+        instruction1 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+        [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 11) { //wait 10 secs -- follow up 1
-        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
         instructionText.text = @"Help the plane move by saying go!";
-        
-        AVSpeechUtterance *instruction3 = [[AVSpeechUtterance alloc] initWithString:@"Help the plane move by saying go!"];
-        instruction3.rate = AVSpeechUtteranceMinimumSpeechRate;
-        [self.synthesizer speakUtterance:instruction3];
+        instruction1 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+        [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions == 21) { //wait 10 secs -- follow up 2
-        instructionText = (SKLabelNode *) [self childNodeWithName:@"instructionText"];
-        instructionText.text = @"Can you say go?";
-        
-        AVSpeechUtterance *instruction4 = [[AVSpeechUtterance alloc] initWithString:@"Can you say go?"];
-        instruction4.rate = AVSpeechUtteranceMinimumSpeechRate;
-        [self.synthesizer speakUtterance:instruction4];
+        instructionText.text = @"Say go";
+        instruction1 = [[AVSpeechUtterance alloc] initWithString:instructionText.text];
+        instruction1.rate = AVSpeechUtteranceMinimumSpeechRate;
+        [self.synthesizer speakUtterance:instruction1];
     }
     else if (instructions > 30) { //wait another 10 secs -- restart instructions
         instructions = 1;
@@ -142,6 +145,12 @@
             }
              [self moveBgContinuously];
         
+    }
+    if ([node.name isEqualToString:@"Skip"]) {
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        SecondLevel *scene = [SecondLevel sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
     }
     
 }

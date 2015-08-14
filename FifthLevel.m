@@ -9,7 +9,7 @@
 #import "FifthLevel.h"
 
 @implementation FifthLevel {
-    SKLabelNode *downButton;
+    SKLabelNode *downButton, *skip;
     CGSize screenSize;
     SKSpriteNode *moon, *airplane, *background;
     SKTexture *nightBuildings;
@@ -32,7 +32,16 @@
         screenSize = [[UIScreen mainScreen] bounds].size;
         
         [self initalizingScrollingBackground];
-
+       
+        skip = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        skip.text = @"SKIP"; //Set the button text
+        skip.name = @"Skip";
+        skip.fontSize = 40;
+        skip.fontColor = [SKColor orangeColor];
+        skip.position = CGPointMake(850,600);
+        skip.zPosition = 50;
+        [self addChild:skip]; //add node to screen
+        
         moon = [SKSpriteNode spriteNodeWithImageNamed:@"Moon.png"];
         moon.position = CGPointMake(screenSize.width*.85, screenSize.height*.8);
         
@@ -241,6 +250,10 @@
     if([node.name isEqualToString:@"endGame"]){
         [self moveToNextScene];
     }
+    if ([node.name isEqualToString:@"Skip"]) {
+        [self moveToNextScene];
+    }
+
 }
 
 -(void)update:(NSTimeInterval)currentTime{
