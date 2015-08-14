@@ -9,15 +9,17 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "Actions.h"
+#import "ThirdLevel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <OpenEars/OEEventsObserver.h>
 
-@interface SecondLevel : SKScene{
+@interface SecondLevel : SKScene <OEEventsObserverDelegate>{
     SKAction *actionMoveDown;
     CGRect screenRect;
     CGFloat screenHeight;
     CGFloat screenWidth;
     SKAction *actionMoveRight;
-    SKTexture* seaTexture;
-    SKTexture* waveTexture;
+    SKTexture *seaTexture, *waveTexture, *skylineTexture;
     SKAction* moveGroundSpritesForever;
 }
 
@@ -27,6 +29,8 @@
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *sea ;
 @property (nonatomic, strong)    SKSpriteNode *wave ;
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
+@property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
 -(SKAction*)moveBgContinuously;
 

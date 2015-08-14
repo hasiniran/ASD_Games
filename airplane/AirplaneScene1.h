@@ -7,8 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "SecondLevel.h"
-
+#import <AVFoundation/AVFoundation.h>
+#include "SecondLevel.h"
 
 static const uint32_t shipCategory =  0x1 << 0;
 static const uint32_t obstacleCategory =  0x1 << 1;
@@ -44,10 +44,11 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 
 @property (nonatomic, strong)  SKSpriteNode *ship;
 @property (nonatomic,strong)   SKAction *actionMoveUp;
-@property (nonatomic, strong)    SKSpriteNode *bg ;
+//@property (nonatomic, strong)    SKSpriteNode *bg ;
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *runway ;
 
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
 
 -(SKAction*)moveBgContinuously;
 -(SKAction*)moveAction: (CGFloat)width :(NSTimeInterval) timeInterval ;

@@ -6,17 +6,25 @@
 //  Copyright (c) 2015 Hasini Yatawatte. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
-#import "AirplaneScene1.h"
-#import "Level2.h" //changed level1 to level4 for testing purposes
-
 #ifndef ASD_Game_StartupMenu_h
 #define ASD_Game_StartupMenu_h
 
-@interface StartupMenu : SKScene{
 
-    
+#import <SpriteKit/SpriteKit.h>
+//transitions to level 1 of airplane or train game
+#import "AirplaneScene1.h"
+#import "Level1.h"
+
+//Voice Synthesis imports
+#import <AVFoundation/AVFoundation.h>
+
+
+@interface StartupMenu : SKScene{
 }
+
+
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
+
 
 @end
 

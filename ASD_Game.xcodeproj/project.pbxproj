@@ -71,6 +71,26 @@
 		2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99A1A1A70BE00685B1A /* AirplaneCartoon.png */; };
 		2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */; };
 		25A40EEC1A82969D00ACA2D0 /* StartUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */; };
+		A52EE2F31B5D8AC6009B6234 /* RapidEarsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52EE2F21B5D8AC6009B6234 /* RapidEarsDemo.framework */; };
+		A52EE2F71B614D01009B6234 /* RejectoDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52EE2F61B614D01009B6234 /* RejectoDemo.framework */; };
+		A5D04AEB1B4340C4001E2A48 /* BlueBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */; };
+		A5D04AEC1B4340C4001E2A48 /* LightPinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */; };
+		A5D04AED1B4340C4001E2A48 /* OrangeBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */; };
+		A5D04AEE1B4340C4001E2A48 /* PinkBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE81B4340C4001E2A48 /* PinkBalloon.png */; };
+		A5D04AEF1B4340C4001E2A48 /* PurpleBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */; };
+		A5D04AF01B4340C4001E2A48 /* YellowBalloon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */; };
+		A5D04AF21B4476C0001E2A48 /* UFO.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF11B4476C0001E2A48 /* UFO.png */; };
+		A5D04AF61B458EAE001E2A48 /* OrangeBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */; };
+		A5D04AF71B458EAE001E2A48 /* PurpleBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */; };
+		A5D04AF81B458EAE001E2A48 /* YellowBoat.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF51B458EAE001E2A48 /* YellowBoat.png */; };
+		A5D04AFA1B45FF30001E2A48 /* Sun.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04AF91B45FF30001E2A48 /* Sun.png */; };
+		A5D04AFF1B460219001E2A48 /* FourthLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D04AFE1B460219001E2A48 /* FourthLevel.m */; };
+		A5D04B011B4B7C31001E2A48 /* Package.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04B001B4B7C30001E2A48 /* Package.png */; };
+		A5D04B031B4B7C3D001E2A48 /* CaptainBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04B021B4B7C3D001E2A48 /* CaptainBoy.png */; };
+		A5D04B061B4CD966001E2A48 /* FifthLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D04B051B4CD966001E2A48 /* FifthLevel.m */; };
+		A5D04B091B4CE0D9001E2A48 /* Moon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04B071B4CE0D9001E2A48 /* Moon.png */; };
+		A5D04B0A1B4CE0D9001E2A48 /* NightSky.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04B081B4CE0D9001E2A48 /* NightSky.png */; };
+		A5D04B0C1B4CE170001E2A48 /* BuildingsNight.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D04B0B1B4CE170001E2A48 /* BuildingsNight.png */; };
 		E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E95017691ABFCF6000F7359E /* BlueBird.png */; };
 		E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176A1ABFCF6000F7359E /* LightPinkBird.png */; };
 		E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */ = {isa = PBXBuildFile; fileRef = E950176B1ABFCF6000F7359E /* OrangeBird.png */; };
@@ -131,11 +151,11 @@
 		07F8D6CB1ABE86C300F97244 /* BarnLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarnLarge.png; sourceTree = "<group>"; };
 		07F9553D1AD5ABB00080668A /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		2521EBF11A75BAF500E844F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "airplane/Launch Screen.xib"; sourceTree = "<group>"; };
-		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
-		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
-		2521EBF71A75BDC300E844F1 /* GameStartScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameStartScene.h; sourceTree = "<group>"; };
-		2521EBFA1A761C8F00E844F1 /* SecondLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondLevel.h; sourceTree = "<group>"; };
-		2521EBFB1A761C8F00E844F1 /* SecondLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondLevel.m; sourceTree = "<group>"; };
+		2521EBF31A75BD0200E844F1 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameStartScene.sks; path = airplane/GameStartScene.sks; sourceTree = "<group>"; };
+		2521EBF51A75BDA600E844F1 /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStartScene.m; path = airplane/GameStartScene.m; sourceTree = "<group>"; };
+		2521EBF71A75BDC300E844F1 /* GameStartScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GameStartScene.h; path = airplane/GameStartScene.h; sourceTree = "<group>"; };
+		2521EBFA1A761C8F00E844F1 /* SecondLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondLevel.h; path = airplane/SecondLevel.h; sourceTree = "<group>"; };
+		2521EBFB1A761C8F00E844F1 /* SecondLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondLevel.m; path = airplane/SecondLevel.m; sourceTree = "<group>"; };
 		2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLevelCompleted.h; sourceTree = "<group>"; };
 		2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstLevelCompleted.m; sourceTree = "<group>"; };
 		2521EC001A76335D00E844F1 /* Sea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sea.png; sourceTree = "<group>"; };
@@ -154,14 +174,14 @@
 		2552AC4B19F8160900EE77C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2552AC4D19F8160900EE77C7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2552AC4F19F8160900EE77C7 /* airplane-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "airplane-Prefix.pch"; sourceTree = "<group>"; };
-		2552AC5019F8160900EE77C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2552AC5119F8160900EE77C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2552AC5019F8160900EE77C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = airplane/AppDelegate.h; sourceTree = "<group>"; };
+		2552AC5119F8160900EE77C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = airplane/AppDelegate.m; sourceTree = "<group>"; };
 		2552AC5419F8160900EE77C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2552AC5619F8160900EE77C7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = airplane/ViewController.h; sourceTree = "<group>"; };
 		2552AC5719F8160900EE77C7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = airplane/ViewController.m; sourceTree = "<group>"; };
-		2552AC5919F8160900EE77C7 /* AirplaneScene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirplaneScene1.h; sourceTree = "<group>"; };
-		2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirplaneScene1.m; sourceTree = "<group>"; };
-		2552AC5E19F8160900EE77C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2552AC5919F8160900EE77C7 /* AirplaneScene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AirplaneScene1.h; path = airplane/AirplaneScene1.h; sourceTree = "<group>"; };
+		2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AirplaneScene1.m; path = airplane/AirplaneScene1.m; sourceTree = "<group>"; };
+		2552AC5E19F8160900EE77C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = airplane/Images.xcassets; sourceTree = "<group>"; };
 		2552AC6419F8160900EE77C7 /* airplaneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = airplaneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552AC6519F8160900EE77C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2552AC6D19F8160900EE77C7 /* airplaneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "airplaneTests-Info.plist"; sourceTree = "<group>"; };
@@ -171,14 +191,36 @@
 		2561A99C1A1A70BE00685B1A /* AirplanewithCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplanewithCharacter.png; sourceTree = "<group>"; };
 		25A40EEB1A82969D00ACA2D0 /* StartUpMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpMenu.m; sourceTree = "<group>"; };
 		25A40EED1A8296AF00ACA2D0 /* StartupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupMenu.h; sourceTree = "<group>"; };
+		A52EE2F21B5D8AC6009B6234 /* RapidEarsDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RapidEarsDemo.framework; sourceTree = "<group>"; };
+		A52EE2F61B614D01009B6234 /* RejectoDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RejectoDemo.framework; sourceTree = "<group>"; };
+		A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueBalloon.png; path = ../BlueBalloon.png; sourceTree = "<group>"; };
+		A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightPinkBalloon.png; path = ../LightPinkBalloon.png; sourceTree = "<group>"; };
+		A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBalloon.png; path = ../OrangeBalloon.png; sourceTree = "<group>"; };
+		A5D04AE81B4340C4001E2A48 /* PinkBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PinkBalloon.png; path = ../PinkBalloon.png; sourceTree = "<group>"; };
+		A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBalloon.png; path = ../PurpleBalloon.png; sourceTree = "<group>"; };
+		A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBalloon.png; path = ../YellowBalloon.png; sourceTree = "<group>"; };
+		A5D04AF11B4476C0001E2A48 /* UFO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UFO.png; path = ../UFO.png; sourceTree = "<group>"; };
+		A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeBoat.png; path = ../OrangeBoat.png; sourceTree = "<group>"; };
+		A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleBoat.png; path = ../PurpleBoat.png; sourceTree = "<group>"; };
+		A5D04AF51B458EAE001E2A48 /* YellowBoat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBoat.png; path = ../YellowBoat.png; sourceTree = "<group>"; };
+		A5D04AF91B45FF30001E2A48 /* Sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sun.png; path = ../Sun.png; sourceTree = "<group>"; };
+		A5D04AFD1B460219001E2A48 /* FourthLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourthLevel.h; path = airplane/FourthLevel.h; sourceTree = "<group>"; };
+		A5D04AFE1B460219001E2A48 /* FourthLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourthLevel.m; path = airplane/FourthLevel.m; sourceTree = "<group>"; };
+		A5D04B001B4B7C30001E2A48 /* Package.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Package.png; path = ../Package.png; sourceTree = "<group>"; };
+		A5D04B021B4B7C3D001E2A48 /* CaptainBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CaptainBoy.png; path = ../CaptainBoy.png; sourceTree = "<group>"; };
+		A5D04B041B4CD966001E2A48 /* FifthLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FifthLevel.h; sourceTree = "<group>"; };
+		A5D04B051B4CD966001E2A48 /* FifthLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FifthLevel.m; sourceTree = "<group>"; };
+		A5D04B071B4CE0D9001E2A48 /* Moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Moon.png; path = ../Moon.png; sourceTree = "<group>"; };
+		A5D04B081B4CE0D9001E2A48 /* NightSky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NightSky.png; path = ../NightSky.png; sourceTree = "<group>"; };
+		A5D04B0B1B4CE170001E2A48 /* BuildingsNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BuildingsNight.png; path = ../BuildingsNight.png; sourceTree = "<group>"; };
 		E95017691ABFCF6000F7359E /* BlueBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBird.png; sourceTree = "<group>"; };
 		E950176A1ABFCF6000F7359E /* LightPinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPinkBird.png; sourceTree = "<group>"; };
 		E950176B1ABFCF6000F7359E /* OrangeBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBird.png; sourceTree = "<group>"; };
 		E950176C1ABFCF6000F7359E /* PinkBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkBird.png; sourceTree = "<group>"; };
 		E950176D1ABFCF6000F7359E /* PurpleBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleBird.png; sourceTree = "<group>"; };
 		E950176E1ABFCF6000F7359E /* YellowBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowBird.png; sourceTree = "<group>"; };
-		E9A7FFA41ACAF3100032FDBD /* ThirdLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdLevel.h; sourceTree = "<group>"; };
-		E9A7FFA51ACAF3100032FDBD /* ThirdLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdLevel.m; sourceTree = "<group>"; };
+		E9A7FFA41ACAF3100032FDBD /* ThirdLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThirdLevel.h; path = airplane/ThirdLevel.h; sourceTree = "<group>"; };
+		E9A7FFA51ACAF3100032FDBD /* ThirdLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThirdLevel.m; path = airplane/ThirdLevel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,9 +229,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D848631B3AF9B2008603B6 /* AudioToolbox.framework in Frameworks */,
+				A52EE2F31B5D8AC6009B6234 /* RapidEarsDemo.framework in Frameworks */,
 				01A25E111B3DA12A00D68AA9 /* Rms.framework in Frameworks */,
 				01D848641B3AF9B2008603B6 /* AVFoundation.framework in Frameworks */,
 				01D848601B3AF991008603B6 /* Slt.framework in Frameworks */,
+				A52EE2F71B614D01009B6234 /* RejectoDemo.framework in Frameworks */,
 				2552AC4219F8160900EE77C7 /* CoreGraphics.framework in Frameworks */,
 				2552AC4419F8160900EE77C7 /* UIKit.framework in Frameworks */,
 				2552AC4619F8160900EE77C7 /* SpriteKit.framework in Frameworks */,
@@ -242,8 +286,17 @@
 				2552AC5319F8160900EE77C7 /* Main.storyboard */,
 				2552AC5619F8160900EE77C7 /* ViewController.h */,
 				2552AC5719F8160900EE77C7 /* ViewController.m */,
+				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
+				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
+				A52EE2F61B614D01009B6234 /* RejectoDemo.framework */,
+				A52EE2F21B5D8AC6009B6234 /* RapidEarsDemo.framework */,
 				255647A41A8280AD0018D2C9 /* trainGame */,
 				255647A31A8280710018D2C9 /* airplaneGame */,
+				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
+				2552AC4819F8160900EE77C7 /* Supporting Files */,
+				2552AC6B19F8160900EE77C7 /* airplaneTests */,
+				2552AC3E19F8160900EE77C7 /* Frameworks */,
+				2552AC3D19F8160900EE77C7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -271,29 +324,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2552AC4719F8160900EE77C7 /* airplane */ = {
-			isa = PBXGroup;
-			children = (
-				E9A7FFA41ACAF3100032FDBD /* ThirdLevel.h */,
-				E9A7FFA51ACAF3100032FDBD /* ThirdLevel.m */,
-				2552AC5019F8160900EE77C7 /* AppDelegate.h */,
-				2552AC5119F8160900EE77C7 /* AppDelegate.m */,
-				2521EBF31A75BD0200E844F1 /* GameStartScene.sks */,
-				2521EBF51A75BDA600E844F1 /* GameStartScene.m */,
-				2521EBF71A75BDC300E844F1 /* GameStartScene.h */,
-				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
-				2521EBFB1A761C8F00E844F1 /* SecondLevel.m */,
-				2552AC5919F8160900EE77C7 /* AirplaneScene1.h */,
-				2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */,
-				2552AC5E19F8160900EE77C7 /* Images.xcassets */,
-				2552AC4819F8160900EE77C7 /* Supporting Files */,
-			);
-			path = airplane;
-			sourceTree = "<group>";
-		};
 		2552AC4819F8160900EE77C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5D04B0B1B4CE170001E2A48 /* BuildingsNight.png */,
+				A5D04B071B4CE0D9001E2A48 /* Moon.png */,
+				A5D04B081B4CE0D9001E2A48 /* NightSky.png */,
+				A5D04B021B4B7C3D001E2A48 /* CaptainBoy.png */,
+				A5D04B001B4B7C30001E2A48 /* Package.png */,
+				A5D04AF91B45FF30001E2A48 /* Sun.png */,
+				A5D04AF31B458EAE001E2A48 /* OrangeBoat.png */,
+				A5D04AF41B458EAE001E2A48 /* PurpleBoat.png */,
+				A5D04AF51B458EAE001E2A48 /* YellowBoat.png */,
+				A5D04AF11B4476C0001E2A48 /* UFO.png */,
+				A5D04AE51B4340C4001E2A48 /* BlueBalloon.png */,
+				A5D04AE61B4340C4001E2A48 /* LightPinkBalloon.png */,
+				A5D04AE71B4340C4001E2A48 /* OrangeBalloon.png */,
+				A5D04AE81B4340C4001E2A48 /* PinkBalloon.png */,
+				A5D04AE91B4340C4001E2A48 /* PurpleBalloon.png */,
+				A5D04AEA1B4340C4001E2A48 /* YellowBalloon.png */,
 				01A25E141B3DC11B00D68AA9 /* Pig.png */,
 				01A25E121B3DC11200D68AA9 /* Horse.png */,
 				076584C01AE995DA00F6FBD1 /* cow.mp3 */,
@@ -335,6 +384,7 @@
 				2552AC4F19F8160900EE77C7 /* airplane-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = airplane;
 			sourceTree = "<group>";
 		};
 		2552AC6B19F8160900EE77C7 /* airplaneTests */ = {
@@ -360,10 +410,19 @@
 			children = (
 				2521EBFD1A761E9A00E844F1 /* FirstLevelCompleted.h */,
 				2521EBFE1A761E9A00E844F1 /* FirstLevelCompleted.m */,
-				2552AC4719F8160900EE77C7 /* airplane */,
-				2552AC6B19F8160900EE77C7 /* airplaneTests */,
-				2552AC3E19F8160900EE77C7 /* Frameworks */,
-				2552AC3D19F8160900EE77C7 /* Products */,
+				2552AC5919F8160900EE77C7 /* AirplaneScene1.h */,
+				2552AC5A19F8160900EE77C7 /* AirplaneScene1.m */,
+				2521EBFA1A761C8F00E844F1 /* SecondLevel.h */,
+				2521EBFB1A761C8F00E844F1 /* SecondLevel.m */,
+				E9A7FFA41ACAF3100032FDBD /* ThirdLevel.h */,
+				E9A7FFA51ACAF3100032FDBD /* ThirdLevel.m */,
+				A5D04AFD1B460219001E2A48 /* FourthLevel.h */,
+				A5D04AFE1B460219001E2A48 /* FourthLevel.m */,
+				A5D04B041B4CD966001E2A48 /* FifthLevel.h */,
+				A5D04B051B4CD966001E2A48 /* FifthLevel.m */,
+				2521EBF31A75BD0200E844F1 /* GameStartScene.sks */,
+				2521EBF51A75BDA600E844F1 /* GameStartScene.m */,
+				2521EBF71A75BDC300E844F1 /* GameStartScene.h */,
 			);
 			name = airplaneGame;
 			sourceTree = "<group>";
@@ -467,44 +526,60 @@
 				073371781A95A6250024872B /* Train.png in Resources */,
 				076CF5FE1A9D1FEA001839A2 /* Background.png in Resources */,
 				2525D8A71A3557F1009816BB /* Sky.png in Resources */,
+				A5D04AF01B4340C4001E2A48 /* YellowBalloon.png in Resources */,
 				076584BF1AE995CB00F6FBD1 /* pig.mp3 in Resources */,
 				2552AC4C19F8160900EE77C7 /* InfoPlist.strings in Resources */,
 				07D7AF131AA115400076A177 /* PurpleBoy.png in Resources */,
 				01A25E151B3DC11B00D68AA9 /* Pig.png in Resources */,
 				2521EC051A76335D00E844F1 /* Waves.png in Resources */,
 				07F8D6CC1ABE86C300F97244 /* BarnLarge.png in Resources */,
+				A5D04B0A1B4CE0D9001E2A48 /* NightSky.png in Resources */,
 				07EE529B1A9E2C06004D0DE7 /* background_mount.png in Resources */,
 				01D8485D1B3AF991008603B6 /* AcousticModelEnglish.bundle in Resources */,
 				076CF6021A9D2049001839A2 /* Clouds.png in Resources */,
 				07D7AF171AA11B2C0076A177 /* purpHead.png in Resources */,
+				A5D04B031B4B7C3D001E2A48 /* CaptainBoy.png in Resources */,
 				2525D8A51A355719009816BB /* Runway.png in Resources */,
 				2521EC031A76335D00E844F1 /* Sea.png in Resources */,
+				A5D04B011B4B7C31001E2A48 /* Package.png in Resources */,
 				2521EBF41A75BD0200E844F1 /* GameStartScene.sks in Resources */,
 				01D8485E1B3AF991008603B6 /* AcousticModelSpanish.bundle in Resources */,
+				A5D04B091B4CE0D9001E2A48 /* Moon.png in Resources */,
 				2561A99F1A1A70BE00685B1A /* AirplanewithCharacter.png in Resources */,
 				E95017721ABFCF6000F7359E /* PinkBird.png in Resources */,
+				A5D04AEF1B4340C4001E2A48 /* PurpleBalloon.png in Resources */,
 				E95017731ABFCF6000F7359E /* PurpleBird.png in Resources */,
 				E95017711ABFCF6000F7359E /* OrangeBird.png in Resources */,
+				A5D04AED1B4340C4001E2A48 /* OrangeBalloon.png in Resources */,
 				076CF6041A9D2076001839A2 /* Sky2.png in Resources */,
 				E95017701ABFCF6000F7359E /* LightPinkBird.png in Resources */,
+				A5D04B0C1B4CE170001E2A48 /* BuildingsNight.png in Resources */,
 				2561A99D1A1A70BE00685B1A /* AirplaneCartoon.png in Resources */,
 				2552AC5F19F8160900EE77C7 /* Images.xcassets in Resources */,
 				07D7AF151AA115470076A177 /* YellowBoy.png in Resources */,
 				074D32C41A8BF9F1004C1C11 /* station.png in Resources */,
+				A5D04AF21B4476C0001E2A48 /* UFO.png in Resources */,
+				A5D04AF81B458EAE001E2A48 /* YellowBoat.png in Resources */,
+				A5D04AEC1B4340C4001E2A48 /* LightPinkBalloon.png in Resources */,
 				016A9CAC1AC12CC500A87406 /* StopSign.png in Resources */,
+				A5D04AF61B458EAE001E2A48 /* OrangeBoat.png in Resources */,
 				07ED6EAE1AB9FA5C007F0E41 /* Station2.png in Resources */,
 				01A25E131B3DC11200D68AA9 /* Horse.png in Resources */,
 				07CCCB5E1A9FD39C00C62E25 /* BlueBoy.png in Resources */,
 				07F9553E1AD5ABB00080668A /* arrow.png in Resources */,
 				074407CC1AE575BB00389890 /* blueHead.png in Resources */,
+				A5D04AFA1B45FF30001E2A48 /* Sun.png in Resources */,
 				2552AC5519F8160900EE77C7 /* Main.storyboard in Resources */,
 				076584C11AE995DA00F6FBD1 /* cow.mp3 in Resources */,
 				0733717A1A95A6340024872B /* Rail.png in Resources */,
 				E950176F1ABFCF6000F7359E /* BlueBird.png in Resources */,
+				A5D04AEB1B4340C4001E2A48 /* BlueBalloon.png in Resources */,
 				2521EBF21A75BAF500E844F1 /* Launch Screen.xib in Resources */,
 				076CF6001A9D1FF3001839A2 /* Cow.png in Resources */,
+				A5D04AEE1B4340C4001E2A48 /* PinkBalloon.png in Resources */,
 				E95017741ABFCF6000F7359E /* YellowBird.png in Resources */,
 				074407CE1AE5790E00389890 /* yellowHead.png in Resources */,
+				A5D04AF71B458EAE001E2A48 /* PurpleBoat.png in Resources */,
 				2521EC041A76335D00E844F1 /* Sky-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,9 +607,11 @@
 				078A114A1A82D77C00956F41 /* Level1.m in Sources */,
 				2521EBFC1A761C8F00E844F1 /* SecondLevel.m in Sources */,
 				2521EBF61A75BDA600E844F1 /* GameStartScene.m in Sources */,
+				A5D04AFF1B460219001E2A48 /* FourthLevel.m in Sources */,
 				2521EBFF1A761E9A00E844F1 /* FirstLevelCompleted.m in Sources */,
 				2552AC5B19F8160900EE77C7 /* AirplaneScene1.m in Sources */,
 				0733717F1A95B1D30024872B /* Level2.m in Sources */,
+				A5D04B061B4CD966001E2A48 /* FifthLevel.m in Sources */,
 				2552AC5819F8160900EE77C7 /* ViewController.m in Sources */,
 				2552AC5219F8160900EE77C7 /* AppDelegate.m in Sources */,
 				2552AC4E19F8160900EE77C7 /* main.m in Sources */,
@@ -669,10 +746,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "airplane/airplane-Prefix.pch";
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -688,10 +767,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "airplane/airplane-Prefix.pch";
 				INFOPLIST_FILE = "airplane/airplane-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

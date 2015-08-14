@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "GameStartScene.h"
-#import "AirplaneScene1.h"
+//#import "GameStartScene.h"  //not needed, unknown functionality
+//#import "AirplaneScene1.h" //not needed either, imported in ViewController.h from StartUpMenu.h
 
 @implementation ViewController
 
@@ -16,9 +16,7 @@ SKScene * scene;
 
 - (void)viewDidLoad
 {
-
     SKView * skView = (SKView *)self.view;
-    
     if (!skView.scene) {
         skView.showsFPS = YES;
         skView.showsNodeCount = YES;
@@ -30,14 +28,7 @@ SKScene * scene;
         // Present the scene.
         [skView presentScene:scene];
     }
-    
-
-    
-
 }
-
-
-
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
@@ -46,7 +37,6 @@ SKScene * scene;
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
-
 
 - (BOOL)shouldAutorotate
 {
@@ -100,9 +90,8 @@ SKScene * scene;
 //     NSLog(@"clicked !!!!");
 //}
 //
+
 - (IBAction)LaunchAirplaneGame:(id)sender {
-    
-    
     
     SKView * skView = (SKView *)self.view;
     
