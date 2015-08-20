@@ -13,28 +13,27 @@
 @implementation ViewController
 
 SKScene * scene;
-
 - (void)viewDidLoad
 {
     SKView * skView = (SKView *)self.view;
     if (!skView.scene) {
         skView.showsFPS = YES;
         skView.showsNodeCount = YES;
+        skView.showsPhysics = YES;
         
         // Create and configure the scene.
         scene = [StartupMenu sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
-        
         // Present the scene.
         [skView presentScene:scene];
     }
 }
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    
-   }
+}
 
--(BOOL)prefersStatusBarHidden{
+-(BOOL)prefersStatusBarHidden
+{
     return YES;
 }
 
@@ -58,7 +57,7 @@ SKScene * scene;
     // Release any cached data, images, etc that aren't in use.
 }
 
-//- (IBAction)GoButton:(id)sender {
+/*//- (IBAction)GoButton:(id)sender {
 //    
 //    SKSpriteNode *ship = ((MyScene *)scene).ship ;
 //    [ship runAction:((MyScene *)scene).actionMoveUp];
@@ -89,9 +88,9 @@ SKScene * scene;
 //
 //     NSLog(@"clicked !!!!");
 //}
-//
+//*/
 
-- (IBAction)LaunchAirplaneGame:(id)sender {
+/*- (IBAction)LaunchAirplaneGame:(id)sender {
     
     SKView * skView = (SKView *)self.view;
     
@@ -110,5 +109,5 @@ SKScene * scene;
     
     NSLog(@"clicked !!!!");
 }
-
+*/
 @end

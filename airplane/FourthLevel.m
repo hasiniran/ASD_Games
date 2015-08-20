@@ -29,8 +29,8 @@
 
     if (self = [super initWithSize:size]) {
         
-        // Set screenSize for ease
-        screenSize = [[UIScreen mainScreen] bounds].size;
+        screenWidth = self.size.width;
+        screenHeight = self.size.height;
         
         [self initalizingScrollingBackground];
         
@@ -54,14 +54,14 @@
         boats = [NSArray arrayWithObjects:orangeBoat, purpleBoat, yellowBoat, nil];
         
         sun = [SKSpriteNode spriteNodeWithImageNamed:@"Sun.png"];
-        sun.position = CGPointMake(screenSize.width*.85, screenSize.height*.8);
+        sun.position = CGPointMake(screenWidth*.85, screenHeight*.8);
         
         //question specifications
         question.hidden = YES;
         question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
         question.name = @"colorofBoatQuestion";
         question.fontSize = 50;
-        question.position = CGPointMake(screenSize.width*.5, screenSize.height *.5);
+        question.position = CGPointMake(screenWidth*.5, screenHeight *.5);
         
         // Create button
         correctButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -69,20 +69,20 @@
         correctButton.name = @"correctButton";
         correctButton.fontSize = 40;
         correctButton.fontColor = [SKColor blueColor];
-        correctButton.position = CGPointMake(screenSize.width * 1./4, screenSize.height * 1./25);
+        correctButton.position = CGPointMake(screenWidth * 1./4, screenHeight * 1./25);
         
         incorrectButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         incorrectButton.text = @"Not Orange";
         incorrectButton.name = @"incorrectButton";
         incorrectButton.fontSize = 40;
         incorrectButton.fontColor = [SKColor blueColor];
-        incorrectButton.position = CGPointMake(screenSize.width * 3./4, screenSize.height * 1./25);
+        incorrectButton.position = CGPointMake(screenWidth * 3./4, screenHeight * 1./25);
         
         captainBoy = [SKSpriteNode spriteNodeWithImageNamed:@"CaptainBoy.png"];
-        captainBoy.position = CGPointMake(screenSize.width*1.2, screenSize.height*.2);
+        captainBoy.position = CGPointMake(screenWidth*1.2, screenHeight*.2);
         
         package = [SKSpriteNode spriteNodeWithImageNamed:@"Package.png"];
-        package.position = CGPointMake(screenSize.width*1.2, screenSize.height*1.2);
+        package.position = CGPointMake(screenWidth*1.2, screenHeight*1.2);
 
         [self addChild:correctButton];
         [self addChild:incorrectButton];
@@ -91,7 +91,7 @@
         for (SKNode *boat in boats)
         {
             [self addChild:boat];
-            boat.position = CGPointMake(screenSize.width *1.2, screenSize.height*.2);
+            boat.position = CGPointMake(screenWidth *1.2, screenHeight*.2);
         }
         [self addChild:sun];
         [self addChild: captainBoy];
@@ -109,9 +109,9 @@
 
 -(void) moveShipDropPackage
 {
-    [airplane runAction:[SKAction moveTo:CGPointMake(captainBoy.position.x+40, screenSize.height*.75) duration:2]];
+    [airplane runAction:[SKAction moveTo:CGPointMake(captainBoy.position.x+40, screenHeight*.75) duration:2]];
     [package runAction:[SKAction moveTo:CGPointMake(captainBoy.position.x+60, airplane.position.y-60) duration:2] completion:^{
-        [package runAction:[SKAction moveTo:CGPointMake(captainBoy.position.x+60, screenSize.height*.2-40) duration:2] completion:^{
+        [package runAction:[SKAction moveTo:CGPointMake(captainBoy.position.x+60, screenHeight*.2-40) duration:2] completion:^{
             [self boatsLeave];
         }];
     }];
@@ -125,9 +125,9 @@
      * boats in from side
      */
     captainsBoat = arc4random_uniform(boats.count);
-    double currentWidth = screenSize.width*.3;
-    double currentHeight = screenSize.height*.2;
-    double dw = screenSize.width*.8/boats.count;
+    double currentWidth = screenWidth*.3;
+    double currentHeight = screenHeight*.2;
+    double dw = screenWidth*.8/boats.count;
     for (int i = 0; i < boats.count; i++)
     {
         SKSpriteNode *boat = boats[i];
@@ -147,15 +147,15 @@
 
 -(void)boatsLeave
 {
-    double dw = screenSize.width*.5/boats.count;
+    double dw = screenWidth*.5/boats.count;
     double width = -dw*boats.count;
     for (int i = 0; i < boats.count; i++){
         SKSpriteNode *boat = boats[i];
         if(i == captainsBoat){
-            [captainBoy runAction:[SKAction moveTo:CGPointMake(width-40, screenSize.height*.2) duration:5]];
-            [package runAction:[SKAction moveTo:CGPointMake(width+20, screenSize.height*.2-40) duration:5]];
+            [captainBoy runAction:[SKAction moveTo:CGPointMake(width-40, screenHeight*.2) duration:5]];
+            [package runAction:[SKAction moveTo:CGPointMake(width+20, screenHeight*.2-40) duration:5]];
         }
-        [boat runAction:[SKAction moveTo:CGPointMake(width, screenSize.height*.2) duration:5] completion:^{[self moveToNextScene];}];
+        [boat runAction:[SKAction moveTo:CGPointMake(width, screenHeight*.2) duration:5] completion:^{[self moveToNextScene];}];
         width += dw;
     }
 }
@@ -217,8 +217,8 @@
 {
     airplane = [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [airplane setScale:0.5];
-    airplane.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
-    airplane.physicsBody = [SKPhysicsBody bodyWithTexture:airplane.texture size:airplane.texture.size];
+    airplane.position = CGPointMake(200, screenHeight*0.75);
+    airplane.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
     airplane.physicsBody.dynamic = YES;
     airplane.physicsBody.allowsRotation = NO;
     //airplane.physicsBody.affectedByGravity = YES;

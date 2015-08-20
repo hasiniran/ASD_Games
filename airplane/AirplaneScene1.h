@@ -32,18 +32,17 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 @interface AirplaneScene1 : SKScene{
    
 
-    SKAction *actionMoveDown;
+    SKAction *actionMoveDown, *actionMoveRight, *actionMoveUp;
     CGRect screenRect;
     CGFloat screenHeight;
     CGFloat screenWidth;
-    SKAction *actionMoveRight;
     SKTexture* groundTexture;
     SKAction* moveGroundSpritesForever;
     
 }
 
 @property (nonatomic, strong)  SKSpriteNode *ship;
-@property (nonatomic,strong)   SKAction *actionMoveUp;
+//@property (nonatomic,strong)   SKAction *actionMoveUp;
 //@property (nonatomic, strong)    SKSpriteNode *bg ;
 @property (nonatomic, strong)    SKSpriteNode *sky ;
 @property (nonatomic, strong)    SKSpriteNode *runway ;

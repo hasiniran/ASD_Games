@@ -28,8 +28,8 @@
     if (self = [super initWithSize:size]) {
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
 
-        // Set screenSize for ease
-        screenSize = [[UIScreen mainScreen] bounds].size;
+        screenWidth = self.size.width;
+        screenHeight = self.size.height;
         
         [self initalizingScrollingBackground];
        
@@ -43,7 +43,7 @@
         [self addChild:skip]; //add node to screen
         
         moon = [SKSpriteNode spriteNodeWithImageNamed:@"Moon.png"];
-        moon.position = CGPointMake(screenSize.width*.85, screenSize.height*.8);
+        moon.position = CGPointMake(screenSize.width*.85, screenHeight*.8);
         
         // Create down button
         downButton = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -124,8 +124,8 @@
 {
     airplane = [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [airplane setScale:0.5];
-    airplane.position = CGPointMake(200, screenSize.height*0.75);
-    airplane.physicsBody = [SKPhysicsBody bodyWithTexture:airplane.texture size:airplane.texture.size];
+    airplane.position = CGPointMake(200, screenHeight*0.75);
+    airplane.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
     airplane.physicsBody.dynamic = YES;
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
     [self addChild: airplane ];

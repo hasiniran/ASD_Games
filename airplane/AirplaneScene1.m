@@ -13,17 +13,20 @@
     NSTimer *instructionTimer;
     SKLabelNode *instructionText, *skip;
     AVSpeechUtterance *instruction1;
+    SKSpriteNode *airplane;
 }
 
 -(id)initWithSize:(CGSize)size {
-    screenRect = [[UIScreen mainScreen] bounds];
-    screenHeight = screenRect.size.height;
-    screenWidth = screenRect.size.width;
+    
     instructions = 0;
     //initialize synthesizer
     self.synthesizer = [[AVSpeechSynthesizer alloc] init];
     
     if (self = [super initWithSize:size]) {
+        screenHeight = self.size.height;
+        screenWidth = self.size.width;
+        NSLog(@"width:%f, height:%f", screenWidth, screenHeight);
+
        [self initalizingScrollingBackground];
        [self addShip];
 
@@ -59,6 +62,12 @@
         instructionText.zPosition = 50;
         [self addChild:instructionText];
         [self timer];
+        self.physicsWorld.gravity = CGVectorMake( 0.0, -0.5 );
+     /*
+        actionMoveUp = [SKAction moveByX:0 y:100 duration:.2];
+        actionMoveDown = [SKAction moveByX:0 y:-30 duration:.2];
+        actionMoveRight = [SKAction moveByX:30 y:0  duration:.2];
+*/
     }
     return self;
 }
@@ -101,20 +110,14 @@
 
 -(void)addShip
 {
-    self.ship= [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
-    [self.ship setScale:0.5];
-    self.ship.position = CGPointMake(screenWidth/2-100, 100);
-    
-    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];;
-    self.ship.physicsBody.dynamic = YES;
-    self.ship.physicsBody.allowsRotation = NO;
-   // self.ship.physicsBody.affectedByGravity = YES
-     [self addChild:self.ship ];
-    
-    self.physicsWorld.gravity = CGVectorMake( 0.0, -0.5 );
-    self.actionMoveUp = [SKAction moveByX:0 y:30 duration:.2];
-    actionMoveDown = [SKAction moveByX:0 y:-30 duration:.2];
-    actionMoveRight = [SKAction moveByX:30 y:0  duration:.2];
+    airplane = [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
+    [airplane setScale:0.5];
+    airplane.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
+    airplane.position = CGPointMake(airplane.size.width/2, 100);
+    airplane.physicsBody.dynamic = YES;
+    airplane.physicsBody.allowsRotation = NO;
+    airplane.physicsBody.affectedByGravity = YES;
+    [self addChild: airplane];
 }
 
 
@@ -135,13 +138,11 @@
         [self.view presentScene:scene transition: reveal];
         
     }else if ([node.name isEqualToString:@"Go"]) {
-            if(self.ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75){
-        
-                [self.ship.physicsBody applyImpulse:CGVectorMake(0, 30)];
+            if(airplane.position.y < screenHeight*.75){
+                [airplane.physicsBody applyImpulse:CGVectorMake(1, 5)];
             }else{
-        
-                [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
-                self.ship.physicsBody.dynamic = NO;
+                [airplane setPosition:CGPointMake(airplane.position.x, screenHeight*0.75)];
+                airplane.physicsBody.dynamic = NO;
             }
              [self moveBgContinuously];
         
@@ -159,18 +160,10 @@
 
 -(void)initalizingScrollingBackground
 {
-    // Create ground texture
+    //create the ground/runway
     groundTexture = [SKTexture textureWithImageNamed:@"Runway.png"];
-    self.runway = [SKSpriteNode spriteNodeWithTexture:groundTexture];
     groundTexture.filteringMode = SKTextureFilteringNearest;
-    
-    SKAction* moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration: 0.02 * groundTexture.size.width*2];
-    SKAction* resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
-    moveGroundSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
-    
-    // Create ground
-    // multiple images are merged to give the illusion of continuity
-
+    self.runway = [SKSpriteNode spriteNodeWithTexture:groundTexture];
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:groundTexture];
         bg.position = CGPointMake(i * bg.size.width, 0);
@@ -178,14 +171,19 @@
         bg.name = @"runway";
         [self addChild:bg];
     }
-
+    
+    //move ground
+    /*
+    SKAction* moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration: 0.02 * groundTexture.size.width*2];
+    SKAction* resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
+    moveGroundSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
+*/
     // Create skyline
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"Sky.png"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
- 
     for (int i = 0; i < 3; i++) {
         SKSpriteNode *bg = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
-        bg.position = CGPointMake(i * bg.size.width, groundTexture.size.height );
+        bg.position = CGPointMake(i * bg.size.width,groundTexture.size.height);
       //  bg.zPosition = -200;
         bg.anchorPoint = CGPointZero;
         bg.name = @"sky";
@@ -224,7 +222,7 @@
     
     SKNode* dummy = [SKNode node];
     dummy.position = CGPointMake(0, 0);
-    dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, groundTexture.size.height/2 -20)];
+    dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(screenWidth, groundTexture.size.height/2 -20)];
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
    // [self moveBg];
@@ -244,6 +242,7 @@
     __block SKSpriteNode *runway;
     SKAction* moveBackground;
     
+    //move the runway
     [self enumerateChildNodesWithName:@"runway" usingBlock: ^(SKNode *node, BOOL *stop)
     {
         runway = (SKSpriteNode *)node;
@@ -255,10 +254,11 @@
         }
     }];
 
+    //move the sky
     [self enumerateChildNodesWithName:@"sky" usingBlock: ^(SKNode *node, BOOL *stop)
      {
          sky = (SKSpriteNode *) node;
-         SKAction* moveSky = [self moveAction:sky.size.width*1.0: 0.009];
+         SKAction* moveSky = [self moveAction:sky.size.width*1.0: 0.005];
          SKAction* resetSky = [self moveAction:-sky.size.width: 0.0];
          moveSkyForever = [SKAction repeatActionForever:[SKAction sequence:@[moveSky,resetSky]]];
          
@@ -266,61 +266,7 @@
              [sky runAction: moveSkyForever];
          }
      }];
-/*
-//     moveBackground = [SKAction group:@[[SKAction runBlock:^{
-//                                                            [runway runAction:moveRunwayForever];
-//                                                           }
-//                                        ],
-//                                       [SKAction runBlock:^{
-//                                                            [sky runAction:moveSkyForever];
-//                                                            }
-//                                        ]]];
-//    
-//    
-//    moveBackground = [SKAction group:@[ [SKAction runActi],
-//                                         [SKAction runAction:moveSkyForever onChildWithName:@"sky"] ]];
-    
-//                    
-//    
-//    if(!sky.hasActions && !runway.hasActions) {
-//       [self runAction:moveBackground];
-//        
-//    }
- */
     return moveBackground;
-    
-    
-}
-
-- (void)moveBg
-{
-    [self enumerateChildNodesWithName:@"runway" usingBlock: ^(SKNode *node, BOOL *stop)
-     {
-         SKSpriteNode * bg = (SKSpriteNode *) node;
-       //  CGFloat bgVelocity = -1*fabs(self.ship.physicsBody.velocity.dy);
-        // CGFloat bgVelocity = -100;
-         CGPoint amtToMove = CGPointMultiplyScalar(CGPointMake(RUNWAY_VELOCITY,0),_dt);
-         bg.position = CGPointAdd(bg.position, amtToMove);
-         if (bg.position.x <= -bg.size.width)
-         {
-             bg.position = CGPointMake(bg.position.x + bg.size.width*2,
-                                       bg.position.y);
-         }
-     }];
-    
-    [self enumerateChildNodesWithName:@"sky" usingBlock: ^(SKNode *node, BOOL *stop)
-     {
-         SKSpriteNode * bg = (SKSpriteNode *) node;
-         //  CGFloat bgVelocity = -1*fabs(self.ship.physicsBody.velocity.dy);
-        // CGFloat bgVelocity = -10;
-         CGPoint amtToMove = CGPointMultiplyScalar(CGPointMake(SKY_VELOCITY,0),_dt);
-         bg.position = CGPointAdd(bg.position, amtToMove);
-         if (bg.position.x <= -bg.size.width)
-         {
-             bg.position = CGPointMake(bg.position.x + bg.size.width*2,
-                                       bg.position.y);
-         }
-     }];
 }
 
 CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
@@ -332,7 +278,6 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
         return value;
     }
 }
-
 
 -(void)levelCompleted:(BOOL)won{
     
@@ -364,9 +309,7 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
         retryButton.position = CGPointMake(self.size.width/2, screenHeight/2-100);
         retryButton.name = @"level2";
         [self addChild:retryButton];
-
     }
-    
 }
 
 -(void)update:(CFTimeInterval)currentTime {
@@ -384,19 +327,19 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
     }
     _lastUpdateTime = currentTime;
     
-    
-    if(self.ship.physicsBody.velocity.dy != 0 ) {
-
-        if( self.ship.position.y >= [[UIScreen mainScreen] bounds].size.height*0.75 ){
-            
-        [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
-        self.ship.physicsBody.dynamic = NO;
+    //if plane reaches a certain height, then keep at that height
+    if(airplane.physicsBody.velocity.dy != 0 ) {
+        if(airplane.position.y >= screenHeight*0.75 ){
+            [airplane setPosition:CGPointMake(airplane.position.x, screenHeight*0.75)];
+            airplane.physicsBody.dynamic = NO;
+            [airplane runAction:[SKAction moveTo:CGPointMake(screenWidth+airplane.size.width/2, screenHeight*.75) duration:4] completion:^{
+                [self moveToNextScene];}
+             ];
         }
-        
        [self moveBgContinuously];
-        
     }
-    else if(self.ship.physicsBody.velocity.dy==0 && self.ship.position.y < [[UIScreen mainScreen] bounds].size.height*0.75)
+    //if not moving up then...unknown functionality
+    else if(airplane.physicsBody.velocity.dy == 0 && airplane.position.y < screenHeight*0.75)
     {
         [self enumerateChildNodesWithName:@"runway" usingBlock: ^(SKNode *node, BOOL *stop)
          {
@@ -405,21 +348,23 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
                //  [bg removeAllActions];
              }
          }];
-        
         [self enumerateChildNodesWithName:@"sky" usingBlock: ^(SKNode *node, BOOL *stop)
-         {
-             SKSpriteNode * bg = (SKSpriteNode *) node;
-             if( bg.hasActions){
+        {
+            SKSpriteNode * bg = (SKSpriteNode *) node;
+            if( bg.hasActions){
                 // [bg removeAllActions];
-             }
-         }];
+            }
+        }];
     }
-    
-    if( self.ship.position.y >= [[UIScreen mainScreen] bounds].size.height*0.75 ){
-        [self.ship setPosition:CGPointMake(self.ship.position.x, [[UIScreen mainScreen] bounds].size.height*0.75)];
-        self.ship.physicsBody.dynamic = NO;
-        [self levelCompleted:TRUE];
-    }
+}
+
+-(void)moveToNextScene
+{
+    // Move to next scene
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    SecondLevel *scene = [SecondLevel sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.view presentScene:scene transition: reveal];
 }
 
 @end

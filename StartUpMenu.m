@@ -15,7 +15,6 @@
     NSTimer *instructionTimer;
 }
 
-
 SKScene * scene;
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -27,7 +26,7 @@ SKScene * scene;
         Game1.name = @"Airplane";
         Game1.fontSize = 40;
         Game1.fontColor = [SKColor yellowColor];
-        Game1.position = CGPointMake(self.size.width/2, self.size.height/2);
+        Game1.position = CGPointMake(self.size.width/2, self.size.height*2/3);
         
         
         SKLabelNode *Game2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];   //Second button goes to train game
@@ -35,7 +34,7 @@ SKScene * scene;
         Game2.name = @"Train";
         Game2.fontSize = 40;
         Game2.fontColor = [SKColor redColor];
-        Game2.position = CGPointMake(self.size.width/2, self.size.height/4);    //Put train button underneath, airplane button
+        Game2.position = CGPointMake(self.size.width/2, self.size.height/3);    //Put train button underneath, airplane button
         
         [self addChild:Game1];
         [self addChild:Game2];
@@ -46,7 +45,6 @@ SKScene * scene;
     
     return self;
 }
-
 
 -(void)timer {
     instructionTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(instructionSpeech) userInfo:nil repeats:YES];

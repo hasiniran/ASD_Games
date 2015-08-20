@@ -26,7 +26,6 @@
     NSArray *birds, *balloons, *UFOs;
     SKLabelNode *skip;
     SKLabelNode *question;
-    CGSize screenSize;
     NSMutableArray *objectNames;
     int instructions;
     NSTimer *instructionTimer;
@@ -42,6 +41,10 @@
 -(id)initWithSize:(CGSize)size {
     
     if (self = [super initWithSize:size]) {
+        //get bounds for horizontal view when using iPad, screenRect don't work in simulator
+        screenRect = [[UIScreen mainScreen] bounds];
+        screenHeight = self.size.height;//screenRect.size.width;
+        screenWidth = self.size.width;//screenRect.size.height;
         
         self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
         [self.openEarsEventsObserver setDelegate:self];
@@ -76,10 +79,7 @@
         
         //initialize synthesizer
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
-        
-        // Set screenSize for ease
-        screenSize = [[UIScreen mainScreen] bounds].size;
- 
+    
         objectNames = [NSMutableArray arrayWithObjects:@"birds", @"balloons", @"U.F.Os", nil];
         
         // Create bird sprites
@@ -134,7 +134,7 @@
         // Create question
         question = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
         question.fontSize = 50;
-        question.position = CGPointMake(screenSize.width * .5, screenSize.height * 1./10);
+        question.position = CGPointMake(screenWidth * .5, screenHeight * 1./10);
         question.name = @"numberOfBirdsQuestion";
         question.hidden = YES;
 
@@ -145,21 +145,21 @@
         {
             [self addChild:bird];
             // Set bird initial position
-            bird.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
+            bird.position = CGPointMake(screenWidth *1.2, screenHeight*1.2);
         }
         
         for (SKNode *balloon in balloons)
         {
             [self addChild:balloon];
             // Set balloon initial position
-            balloon.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
+            balloon.position = CGPointMake(screenWidth *1.2, screenHeight*1.2);
         }
         
         for (SKNode *UFO in UFOs)
         {
             [self addChild:UFO];
             // Set balloon initial position
-            UFO.position = CGPointMake(screenSize.width *1.2, screenSize.height*1.2);
+            UFO.position = CGPointMake(screenWidth *1.2, screenHeight*1.2);
         }
         
         [self addShip];
@@ -334,10 +334,10 @@
     int numUFOs = arc4random_uniform(UFOs.count)+1;
     if (!numUFOs)
         numUFOs = 1;
-    double maxHeight = screenSize.height*0.85;
+    double maxHeight = screenHeight*0.85;
     double dh = maxHeight * 1/8;
     double currentHeight = maxHeight;
-    double minWidth = screenSize.width * .5;
+    double minWidth = screenWidth * .5;
     double dw = minWidth / numUFOs;
     double currentWidth = minWidth;
     
@@ -368,7 +368,7 @@
     for (int i = 0; i < numUFOs; i++)
     {
         SKSpriteNode *UFO = UFOs[i];
-        [UFO runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+        [UFO runAction:[SKAction moveTo:CGPointMake(screenWidth*1.2, screenHeight*1.2) duration:2] completion:^{
             objectsDisplayed--;
             if (objectsDisplayed == 0)
             {
@@ -390,10 +390,10 @@
     int numBalloons = arc4random_uniform(balloons.count)+1;
     if (!numBalloons)
         numBalloons = 1;
-    double maxHeight = screenSize.height*0.85;
+    double maxHeight = screenHeight*0.85;
     double dh = maxHeight * 1/8;
     double currentHeight = maxHeight;
-    double minWidth = screenSize.width * .5;
+    double minWidth = screenWidth * .5;
     double dw = minWidth / numBalloons;
     double currentWidth = minWidth;
     
@@ -424,7 +424,7 @@
     for (int i = 0; i < numBalloons; i++)
     {
         SKSpriteNode *balloon = balloons[i];
-        [balloon runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+        [balloon runAction:[SKAction moveTo:CGPointMake(screenWidth*1.2, screenHeight*1.2) duration:2] completion:^{
             objectsDisplayed--;
             if (objectsDisplayed == 0)
             {
@@ -446,7 +446,7 @@
     for (int i = 0; i < numBalloons; i++)
     {
         SKSpriteNode *balloon = balloons[i];
-        [balloon runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+        [balloon runAction:[SKAction moveTo:CGPointMake(screenWidth*1.2, screenHeight*1.2) duration:2] completion:^{
             objectsDisplayed--;
             if (objectsDisplayed == 0)
             {
@@ -468,10 +468,10 @@
     int numBirds = arc4random_uniform(birds.count)+1;
     if (!numBirds)
         numBirds = 1;
-    double maxHeight = screenSize.height*0.85;
+    double maxHeight = screenHeight*0.85;
     double dh = maxHeight * 1/8;
     double currentHeight = maxHeight;
-    double minWidth = screenSize.width * .5;
+    double minWidth = screenWidth * .5;
     double dw = minWidth / numBirds;
     double currentWidth = minWidth;
     
@@ -502,7 +502,7 @@
     for (int i = 0; i < numBirds; i++)
     {
         SKSpriteNode *bird = birds[i];
-        [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+        [bird runAction:[SKAction moveTo:CGPointMake(screenWidth*1.2, screenHeight*1.2) duration:2] completion:^{
             objectsDisplayed--;
             if (objectsDisplayed == 0)
             {
@@ -524,7 +524,7 @@
     for (int i = 0; i < numBirds; i++)
     {
         SKSpriteNode *bird = birds[i];
-        [bird runAction:[SKAction moveTo:CGPointMake(screenSize.width*1.2, screenSize.height*1.2) duration:2] completion:^{
+        [bird runAction:[SKAction moveTo:CGPointMake(screenWidth*1.2, screenHeight*1.2) duration:2] completion:^{
             objectsDisplayed--;
             if (objectsDisplayed == 0)
             {
@@ -584,14 +584,12 @@
 {
     self.ship= [SKSpriteNode spriteNodeWithImageNamed:@"AirplaneCartoon.png"];
     [self.ship setScale:0.5];
-    self.ship.position = CGPointMake(200, [[UIScreen mainScreen] bounds].size.height*0.75);
-    
-    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.texture.size];
+    self.ship.position = CGPointMake(200, self.size.height*0.75);
+    self.ship.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
     self.ship.physicsBody.dynamic = YES;
     self.ship.physicsBody.allowsRotation = NO;
     // self.ship.physicsBody.affectedByGravity = YES
     [self addChild:self.ship ];
-    
     self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 );
 }
 
