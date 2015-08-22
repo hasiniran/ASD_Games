@@ -58,7 +58,7 @@
         skip.fontColor = [SKColor orangeColor];
         skip.position = CGPointMake(850,600);
         skip.zPosition = 50;
-        [_HUDLayer addChild:skip]; //add node to screen
+        [self addChild:skip]; //add node to screen
         
         //go button
         go = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -68,7 +68,8 @@
         go.fontColor = [SKColor blueColor];
         go.position = CGPointMake(500,200);
         go.zPosition = 150;
-        [_HUDLayer addChild:go]; //add node to screen
+        [self addChild:go]; //add node to screen
+        
         
         //instructions
         instructionText = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -158,7 +159,7 @@
 
 
 -(void)smoke {   //Moving object
-    smoke = [SKSpriteNode spriteNodeWithImageNamed:@"trainsmoke.jpg"]; //ask Adriana to make better smoke image/sprite
+    smoke = [SKSpriteNode spriteNodeWithImageNamed:@"TrainSmoke.jpg"]; //ask Adriana to make better smoke image/sprite
     smoke.position = CGPointMake(315, 285);
     smoke.zPosition = 50;
     [smoke setScale:.5];
@@ -320,7 +321,8 @@
     
     CGPoint location = [[touches anyObject] locationInNode:self];
     button = [self nodeAtPoint:location];
-    
+    NSLog(@"%@", button.name);
+    NSLog(@"This came here");
     if ([button.name isEqualToString:@"level2"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         Level2 *scene = [Level2 sceneWithSize:self.view.bounds.size];
@@ -328,8 +330,9 @@
         [self.view presentScene:scene transition: reveal];
     }
     else if ([button.name isEqualToString:@"Go"]) {
-        [train.physicsBody applyImpulse:CGVectorMake(1, 0)];
-        [smoke.physicsBody applyImpulse:CGVectorMake(1, 0)];
+        NSLog(@"Pushed Go");
+        [train.physicsBody applyImpulse:CGVectorMake(5, 0)];
+        [smoke.physicsBody applyImpulse:CGVectorMake(5, 0)];
     }
     else if ([button.name isEqualToString:@"Skip"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];

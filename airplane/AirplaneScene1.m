@@ -47,11 +47,9 @@
         go.name = @"Go";
         go.fontSize = 40;
         go.fontColor = [SKColor yellowColor];
-        go.position = CGPointMake(0,-go.frame.size.height/2);
-        SKSpriteNode *background = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(go.frame.size.width, go.frame.size.height)];
-        background.position = CGPointMake(self.size.width/2, 40);
-        [background addChild:go];
-        [self addChild:background];
+        go.position = CGPointMake(screenWidth/2,100);
+        go.zPosition = 50;
+        [self addChild: go];
         
         //instructions
         instructionText = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -124,8 +122,8 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
+ //   UITouch *touch = ;
+    CGPoint location = [[touches anyObject] locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     //stop repeating instructions
     [instructionTimer invalidate];
@@ -221,8 +219,10 @@
     // Create ground physics container
     
     SKNode* dummy = [SKNode node];
+
+    
+    dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(screenWidth, 100) center:CGPointMake(screenWidth/2, 100/2)];
     dummy.position = CGPointMake(0, 0);
-    dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(screenWidth, groundTexture.size.height/2 -20)];
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
    // [self moveBg];
